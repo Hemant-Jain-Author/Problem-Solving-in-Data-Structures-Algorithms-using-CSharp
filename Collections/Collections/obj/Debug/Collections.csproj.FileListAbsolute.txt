@@ -1,0 +1,6 @@
+c:\users\hemant\documents\visual studio 2015\Projects\Collections\Collections\bin\Debug\Collections.exe.config
+C:\Users\hemant\Documents\Visual Studio 2015\Projects\Collections\Collections\obj\Debug\Collections.csprojResolveAssemblyReference.cache
+C:\Users\hemant\Documents\Visual Studio 2015\Projects\Collections\Collections\bin\Debug\Collections.exe
+C:\Users\hemant\Documents\Visual Studio 2015\Projects\Collections\Collections\bin\Debug\Collections.pdb
+C:\Users\hemant\Documents\Visual Studio 2015\Projects\Collections\Collections\obj\Debug\Collections.exe
+C:\Users\hemant\Documents\Visual Studio 2015\Projects\Collections\Collections\obj\Debug\Collections.pdb
