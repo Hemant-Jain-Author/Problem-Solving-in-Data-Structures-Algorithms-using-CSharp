@@ -100,7 +100,7 @@ public class Searching
 
 		while (low <= high)
 		{
-			mid = low + (high - low) / 2; // To avoid the overflow
+			mid = (low + high) / 2
 			if (arr[mid] == value)
 			{
 				return true;
@@ -125,7 +125,7 @@ public class Searching
 		{
 			return false;
 		}
-		int mid = low + (high - low) / 2; // To avoid the overflow
+		int mid = (low + high) / 2
 		if (arr[mid] == value)
 		{
 			return true;
