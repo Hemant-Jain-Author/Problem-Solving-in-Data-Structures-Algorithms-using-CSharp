@@ -18,6 +18,7 @@ public class Stack2
 	}
 
 	/* Other methods */
+
 	public int size()
 	{
 		return (top + 1);

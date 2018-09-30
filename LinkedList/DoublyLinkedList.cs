@@ -28,6 +28,7 @@ public class DoublyLinkedList
 	}
 
 	/* Other methods */
+
 	public int size()
 	{
 		return count;
@@ -219,8 +220,8 @@ public class DoublyLinkedList
 	}
 
 	/*
-	 * Reverse a doubly linked List iteratively
-	 */
+	* Reverse a doubly linked List iteratively
+	*/
 
 	public void reverseList()
 	{

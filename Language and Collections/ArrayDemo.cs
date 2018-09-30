@@ -39,7 +39,7 @@ public class ArrayDemo
 		}
 	}
 
-	public static void Main232(string[] args)
+	public static void Main(string[] args)
 	{
 
 	}

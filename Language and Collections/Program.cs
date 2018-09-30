@@ -6,7 +6,7 @@ namespace Chapter1
 {
 	class HelloWorld
 	{
-		static void Main8(string[] args)
+		static void Main(string[] args)
 		{
 			Console.WriteLine("Hello, World!");
 		}

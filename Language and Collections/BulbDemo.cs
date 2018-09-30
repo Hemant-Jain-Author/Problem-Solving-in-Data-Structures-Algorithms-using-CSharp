@@ -77,18 +77,3 @@ public class BulbDemo3
 		Console.WriteLine("Bulb Size :" + b.size);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -89,7 +89,6 @@ public class StackLL
 		s.Push(3);
 		s.Print();
 		Console.WriteLine(s.Pop());
-		Console.WriteLine(s.Pop());
 		s.Print();
 	}
 }

@@ -16,7 +16,6 @@ public class CircularLinkedList
 			next = n;
 		}
 	}
-
 	public int size()
 	{
 		return count;
@@ -132,7 +131,6 @@ public class CircularLinkedList
 			prev = curr;
 			curr = curr.next;
 		}
-
 		return false;
 	}
 
@@ -212,9 +210,6 @@ public class CircularLinkedList
 	public static void Main(string[] args)
 	{
 		CircularLinkedList ll = new CircularLinkedList();
-		ll.addHead(1);
-		ll.addHead(2);
-		ll.addHead(3);
 		ll.addHead(1);
 		ll.addHead(2);
 		ll.addHead(3);

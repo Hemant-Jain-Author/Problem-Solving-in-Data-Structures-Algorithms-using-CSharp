@@ -103,14 +103,15 @@ public class algo
 		TowersOfHanoi(3);
 	}
 
-	internal virtual int isPrime(int n)
+	bool isPrime(int n)
 	{
-		int answer = (n > 1) ? 1 : 0;
+		bool answer = (n > 1) ? true : false;
+
 		for (int i = 2; i * i <= n; ++i)
 		{
 			if (n % i == 0)
 			{
-				answer = 1;
+				answer = false;
 				break;
 			}
 		}

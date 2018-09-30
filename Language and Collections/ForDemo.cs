@@ -2,11 +2,10 @@
 
 public class ForDemo
 {
-
 	private const string text = "Hello, World!";
 	internal const double PI = 3.141592653589793;
 
-	public static void Main1000(string[] args)
+	public static void Main1(string[] args)
 	{
         if (true)
         {
@@ -23,7 +22,7 @@ public class ForDemo
         }
     }
 
-    public static void Main1(string[] args)
+    public static void Main2(string[] args)
     {
         int[] numbers = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         int sum = 0;
@@ -35,9 +34,8 @@ public class ForDemo
     }
 
 
-    public static void Main88(string[] args)
+    public static void Main3(string[] args)
 	{
-
 		int[] numbers = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 		int sum = 0;
 		for (int i = 0; i < numbers.Length; i++)
@@ -48,9 +46,8 @@ public class ForDemo
 		Console.WriteLine("Sum is :: " + sum);
 	}
 
-	public static void Main3(string[] args)
+	public static void Main4(string[] args)
 	{
-
 		int[] numbers = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 		int sum = 0;
 		int i = 0;
@@ -62,11 +59,8 @@ public class ForDemo
 		Console.WriteLine("Sum is :: " + sum);
 	}
 
-
 	//	String[] stra=new String[2];
 	//	stra[0]="hello";
 	//	stra[1]="hello";
 	//	main2(stra);
-
-
 }

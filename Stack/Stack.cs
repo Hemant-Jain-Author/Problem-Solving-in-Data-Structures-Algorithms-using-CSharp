@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Stack
 {
-
 	private int capacity = 1000;
 	private int[] data;
 	private int top = -1;
@@ -79,7 +78,6 @@ public class Stack
 		s.Push(2);
 		s.Push(3);
 		s.Print();
-		Console.WriteLine(s.Pop());
 		Console.WriteLine(s.Pop());
 		s.Print();
 	}
