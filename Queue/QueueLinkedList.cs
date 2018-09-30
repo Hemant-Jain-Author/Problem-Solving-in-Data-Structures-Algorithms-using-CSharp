@@ -1,8 +1,10 @@
 ﻿using System;
-using System.Collections;
 
-public class Queue
+public class QueueLL
 {
+	private Node tail = null;
+	private int count = 0;
+
 	private class Node
 	{
 		internal int value;
@@ -13,27 +15,7 @@ public class Queue
 			value = v;
 			next = n;
 		}
-		public virtual int Value
-		{
-			get
-			{
-				return value;
-			}
-		}
-
-		public virtual Node Next
-		{
-			get
-			{
-				return next;
-			}
-		}
 	}
-
-	private Node head = null;
-	private Node tail = null;
-	private int count = 0;
-
 
 	public virtual int size()
 	{
@@ -48,66 +30,74 @@ public class Queue
 		}
 	}
 
-
 	public virtual int peek()
 	{
 		if (Empty)
 		{
-			throw new System.InvalidOperationException("QueueEmptyException");
+			throw new System.InvalidOperationException("StackEmptyException");
 		}
-		return head.Value;
+		int value;
+		if (tail == tail.next)
+		{
+			value = tail.value;
+		}
+		else
+		{
+			value = tail.next.value;
+		}
+
+		return value;
 	}
 
 	public virtual void add(int value)
 	{
 		Node temp = new Node(value, null);
 
-		if (head == null)
+		if (tail == null)
 		{
-			head = tail = temp;
+			tail = temp;
+			tail.next = tail;
 		}
 		else
 		{
+			temp.next = tail.next;
 			tail.next = temp;
 			tail = temp;
 		}
 		count++;
 	}
 
-
 	public virtual int remove()
 	{
 		if (Empty)
 		{
-			throw new System.InvalidOperationException("QueueEmptyException");
+			throw new System.InvalidOperationException("StackEmptyException");
 		}
-		int value = head.Value;
-		head = head.Next;
+
+		int value = 0;
+		if (tail == tail.next)
+		{
+			value = tail.value;
+			tail = null;
+		}
+		else
+		{
+			value = tail.next.value;
+			tail.next = tail.next.next;
+		}
 		count--;
 		return value;
 	}
 
-	public virtual void print()
-	{
-		Node temp = head;
-		while (temp != null)
-		{
-			Console.Write(temp.Value + " ");
-			temp = temp.Next;
-		}
-	}
-
 	public static void Main(string[] args)
 	{
-		Queue q = new Queue();
-		for (int i = 1; i <= 100; i++)
+		QueueLL q = new QueueLL();
+		q.add(1);
+		q.add(2);
+		q.add(3);
+		for (int i = 0; i < 3; i++)
 		{
-			q.add(i);
+			Console.WriteLine(q.remove());
 		}
-		for (int i = 1; i <= 50; i++)
-		{
-			q.remove();
-		}
-		q.print();
 	}
 }

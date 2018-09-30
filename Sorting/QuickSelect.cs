@@ -2,11 +2,6 @@
 
 public class QuickSelect
 {
-	public static void quickSelect(int[] arr, int k)
-	{
-		quickSelect(arr, 0, arr.Length - 1, k);
-	}
-
 	public static void quickSelect(int[] arr, int lower, int upper, int k)
 	{
 		if (upper <= lower)
@@ -15,7 +10,6 @@ public class QuickSelect
 		}
 
 		int pivot = arr[lower];
-
 		int start = lower;
 		int stop = upper;
 
@@ -35,16 +29,18 @@ public class QuickSelect
 			}
 		}
 
-		swap(arr, upper, start); //upper is the pivot position
+		swap(arr, upper, start); // upper is the pivot position
 
 		if (k < upper)
 		{
-			quickSelect(arr, start, upper - 1, k); //pivot -1 is the upper for left sub array.
+			quickSelect(arr, start, upper - 1, k); // pivot -1 is the upper for
 		}
+		// left sub array.
 		if (k > upper)
 		{
-			quickSelect(arr, upper + 1, stop, k); // pivot + 1 is the lower for right sub array.
+			quickSelect(arr, upper + 1, stop, k); // pivot + 1 is the lower for
 		}
+		// right sub array.
 	}
 
 	public static void swap(int[] arr, int first, int second)
@@ -53,10 +49,16 @@ public class QuickSelect
 		arr[first] = arr[second];
 		arr[second] = temp;
 	}
+
+	public static int get(int[] arr, int k)
+	{
+		quickSelect(arr, 0, arr.Length - 1, k);
+		return arr[k - 1];
+	}
+
 	public static void Main(string[] args)
 	{
 		int[] array = new int[] { 3, 4, 2, 1, 6, 5, 7, 8, 10, 9 };
-		QuickSelect.quickSelect(array, 5);
-		Console.Write("value at index 5 is : " + array[4]);
+		Console.Write("value at index 5 is : " + QuickSelect.get(array, 5));
 	}
 }

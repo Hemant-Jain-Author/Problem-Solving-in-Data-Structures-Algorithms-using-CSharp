@@ -1,23 +1,13 @@
-﻿public class SelectionSort
+﻿using System;
+
+public class SelectionSort
 {
-	private int[] arr;
-
-	public SelectionSort(int[] array)
-	{
-		arr = array;
-	}
-	private bool less(int value1, int value2)
-	{
-		return value1 < value2;
-	}
-
 	private bool more(int value1, int value2)
 	{
 		return value1 > value2;
 	}
 
-
-	public virtual void sort() //back array
+	public static void sort(int[] arr) // sorted array created from back.
 	{
 		int size = arr.Length;
 		int i, j, max, temp;
@@ -37,23 +27,40 @@
 		}
 	}
 
-	internal virtual void sort2() //front array
+public static void sort2(int[] arr) // sorted array created from front
+{
+	int size = arr.Length;
+	int i, j, min, temp;
+	for (i = 0; i < size - 1; i++)
 	{
-		int size = arr.Length;
-		int i, j, min, temp;
-		for (i = 0; i < size - 1; i++)
+		min = i;
+		for (j = i + 1; j < size; j++)
 		{
-			min = i;
-			for (j = i + 1; j < size; j++)
+			if (arr[j] < arr[min])
 			{
-				if (arr[j] < arr[min])
-				{
-					min = j;
-				}
+				min = j;
 			}
-			temp = arr[i];
-			arr[i] = arr[min];
-			arr[min] = temp;
+		}
+		temp = arr[i];
+		arr[i] = arr[min];
+		arr[min] = temp;
+	}
+}
+
+	public static void Main(string[] args)
+	{
+		int[] array = new int[] { 9, 1, 8, 2, 7, 3, 6, 4, 5 };
+		SelectionSort.sort(array);
+		for (int i = 0; i < array.Length; i++)
+		{
+			Console.Write(array[i] + " ");
+		}
+		Console.WriteLine();
+		int[] array2 = new int[] { 9, 1, 8, 2, 7, 3, 6, 4, 5 };
+		SelectionSort.sort2(array2);
+		for (int i = 0; i < array2.Length; i++)
+		{
+			Console.Write(array2[i] + " ");
 		}
 	}
 }

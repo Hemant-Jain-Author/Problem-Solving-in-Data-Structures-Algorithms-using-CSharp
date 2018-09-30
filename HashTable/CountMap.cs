@@ -9,8 +9,7 @@ public class CountMap<T>
 	{
 		if (hm.ContainsKey(key))
 		{
-			int count = hm[key];
-			hm[key] = count + 1;
+			hm[key] = hm[key] + 1;
 		}
 		else
 		{
@@ -28,8 +27,7 @@ public class CountMap<T>
 			}
 			else
 			{
-				int count = hm[key];
-				hm[key] = count - 1;
+				hm[key] = hm[key] - 1;
 			}
 		}
 	}
@@ -53,13 +51,15 @@ public class CountMap<T>
 		return hm.Count;
 	}
 
-	public static void Main2(string[] args)
+	public static void Main(string[] args)
 	{
 		CountMap<int> cm = new CountMap<int>();
 		cm.add(2);
 		cm.add(2);
+		Console.WriteLine("count is : " + cm.get(2));
 		cm.remove(2);
 		Console.WriteLine("count is : " + cm.get(2));
-		Console.WriteLine("count is : " + cm.get(3));
+		cm.remove(2);
+		Console.WriteLine("count is : " + cm.get(2));
 	}
 }

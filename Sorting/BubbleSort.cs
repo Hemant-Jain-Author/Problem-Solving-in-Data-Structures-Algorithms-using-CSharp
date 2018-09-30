@@ -2,24 +2,17 @@
 
 public class BubbleSort
 {
-	private int[] arr;
-
-	public BubbleSort(int[] array)
-	{
-		arr = array;
-	}
-
-	private bool less(int value1, int value2)
+	private static bool less(int value1, int value2)
 	{
 		return value1 < value2;
 	}
 
-	private bool more(int value1, int value2)
+	private static bool more(int value1, int value2)
 	{
 		return value1 > value2;
 	}
 
-	public virtual void sort()
+	public static void sort(int[] arr)
 	{
 		int size = arr.Length;
 
@@ -39,7 +32,7 @@ public class BubbleSort
 		}
 	}
 
-	public virtual void sort2()
+	public static void sort2(int[] arr)
 	{
 		int size = arr.Length;
 		int i, j, temp, swapped = 1;
@@ -60,14 +53,20 @@ public class BubbleSort
 		}
 	}
 
-	public static void Main1(string[] args)
+	public static void Main(string[] args)
 	{
 		int[] array = new int[] { 9, 1, 8, 2, 7, 3, 6, 4, 5 };
-		BubbleSort bs = new BubbleSort(array);
-		bs.sort2();
+		BubbleSort.sort(array);
 		for (int i = 0; i < array.Length; i++)
 		{
 			Console.Write(array[i] + " ");
+		}
+		Console.WriteLine();
+		int[] array2 = new int[] { 9, 1, 8, 2, 7, 3, 6, 4, 5 };
+		BubbleSort.sort2(array2);
+		for (int i = 0; i < array2.Length; i++)
+		{
+			Console.Write(array2[i] + " ");
 		}
 	}
 }

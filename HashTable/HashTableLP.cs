@@ -1,29 +1,30 @@
 ﻿using System;
 
-public class HashTable
+public class HashTableLP
 {
 
-	private static int EMPTY_NODE = -1;
-	private static int LAZY_DELETED = -2;
-	private static int FILLED_NODE = 0;
-
+	private static int EMPTY_VALUE = -1;
+	private static int DELETED_VALUE = -2;
+	private static int FILLED_VALUE = 0;
 
 	private int tableSize;
 	internal int[] Arr;
 	internal int[] Flag;
 
-	public HashTable(int tSize)
+	public HashTableLP(int tSize)
 	{
 		tableSize = tSize;
 		Arr = new int[tSize + 1];
 		Flag = new int[tSize + 1];
 		for (int i = 0; i <= tSize; i++)
 		{
-			Flag[i] = EMPTY_NODE;
+			Flag[i] = EMPTY_VALUE;
 		}
 	}
 
-	internal virtual int ComputeHash(int key)
+	/* Other Methods */
+
+	internal virtual int computeHash(int key)
 	{
 		return key % tableSize;
 	}
@@ -33,15 +34,20 @@ public class HashTable
 		return index;
 	}
 
-	internal virtual bool InsertNode(int value)
+	internal virtual int resolverFun2(int index)
 	{
-		int hashValue = ComputeHash(value);
+		return index * index;
+	}
+
+	internal virtual bool add(int value)
+	{
+		int hashValue = computeHash(value);
 		for (int i = 0; i < tableSize; i++)
 		{
-			if (Flag[hashValue] == EMPTY_NODE || Flag[hashValue] == LAZY_DELETED)
+			if (Flag[hashValue] == EMPTY_VALUE || Flag[hashValue] == DELETED_VALUE)
 			{
 				Arr[hashValue] = value;
-				Flag[hashValue] = FILLED_NODE;
+				Flag[hashValue] = FILLED_VALUE;
 				return true;
 			}
 			hashValue += resolverFun(i);
@@ -50,17 +56,17 @@ public class HashTable
 		return false;
 	}
 
-	internal virtual bool FindNode(int value)
+	internal virtual bool find(int value)
 	{
-		int hashValue = ComputeHash(value);
+		int hashValue = computeHash(value);
 		for (int i = 0; i < tableSize; i++)
 		{
-			if (Flag[hashValue] == EMPTY_NODE)
+			if (Flag[hashValue] == EMPTY_VALUE)
 			{
 				return false;
 			}
 
-			if (Flag[hashValue] == FILLED_NODE && Arr[hashValue] == value)
+			if (Flag[hashValue] == FILLED_VALUE && Arr[hashValue] == value)
 			{
 				return true;
 			}
@@ -71,33 +77,32 @@ public class HashTable
 		return false;
 	}
 
-	internal virtual bool DeleteNode(int value)
+	internal virtual bool remove(int value)
 	{
-		int hashValue = ComputeHash(value);
+		int hashValue = computeHash(value);
 		for (int i = 0; i < tableSize; i++)
 		{
-			if (Flag[hashValue] == EMPTY_NODE)
+			if (Flag[hashValue] == EMPTY_VALUE)
 			{
 				return false;
 			}
 
-			if (Flag[hashValue] == FILLED_NODE && Arr[hashValue] == value)
+			if (Flag[hashValue] == FILLED_VALUE && Arr[hashValue] == value)
 			{
-				Flag[hashValue] = LAZY_DELETED;
+				Flag[hashValue] = DELETED_VALUE;
 				return true;
 			}
 			hashValue += resolverFun(i);
 			hashValue %= tableSize;
 		}
 		return false;
-
 	}
 
-	internal virtual void Print()
+	internal virtual void print()
 	{
 		for (int i = 0; i < tableSize; i++)
 		{
-			if (Flag[i] == FILLED_NODE)
+			if (Flag[i] == FILLED_VALUE)
 			{
 				Console.WriteLine("Node at index [" + i + " ] :: " + Arr[i]);
 			}
@@ -106,27 +111,13 @@ public class HashTable
 
 	public static void Main(string[] args)
 	{
-		HashTable ht = new HashTable(1000);
-		ht.InsertNode(89);
-		ht.InsertNode(18);
-		ht.InsertNode(49);
-		ht.InsertNode(58);
-		ht.InsertNode(69);
-		ht.InsertNode(89);
-		ht.InsertNode(18);
-		ht.InsertNode(49);
-		ht.InsertNode(58);
-		ht.InsertNode(69);
-
-		ht.Print();
-		Console.WriteLine("");
-
-		ht.DeleteNode(89);
-		ht.DeleteNode(18);
-		ht.DeleteNode(49);
-		ht.DeleteNode(58);
-		ht.DeleteNode(100);
-
-		ht.Print();
+		HashTableLP ht = new HashTableLP(1000);
+		ht.add(1);
+		ht.add(2);
+		ht.add(3);
+		ht.print();
+		Console.WriteLine(ht.remove(1));
+		Console.WriteLine(ht.remove(4));
+		ht.print();
 	}
 }

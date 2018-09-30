@@ -1,25 +1,23 @@
 ﻿using System;
-using System.Collections;
 
-public class MinMaxStack
+public class Stack2
 {
-	private const int MIN_CAPACITY = 1000;
 	private int[] data;
 	private int top = -1;
 	private int minCapacity;
-	private int maxCapacity;
+	private int capacity;
 
-	public MinMaxStack() : this(MIN_CAPACITY)
+	public Stack2() : this(1000)
 	{
-		maxCapacity = minCapacity = MIN_CAPACITY;
 	}
 
-	public MinMaxStack(int capacity)
+	public Stack2(int size)
 	{
-		data = new int[capacity];
-		maxCapacity = minCapacity = capacity;
+		data = new int[size];
+		capacity = minCapacity = size;
 	}
 
+	/* Other methods */
 	public int size()
 	{
 		return (top + 1);
@@ -35,13 +33,13 @@ public class MinMaxStack
 
 	public void Push(int value)
 	{
-		if (size() == maxCapacity)
+		if (size() == capacity)
 		{
 			Console.WriteLine("size dubbelled");
-			int[] newData = new int[maxCapacity * 2];
-			Array.Copy(data, 0, newData, 0, maxCapacity);
+			int[] newData = new int[capacity * 2];
+			Array.Copy(data, 0, newData, 0, capacity);
 			data = newData;
-			maxCapacity = maxCapacity * 2;
+			capacity = capacity * 2;
 		}
 		top++;
 		data[top] = value;
@@ -51,7 +49,7 @@ public class MinMaxStack
 	{
 		if (Empty)
 		{
-			throw new System.InvalidOperationException("MinMaxStackEmptyException");
+			throw new System.InvalidOperationException("StackEmptyException");
 		}
 		return data[top];
 	}
@@ -60,18 +58,17 @@ public class MinMaxStack
 	{
 		if (Empty)
 		{
-			throw new System.InvalidOperationException("MinMaxStackEmptyException");
+			throw new System.InvalidOperationException("StackEmptyException");
 		}
 
 		int topVal = data[top];
 		top--;
-
-		if (size() == maxCapacity / 2 && maxCapacity > minCapacity)
+		if (size() == capacity / 2 && capacity > minCapacity)
 		{
 			Console.WriteLine("size halfed");
-			maxCapacity = maxCapacity / 2;
-			int[] newData = new int[maxCapacity];
-			Array.Copy(data, 0, newData, 0, maxCapacity);
+			capacity = capacity / 2;
+			int[] newData = new int[capacity];
+			Array.Copy(data, 0, newData, 0, capacity);
 			data = newData;
 		}
 		return topVal;
@@ -87,7 +84,7 @@ public class MinMaxStack
 
 	public static void Main(string[] args)
 	{
-		MinMaxStack s = new MinMaxStack(10);
+		Stack2 s = new Stack2(10);
 		for (int i = 1; i <= 100; i++)
 		{
 			s.Push(i);

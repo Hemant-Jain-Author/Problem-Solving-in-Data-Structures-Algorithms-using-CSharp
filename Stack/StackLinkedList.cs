@@ -1,8 +1,10 @@
 ﻿using System;
-using System.Collections;
 
-public class ListStack
+public class StackLL
 {
+	private Node head = null;
+	private int count = 0;
+
 	private class Node
 	{
 		internal int value;
@@ -13,27 +15,7 @@ public class ListStack
 			value = v;
 			next = n;
 		}
-		public int Value
-		{
-			get
-			{
-				return value;
-			}
-		}
-
-		public Node Next
-		{
-			get
-			{
-				return next;
-			}
-		}
-
 	}
-
-	private Node head = null;
-	private int count = 0;
-
 
 	public int size()
 	{
@@ -52,9 +34,9 @@ public class ListStack
 	{
 		if (Empty)
 		{
-			throw new System.InvalidOperationException("ListStackEmptyException");
+			throw new System.InvalidOperationException("StackEmptyException");
 		}
-		return head.Value;
+		return head.value;
 	}
 
 	public void Push(int value)
@@ -63,15 +45,14 @@ public class ListStack
 		count++;
 	}
 
-
 	public int Pop()
 	{
 		if (Empty)
 		{
-			throw new System.InvalidOperationException("ListStackEmptyException");
+			throw new System.InvalidOperationException("StackEmptyException");
 		}
-		int value = head.Value;
-		head = head.Next;
+		int value = head.value;
+		head = head.next;
 		count--;
 		return value;
 	}
@@ -90,28 +71,25 @@ public class ListStack
 		}
 	}
 
-
-	public void print()
+	public void Print()
 	{
 		Node temp = head;
 		while (temp != null)
 		{
-			Console.Write(temp.Value + " ");
-			temp = temp.Next;
+			Console.Write(temp.value + " ");
+			temp = temp.next;
 		}
 	}
 
 	public static void Main(string[] args)
 	{
-		ListStack s = new ListStack();
-		for (int i = 1; i <= 100; i++)
-		{
-			s.Push(i);
-		}
-		for (int i = 1; i <= 50; i++)
-		{
-			s.Pop();
-		}
-		s.print();
+		StackLL s = new StackLL();
+		s.Push(1);
+		s.Push(2);
+		s.Push(3);
+		s.Print();
+		Console.WriteLine(s.Pop());
+		Console.WriteLine(s.Pop());
+		s.Print();
 	}
 }

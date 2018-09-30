@@ -2,6 +2,10 @@
 
 public class HashTableSC
 {
+
+	private int tableSize;
+	internal Node[] listArray;
+
 	private class Node
 	{
 		internal int value;
@@ -14,9 +18,6 @@ public class HashTableSC
 		}
 	}
 
-	private int tableSize;
-	private Node[] listArray; //double pointer
-
 	public HashTableSC()
 	{
 		tableSize = 512;
@@ -27,34 +28,22 @@ public class HashTableSC
 		}
 	}
 
-	private int ComputeHash(int key) //division method
+	private int computeHash(int key) // division method
 	{
-		int hashValue = 0;
-		hashValue = key;
+		int hashValue = key;
 		return hashValue % tableSize;
 	}
 
-	internal virtual int resolverFun(int i)
+	public void add(int value)
 	{
-		return i;
+		int index = computeHash(value);
+		listArray[index] = new Node(this, value, listArray[index]);
 	}
 
-	internal virtual int resolverFun2(int i)
+	public bool remove(int value)
 	{
-		return i * i;
-	}
-
-
-	public virtual void insert(int value)
-	{
-		int index = ComputeHash(value);
-		listArray[index] = new Node(value, listArray[index]);
-	}
-
-	public virtual bool delete(int value)
-	{
-		int index = ComputeHash(value);
-		Node nextNode, head = listArray[index];
+		int index = computeHash(value);
+		Node nextNode , head = listArray[index];
 		if (head != null && head.value == value)
 		{
 			listArray[index] = head.next;
@@ -76,11 +65,11 @@ public class HashTableSC
 		return false;
 	}
 
-	public virtual void print()
+	public void print()
 	{
 		for (int i = 0; i < tableSize; i++)
 		{
-			Console.WriteLine("Printing for index value :: " + i + "List of value printing :: ");
+			Console.WriteLine("printing for index value :: " + i + "List of value printing :: ");
 			Node head = listArray[i];
 			while (head != null)
 			{
@@ -90,9 +79,9 @@ public class HashTableSC
 		}
 	}
 
-	public virtual bool find(int value)
+	public bool find(int value)
 	{
-		int index = ComputeHash(value);
+		int index = computeHash(value);
 		Node head = listArray[index];
 		while (head != null)
 		{
@@ -111,11 +100,11 @@ public class HashTableSC
 
 		for (int i = 100; i < 110; i++)
 		{
-			ht.insert(i);
+			ht.add(i);
 		}
 		Console.WriteLine("search 100 :: " + ht.find(100));
-		Console.WriteLine("remove 100 :: " + ht.delete(100));
+		Console.WriteLine("remove 100 :: " + ht.remove(100));
 		Console.WriteLine("search 100 :: " + ht.find(100));
-		Console.WriteLine("remove 100 :: " + ht.delete(100));
+		Console.WriteLine("remove 100 :: " + ht.remove(100));
 	}
 }

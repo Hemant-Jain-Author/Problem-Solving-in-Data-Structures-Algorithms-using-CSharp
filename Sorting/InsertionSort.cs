@@ -1,18 +1,15 @@
-﻿public class InsertionSort
+﻿using System;
+
+public class InsertionSort
 {
-	private int[] arr;
-	public InsertionSort(int[] array)
-	{
-		arr = array;
-	}
-	private bool more(int value1, int value2)
+	private static bool more(int value1, int value2)
 	{
 		return value1 > value2;
 	}
-	public virtual void sort()
+
+	public static void sort(int[] arr)
 	{
 		int size = arr.Length;
-
 		int temp, j;
 		for (int i = 1; i < size; i++)
 		{
@@ -22,6 +19,17 @@
 				arr[j] = arr[j - 1];
 			}
 			arr[j] = temp;
+		}
+	}
+
+	public static void Main(string[] args)
+	{
+		int[] array = new int[] { 9, 1, 8, 2, 7, 3, 6, 4, 5 };
+		InsertionSort.sort(array);
+		for (int i = 0; i < array.Length; i++)
+		{
+			Console.Write(array[i] + " ");
+
 		}
 	}
 }

@@ -1,57 +1,23 @@
-﻿using System;
-/*
+﻿﻿using System;
+
 public class LinkedList
 {
 	private class Node
 	{
 		internal int value;
 		internal Node next;
-		// Nested Class Node other fields and methods.
-	}
 
-	private Node head;
-	// Outer Class LinkedList other fields and methods.
-}
-
-public class Tree
-{
-	private class Node
-	{
-		private int value;
-		private Node lChild;
-		private Node rChild;
-		// Nested Class Node other fields and methods.	
-	}
-
-	private Node root;
-	// Outer Class Tree other fields and methods.
-}
-*/
-
-public class LinkedList
-{
-
-	private class Node
-	{
-		internal int value;
-		internal Node next;
 		public Node(int v, Node n)
 		{
 			value = v;
 			next = n;
-		}
-		public Node(int v)
-		{
-			value = v;
-			next = null;
 		}
 	}
 
 	private Node head;
 	private int count = 0;
 
-	//Other Methods.
-
+	// Other Methods.
 	public int size()
 	{
 		return count;
@@ -65,8 +31,7 @@ public class LinkedList
 		}
 	}
 
-	//Other Methods.
-
+	// Other Methods.
 
 	public int peek()
 	{
@@ -100,7 +65,6 @@ public class LinkedList
 		curr.next = newNode;
 	}
 
-
 	public int removeHead()
 	{
 		if (Empty)
@@ -113,7 +77,7 @@ public class LinkedList
 		return value;
 	}
 
-	public bool isPresent(int data)
+	public bool searchList(int data)
 	{
 		Node temp = head;
 		while (temp != null)
@@ -161,7 +125,7 @@ public class LinkedList
 		Node currNode = head;
 		Node nextNode;
 
-		while (currNode != null && currNode.value == delValue) //first node
+		while (currNode != null && currNode.value == delValue) // first node
 		{
 			head = currNode.next;
 			currNode = head;
@@ -221,8 +185,6 @@ public class LinkedList
 
 	public LinkedList copyListReversed()
 	{
-		LinkedList ll = new LinkedList();
-
 		Node tempNode = null;
 		Node tempNode2 = null;
 		Node curr = head;
@@ -232,17 +194,16 @@ public class LinkedList
 			curr = curr.next;
 			tempNode = tempNode2;
 		}
-		ll.head = tempNode;
-		return ll;
+		LinkedList ll2 = new LinkedList();
+		ll2.head = tempNode;
+		return ll2;
 	}
 
 	public LinkedList copyList()
 	{
-		LinkedList ll = new LinkedList();
 		Node headNode = null;
 		Node tailNode = null;
 		Node tempNode = null;
-
 		Node curr = head;
 
 		if (curr == null)
@@ -261,8 +222,9 @@ public class LinkedList
 			tailNode = tempNode;
 			curr = curr.next;
 		}
-		ll.head = headNode;
-		return ll;
+		LinkedList ll2 = new LinkedList();
+		ll2.head = headNode;
+		return ll2;
 	}
 
 	public bool compareList(LinkedList ll)
@@ -286,6 +248,28 @@ public class LinkedList
 		}
 	}
 
+	public bool compareList2(LinkedList ll2)
+	{
+		Node head1 = head;
+		Node head2 = ll2.head;
+
+		while (head1 == null && head2 == null)
+		{
+			if (head1.value != head2.value)
+			{
+				return false;
+			}
+			head1 = head1.next;
+			head2 = head2.next;
+		}
+
+		if (head1 == null && head2 == null)
+		{
+			return true;
+		}
+		return false;
+	}
+
 	public int findLength()
 	{
 		Node curr = head;
@@ -300,6 +284,10 @@ public class LinkedList
 
 	public int nthNodeFromBegining(int index)
 	{
+		if (index > size() || index < 1)
+		{
+			return int.MaxValue;
+		}
 		int count = 0;
 		Node curr = head;
 		while (curr != null && count < index - 1)
@@ -307,9 +295,6 @@ public class LinkedList
 			count++;
 			curr = curr.next;
 		}
-		if (curr == null)
-			throw new Exception("null element");
-
 		return curr.value;
 	}
 
@@ -319,7 +304,7 @@ public class LinkedList
 		int startIndex;
 		if (size != 0 && size < index)
 		{
-			throw new Exception("null element");
+			return int.MaxValue;
 		}
 		startIndex = size - index + 1;
 		return nthNodeFromBegining(startIndex);
@@ -327,10 +312,10 @@ public class LinkedList
 
 	public int nthNodeFromEnd2(int index)
 	{
-		int count = 0;
+		int count = 1;
 		Node forward = head;
 		Node curr = head;
-		while (forward != null && count < index - 1)
+		while (forward != null && count <= index)
 		{
 			count++;
 			forward = forward.next;
@@ -338,7 +323,7 @@ public class LinkedList
 
 		if (forward == null)
 		{
-			throw new Exception("null element");
+			return int.MaxValue;
 		}
 
 		while (forward != null)
@@ -349,12 +334,13 @@ public class LinkedList
 		return curr.value;
 	}
 
-	private Node findIntersection(LinkedList list2)
+	public Node findIntersection(LinkedList lst2)
 	{
+		Node head2 = lst2.head;
 		int l1 = 0;
 		int l2 = 0;
-		Node tempHead = head;
-		Node tempHead2 = list2.head;
+		Node tempHead = this.head;
+		Node tempHead2 = head2;
 		while (tempHead != null)
 		{
 			l1++;
@@ -388,11 +374,10 @@ public class LinkedList
 			head = head.next;
 			head2 = head2.next;
 		}
-
 		return head;
 	}
 
-	public void freeList()
+	public void deleteList()
 	{
 		head = null;
 		count = 0;
@@ -430,15 +415,16 @@ public class LinkedList
 
 	public void removeDuplicate()
 	{
-		while (head != null)
+		Node curr = head;
+		while (curr != null)
 		{
-			if (head.next != null && head.value == head.next.value)
+			if (curr.next != null && curr.value == curr.next.value)
 			{
-				head.next = head.next.next;
+				curr.next = curr.next.next;
 			}
 			else
 			{
-				head = head.next;
+				curr = curr.next;
 			}
 		}
 	}
@@ -494,7 +480,6 @@ public class LinkedList
 			return false;
 		}
 	}
-
 
 	public int loopTypeDetect()
 	{
@@ -573,13 +558,23 @@ public class LinkedList
 		LinkedList ll = new LinkedList();
 		ll.addHead(1);
 		ll.addHead(2);
+		Node nd = ll.head;
 		ll.addHead(3);
 		LinkedList ll2 = new LinkedList();
 		ll2.addHead(1);
+		ll2.head.next = nd;
 		ll2.addHead(2);
-		//ll2.addHead(3);
-		//ll.print();
-		Console.WriteLine(ll.compareList(ll2));
+		ll2.addHead(3);
+		ll2.print();
 
+		Console.WriteLine((ll.findIntersection(ll2)).value);
+		/*
+			* LinkedList l2 = ll.copyList(); l2.print(); LinkedList l3 =
+			* ll.CopyListReversed(); l3.print()
+			* 
+			* System.out.println(ll.nthNodeFromBegining(2));
+			* System.out.println(ll.nthNodeFromEnd(2));
+			* System.out.println(ll.nthNodeFromEnd2(2));
+			*/
 	}
 }

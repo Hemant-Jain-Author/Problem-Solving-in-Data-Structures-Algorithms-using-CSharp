@@ -16,10 +16,10 @@ public class HashTableExercise
 		removeDuplicate(first);
 		Console.WriteLine(first);
 
-		int[] arr = new int[] { 1, 2, 3, 5, 6, 7, 8, 9, 10 };
+		int[] arr = new int[] {1, 2, 3, 5, 6, 7, 8, 9, 10};
 		Console.WriteLine(findMissing(arr, 1, 10));
 
-		int[] arr1 = new int[] { 1, 2, 3, 4, 4, 5, 6, 7, 8, 9, 1 };
+		int[] arr1 = new int[] {1, 2, 3, 4, 4, 5, 6, 7, 8, 9, 1};
 		printRepeating(arr1);
 		printFirstRepeating(arr1);
 	}
@@ -34,39 +34,49 @@ public class HashTableExercise
 			return false;
 		}
 
-		CountMap<char> cm = new CountMap<char>();
+		Dictionary<char?, int?> hm = new Dictionary<char?, int?>();
 
 		foreach (char ch in str1)
 		{
-			cm.add(ch);
+			if (hm.ContainsKey(ch))
+			{
+				hm[ch] = hm[ch] + 1;
+			}
+			else
+			{
+				hm[ch] = 1;
+			}
 		}
 
 		foreach (char ch in str2)
 		{
-			if (cm.containsKey(ch))
-				cm.remove(ch);
-			else
+			if (hm.ContainsKey(ch) == false || hm[ch] == 0)
+			{
 				return false;
+			}
+			else
+			{
+				hm[ch] = hm[ch] - 1;
+			}
 		}
 
-		return (cm.size() == 0);
+		return true;
 	}
 
-	public static void removeDuplicate(char[] str)
+	public static string removeDuplicate(char[] str)
 	{
-		int index = 0;
 		HashSet<char> hs = new HashSet<char>();
-
+		string outValue = "";
 
 		foreach (char ch in str)
 		{
 			if (hs.Contains(ch) == false)
 			{
-				str[index++] = ch;
+				outValue += ch;
 				hs.Add(ch);
 			}
 		}
-		str[index] = '\0';
+		return outValue;
 	}
 
 	public static int findMissing(int[] arr, int start, int end)
@@ -84,7 +94,6 @@ public class HashTableExercise
 				return curr;
 			}
 		}
-
 		return int.MaxValue;
 	}
 
@@ -97,7 +106,7 @@ public class HashTableExercise
 		{
 			if (hs.Contains(val))
 			{
-				Console.Write("  " + val);
+				Console.Write(" " + val);
 			}
 			else
 			{
@@ -110,24 +119,21 @@ public class HashTableExercise
 	{
 		int i;
 		int size = arr.Length;
-		CountMap<int> hs = new CountMap<int>();
+		HashSet<int> hs = new HashSet<int>();
+		int firstRepeating = int.MaxValue;
 
-		for (i = 0; i < size; i++)
+		for (i = size - 1; i >= 0; i--)
 		{
-			hs.add(arr[i]);
-		}
-		for (i = 0; i < size; i++)
-		{
-			hs.remove(arr[i]);
-			if (hs.containsKey(arr[i]))
+			if (hs.Contains(arr[i]))
 			{
-				Console.WriteLine("First Repeating number is : " + arr[i]);
-				return;
+				firstRepeating = arr[i];
 			}
+			hs.Add(arr[i]);
 		}
+		Console.WriteLine("First Repeating number is : " + firstRepeating);
 	}
 
-	internal virtual int hornerHash(char[] key, int tableSize)
+	public static int hornerHash(char[] key, int tableSize)
 	{
 		int size = key.Length;
 		int h = 0;

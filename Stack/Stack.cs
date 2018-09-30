@@ -1,21 +1,24 @@
 ﻿using System;
 using System.Collections;
 
-public class ArrayStack
+public class Stack
 {
 
-	private const int CAPACITY = 1000;
+	private int capacity = 1000;
 	private int[] data;
 	private int top = -1;
 
-	public ArrayStack() : this(CAPACITY)
-	{
-	}
-
-	public ArrayStack(int capacity)
+	public Stack()
 	{
 		data = new int[capacity];
 	}
+
+	public Stack(int size)
+	{
+		data = new int[size];
+		capacity = size;
+	}
+	/* Other methods */
 
 	public int size()
 	{
@@ -34,18 +37,17 @@ public class ArrayStack
 	{
 		if (size() == data.Length)
 		{
-			throw new System.InvalidOperationException("ArrayStackOvarflowException");
+			throw new System.InvalidOperationException("StackOvarflowException");
 		}
 		top++;
 		data[top] = value;
 	}
 
-
 	public int Peek()
 	{
 		if (Empty)
 		{
-			throw new System.InvalidOperationException("ArrayStackEmptyException");
+			throw new System.InvalidOperationException("StackEmptyException");
 		}
 		return data[top];
 	}
@@ -54,7 +56,7 @@ public class ArrayStack
 	{
 		if (Empty)
 		{
-			throw new System.InvalidOperationException("ArrayStackEmptyException");
+			throw new System.InvalidOperationException("StackEmptyException");
 		}
 		int topVal = data[top];
 		top--;
@@ -65,21 +67,20 @@ public class ArrayStack
 	{
 		for (int i = top; i > -1; i--)
 		{
-			Console.Write(" " + data[i]);
+			Console.Write(data[i] + " ");
 		}
+		Console.WriteLine("");
 	}
 
 	public static void Main(string[] args)
 	{
-		ArrayStack s = new ArrayStack(1000);
-		for (int i = 1; i <= 100; i++)
-		{
-			s.Push(i);
-		}
-		for (int i = 1; i <= 50; i++)
-		{
-			s.Pop();
-		}
+		Stack s = new Stack();
+		s.Push(1);
+		s.Push(2);
+		s.Push(3);
+		s.Print();
+		Console.WriteLine(s.Pop());
+		Console.WriteLine(s.Pop());
 		s.Print();
 	}
 }

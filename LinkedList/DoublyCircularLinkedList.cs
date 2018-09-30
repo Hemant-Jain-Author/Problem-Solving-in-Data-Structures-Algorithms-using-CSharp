@@ -2,6 +2,10 @@
 
 public class DoublyCircularLinkedList
 {
+	private Node head = null;
+	private Node tail = null;
+	private int count = 0;
+
 	private class Node
 	{
 		internal int value;
@@ -22,23 +26,14 @@ public class DoublyCircularLinkedList
 			prev = this;
 		}
 	}
+	/* Other methods */
 
-	private Node head = null;
-	private Node tail = null;
-
-	private int count = 0;
-
-
-	public DoublyCircularLinkedList()
-	{
-	}
-
-	public virtual int size()
+	public int size()
 	{
 		return count;
 	}
 
-	public virtual bool Empty
+	public bool Empty
 	{
 		get
 		{
@@ -46,7 +41,7 @@ public class DoublyCircularLinkedList
 		}
 	}
 
-	public virtual int peekHead()
+	public int peekHead()
 	{
 		if (Empty)
 		{
@@ -55,7 +50,7 @@ public class DoublyCircularLinkedList
 		return head.value;
 	}
 
-	public virtual void addHead(int value)
+	public void addHead(int value)
 	{
 		Node newNode = new Node(value, null, null);
 		if (count == 0)
@@ -69,12 +64,13 @@ public class DoublyCircularLinkedList
 			newNode.next = head;
 			newNode.prev = head.prev;
 			head.prev = newNode;
+			newNode.prev.next = newNode;
 			head = newNode;
 		}
 		count++;
 	}
 
-	public virtual void addTail(int value)
+	public void addTail(int value)
 	{
 		Node newNode = new Node(value, null, null);
 		if (count == 0)
@@ -88,12 +84,13 @@ public class DoublyCircularLinkedList
 			newNode.next = tail.next;
 			newNode.prev = tail;
 			tail.next = newNode;
+			newNode.next.prev = newNode;
 			tail = newNode;
 		}
 		count++;
 	}
 
-	public virtual int removeHead()
+	public int removeHead()
 	{
 		if (count == 0)
 		{
@@ -117,7 +114,7 @@ public class DoublyCircularLinkedList
 		return value;
 	}
 
-	public virtual int removeTail()
+	public int removeTail()
 	{
 		if (count == 0)
 		{
@@ -141,7 +138,7 @@ public class DoublyCircularLinkedList
 		return value;
 	}
 
-	public virtual bool isPresent(int key)
+	public bool isPresent(int key)
 	{
 		Node temp = head;
 		if (head == null)
@@ -161,25 +158,37 @@ public class DoublyCircularLinkedList
 		return false;
 	}
 
-
-	public virtual void freeList()
+	public void deleteList()
 	{
 		head = null;
 		tail = null;
 		count = 0;
 	}
 
-	public virtual void print()
+	public void print()
 	{
 		if (Empty)
 		{
 			return;
 		}
 		Node temp = head;
-		do
+		while (temp != tail)
 		{
 			Console.Write(temp.value + " ");
 			temp = temp.next;
-		} while (temp != null);
+		}
+		Console.Write(temp.value);
+	}
+
+	public static void Main(string[] args)
+	{
+		DoublyCircularLinkedList ll = new DoublyCircularLinkedList();
+		ll.addHead(1);
+		ll.addHead(2);
+		ll.addHead(3);
+		ll.addHead(1);
+		ll.addHead(2);
+		ll.addHead(3);
+		ll.print();
 	}
 }

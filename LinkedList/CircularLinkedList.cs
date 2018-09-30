@@ -2,10 +2,11 @@
 
 public class CircularLinkedList
 {
+	private Node tail;
+	private int count = 0;
 
 	private class Node
 	{
-		//Node class Fields and Methods
 		internal int value;
 		internal Node next;
 
@@ -14,15 +15,7 @@ public class CircularLinkedList
 			value = v;
 			next = n;
 		}
-		public Node(int v)
-		{
-			value = v;
-			next = null;
-		}
 	}
-	private Node tail;
-	private int count = 0;
-	//Other Methods
 
 	public int size()
 	{
@@ -109,9 +102,9 @@ public class CircularLinkedList
 		Node curr = tail.next;
 		Node head = tail.next;
 
-		if (curr.value == key) //head and single node case.
+		if (curr.value == key) // head and single node case.
 		{
-			if (curr == curr.next) //single node case
+			if (curr == curr.next) // single node case
 			{
 				tail = null;
 			}
@@ -143,7 +136,7 @@ public class CircularLinkedList
 		return false;
 	}
 
-	public void copyListReversed()
+	public CircularLinkedList copyListReversed()
 	{
 		CircularLinkedList cl = new CircularLinkedList();
 		Node curr = tail.next;
@@ -159,9 +152,10 @@ public class CircularLinkedList
 			cl.addHead(curr.value);
 			curr = curr.next;
 		}
+		return cl;
 	}
 
-	public void copyList()
+	public CircularLinkedList copyList()
 	{
 		CircularLinkedList cl = new CircularLinkedList();
 		Node curr = tail.next;
@@ -177,9 +171,10 @@ public class CircularLinkedList
 			cl.addTail(curr.value);
 			curr = curr.next;
 		}
+		return cl;
 	}
 
-	public bool isPresent(int data)
+	public bool searchList(int data)
 	{
 		Node temp = tail;
 		for (int i = 0; i < count; i++)
@@ -193,7 +188,7 @@ public class CircularLinkedList
 		return false;
 	}
 
-	public void freeList()
+	public void deleteList()
 	{
 		tail = null;
 		count = 0;
@@ -212,5 +207,17 @@ public class CircularLinkedList
 			temp = temp.next;
 		}
 		Console.Write(temp.value);
+	}
+
+	public static void Main(string[] args)
+	{
+		CircularLinkedList ll = new CircularLinkedList();
+		ll.addHead(1);
+		ll.addHead(2);
+		ll.addHead(3);
+		ll.addHead(1);
+		ll.addHead(2);
+		ll.addHead(3);
+		ll.print();
 	}
 }

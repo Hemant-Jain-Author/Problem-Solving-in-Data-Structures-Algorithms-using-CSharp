@@ -2,11 +2,15 @@
 
 public class DoublyLinkedList
 {
+	private Node head;
+	private Node tail;
+	private int count = 0;
+
 	private class Node
 	{
-		public int value;
-		public Node next;
-		public Node prev;
+		internal int value;
+		internal Node next;
+		internal Node prev;
 
 		public Node(int v, Node nxt, Node prv)
 		{
@@ -14,6 +18,7 @@ public class DoublyLinkedList
 			next = nxt;
 			prev = prv;
 		}
+
 		public Node(int v)
 		{
 			value = v;
@@ -22,15 +27,7 @@ public class DoublyLinkedList
 		}
 	}
 
-	private Node head;
-	private Node tail;
-
-	private int count = 0;
-
-	public DoublyLinkedList()
-	{
-	}
-
+	/* Other methods */
 	public int size()
 	{
 		return count;
@@ -110,25 +107,23 @@ public class DoublyLinkedList
 	public bool removeNode(int key)
 	{
 		Node curr = head;
-
-		if (curr == null) //empty list
+		if (curr == null) // empty list
 		{
 			return false;
 		}
 
-		if (curr.value == key) //head is the node with value key.
+		if (curr.value == key) // head is the node with value key.
 		{
 			head = head.next;
 			count--;
 			if (head != null)
 			{
-				head = null;
+				head.prev = null;
 			}
 			else
 			{
 				tail = null; // only one element in list.
 			}
-
 			return true;
 		}
 
@@ -137,7 +132,7 @@ public class DoublyLinkedList
 			if (curr.next.value == key)
 			{
 				curr.next = curr.next.next;
-				if (curr.next == null) //last element case.
+				if (curr.next == null) // last element case.
 				{
 					tail = curr;
 				}
@@ -153,7 +148,6 @@ public class DoublyLinkedList
 		return false;
 	}
 
-
 	public bool isPresent(int key)
 	{
 		Node temp = head;
@@ -168,8 +162,7 @@ public class DoublyLinkedList
 		return false;
 	}
 
-
-	public void freeList()
+	public void deleteList()
 	{
 		head = null;
 		tail = null;
@@ -184,40 +177,39 @@ public class DoublyLinkedList
 			Console.Write(temp.value + " ");
 			temp = temp.next;
 		}
-		Console.WriteLine("");
 	}
 
-	//SORTED INSERT DECREASING
+	// SORTED INSERT DECREASING
 	public void sortedInsert(int value)
 	{
 		Node temp = new Node(value);
 
 		Node curr = head;
-		if (curr == null) //first element
+		if (curr == null) // first element
 		{
 			head = temp;
 			tail = temp;
 		}
 
-		if (head.value <= value) //at the begining
+		if (head.value <= value) // at the begining
 		{
 			temp.next = head;
 			head.prev = temp;
 			head = temp;
 		}
 
-		while (curr.next != null && curr.next.value > value) //treversal
+		while (curr.next != null && curr.next.value > value) // treversal
 		{
 			curr = curr.next;
 		}
 
-		if (curr.next == null) //at the end
+		if (curr.next == null) // at the end
 		{
 			tail = temp;
 			temp.prev = curr;
 			curr.next = temp;
 		}
-		else ///all other
+		else /// all other
 		{
 			temp.next = curr.next;
 			temp.prev = curr;
@@ -227,8 +219,8 @@ public class DoublyLinkedList
 	}
 
 	/*
-        Reverse a doubly linked List iteratively
-     */
+	 * Reverse a doubly linked List iteratively
+	 */
 
 	public void reverseList()
 	{
@@ -252,7 +244,7 @@ public class DoublyLinkedList
 		return;
 	}
 
-	/*  Remove Duplicate */
+	/* Remove Duplicate */
 	public void removeDuplicate()
 	{
 		Node curr = head;
@@ -311,10 +303,8 @@ public class DoublyLinkedList
 		ll.addHead(4);
 		ll.addHead(5);
 		ll.addHead(6);
-		ll.print();
 		ll.removeHead();
-		ll.print();
-		ll.freeList();
+		ll.deleteList();
 		ll.print();
 		ll.addHead(11);
 		ll.addHead(21);

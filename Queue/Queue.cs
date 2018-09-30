@@ -4,7 +4,7 @@ using System.Collections;
 public class Queue
 {
 	private int count;
-	private int Capacity = 100;
+	private int capacity = 100;
 	private int[] data;
 	internal int front = 0;
 	internal int back = 0;
@@ -15,18 +15,20 @@ public class Queue
 		data = new int[100];
 	}
 
-	public virtual void add(int value)
+	public virtual bool add(int value)
 	{
-		if (count >= Capacity)
+		if (count >= capacity)
 		{
-			throw new System.InvalidOperationException("QueueFullException");
+			Console.WriteLine("Queue is full.");
+			return false;
 		}
 		else
 		{
 			count++;
 			data[back] = value;
-			back = (++back) % (Capacity - 1);
+			back = (++back) % (capacity - 1);
 		}
+		return true;
 	}
 
 	public virtual int remove()
@@ -34,13 +36,14 @@ public class Queue
 		int value;
 		if (count <= 0)
 		{
-			throw new System.InvalidOperationException("QueueEmptyException");
+			Console.WriteLine("Queue is empty.");
+			return -999;
 		}
 		else
 		{
 			count--;
 			value = data[front];
-			front = (++front) % (Capacity - 1);
+			front = (++front) % (capacity - 1);
 		}
 		return value;
 	}
@@ -70,5 +73,6 @@ public class Queue
 		{
 			Console.WriteLine(que.remove());
 		}
+
 	}
 }
