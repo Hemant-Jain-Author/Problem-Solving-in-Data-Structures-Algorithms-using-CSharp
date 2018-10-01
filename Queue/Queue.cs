@@ -63,16 +63,13 @@ public class Queue
 
 	public static void Main(string[] args)
 	{
-		Queue que = new Queue();
-
-		for (int i = 0; i < 20; i++)
+		Queue q = new Queue();
+		q.add(1);
+		q.add(2);
+		q.add(3);
+		for (int i = 0; i < 3; i++)
 		{
-			que.add(i);
+			Console.WriteLine(q.remove());
 		}
-		for (int i = 0; i < 22; i++)
-		{
-			Console.WriteLine(que.remove());
-		}
-
 	}
 }

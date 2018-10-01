@@ -1,157 +1,183 @@
 ﻿using System;
 
-
 public class PriorityQueue<T> where T : IComparable<T>
 {
-	private const int CAPACITY = 16;
-	private int size; // Number of elements in PriorityQueue
-	private T[] arr; // The PriorityQueue array
-	bool isMinHeap;
+	private const int CAPACITY = 32;
+	private int Count; // Number of elements in Heap
+	private T[] arr; // The Heap array
+	private bool isMinHeap;
 
-	public PriorityQueue(bool minHeap = true)
+	public PriorityQueue(bool isMin = true)
 	{
 		arr = new T[CAPACITY];
-		size = 0;
-		isMinHeap = minHeap;
+		Count = 0;
+		isMinHeap = isMin;
 	}
 
-	public PriorityQueue(T[] array, bool minHeap = true)
+	public PriorityQueue(T[] array, bool isMin = true)
 	{
-		size = array.Length;
-		arr = new T[array.Length + 1];
-		size = array.Length;
-		isMinHeap = minHeap;
-		Array.Copy(array, 0, arr, 1, array.Length); //we do not use 0 index
+		Count = array.Length;
+		arr = array;
+		isMinHeap = isMin;
 
-		//Build PriorityQueue operation over array
-		for (int i = (size / 2); i > 0; i--)
+		// Build Heap operation over array
+		for (int i = (Count / 2); i >= 0; i--)
 		{
 			proclateDown(i);
 		}
 	}
-	//Other Methods.
 
-	private int comp(int first, int second)
+	// Other Methods.
+	private bool compare(T[] arr, int first, int second)
 	{
 		if (isMinHeap)
-			return arr[first].CompareTo(arr[second]);
+			return arr[first].CompareTo(arr[second]) > 0;
 		else
-			return arr[second].CompareTo(arr[first]);
+			return arr[first].CompareTo(arr[second]) < 0;
 	}
 
-	private void proclateDown(int position)
+	private void proclateDown(int parent)
 	{
-		int lChild = 2 * position;
+		int lChild = 2 * parent + 1;
 		int rChild = lChild + 1;
-		int small = -1;
+		int child = -1;
 		T temp;
 
-		if (lChild <= size)
+		if (lChild < Count)
 		{
-			small = lChild;
+			child = lChild;
 		}
 
-		if (rChild <= size && comp(rChild, lChild) < 0)
+		if (rChild < Count && compare(arr, lChild, rChild))
 		{
-			small = rChild;
+			child = rChild;
 		}
 
-		if (small != -1 && comp(small, position) < 0)
+		if (child != -1 && compare(arr, parent, child))
 		{
-			temp = arr[position];
-			arr[position] = arr[small];
-			arr[small] = temp;
-			proclateDown(small);
+			temp = arr[parent];
+			arr[parent] = arr[child];
+			arr[child] = temp;
+			proclateDown(child);
 		}
 	}
 
-	private void proclateUp(int position)
+	private void proclateUp(int child)
 	{
-		int parent = position / 2;
+		int parent = (child - 1) / 2;
 		T temp;
-		if (parent == 0)
+		if (parent < 0)
 		{
 			return;
 		}
 
-		if (comp(parent, position) > 0) //parent grater then child.
+		if (compare(arr, parent, child))
 		{
-			temp = arr[position];
-			arr[position] = arr[parent];
+			temp = arr[child];
+			arr[child] = arr[parent];
 			arr[parent] = temp;
 			proclateUp(parent);
 		}
 	}
 
-	public virtual void Enqueue(T value)
+	public void add(T value)
 	{
-		if (size == arr.Length - 1)
+		if (Count == arr.Length)
 		{
 			doubleSize();
 		}
 
-		arr[++size] = value;
-		proclateUp(size);
+		arr[Count++] = value;
+		proclateUp(Count - 1);
 	}
 
 	private void doubleSize()
 	{
 		T[] old = arr;
 		arr = new T[arr.Length * 2];
-		Array.Copy(old, 1, arr, 1, size);
+		Array.Copy(old, 0, arr, 0, Count);
 	}
 
-	public virtual T Dequeue()
+	public T remove()
 	{
-		if (isEmpty())
+		if (Count == 0)
 		{
-			throw new System.InvalidOperationException("HeapEmptyException");
+			throw new System.InvalidOperationException();
 		}
 
-		T value = arr[1];
-		arr[1] = arr[size];
-		size--;
-		proclateDown(1);
+		T value = arr[0];
+		arr[0] = arr[Count - 1];
+		Count--;
+		proclateDown(0);
 		return value;
 	}
 
-	public virtual void Print()
+	public void print()
 	{
-		for (int i = 1; i <= size + 1; i++)
+		for (int i = 0; i < Count; i++)
 		{
-			Console.WriteLine("value is :: " + arr[i]);
+			Console.Write(arr[i] + " ");
 		}
 	}
 
-	public virtual bool isEmpty()
+	public bool isEmpty()
 	{
-		return (size == 0);
+		return (Count == 0);
 	}
 
-	public virtual T Peek()
+	public int size()
 	{
-		if (isEmpty())
+		return Count;
+	}
+
+	public T peek()
+	{
+		if (Count == 0)
 		{
-			throw new System.InvalidOperationException("HeapEmptyException");
+			throw new System.InvalidOperationException();
 		}
-		return arr[1];
+		return arr[0];
 	}
 
-	public int Count
+	public static void HeapSort(int[] array, bool inc)
 	{
-		get
-		{
-			return size;
-		}
-
-	}
-
-	public static void Sort(T[] array)
-	{
-		PriorityQueue<T> hp = new PriorityQueue<T>(array);
+		// Create max heap for increasing order sorting.
+		PriorityQueue<int> hp = new PriorityQueue<int>(array, !inc);
 		for (int i = 0; i < array.Length; i++)
 		{
-			array[i] = hp.Dequeue();
+			array[array.Length - i - 1] = hp.remove();
+		}
+	}
+}
+
+public class HeapDemo
+{
+	public static void Main1(string[] args)
+	{
+		int[] a = new int[] { 1, 9, 6, 7, 8, 0, 2, 4, 5, 3 };
+		PriorityQueue<int> hp = new PriorityQueue<int>(a, true);
+
+		hp.add(100);
+		hp.add(-1);
+		hp.print();
+		Console.WriteLine();
+		while (hp.isEmpty() == false)
+		{
+			Console.Write(hp.remove() + " ");
+		}
+		Console.WriteLine();
+		int[] a2 = new int[] { 1, 9, 6, 7, 8, 0, 2, 4, 5, 3 };
+		PriorityQueue<int>.HeapSort(a2, true);
+		for (int i = 0; i < a2.Length; i++)
+		{
+			Console.Write(a2[i] + " ");
+		}
+		Console.WriteLine();
+		int[] a3 = new int[] { 1, 9, 6, 7, 8, 0, 2, 4, 5, 3 };
+		PriorityQueue<int>.HeapSort(a3, false);
+		for (int i = 0; i < a3.Length; i++)
+		{
+			Console.Write(a3[i] + " ");
 		}
 	}
 }

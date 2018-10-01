@@ -37,7 +37,7 @@ public class Tree
 		root = levelOrderBinaryTree(arr, 0);
 	}
 
-	public Node levelOrderBinaryTree(int[] arr, int start)
+	private Node levelOrderBinaryTree(int[] arr, int start)
 	{
 		int size = arr.Length;
 		Node curr = new Node(arr[start]);
@@ -197,7 +197,7 @@ public class Tree
 			que.Enqueue(root);
 		}
 
-		while (que.Empty == false)
+		while (que.Count != 0)
 		{
 			temp = que.Dequeue();
 			Console.Write(" " + temp.value);
@@ -223,7 +223,7 @@ public class Tree
 			stk.Push(root);
 		}
 
-		while (stk.Empty == false)
+		while (stk.Count != 0)
 		{
 			temp = stk.Pop();
 			Console.WriteLine(temp.value);
@@ -239,7 +239,7 @@ public class Tree
 		}
 	}
 
-	internal void PrintLevelOrderLineByLine()
+	public void PrintLevelOrderLineByLine()
 	{
 		Queue<Node> que1 = new Queue<Node>();
 		Queue<Node> que2 = new Queue<Node>();
@@ -282,7 +282,7 @@ public class Tree
 		}
 	}
 
-	internal void PrintLevelOrderLineByLine2()
+	public void PrintLevelOrderLineByLine2()
 	{
 		Queue<Node> que = new Queue<Node>();
 		Node temp = null;
@@ -313,7 +313,7 @@ public class Tree
 		}
 	}
 
-	internal void PrintSpiralTree()
+	public void PrintSpiralTree()
 	{
 		Stack<Node> stk1 = new Stack<Node>();
 		Stack<Node> stk2 = new Stack<Node>();
@@ -416,7 +416,7 @@ public class Tree
 		return node.value;
 	}
 
-	public Node FindMaxNode(Node curr)
+	private Node FindMaxNode(Node curr)
 	{
 		Node node = curr;
 		if (node == null)
@@ -431,7 +431,7 @@ public class Tree
 		return node;
 	}
 
-	public Node FindMinNode(Node curr)
+	private Node FindMinNode(Node curr)
 	{
 		Node node = curr;
 		if (node == null)
@@ -549,7 +549,7 @@ public class Tree
 			return (isEqualUtil(node1.lChild, node2.lChild) && isEqualUtil(node1.rChild, node2.rChild) && (node1.value == node2.value));
 		}
 	}
-
+	/*
 	public Node Ancestor(int first, int second)
 	{
 		if (first > second)
@@ -578,7 +578,7 @@ public class Tree
 		}
 		return curr;
 	}
-
+	*/
 	public Tree CopyTree()
 	{
 		Tree tree2 = new Tree();
@@ -630,7 +630,7 @@ public class Tree
 		return numNodes(root);
 	}
 
-	public int numNodes(Node curr)
+	private int numNodes(Node curr)
 	{
 		if (curr == null)
 		{
@@ -647,7 +647,7 @@ public class Tree
 		return numNodes(root);
 	}
 
-	public int numFullNodesBT(Node curr)
+	private int numFullNodesBT(Node curr)
 	{
 		int count;
 		if (curr == null)
@@ -842,7 +842,12 @@ public class Tree
 		}
 	}
 
-	public bool isBST3(Node root)
+	public bool isBST3()
+	{
+		return isBSTUtil3(root);
+	}
+
+	private bool isBSTUtil3(Node root)
 	{
 		if (root == null)
 		{
@@ -856,7 +861,7 @@ public class Tree
 		{
 			return false;
 		}
-		return (isBST3(root.lChild) && isBST3(root.rChild));
+		return (isBSTUtil3(root.lChild) && isBSTUtil3(root.rChild));
 	}
 
 	public bool isBST()
@@ -864,7 +869,7 @@ public class Tree
 		return isBST(root, int.MinValue, int.MaxValue);
 	}
 
-	public bool isBST(Node curr, int min, int max)
+	private bool isBST(Node curr, int min, int max)
 	{
 		if (curr == null)
 		{
@@ -911,7 +916,7 @@ public class Tree
 		return true;
 	}
 
-	internal bool isCompleteTree()
+	public bool isCompleteTree()
 	{
 		Queue<Node> que = new Queue<Node>();
 		Node temp = null;
@@ -920,7 +925,7 @@ public class Tree
 		{
 			que.Enqueue(root);
 		}
-		while (que.size() != 0)
+		while (que.Count != 0)
 		{
 			temp = que.Dequeue();
 			if (temp.lChild != null)
@@ -952,7 +957,7 @@ public class Tree
 		return true;
 	}
 
-	internal bool isCompleteTreeUtil(Node curr, int index, int count)
+	private bool isCompleteTreeUtil(Node curr, int index, int count)
 	{
 		if (curr == null)
 		{
@@ -965,16 +970,13 @@ public class Tree
 		return isCompleteTreeUtil(curr.lChild, index * 2 + 1, count) && isCompleteTreeUtil(curr.rChild, index * 2 + 2, count);
 	}
 
-	internal bool CompleteTree2
+	public bool isCompleteTree2()
 	{
-		get
-		{
-			int count = numNodes();
-			return isCompleteTreeUtil(root, 0, count);
-		}
+		int count = numNodes();
+		return isCompleteTreeUtil(root, 0, count);
 	}
 
-	internal bool isHeapUtil(Node curr, int parentValue)
+	private bool isHeapUtil(Node curr, int parentValue)
 	{
 		if (curr == null)
 		{
@@ -987,16 +989,13 @@ public class Tree
 		return (isHeapUtil(curr.lChild, curr.value) && isHeapUtil(curr.rChild, curr.value));
 	}
 
-	internal bool Heap
+	public bool isHeap()
 	{
-		get
-		{
-			int infi = -9999999;
-			return (CompleteTree && isHeapUtil(root, infi));
-		}
+		int infi = -9999999;
+		return (isCompleteTree() && isHeapUtil(root, infi));
 	}
 
-	internal bool isHeapUtil2(Node curr, int index, int count, int parentValue)
+	private bool isHeapUtil2(Node curr, int index, int count, int parentValue)
 	{
 		if (curr == null)
 		{
@@ -1013,14 +1012,11 @@ public class Tree
 		return isHeapUtil2(curr.lChild, index * 2 + 1, count, curr.value) && isHeapUtil2(curr.rChild, index * 2 + 2, count, curr.value);
 	}
 
-	internal bool Heap2
+	public bool isHeap2()
 	{
-		get
-		{
-			int count = numNodes();
-			int parentValue = -9999999;
-			return isHeapUtil2(root, 0, count, parentValue);
-		}
+		int count = numNodes();
+		int parentValue = -9999999;
+		return isHeapUtil2(root, 0, count, parentValue);
 	}
 
 	// void DFS(Node head)
@@ -1047,7 +1043,7 @@ public class Tree
 	// }
 	// System.out.print(("count is : " + count);
 	// }
-
+	/*
 	public Node treeToListRec()
 	{
 		Node head = treeToListRec(root);
@@ -1100,7 +1096,7 @@ public class Tree
 		Tail.rChild = Head;
 		return Head;
 	}
-
+	*/
 	public void printAllPath()
 	{
 		Stack<int> stk = new Stack<int>();
@@ -1118,7 +1114,11 @@ public class Tree
 
 		if (curr.lChild == null && curr.rChild == null)
 		{
-			Console.WriteLine(stk);
+			foreach (int val in stk)
+			{
+				Console.Write(val + " ");
+			}
+			Console.WriteLine();
 			stk.Pop();
 			return;
 		}
@@ -1203,22 +1203,16 @@ public class Tree
 	private Node trimOutsideRange(Node curr, int min, int max)
 	{
 		if (curr == null)
-		{
 			return null;
-		}
 
 		curr.lChild = trimOutsideRange(curr.lChild, min, max);
 		curr.rChild = trimOutsideRange(curr.rChild, min, max);
 
 		if (curr.value < min)
-		{
 			return curr.rChild;
-		}
 
 		if (curr.value > max)
-		{
 			return curr.lChild;
-		}
 
 		return curr;
 	}
@@ -1332,7 +1326,7 @@ public class Tree
 		return searchBTUtil(root, value);
 	}
 
-	public bool searchBTUtil(Node curr, int value)
+	private bool searchBTUtil(Node curr, int value)
 	{
 		bool left, right;
 		if (curr == null)
@@ -1379,7 +1373,7 @@ public class Tree
 		return curr;
 	}
 
-	internal bool isBSTArray(int[] preorder, int size)
+	public bool isBSTArray(int[] preorder, int size)
 	{
 		Stack<int> stk = new Stack<int>();
 		int value;
@@ -1413,7 +1407,7 @@ public class Tree
 		Console.WriteLine("");
 		Console.WriteLine(t.Heap);
 		Console.WriteLine(t.Heap2);
-		Console.WriteLine(t.CompleteTree);
+		Console.WriteLine(t.isCompleteTree());
 
 		Console.WriteLine("");
 		t.PrintBredthFirst();
@@ -1436,10 +1430,10 @@ public class Tree
 		Console.WriteLine("");
 
 		/*
-		 * t.PrintPostOrder(); System.out.println(); t.iterativePostOrder();
-		 * t.PrintBredthFirst(); // t.treeToListRec(); t.printAllPath();
-		 * System.out.println(t.LCA(10, 3)); t.iterativePreOrder(); t.PrintPreOrder();
-		 * // t.CreateBinaryTree(arr); // System.out.println(t.isBST2());
-		 */
+			* t.PrintPostOrder(); System.out.println(); t.iterativePostOrder();
+			* t.PrintBredthFirst(); // t.treeToListRec(); t.printAllPath();
+			* System.out.println(t.LCA(10, 3)); t.iterativePreOrder(); t.PrintPreOrder();
+			* // t.CreateBinaryTree(arr); // System.out.println(t.isBST2());
+			*/
 	}
 }

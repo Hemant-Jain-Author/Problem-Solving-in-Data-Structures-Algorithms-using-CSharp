@@ -6,7 +6,7 @@ public class Graph
 	internal int count;
 	private LinkedList<LinkedList<Edge>> Adj;
 
-	private class Edge
+	private class Edge : IComparable<AdjNode>
 	{
 		internal int dest;
 		internal int cost;
@@ -15,6 +15,11 @@ public class Graph
 		{
 			dest = dst;
 			cost = cst;
+		}
+
+		int IComparable<Edge>.CompareTo(Edge other)
+		{
+			return cost - other.cost;
 		}
 	}
 
@@ -68,7 +73,7 @@ public class Graph
 		int count = gph.count;
 		bool[] visited = new bool[count];
 
-		Stack<int?> stk = new Stack<int?>();
+		Stack<int> stk = new Stack<int>();
 		stk.Push(source);
 		visited[source] = true;
 
@@ -109,7 +114,7 @@ public class Graph
 		}
 	}
 
-	public static void dfsUtil2(Graph gph, int index, bool[] visited, Stack<int?> stk)
+	public static void dfsUtil2(Graph gph, int index, bool[] visited, Stack<int> stk)
 	{
 		visited[index] = true;
 		LinkedList<Edge> adl = gph.Adj.get(index);
@@ -127,7 +132,7 @@ public class Graph
 	{
 		int count = gph.count;
 		bool[] visited = new bool[count];
-		LinkedList<int?> que = new LinkedList<int?>();
+		LinkedList<int> que = new LinkedList<int>();
 		que.AddLast(source);
 		visited[source] = true;
 
@@ -164,7 +169,7 @@ public class Graph
 
 	public static void topologicalSort(Graph gph)
 	{
-		Stack<int?> stk = new Stack<int?>();
+		Stack<int> stk = new Stack<int>();
 		int count = gph.count;
 		bool[] visited = new bool[count];
 
@@ -231,7 +236,7 @@ public class Graph
 		return countAllPathDFS(gph, visited, src, dest);
 	}
 
-	public static void printAllPathDFS(Graph gph, bool[] visited, int source, int dest, Stack<int?> path)
+	public static void printAllPathDFS(Graph gph, bool[] visited, int source, int dest, Stack<int> path)
 	{
 		path.Push(source);
 
@@ -257,7 +262,7 @@ public class Graph
 	public static void printAllPath(Graph gph, int src, int dest)
 	{
 		bool[] visited = new bool[gph.count];
-		Stack<int?> path = new Stack<int?>();
+		Stack<int> path = new Stack<int>();
 		printAllPathDFS(gph, visited, src, dest, path);
 	}
 
@@ -331,9 +336,9 @@ public class Graph
 	public static int[][] transitiveClosure(Graph gph)
 	{
 		int count = gph.count;
-//JAVA TO C# CONVERTER NOTE: The following call to the 'RectangularArrays' 
-//helper class reproduces the rectangular array initialization that is automatic in Java:
-//ORIGINAL LINE: int[][] tc = new int[count][count];
+		//JAVA TO C# CONVERTER NOTE: The following call to the 'RectangularArrays' 
+		//helper class reproduces the rectangular array initialization that is automatic in Java:
+		//ORIGINAL LINE: int[][] tc = new int[count][count];
 		int[][] tc = RectangularArrays.ReturnRectangularIntArray(count, count);
 		for (int i = 0; i < count; i++)
 		{
@@ -369,7 +374,7 @@ public class Graph
 		int[] level = new int[count];
 		visited[source] = true;
 
-		LinkedList<int?> que = new LinkedList<int?>();
+		LinkedList<int> que = new LinkedList<int>();
 		que.AddLast(source);
 		level[source] = 0;
 		Console.WriteLine("\nNode  - Level");
@@ -396,7 +401,7 @@ public class Graph
 	{
 		int count = gph.count;
 		bool[] visited = new bool[count];
-		LinkedList<int?> que = new LinkedList<int?>();
+		LinkedList<int> que = new LinkedList<int>();
 		que.AddLast(source);
 		visited[source] = true;
 		int[] level = new int[count];
@@ -681,7 +686,7 @@ public class Graph
 		int count = gph.count;
 		bool[] visited = new bool[count];
 
-		Stack<int?> stk = new Stack<int?>();
+		Stack<int> stk = new Stack<int>();
 		for (int i = 0; i < count; i++)
 		{
 			if (visited[i] == false)
@@ -695,7 +700,7 @@ public class Graph
 			visited[i] = false;
 		}
 
-		Stack<int?> stk2 = new Stack<int?>();
+		Stack<int> stk2 = new Stack<int>();
 		while (stk.Count > 0)
 		{
 			int index = stk.Pop();
@@ -812,7 +817,7 @@ public class Graph
 		{
 			distance[i] = -1;
 		}
-		LinkedList<int?> que = new LinkedList<int?>();
+		LinkedList<int> que = new LinkedList<int>();
 		que.AddLast(source);
 		distance[source] = 0;
 		while (que.Count > 0)
@@ -1000,7 +1005,7 @@ public class Graph
 		}
 		bool[] visited = new bool[count];
 		visited[source] = true;
-		LinkedList<int?> que = new LinkedList<int?>();
+		LinkedList<int> que = new LinkedList<int>();
 		que.AddLast(source);
 		heightArr[source] = 0;
 		int maxHight = 0;
@@ -1053,7 +1058,7 @@ public class Graph
 
 	public static void main12()
 	{
-		int[] parentArray = new int[] {-1, 0, 1, 2, 3};
+		int[] parentArray = new int[] { -1, 0, 1, 2, 3 };
 		Console.WriteLine(heightTreeParentArr(parentArray));
 		Console.WriteLine(heightTreeParentArr2(parentArray));
 	}

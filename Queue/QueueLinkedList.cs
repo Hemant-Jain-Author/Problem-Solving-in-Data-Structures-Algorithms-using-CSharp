@@ -30,6 +30,8 @@ public class QueueLL
 		}
 	}
 
+	/* Other Methods */
+
 	public virtual int peek()
 	{
 		if (Empty)
