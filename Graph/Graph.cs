@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class Graph
 {
 	internal int count;
-	private LinkedList<LinkedList<Edge>> Adj;
+	private List<List<Edge>> Adj;
 
 	private class Edge : IComparable<Edge>
 	{
@@ -26,17 +26,17 @@ public class Graph
 	public Graph(int cnt)
 	{
 		count = cnt;
-		Adj = new LinkedList<LinkedList<Edge>>();
+		Adj = new List<List<Edge>>();
 		for (int i = 0; i < cnt; i++)
 		{
-			Adj.AddLast(new LinkedList<Edge>());
+			Adj.Add(new List<Edge>());
 		}
 	}
 
 	private void addDirectedEdge(int source, int dest, int cost)
 	{
 		Edge edge = new Edge(dest, cost);
-		Adj.get(source).add(edge);
+		Adj[source].Add(edge);
 	}
 
 	public virtual void addDirectedEdge(int source, int dest)
@@ -59,7 +59,7 @@ public class Graph
 	{
 		for (int i = 0; i < count; i++)
 		{
-			LinkedList<Edge> ad = Adj.get(i);
+			List<Edge> ad = Adj[i];
 			Console.Write("\n Vertex " + i + " is connected to : ");
 			foreach (Edge adn in ad)
 			{
@@ -80,7 +80,7 @@ public class Graph
 		while (stk.Count > 0)
 		{
 			int curr = stk.Pop();
-			LinkedList<Edge> adl = gph.Adj.get(curr);
+			List<Edge> adl = gph.Adj[curr];
 			foreach (Edge adn in adl)
 			{
 				if (visited[adn.dest] == false)
@@ -104,7 +104,7 @@ public class Graph
 	public static void dfsUtil(Graph gph, int index, bool[] visited)
 	{
 		visited[index] = true;
-		LinkedList<Edge> adl = gph.Adj.get(index);
+		List<Edge> adl = gph.Adj[index];
 		foreach (Edge adn in adl)
 		{
 			if (visited[adn.dest] == false)
@@ -117,7 +117,7 @@ public class Graph
 	public static void dfsUtil2(Graph gph, int index, bool[] visited, Stack<int> stk)
 	{
 		visited[index] = true;
-		LinkedList<Edge> adl = gph.Adj.get(index);
+		List<Edge> adl = gph.Adj[index];
 		foreach (Edge adn in adl)
 		{
 			if (visited[adn.dest] == false)
@@ -132,27 +132,27 @@ public class Graph
 	{
 		int count = gph.count;
 		bool[] visited = new bool[count];
-		LinkedList<int> que = new LinkedList<int>();
-		que.AddLast(source);
+		Queue<int> que = new Queue<int>();
+		que.Enqueue(source);
 		visited[source] = true;
 
 		while (que.Count > 0)
 		{
-			int curr = que.RemoveFirst();
-			LinkedList<Edge> adl = gph.Adj.get(curr);
+			int curr = que.Dequeue();
+			List<Edge> adl = gph.Adj[curr];
 			foreach (Edge adn in adl)
 			{
 				if (visited[adn.dest] == false)
 				{
 					visited[adn.dest] = true;
-					que.AddLast(adn.dest);
+					que.Enqueue(adn.dest);
 				}
 			}
 		}
 		return visited[target];
 	}
 
-	public static void Main()
+	public static void Main444()
 	{
 		Graph gph = new Graph(5);
 		gph.addDirectedEdge(0, 1, 3);
@@ -217,7 +217,7 @@ public class Graph
 		}
 		int count = 0;
 		visited[source] = true;
-		LinkedList<Edge> adl = gph.Adj.get(source);
+		List<Edge> adl = gph.Adj[source];
 		foreach (Edge adn in adl)
 		{
 			if (visited[adn.dest] == false)
@@ -247,7 +247,7 @@ public class Graph
 			return;
 		}
 		visited[source] = true;
-		LinkedList<Edge> adl = gph.Adj.get(source);
+		List<Edge> adl = gph.Adj[source];
 		foreach (Edge adn in adl)
 		{
 			if (visited[adn.dest] == false)
@@ -320,26 +320,23 @@ public class Graph
 	 * matrix vertex v is reachable form vertex u if their is a path from u to v.
 	 */
 
-	public static void transitiveClosureUtil(Graph gph, int source, int dest, int[][] tc)
+	public static void transitiveClosureUtil(Graph gph, int source, int dest, int[,] tc)
 	{
-		tc[source][dest] = 1;
-		LinkedList<Edge> adl = gph.Adj.get(dest);
+		tc[source, dest] = 1;
+		List<Edge> adl = gph.Adj[dest];
 		foreach (Edge adn in adl)
 		{
-			if (tc[source][adn.dest] == 0)
+			if (tc[source, adn.dest] == 0)
 			{
 				transitiveClosureUtil(gph, source, adn.dest, tc);
 			}
 		}
 	}
 
-	public static int[][] transitiveClosure(Graph gph)
+	public static int[,] transitiveClosure(Graph gph)
 	{
 		int count = gph.count;
-		//JAVA TO C# CONVERTER NOTE: The following call to the 'RectangularArrays' 
-		//helper class reproduces the rectangular array initialization that is automatic in Java:
-		//ORIGINAL LINE: int[][] tc = new int[count][count];
-		int[][] tc = RectangularArrays.ReturnRectangularIntArray(count, count);
+		int[,] tc = new int[count, count]; ;
 		for (int i = 0; i < count; i++)
 		{
 			transitiveClosureUtil(gph, i, i, tc);
@@ -356,12 +353,12 @@ public class Graph
 		gph.addDirectedEdge(2, 0, 1);
 		gph.addDirectedEdge(2, 3, 1);
 		gph.addDirectedEdge(3, 3, 1);
-		int[][] tc = transitiveClosure(gph);
+		int[,] tc = transitiveClosure(gph);
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				Console.Write(tc[i][j] + " ");
+				Console.Write(tc[i, j] + " ");
 			}
 			Console.WriteLine();
 		}
@@ -374,23 +371,23 @@ public class Graph
 		int[] level = new int[count];
 		visited[source] = true;
 
-		LinkedList<int> que = new LinkedList<int>();
-		que.AddLast(source);
+		Queue<int> que = new Queue<int>();
+		que.Enqueue(source);
 		level[source] = 0;
 		Console.WriteLine("\nNode  - Level");
 
 		while (que.Count > 0)
 		{
-			int curr = que.RemoveFirst();
+			int curr = que.Dequeue();
 			int depth = level[curr];
-			LinkedList<Edge> adl = gph.Adj.get(curr);
+			List<Edge> adl = gph.Adj[curr];
 			Console.WriteLine(curr + " - " + depth);
 			foreach (Edge adn in adl)
 			{
 				if (visited[adn.dest] == false)
 				{
 					visited[adn.dest] = true;
-					que.AddLast(adn.dest);
+					que.Enqueue(adn.dest);
 					level[adn.dest] = depth + 1;
 				}
 			}
@@ -401,17 +398,17 @@ public class Graph
 	{
 		int count = gph.count;
 		bool[] visited = new bool[count];
-		LinkedList<int> que = new LinkedList<int>();
-		que.AddLast(source);
+		Queue<int> que = new Queue<int>();
+		que.Enqueue(source);
 		visited[source] = true;
 		int[] level = new int[count];
 		level[source] = 0;
 
 		while (que.Count > 0)
 		{
-			int curr = que.RemoveFirst();
+			int curr = que.Dequeue();
 			int depth = level[curr];
-			LinkedList<Edge> adl = gph.Adj.get(curr);
+			List<Edge> adl = gph.Adj[curr];
 			foreach (Edge adn in adl)
 			{
 				if (adn.dest == dest)
@@ -421,7 +418,7 @@ public class Graph
 				if (visited[adn.dest] == false)
 				{
 					visited[adn.dest] = true;
-					que.AddLast(adn.dest);
+					que.Enqueue(adn.dest);
 					level[adn.dest] = depth + 1;
 				}
 			}
@@ -449,7 +446,7 @@ public class Graph
 	{
 		visited[index] = true;
 		int dest;
-		LinkedList<Edge> adl = graph.Adj.get(index);
+		List<Edge> adl = graph.Adj[index];
 		foreach (Edge adn in adl)
 		{
 			dest = adn.dest;
@@ -504,7 +501,7 @@ public class Graph
 	{
 		visited[index] = true;
 		marked[index] = 1;
-		LinkedList<Edge> adl = graph.Adj.get(index);
+		List<Edge> adl = graph.Adj[index];
 		foreach (Edge adn in adl)
 		{
 			int dest = adn.dest;
@@ -547,7 +544,7 @@ public class Graph
 	{
 		visited[index] = 1; // 1 = grey
 		int dest;
-		LinkedList<Edge> adl = graph.Adj.get(index);
+		List<Edge> adl = graph.Adj[index];
 		foreach (Edge adn in adl)
 		{
 			dest = adn.dest;
@@ -603,7 +600,7 @@ public class Graph
 		Graph g = new Graph(count);
 		for (int i = 0; i < count; i++)
 		{
-			LinkedList<Edge> adl = gph.Adj.get(i);
+			List<Edge> adl = gph.Adj[i];
 			foreach (Edge adn in adl)
 			{
 				int dest = adn.dest;
@@ -742,18 +739,17 @@ public class Graph
 
 		dist[source] = 0;
 		previous[source] = -1;
-		EdgeComparator comp = new EdgeComparator();
-		PriorityQueue<Edge> queue = new PriorityQueue<Edge>(100, comp);
+		PriorityQueue<Edge> queue = new PriorityQueue<Edge>();
 		Edge node = new Edge(source, 0);
 		queue.add(node);
 
-		while (queue.Empty != true)
+		while (queue.isEmpty() != true)
 		{
 			node = queue.peek();
 			queue.remove();
 			visited[source] = true;
 			source = node.dest;
-			LinkedList<Edge> adl = gph.Adj.get(source);
+			List<Edge> adl = gph.Adj[source];
 			foreach (Edge adn in adl)
 			{
 				int dest = adn.dest;
@@ -817,20 +813,20 @@ public class Graph
 		{
 			distance[i] = -1;
 		}
-		LinkedList<int> que = new LinkedList<int>();
-		que.AddLast(source);
+		Queue<int> que = new Queue<int>();
+		que.Enqueue(source);
 		distance[source] = 0;
 		while (que.Count > 0)
 		{
-			curr = que.RemoveFirst();
-			LinkedList<Edge> adl = gph.Adj.get(curr);
+			curr = que.Dequeue();
+			List<Edge> adl = gph.Adj[curr];
 			foreach (Edge adn in adl)
 			{
 				if (distance[adn.dest] == -1)
 				{
 					distance[adn.dest] = distance[curr] + 1;
 					path[adn.dest] = curr;
-					que.AddLast(adn.dest);
+					que.Enqueue(adn.dest);
 				}
 			}
 		}
@@ -855,25 +851,9 @@ public class Graph
 		gph.addUndirectedEdge(6, 7, 7);
 		gph.addUndirectedEdge(7, 8, 17);
 		bellmanFordshortestPath(gph, 1);
-		// dijkstra(gph, 1);
-		// prims(gph);
+		dijkstra(gph, 1);
+		prims(gph);
 		Console.WriteLine("isConnectedUndirected :: " + isConnectedUndirected(gph));
-	}
-
-	internal class EdgeComparator : IComparer<Edge>
-	{
-		public virtual int Compare(Edge x, Edge y)
-		{
-			if (x.cost < y.cost)
-			{
-				return -1;
-			}
-			if (x.cost > y.cost)
-			{
-				return 1;
-			}
-			return 0;
-		}
 	}
 
 	public static void dijkstra(Graph gph, int source)
@@ -890,18 +870,17 @@ public class Graph
 
 		dist[source] = 0;
 		previous[source] = -1;
-		EdgeComparator comp = new EdgeComparator();
-		PriorityQueue<Edge> queue = new PriorityQueue<Edge>(100, comp);
+		PriorityQueue<Edge> queue = new PriorityQueue<Edge>();
 		Edge node = new Edge(source, 0);
 		queue.add(node);
 
-		while (queue.Empty != true)
+		while (queue.isEmpty() != true)
 		{
 			node = queue.peek();
 			queue.remove();
 			source = node.dest;
 			visited[source] = true;
-			LinkedList<Edge> adl = gph.Adj.get(source);
+			List<Edge> adl = gph.Adj[source];
 			foreach (Edge adn in adl)
 			{
 				int dest = adn.dest;
@@ -953,7 +932,7 @@ public class Graph
 		{
 			for (int j = 0; j < count; j++)
 			{
-				LinkedList<Edge> adl = gph.Adj.get(j);
+				List<Edge> adl = gph.Adj[j];
 				foreach (Edge adn in adl)
 				{
 					int newDistance = distance[j] + adn.cost;
@@ -1005,25 +984,25 @@ public class Graph
 		}
 		bool[] visited = new bool[count];
 		visited[source] = true;
-		LinkedList<int> que = new LinkedList<int>();
-		que.AddLast(source);
+		Queue<int> que = new Queue<int>();
+		que.Enqueue(source);
 		heightArr[source] = 0;
 		int maxHight = 0;
 		while (que.Count > 0)
 		{
-			int curr = que.RemoveFirst();
+			int curr = que.Dequeue();
 			int height = heightArr[curr];
 			if (height > maxHight)
 			{
 				maxHight = height;
 			}
-			LinkedList<Edge> adl = gph.Adj.get(curr);
+			List<Edge> adl = gph.Adj[curr];
 			foreach (Edge adn in adl)
 			{
 				if (visited[adn.dest] == false)
 				{
 					visited[adn.dest] = true;
-					que.AddLast(adn.dest);
+					que.Enqueue(adn.dest);
 					heightArr[adn.dest] = height + 1;
 				}
 			}
@@ -1062,7 +1041,7 @@ public class Graph
 		Console.WriteLine(heightTreeParentArr(parentArray));
 		Console.WriteLine(heightTreeParentArr2(parentArray));
 	}
-
+	/*
 	public static int bestFirstSearchPQ(Graph gph, int source, int dest)
 	{
 		int[] previous = new int[gph.count];
@@ -1091,7 +1070,7 @@ public class Graph
 			}
 			visited[source] = true;
 
-			LinkedList<Edge> adl = gph.Adj.get(source);
+			List<Edge> adl = gph.Adj[source];
 			foreach (Edge adn in adl)
 			{
 				int curr = adn.dest;
@@ -1108,7 +1087,7 @@ public class Graph
 		}
 		return -1;
 	}
-
+	*/
 	public static bool isConnected(Graph graph)
 	{
 		int count = graph.count;
@@ -1116,10 +1095,10 @@ public class Graph
 
 		// Find a vertex with non - zero degree
 		// DFS traversal of graph from a vertex with non - zero degree
-		LinkedList<Edge> adl;
+		List<Edge> adl;
 		for (int i = 0; i < count; i++)
 		{
-			adl = graph.Adj.get(i);
+			adl = graph.Adj[i];
 			if (adl.Count > 0)
 			{
 				dfsUtil(graph, i, visited);
@@ -1129,7 +1108,7 @@ public class Graph
 		// Check if all non - zero degree count are visited
 		for (int i = 0; i < count; i++)
 		{
-			adl = graph.Adj.get(i);
+			adl = graph.Adj[i];
 			if (adl.Count > 0)
 			{
 				if (visited[i] == false)
@@ -1152,7 +1131,7 @@ public class Graph
 		int odd;
 		int[] inDegree;
 		int[] outDegree;
-		LinkedList<Edge> adl;
+		List<Edge> adl;
 		// Check if all non - zero degree nodes are connected
 		if (isConnected(graph) == false)
 		{
@@ -1168,7 +1147,7 @@ public class Graph
 
 			for (int i = 0; i < count; i++)
 			{
-				adl = graph.Adj.get(i);
+				adl = graph.Adj[i];
 				foreach (Edge adn in adl)
 				{
 					outDegree[i] += 1;
@@ -1219,10 +1198,10 @@ public class Graph
 		Graph gReversed;
 		int index;
 		// Find a vertex with non - zero degree
-		LinkedList<Edge> adl;
+		List<Edge> adl;
 		for (index = 0; index < count; index++)
 		{
-			adl = graph.Adj.get(index);
+			adl = graph.Adj[index];
 			if (adl.Count > 0)
 			{
 				break;
@@ -1232,7 +1211,7 @@ public class Graph
 		dfsUtil(graph, index, visited);
 		for (int i = 0; i < count; i++)
 		{
-			adl = graph.Adj.get(i);
+			adl = graph.Adj[i];
 			if (visited[i] == false && adl.Count > 0)
 			{
 				return false;
@@ -1248,7 +1227,7 @@ public class Graph
 
 		for (int i = 0; i < count; i++)
 		{
-			adl = graph.Adj.get(i);
+			adl = graph.Adj[i];
 			if (visited[i] == false && adl.Count > 0)
 			{
 				return false;
@@ -1271,7 +1250,7 @@ public class Graph
 		// Check if in degree and out degree of every vertex is same
 		for (int i = 0; i < count; i++)
 		{
-			LinkedList<Edge> adl = graph.Adj.get(i);
+			List<Edge> adl = graph.Adj[i];
 			foreach (Edge adn in adl)
 			{
 				outDegree[i] += 1;
@@ -1302,11 +1281,161 @@ public class Graph
 
 	public static void Main(string[] args)
 	{
-		main();
 		main10();
+		main3();
 		/*
 		 * main2(); main3(); main4(); main5(); main6(); main7(); main8(); main9();
 		 * main10(); main11(); main12(); main13(); main14(); main15(); main16();
 		 */
+	}
+}
+
+
+public class PriorityQueue<T> where T : IComparable<T>
+{
+	private const int CAPACITY = 32;
+	private int Count; // Number of elements in Heap
+	private T[] arr; // The Heap array
+	private bool isMinHeap;
+
+	public PriorityQueue(bool isMin = true)
+	{
+		arr = new T[CAPACITY];
+		Count = 0;
+		isMinHeap = isMin;
+	}
+
+	public PriorityQueue(T[] array, bool isMin = true)
+	{
+		Count = array.Length;
+		arr = array;
+		isMinHeap = isMin;
+		// Build Heap operation over array
+		for (int i = (Count / 2); i >= 0; i--)
+		{
+			proclateDown(i);
+		}
+	}
+
+	// Other Methods.
+	private bool compare(T[] arr, int first, int second)
+	{
+		if (isMinHeap)
+			return arr[first].CompareTo(arr[second]) > 0;
+		else
+			return arr[first].CompareTo(arr[second]) < 0;
+	}
+
+	private void proclateDown(int parent)
+	{
+		int lChild = 2 * parent + 1;
+		int rChild = lChild + 1;
+		int child = -1;
+		T temp;
+
+		if (lChild < Count)
+		{
+			child = lChild;
+		}
+
+		if (rChild < Count && compare(arr, lChild, rChild))
+		{
+			child = rChild;
+		}
+
+		if (child != -1 && compare(arr, parent, child))
+		{
+			temp = arr[parent];
+			arr[parent] = arr[child];
+			arr[child] = temp;
+			proclateDown(child);
+		}
+	}
+
+	private void proclateUp(int child)
+	{
+		int parent = (child - 1) / 2;
+		T temp;
+		if (parent < 0)
+		{
+			return;
+		}
+
+		if (compare(arr, parent, child))
+		{
+			temp = arr[child];
+			arr[child] = arr[parent];
+			arr[parent] = temp;
+			proclateUp(parent);
+		}
+	}
+
+	public void add(T value)
+	{
+		if (Count == arr.Length)
+		{
+			doubleSize();
+		}
+
+		arr[Count++] = value;
+		proclateUp(Count - 1);
+	}
+
+	private void doubleSize()
+	{
+		T[] old = arr;
+		arr = new T[arr.Length * 2];
+		Array.Copy(old, 0, arr, 0, Count);
+	}
+
+	public T remove()
+	{
+		if (Count == 0)
+		{
+			throw new System.InvalidOperationException();
+		}
+
+		T value = arr[0];
+		arr[0] = arr[Count - 1];
+		Count--;
+		proclateDown(0);
+		return value;
+	}
+
+	public void print()
+	{
+		for (int i = 0; i < Count; i++)
+		{
+			Console.Write(arr[i] + " ");
+		}
+	}
+
+	public bool isEmpty()
+	{
+		return (Count == 0);
+	}
+
+	public int size()
+	{
+		return Count;
+	}
+
+	public T peek()
+	{
+		if (Count == 0)
+		{
+			throw new System.InvalidOperationException();
+		}
+		return arr[0];
+	}
+
+	public static void HeapSort(int[] array, bool inc)
+	{
+		// Create max heap for increasing order sorting.
+		PriorityQueue<int> hp = new PriorityQueue<int>(array, !inc);
+		for (int i = 0; i < array.Length; i++)
+		{
+			array[array.Length - i - 1] = hp.remove();
+		}
 	}
 }

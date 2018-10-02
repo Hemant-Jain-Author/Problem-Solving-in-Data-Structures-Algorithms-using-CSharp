@@ -26,8 +26,8 @@ public class Heap
 		}
 	}
 	// Other Methods.
-
-	internal bool compare(int[] arr, int first, int second)
+}
+	private bool compare(int[] arr, int first, int second)
 	{
 		if (isMinHeap)
 			return (arr[first] - arr[second]) > 0; // Min heap compare
@@ -138,7 +138,7 @@ public class Heap
 		return arr[0];
 	}
 
-	internal bool IsMinHeap(int[] arr, int size)
+	public bool IsMinHeap(int[] arr, int size)
 	{
 		for (int i = 0; i <= (size - 2) / 2; i++)
 		{
@@ -160,7 +160,7 @@ public class Heap
 		return true;
 	}
 
-	internal bool IsMaxHeap(int[] arr, int size)
+	public bool IsMaxHeap(int[] arr, int size)
 	{
 		for (int i = 0; i <= (size - 2) / 2; i++)
 		{
