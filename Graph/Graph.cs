@@ -6,7 +6,7 @@ public class Graph
 	internal int count;
 	private LinkedList<LinkedList<Edge>> Adj;
 
-	private class Edge : IComparable<AdjNode>
+	private class Edge : IComparable<Edge>
 	{
 		internal int dest;
 		internal int cost;

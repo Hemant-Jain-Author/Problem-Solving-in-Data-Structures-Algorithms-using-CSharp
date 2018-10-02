@@ -19,14 +19,12 @@ public class Heap
 		Count = array.Length;
 		arr = array;
 		isMinHeap = isMin;
-
 		// Build Heap operation over array
 		for (int i = (Count / 2); i >= 0; i--)
 		{
 			proclateDown(i);
 		}
 	}
-
 	// Other Methods.
 
 	internal bool compare(int[] arr, int first, int second)
@@ -201,6 +199,7 @@ public class Heap
 		hp.add(-1);
 		hp.print();
 		Console.WriteLine();
+
 		while (hp.isEmpty() == false)
 		{
 			Console.Write(hp.remove() + " ");

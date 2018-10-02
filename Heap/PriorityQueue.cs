@@ -19,7 +19,6 @@ public class PriorityQueue<T> where T : IComparable<T>
 		Count = array.Length;
 		arr = array;
 		isMinHeap = isMin;
-
 		// Build Heap operation over array
 		for (int i = (Count / 2); i >= 0; i--)
 		{
