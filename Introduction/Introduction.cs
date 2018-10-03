@@ -63,11 +63,7 @@ public class Introduction
 		for (int i = 0; i < size; i++)
 		{
 			if (value == arr[i])
-			{
-				{
-					return i;
-				}
-			}
+				return i;
 		}
 		return -1;
 	}
@@ -87,13 +83,9 @@ public class Introduction
 			else
 			{
 				if (arr[mid] < value)
-				{
 					low = mid + 1;
-				}
 				else
-				{
 					high = mid - 1;
-				}
 			}
 		}
 		return -1;
@@ -150,13 +142,10 @@ public class Introduction
 		{
 			maxEndingHere = maxEndingHere + a[i];
 			if (maxEndingHere < 0)
-			{
 				maxEndingHere = 0;
-			}
+
 			if (maxSoFar < maxEndingHere)
-			{
 				maxSoFar = maxEndingHere;
-			}
 		}
 		return maxSoFar;
 	}
@@ -174,13 +163,10 @@ public class Introduction
 		for (int i = 1; i < size; i += 2)
 		{
 			if ((i - 1) >= 0 && arr[i] > arr[i - 1])
-			{
 				swap(arr, i, i - 1);
-			}
+
 			if ((i + 1) < size && arr[i] > arr[i + 1])
-			{
 				swap(arr, i, i + 1);
-			}
 		}
 	}
 
@@ -223,9 +209,7 @@ public class Introduction
 
 			/* check if some swaps happened. */
 			if (value != -1)
-			{
 				arr[curr] = value;
-			}
 		}
 	}
 
@@ -317,9 +301,7 @@ public class Introduction
 				}
 			}
 			if (found == 0)
-			{
 				return i;
-			}
 		}
 		return -1;
 	}
@@ -328,15 +310,12 @@ public class Introduction
 	{
 		Dictionary<int, int> hs = new Dictionary<int, int>();
 		for (int i = 0; i < size; i++)
-		{
 			hs[arr[i]] = 1;
-		}
+
 		for (int i = 1; i < size + 1; i++)
 		{
 			if (hs.ContainsKey(i) == false)
-			{
 				return i;
-			}
 		}
 		return -1;
 	}
@@ -345,23 +324,18 @@ public class Introduction
 	{
 		int[] aux = new int[size];
 		for (int i = 0; i < size; i++)
-		{
 			aux[i] = -1;
-		}
 
 		for (int i = 0; i < size; i++)
 		{
 			if (arr[i] > 0 && arr[i] <= size)
-			{
 				aux[arr[i] - 1] = arr[i];
-			}
 		}
+
 		for (int i = 0; i < size; i++)
 		{
 			if (aux[i] != i + 1)
-			{
 				return i + 1;
-			}
 		}
 		return -1;
 	}
@@ -381,9 +355,7 @@ public class Introduction
 		for (int i = 0; i < size; i++)
 		{
 			if (arr[i] != i + 1)
-			{
 				return i + 1;
-			}
 		}
 		return -1;
 	}
@@ -432,9 +404,7 @@ public class Introduction
 	public static void MaxMinArr2(int[] arr, int size)
 	{
 		for (int i = 0; i < (size - 1); i++)
-		{
 			ReverseArr(arr, i, size - 1);
-		}
 	}
 
 	/* Testing code */
@@ -466,9 +436,7 @@ public class Introduction
 		{
 			currVal = (currVal + sumAll) - (size * arr[size - i]);
 			if (currVal > maxVal)
-			{
 				maxVal = currVal;
-			}
 		}
 		return maxVal;
 	}
@@ -522,13 +490,9 @@ public class Introduction
 		for (i = size - 2; i >= 0; i--)
 		{
 			if (rightMax[i + 1] > arr[i])
-			{
 				rightMax[i] = rightMax[i + 1];
-			}
 			else
-			{
 				rightMax[i] = arr[i];
-			}
 		}
 		i = 0;
 		j = 0;
@@ -659,9 +623,8 @@ public class Introduction
 		char digit = (char)(number % 10 + '0');
 		number = number / 10;
 		if (number != 0)
-		{
 			printInt1(number);
-		}
+
 		Console.Write("%c" + digit);
 	}
 
@@ -672,18 +635,15 @@ public class Introduction
 		char digit = (char)(number % baseValue);
 		number = number / baseValue;
 		if (number != 0)
-		{
 			printInt(number);
-		}
+
 		Console.Write(conversion[digit]);
 	}
 
 	public static void towerOfHanoi(int num, char src, char dst, char temp)
 	{
 		if (num < 1)
-		{
 			return;
-		}
 
 		towerOfHanoi(num - 1, src, temp, dst);
 		Console.WriteLine("Move " + num + " disk  from peg " + src + " to peg " + dst);
@@ -700,22 +660,19 @@ public class Introduction
 	public static int GCD(int m, int n)
 	{
 		if (m < n)
-		{
 			return (GCD(n, m));
-		}
+
 		if (m % n == 0)
-		{
 			return (n);
-		}
+
 		return (GCD(n, m % n));
 	}
 
 	public static int fibonacci(int n)
 	{
 		if (n <= 1)
-		{
 			return n;
-		}
+
 		return fibonacci(n - 1) + fibonacci(n - 2);
 	}
 
