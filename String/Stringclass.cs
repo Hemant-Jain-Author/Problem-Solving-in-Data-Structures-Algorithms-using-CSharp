@@ -16,8 +16,6 @@ public class Stringclass
 
 	}
 
-
-
 	internal virtual void demo()
 	{
 		string str1 = "hello";

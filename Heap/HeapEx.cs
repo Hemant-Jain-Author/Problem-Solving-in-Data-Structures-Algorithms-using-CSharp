@@ -52,12 +52,17 @@ public class HeapEx
 	{
 		int lchild, rchild;
 		// last element index size - 1
-		for (int parent = 0; parent < (size / 2 + 1); parent++)
+		for (int parent = 0;
+		parent < (size / 2 + 1);
+		parent++)
 		{
 			lchild = parent * 2 + 1;
 			rchild = parent * 2 + 2;
 			// heap property check.
-			if (((lchild < size) && (arr[parent] > arr[lchild])) || ((rchild < size) && (arr[parent] > arr[rchild])))
+			if (((lchild < size) &&
+			(arr[parent] > arr[lchild])) ||
+			((rchild < size) &&
+			(arr[parent] > arr[rchild])))
 			{
 				return false;
 			}
@@ -69,12 +74,14 @@ public class HeapEx
 	{
 		int lchild, rchild;
 		// last element index size - 1
-		for (int parent = 0; parent < (size / 2 + 1); parent++)
+		for (int parent = 0;
+		parent < (size / 2 + 1); parent++)
 		{
 			lchild = parent * 2 + 1;
 			rchild = lchild + 1;
 			// heap property check.
-			if (((lchild < size) && (arr[parent] < arr[lchild])) || ((rchild < size) && (arr[parent] < arr[rchild])))
+			if (((lchild < size) && (arr[parent] < arr[lchild])) ||
+			((rchild < size) && (arr[parent] < arr[rchild])))
 			{
 				return false;
 			}
@@ -151,18 +158,6 @@ public class HeapEx
 			QuickSelectUtil(arr, upper + 1, stop, k); // pivot + 1 is the lower for right sub array.
 		}
 	}
-
-	public static int KSmallestProduct3(int[] arr, int size, int k)
-	{
-		QuickSelectUtil(arr, 0, size - 1, k);
-		int product = 1;
-		for (int i = 0; i < k; i++)
-		{
-			product *= arr[i];
-		}
-		return product;
-	}
-
 	public static int KSmallestProduct2(int[] arr, int size, int k)
 	{
 		PriorityQueue<int> pq = new PriorityQueue<int>();
@@ -177,6 +172,17 @@ public class HeapEx
 		{
 			product *= pq.remove();
 			i += 1;
+		}
+		return product;
+	}
+
+	public static int KSmallestProduct3(int[] arr, int size, int k)
+	{
+		QuickSelectUtil(arr, 0, size - 1, k);
+		int product = 1;
+		for (int i = 0; i < k; i++)
+		{
+			product *= arr[i];
 		}
 		return product;
 	}
@@ -298,35 +304,6 @@ public class HeapEx
 		return total;
 	}
 
-	public static int ChotaBhim2(int[] cups, int size)
-	{
-		int time = 60;
-		Array.Sort(cups);
-		int total = 0;
-		int i, temp;
-		while (time > 0)
-		{
-			total += cups[0];
-			cups[0] = (int)Math.Ceiling(cups[0] / 2.0);
-			i = 0;
-			// Insert into proper location.
-			while (i < size - 1)
-			{
-				if (cups[i] > cups[i + 1])
-				{
-					break;
-				}
-				temp = cups[i];
-				cups[i] = cups[i + 1];
-				cups[i + 1] = temp;
-				i += 1;
-			}
-			time -= 1;
-		}
-		Console.WriteLine("Total : " + total);
-		return total;
-	}
-
 	public static int ChotaBhim3(int[] cups, int size)
 	{
 		int time = 60;
@@ -404,8 +381,6 @@ public class HeapEx
 	{
 		int[] cups = new int[] { 2, 1, 7, 4, 2 };
 		ChotaBhim(cups, cups.Length);
-		int[] cups2 = new int[] { 2, 1, 7, 4, 2 };
-		ChotaBhim2(cups2, cups.Length);
 		int[] cups3 = new int[] { 2, 1, 7, 4, 2 };
 		ChotaBhim3(cups3, cups.Length);
 
@@ -442,7 +417,7 @@ public class HeapEx
 		while (true)
 		{
 			Console.WriteLine("Enter data: ");
-			//data = System.in.read();
+			data = Console.Read();
 
 			if (size < k - 1)
 			{

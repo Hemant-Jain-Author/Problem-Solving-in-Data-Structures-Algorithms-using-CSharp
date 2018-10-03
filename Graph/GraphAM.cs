@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 public class GraphAM
 {
-
 	internal int count;
 	internal int[,] adj;
 
@@ -122,7 +121,6 @@ public class GraphAM
 			else
 			{
 				Console.WriteLine(" node id " + i + "  prev " + previous[i] + " distance : " + dist[i]);
-
 			}
 		}
 	}
@@ -143,9 +141,7 @@ public class GraphAM
 
 		dist[source] = 0;
 		previous[source] = -1;
-
 		PriorityQueue<Edge> queue = new PriorityQueue<Edge>();
-
 		Edge node = new Edge(source, 0);
 		queue.add(node);
 
@@ -163,7 +159,6 @@ public class GraphAM
 					int alt = cost;
 					if (dist[dest] > alt && visited[dest] == false)
 					{
-
 						dist[dest] = alt;
 						previous[dest] = source;
 						node = new Edge(dest, alt);
@@ -183,7 +178,6 @@ public class GraphAM
 			else
 			{
 				Console.WriteLine(" node id " + i + "  prev " + previous[i] + " distance : " + dist[i]);
-
 			}
 		}
 	}
@@ -268,18 +262,15 @@ public class GraphAM
 			{
 				Console.WriteLine(" " + path[i]);
 			}
-
 			return true;
 		}
-
 		Console.WriteLine("Hamiltonian Path not found");
 		return false;
 	}
 
 	public static bool hamiltonianCycleUtil(GraphAM graph, int[] path, int pSize, int[] added)
 	{
-		// Base case full length path is found
-		// this last check can be modified to make it a path.
+		// Base case full length path is found this last check can be modified to make it a path.
 		if (pSize == graph.count)
 		{
 			if (graph.adj[path[pSize - 1], path[0]] == 1)

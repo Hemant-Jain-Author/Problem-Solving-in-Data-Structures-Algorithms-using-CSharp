@@ -26,7 +26,7 @@ public class Heap
 		}
 	}
 	// Other Methods.
-}
+
 	private bool compare(int[] arr, int first, int second)
 	{
 		if (isMinHeap)
@@ -136,50 +136,6 @@ public class Heap
 			throw new System.InvalidOperationException();
 		}
 		return arr[0];
-	}
-
-	public bool IsMinHeap(int[] arr, int size)
-	{
-		for (int i = 0; i <= (size - 2) / 2; i++)
-		{
-			if (2 * i + 1 < size)
-			{
-				if (arr[i] > arr[2 * i + 1])
-				{
-					return false;
-				}
-			}
-			if (2 * i + 2 < size)
-			{
-				if (arr[i] > arr[2 * i + 2])
-				{
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-
-	public bool IsMaxHeap(int[] arr, int size)
-	{
-		for (int i = 0; i <= (size - 2) / 2; i++)
-		{
-			if (2 * i + 1 < size)
-			{
-				if (arr[i] < arr[2 * i + 1])
-				{
-					return false;
-				}
-			}
-			if (2 * i + 2 < size)
-			{
-				if (arr[i] < arr[2 * i + 2])
-				{
-					return false;
-				}
-			}
-		}
-		return true;
 	}
 
 	public static void heapSort(int[] array, bool inc)

@@ -2,23 +2,12 @@
 
 public class Algo
 {
-
-	public static void Main88(string[] args)
+	public int bruteForceSearch(string text, string pattern)
 	{
-		string st1 = "hello, world!";
-		string st2 = "world";
-		Algo algo = new Algo();
-		Console.WriteLine("BruteForceSearch return : " + algo.BruteForceSearch(st1, st2));
-		Console.WriteLine("RobinKarp return : " + algo.RobinKarp(st1, st2));
-		Console.WriteLine("KMP return : " + algo.KMP(st1, st2));
+		return bruteForceSearch(text.ToCharArray(), pattern.ToCharArray());
 	}
 
-	internal virtual int BruteForceSearch(string text, string pattern)
-	{
-		return BruteForceSearch(text.ToCharArray(), pattern.ToCharArray());
-	}
-
-	internal virtual int BruteForceSearch(char[] text, char[] pattern)
+	private int bruteForceSearch(char[] text, char[] pattern)
 	{
 		int i = 0, j = 0;
 		int n = text.Length;
@@ -40,11 +29,12 @@ public class Algo
 		return -1;
 	}
 
-	internal virtual int RobinKarp(string text, string pattern)
+	public int robinKarp(string text, string pattern)
 	{
-		return RobinKarp(text.ToCharArray(), pattern.ToCharArray());
+		return robinKarp(text.ToCharArray(), pattern.ToCharArray());
 	}
-	internal virtual int RobinKarp(char[] text, char[] pattern)
+
+	private int robinKarp(char[] text, char[] pattern)
 	{
 		int n = text.Length;
 		int m = pattern.Length;
@@ -93,7 +83,7 @@ public class Algo
 		return -1;
 	}
 
-	internal virtual void KMPPreprocess(char[] pattern, int[] ShiftArr)
+	private void KMPPreprocess(char[] pattern, int[] ShiftArr)
 	{
 		int m = pattern.Length;
 		int i = 0, j = -1;
@@ -109,11 +99,13 @@ public class Algo
 			ShiftArr[i] = j;
 		}
 	}
-	internal virtual int KMP(string text, string pattern)
+
+	public int KMP(string text, string pattern)
 	{
 		return KMP(text.ToCharArray(), pattern.ToCharArray());
 	}
-	internal virtual int KMP(char[] text, char[] pattern)
+
+	private int KMP(char[] text, char[] pattern)
 	{
 		int i = 0, j = 0;
 		int n = text.Length;
@@ -137,7 +129,7 @@ public class Algo
 		return -1;
 	}
 
-	internal virtual int KMPFindCount(char[] text, char[] pattern)
+	public int KMPFindCount(char[] text, char[] pattern)
 	{
 		int i = 0, j = 0, count = 0;
 		int n = text.Length;
@@ -160,5 +152,15 @@ public class Algo
 			}
 		}
 		return count;
+	}
+
+	public static void Main(string[] args)
+	{
+		string st1 = "hello, world!";
+		string st2 = "world";
+		Algo algo = new Algo();
+		Console.WriteLine("BruteForceSearch return : " + algo.bruteForceSearch(st1, st2));
+		Console.WriteLine("RobinKarp return : " + algo.robinKarp(st1, st2));
+		Console.WriteLine("KMP return : " + algo.KMP(st1, st2));
 	}
 }

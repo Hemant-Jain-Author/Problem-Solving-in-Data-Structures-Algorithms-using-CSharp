@@ -7,9 +7,9 @@ public class Trie
 
 	private class Node
 	{
-		private bool isLastChar;
-		private char ch;
-		private Node[] child;
+		internal bool isLastChar;
+		internal Node[] child;
+
 		public Node(char c)
 		{
 			child = new Node[CharCount];
@@ -18,73 +18,40 @@ public class Trie
 				child[i] = null;
 			}
 			isLastChar = false;
-			ch = c;
-		}
-		public bool IsLastChar
-		{
-			get
-			{
-				return isLastChar;
-			}
-			set
-			{
-				isLastChar = value;
-			}
-		}
-		public Node[] Child
-		{
-			get
-			{
-				return child;
-			}
-			set
-			{
-				child = value;
-			}
-
 		}
 	}
 
 	public Trie()
 	{
-		root = new Node(' '); //first node with dummy value.
+		root = new Node(' '); // first node with dummy value.
 	}
 
-	public void Insert(string str)
+	public bool Add(string str)
 	{
 		if (string.ReferenceEquals(str, null))
-		{
-			return;
-		}
-		Insert(root, str.ToLower(), 0);
+			return false;
+
+		if (Add(root, str.ToLower(), 0) != null)
+			return true;
+		return false;
 	}
 
-	private Node Insert(Node curr, string str, int index)
+	private Node Add(Node curr, string str, int index)
 	{
 		if (curr == null)
-		{
 			curr = new Node(str[index - 1]);
-		}
 
 		if (str.Length == index)
-		{
-			curr.IsLastChar = true;
-		}
+			curr.isLastChar = true;
 		else
-		{
-			curr.Child[str[index] - 'a'] = Insert(curr.Child[str[index] - 'a'], str, index + 1);
-		}
-
+			curr.child[str[index] - 'a'] = Add(curr.child[str[index] - 'a'], str, index + 1);
 		return curr;
 	}
 
-	internal void Remove(string str)
+	public void Remove(string str)
 	{
 		if (string.ReferenceEquals(str, null))
-		{
 			return;
-		}
-
 		str = str.ToLower();
 		Remove(root, str, 0);
 	}
@@ -92,29 +59,21 @@ public class Trie
 	private void Remove(Node curr, string str, int index)
 	{
 		if (curr == null)
-		{
 			return;
-		}
 
 		if (str.Length == index)
 		{
-			if (curr.IsLastChar)
-			{
-				curr.IsLastChar = false;
-			}
+			if (curr.isLastChar)
+				curr.isLastChar = false;
 			return;
 		}
-
-		Remove(curr.Child[str[index] - 'a'], str, index + 1);
+		Remove(curr.child[str[index] - 'a'], str, index + 1);
 	}
 
-
-	internal bool Find(string str)
+	public bool Find(string str)
 	{
 		if (string.ReferenceEquals(str, null))
-		{
 			return false;
-		}
 
 		str = str.ToLower();
 		return Find(root, str, 0);
@@ -123,41 +82,28 @@ public class Trie
 	private bool Find(Node curr, string str, int index)
 	{
 		if (curr == null)
-		{
 			return false;
-		}
 
 		if (str.Length == index)
-		{
-			return curr.IsLastChar;
-		}
+			return curr.isLastChar;
 
-		return Find(curr.Child[str[index] - 'a'], str, index + 1);
+		return Find(curr.child[str[index] - 'a'], str, index + 1);
 	}
 
-
-
-	public static void Main2(string[] args)
+	public static void Main(string[] args)
 	{
 		Trie t = new Trie();
 		string a = "hemant";
-		//string b = "heman";
+		string b = "heman";
 		string c = "hemantjain";
 		string d = "jain";
-		t.Insert(a);
-		t.Insert(d);
+		t.Add(a);
+		t.Add(d);
 		Console.WriteLine(t.Find(a));
-		//System.out.println(t.Find(b));
 		t.Remove(a);
 		t.Remove(d);
 		Console.WriteLine(t.Find(a));
-
-
-
 		Console.WriteLine(t.Find(c));
 		Console.WriteLine(t.Find(d));
-
-
-
 	}
 }

@@ -316,9 +316,9 @@ public class Graph
 	}
 
 	/*
-	 * Given a directed graph, find transitive closure matrix or reach ability
-	 * matrix vertex v is reachable form vertex u if their is a path from u to v.
-	 */
+		* Given a directed graph, find transitive closure matrix or reach ability
+		* matrix vertex v is reachable form vertex u if their is a path from u to v.
+		*/
 
 	public static void transitiveClosureUtil(Graph gph, int source, int dest, int[,] tc)
 	{
@@ -495,8 +495,8 @@ public class Graph
 	}
 
 	/*
-	 * Given a directed graph find if there is a cycle in it.
-	 */
+		* Given a directed graph find if there is a cycle in it.
+		*/
 	public static bool isCyclePresentDFS(Graph graph, int index, bool[] visited, int[] marked)
 	{
 		visited[index] = true;
@@ -627,16 +627,16 @@ public class Graph
 	}
 
 	/*
-	 * Kosaraju Algorithm
-	 * 
-	 * Kosaraju’s Algorithm to find strongly connected directed graph based on DFS :
-	 * 1) Create a visited array of size V, and Initialize all count in visited
-	 * array as 0. 2) Choose any vertex and perform a DFS traversal of graph. For
-	 * all visited count mark them visited as 1. 3) If DFS traversal does not mark
-	 * all count as 1, then return 0. 4) Find transpose or reverse of graph 5)
-	 * Repeat step 1, 2 and 3 for the reversed graph. 6) If DFS traversal mark all
-	 * the count as 1, then return 1.
-	 */
+		* Kosaraju Algorithm
+		* 
+		* Kosaraju’s Algorithm to find strongly connected directed graph based on DFS :
+		* 1) Create a visited array of size V, and Initialize all count in visited array as 0. 
+		* 2) Choose any vertex and perform a DFS traversal of graph. For all visited count mark them visited as 1. 
+		* 3) If DFS traversal does not mark all count as 1, then return 0. 
+		* 4) Find transpose or reverse of graph 
+		* 5) Repeat step 1, 2 and 3 for the reversed graph. 
+		* 6) If DFS traversal mark all the count as 1, then return 1.
+		*/
 	public static bool isStronglyConnected(Graph gph)
 	{
 		int count = gph.count;
@@ -774,7 +774,6 @@ public class Graph
 			else
 			{
 				Console.WriteLine(" node id " + i + "  prev " + previous[i] + " distance : " + dist[i]);
-
 			}
 		}
 	}
@@ -887,7 +886,6 @@ public class Graph
 				int alt = adn.cost + dist[source];
 				if (dist[dest] > alt && visited[dest] == false)
 				{
-
 					dist[dest] = alt;
 					previous[dest] = source;
 					node = new Edge(dest, alt);
@@ -906,7 +904,6 @@ public class Graph
 			else
 			{
 				Console.WriteLine(" node id " + i + "  prev " + previous[i] + " distance : " + dist[i]);
-
 			}
 		}
 	}
@@ -924,8 +921,7 @@ public class Graph
 		}
 		distance[source] = 0;
 		// Outer loop will run (V-1) number of times.
-		// Inner for loop and while loop runs combined will
-		// run for Edges number of times.
+		// Inner for loop and while loop runs combined will run for Edges number of times.
 		// Which make the total complexity as O(V*E)
 
 		for (int i = 0; i < count - 1; i++)
@@ -941,14 +937,11 @@ public class Graph
 						distance[adn.dest] = newDistance;
 						path[adn.dest] = j;
 					}
-
 				}
 			}
 		}
 		for (int i = 0; i < count; i++)
-		{
 			Console.WriteLine(path[i] + " to " + i + " weight " + distance[i]);
-		}
 	}
 
 	public static void main2()
@@ -1121,10 +1114,10 @@ public class Graph
 	}
 
 	/*
-	 * The function returns one of the following values Return 0 if graph is not
-	 * Eulerian Return 1 if graph has an Euler path (Semi-Eulerian) Return 2 if
-	 * graph has an Euler Circuit (Eulerian)
-	 */
+		* The function returns one of the following values Return 0 if graph is not
+		* Eulerian Return 1 if graph has an Euler path (Semi-Eulerian) Return 2 if
+		* graph has an Euler Circuit (Eulerian)
+		*/
 	public static int isEulerian(Graph graph)
 	{
 		int count = graph.count;
@@ -1284,9 +1277,9 @@ public class Graph
 		main10();
 		main3();
 		/*
-		 * main2(); main3(); main4(); main5(); main6(); main7(); main8(); main9();
-		 * main10(); main11(); main12(); main13(); main14(); main15(); main16();
-		 */
+			* main2(); main3(); main4(); main5(); main6(); main7(); main8(); main9();
+			* main10(); main11(); main12(); main13(); main14(); main15(); main16();
+			*/
 	}
 }
 

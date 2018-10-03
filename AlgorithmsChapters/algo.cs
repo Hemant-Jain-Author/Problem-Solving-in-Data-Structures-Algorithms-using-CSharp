@@ -5,9 +5,8 @@ public class algo
 	public static int fibonacci(int n)
 	{
 		if (n <= 1)
-		{
 			return n;
-		}
+
 		return fibonacci(n - 1) + fibonacci(n - 2);
 	}
 
@@ -18,13 +17,10 @@ public class algo
 		int temp = 0;
 
 		if (n == 0)
-		{
 			return first;
-		}
 		else if (n == 1)
-		{
 			return second;
-		}
+
 		int i = 2;
 		while (i <= n)
 		{
@@ -83,9 +79,7 @@ public class algo
 	public static void TOHUtil(int num, char from, char to, char temp)
 	{
 		if (num < 1)
-		{
 			return;
-		}
 
 		TOHUtil(num - 1, from, temp, to);
 		Console.WriteLine("Move disk " + num + " from peg " + from + " to peg " + to);

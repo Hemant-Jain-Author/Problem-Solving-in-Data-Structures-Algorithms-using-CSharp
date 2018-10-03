@@ -26,27 +26,18 @@ public class TST
 	private Node insert(Node curr, string word, int wordIndex)
 	{
 		if (curr == null)
-		{
 			curr = new Node(word[wordIndex]);
-		}
+
 		if (word[wordIndex] < curr.data)
-		{
 			curr.left = insert(curr.left, word, wordIndex);
-		}
 		else if (word[wordIndex] > curr.data)
-		{
 			curr.right = insert(curr.right, word, wordIndex);
-		}
 		else
 		{
 			if (wordIndex < word.Length - 1)
-			{
 				curr.equal = insert(curr.equal, word, wordIndex + 1);
-			}
 			else
-			{
 				curr.isLastChar = true;
-			}
 		}
 		return curr;
 	}
@@ -54,23 +45,16 @@ public class TST
 	private bool find(Node curr, string word, int wordIndex)
 	{
 		if (curr == null)
-		{
 			return false;
-		}
+
 		if (word[wordIndex] < curr.data)
-		{
 			return find(curr.left, word, wordIndex);
-		}
 		else if (word[wordIndex] > curr.data)
-		{
 			return find(curr.right, word, wordIndex);
-		}
 		else
 		{
 			if (wordIndex == word.Length - 1)
-			{
 				return curr.isLastChar;
-			}
 			return find(curr.equal, word, wordIndex + 1);
 		}
 	}
@@ -80,13 +64,9 @@ public class TST
 		bool ret = find(root, word, 0);
 		Console.Write(word + " :: ");
 		if (ret)
-		{
 			Console.WriteLine(" Found ");
-		}
 		else
-		{
 			Console.WriteLine("Not Found ");
-		}
 		return ret;
 	}
 

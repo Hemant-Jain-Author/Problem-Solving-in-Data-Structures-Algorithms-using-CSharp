@@ -8,8 +8,8 @@ public class HashTableLP
 	private static int FILLED_VALUE = 0;
 
 	private int tableSize;
-	internal int[] Arr;
-	internal int[] Flag;
+	private int[] Arr;
+	private int[] Flag;
 
 	public HashTableLP(int tSize)
 	{
@@ -24,22 +24,22 @@ public class HashTableLP
 
 	/* Other Methods */
 
-	internal virtual int computeHash(int key)
+	private int computeHash(int key)
 	{
 		return key % tableSize;
 	}
 
-	internal virtual int resolverFun(int index)
+	private int resolverFun(int index)
 	{
 		return index;
 	}
 
-	internal virtual int resolverFun2(int index)
+	private int resolverFun2(int index)
 	{
 		return index * index;
 	}
 
-	internal virtual bool add(int value)
+	public bool add(int value)
 	{
 		int hashValue = computeHash(value);
 		for (int i = 0; i < tableSize; i++)
@@ -56,7 +56,7 @@ public class HashTableLP
 		return false;
 	}
 
-	internal virtual bool find(int value)
+	public bool find(int value)
 	{
 		int hashValue = computeHash(value);
 		for (int i = 0; i < tableSize; i++)
@@ -77,7 +77,7 @@ public class HashTableLP
 		return false;
 	}
 
-	internal virtual bool remove(int value)
+	public bool remove(int value)
 	{
 		int hashValue = computeHash(value);
 		for (int i = 0; i < tableSize; i++)
@@ -98,7 +98,7 @@ public class HashTableLP
 		return false;
 	}
 
-	internal virtual void print()
+	public void print()
 	{
 		for (int i = 0; i < tableSize; i++)
 		{

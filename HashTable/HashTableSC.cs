@@ -2,9 +2,8 @@
 
 public class HashTableSC
 {
-
 	private int tableSize;
-	internal Node[] listArray;
+	private Node[] listArray;
 
 	private class Node
 	{
@@ -37,13 +36,13 @@ public class HashTableSC
 	public void add(int value)
 	{
 		int index = computeHash(value);
-		listArray[index] = new Node(this, value, listArray[index]);
+		listArray[index] = new Node(value, listArray[index]);
 	}
 
 	public bool remove(int value)
 	{
 		int index = computeHash(value);
-		Node nextNode , head = listArray[index];
+		Node nextNode, head = listArray[index];
 		if (head != null && head.value == value)
 		{
 			listArray[index] = head.next;

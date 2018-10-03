@@ -2,18 +2,18 @@
 
 public class StringTree
 {
-	internal class Node
+	private Node root = null;
+
+	private class Node
 	{
 		internal string value;
 		internal int count;
 		internal Node lChild;
 		internal Node rChild;
 	}
-	internal Node root = null;
-	//Other Methods.
 
-
-	public virtual void print()
+	// Other Methods.
+	public void print()
 	{
 		print(root);
 	}
@@ -28,14 +28,14 @@ public class StringTree
 			print(curr.rChild);
 		}
 	}
-	public virtual void insert(string value)
+
+	public void add(string value)
 	{
-		root = insert(value, root);
+		root = add(value, root);
 	}
 
-	internal virtual Node insert(string value, Node curr)
+	private Node add(string value, Node curr)
 	{
-		int compare;
 		if (curr == null)
 		{
 			curr = new Node();
@@ -45,43 +45,31 @@ public class StringTree
 		}
 		else
 		{
-			compare = curr.value.CompareTo(value);
+			int compare = curr.value.CompareTo(value);
 			if (compare == 0)
-			{
 				curr.count++;
-			}
 			else if (compare == 1)
-			{
-				curr.lChild = insert(value, curr.lChild);
-			}
+				curr.lChild = add(value, curr.lChild);
 			else
-			{
-				curr.rChild = insert(value, curr.rChild);
-			}
+				curr.rChild = add(value, curr.rChild);
 		}
 		return curr;
 	}
 
-	internal virtual void freeTree()
-	{
-		root = null;
-	}
-
-	internal virtual bool find(string value)
+	public bool find(string value)
 	{
 		bool ret = find(root, value);
 		Console.WriteLine("Find " + value + " Return " + ret);
 		return ret;
 	}
 
-	internal virtual bool find(Node curr, string value)
+	private bool find(Node curr, string value)
 	{
-		int compare;
 		if (curr == null)
 		{
 			return false;
 		}
-		compare = curr.value.CompareTo(value);
+		int compare = curr.value.CompareTo(value);
 		if (compare == 0)
 		{
 			return true;
@@ -89,31 +77,23 @@ public class StringTree
 		else
 		{
 			if (compare == 1)
-			{
 				return find(curr.lChild, value);
-			}
 			else
-			{
 				return find(curr.rChild, value);
-			}
 		}
 	}
 
-	internal virtual int frequency(string value)
+	public int frequency(string value)
 	{
 		return frequency(root, value);
-
 	}
 
-	internal virtual int frequency(Node curr, string value)
+	private int frequency(Node curr, string value)
 	{
-		int compare;
 		if (curr == null)
-		{
 			return 0;
-		}
 
-		compare = curr.value.CompareTo(value);
+		int compare = curr.value.CompareTo(value);
 		if (compare == 0)
 		{
 			return curr.count;
@@ -121,24 +101,26 @@ public class StringTree
 		else
 		{
 			if (compare > 0)
-			{
 				return frequency(curr.lChild, value);
-			}
 			else
-			{
 				return frequency(curr.rChild, value);
-			}
 		}
 	}
-	public static void Main55(string[] args)
+
+	public void freeTree()
+	{
+		root = null;
+	}
+
+	public static void Main(string[] args)
 	{
 		StringTree tt = new StringTree();
-		tt.insert("banana");
-		tt.insert("apple");
-		tt.insert("mango");
-		tt.insert("banana");
-		tt.insert("apple");
-		tt.insert("mango");
+		tt.add("banana");
+		tt.add("apple");
+		tt.add("mango");
+		tt.add("banana");
+		tt.add("apple");
+		tt.add("mango");
 		Console.WriteLine("\nSearch results for apple, banana, grapes and mango :\n");
 		tt.find("apple");
 		tt.find("banana");
@@ -146,13 +128,10 @@ public class StringTree
 		tt.find("applkhjkhkj");
 		tt.find("grapes");
 		tt.find("mango");
-
 		tt.print();
 		Console.WriteLine("frequency returned :: " + tt.frequency("apple"));
 		Console.WriteLine("frequency returned :: " + tt.frequency("banana"));
 		Console.WriteLine("frequency returned :: " + tt.frequency("mango"));
 		Console.WriteLine("frequency returned :: " + tt.frequency("hemant"));
-
 	}
-
 }

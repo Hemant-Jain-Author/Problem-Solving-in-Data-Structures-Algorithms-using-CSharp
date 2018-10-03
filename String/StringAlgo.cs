@@ -2,8 +2,7 @@
 
 public class StringAlgo
 {
-
-	public bool matchExpUtil(char[] exp, char[] str, int i, int j)
+	public static bool matchExpUtil(char[] exp, char[] str, int i, int j)
 	{
 		if (i == exp.Length && j == str.Length)
 		{
@@ -24,14 +23,20 @@ public class StringAlgo
 		return false;
 	}
 
-
-	public bool matchExp(char[] exp, char[] str)
+	public static bool matchExp(string exp, string str)
 	{
-		return matchExpUtil(exp, str, 0, 0);
+		return matchExpUtil(exp.ToCharArray(), str.ToCharArray(), 0, 0);
 	}
 
-	public int match(char[] source, char[] pattern)
+	public static void main1()
 	{
+		Console.WriteLine(matchExp("*llo,?World?", "Hello, World!"));
+	}
+
+	public static bool match(string src, string ptn)
+	{
+		char[] source = src.ToCharArray();
+		char[] pattern = ptn.ToCharArray();
 		int iSource = 0;
 		int iPattern = 0;
 		int sourceLen = source.Length;
@@ -39,18 +44,20 @@ public class StringAlgo
 		for (iSource = 0; iSource < sourceLen; iSource++)
 		{
 			if (source[iSource] == pattern[iPattern])
-			{
 				iPattern++;
-			}
+
 			if (iPattern == patternLen)
-			{
-				return 1;
-			}
+				return true;
 		}
-		return 0;
+		return false;
 	}
 
-	public char[] myStrdup(char[] src)
+	public static void main2()
+	{
+		Console.WriteLine(match("harrypottermustnotgotoschool", "pottergo"));
+	}
+
+	public static char[] myStrdup(char[] src)
 	{
 		int index = 0;
 		char[] dst = new char[src.Length];
@@ -61,28 +68,36 @@ public class StringAlgo
 		return dst;
 	}
 
-
-	bool isPrime(int n)
+	public static bool isPrime(int n)
 	{
 		bool answer = (n > 1) ? true : false;
-
-		for (int i = 2; i * i <= n; ++i)
+		for (int i = 2; i * i < n; ++i)
 		{
 			if (n % i == 0)
 			{
-				answer = true;
+				answer = false;
 				break;
 			}
 		}
 		return answer;
 	}
 
+	public static void main3()
+	{
+		Console.Write("Prime numbers under 100 :: ");
+		for (int i = 0; i < 100; i++)
+		{
+			if (isPrime(i))
+			{
+				Console.Write(i + " ");
+			}
+		}
+		Console.WriteLine();
+	}
 
-
-	public int myAtoi(string str)
+	public static int myAtoi(string str)
 	{
 		int value = 0;
-
 		int size = str.Length;
 		for (int i = 0; i < size; i++)
 		{
@@ -92,9 +107,15 @@ public class StringAlgo
 		return value;
 	}
 
-	public bool isUniqueChar(string str)
+	public static void main4()
+	{
+		Console.WriteLine(myAtoi("1000"));
+	}
+
+	public static bool isUniqueChar(string str)
 	{
 		int[] bitarr = new int[26];
+		int index;
 		for (int i = 0; i < 26; i++)
 		{
 			bitarr[i] = 0;
@@ -105,28 +126,35 @@ public class StringAlgo
 			char c = str[i];
 			if ('A' <= c && 'Z' >= c)
 			{
-				c = (char)(c - 'A');
+				index = (c - 'A');
 			}
 			else if ('a' <= c && 'z' >= c)
 			{
-				c = (char)(c - 'a');
+				index = (c - 'a');
 			}
 			else
 			{
 				Console.WriteLine("Unknown Char!\n");
 				return false;
 			}
-			if (bitarr[c] != 0)
+			if (bitarr[index] != 0)
 			{
-				Console.WriteLine("Duplicate detected!\n");
+				Console.WriteLine("Duplicate detected!");
 				return false;
 			}
+			bitarr[index] += 1;
 		}
-		Console.WriteLine("No duplicate detected!\n");
+		Console.WriteLine("No duplicate detected!");
 		return true;
 	}
 
-	public char ToUpper(char s)
+	public static void main5()
+	{
+		Console.WriteLine(isUniqueChar("aple"));
+		Console.WriteLine(isUniqueChar("apple"));
+	}
+
+	public static char ToUpper(char s)
 	{
 		if (s >= 97 && s <= (97 + 25))
 		{
@@ -135,7 +163,7 @@ public class StringAlgo
 		return s;
 	}
 
-	public char ToLower(char s)
+	public static char ToLower(char s)
 	{
 		if (s >= 65 && s <= (65 + 25))
 		{
@@ -144,9 +172,7 @@ public class StringAlgo
 		return s;
 	}
 
-
-
-	public char LowerUpper(char s)
+	public static char LowerUpper(char s)
 	{
 		if (s >= 97 && s <= (97 + 25))
 		{
@@ -159,8 +185,15 @@ public class StringAlgo
 		return s;
 	}
 
+	public static void main6()
+	{
+		Console.WriteLine(ToLower('A'));
+		Console.WriteLine(ToUpper('a'));
+		Console.WriteLine(LowerUpper('s'));
+		Console.WriteLine(LowerUpper('S'));
+	}
 
-	public bool isPermutation(string s1, string s2)
+	public static bool isPermutation(string s1, string s2)
 	{
 		int[] count = new int[256];
 		int length = s1.Length;
@@ -192,7 +225,12 @@ public class StringAlgo
 		return true;
 	}
 
-	public bool isPalindrome(string str)
+	public static void main7()
+	{
+		Console.WriteLine(isPermutation("apple", "plepa"));
+	}
+
+	public static bool isPalindrome(string str)
 	{
 		int i = 0, j = str.Length - 1;
 		while (i < j && str[i] == str[j])
@@ -212,7 +250,13 @@ public class StringAlgo
 		}
 	}
 
-	public int pow(int x, int n)
+	public static void main8()
+	{
+		Console.WriteLine(isPalindrome("hello"));
+		Console.WriteLine(isPalindrome("eoloe"));
+	}
+
+	public static int pow(int x, int n)
 	{
 		int value;
 		if (n == 0)
@@ -231,41 +275,48 @@ public class StringAlgo
 		}
 	}
 
-	public int myStrcmp(string a, string b)
+	public static void main9()
+	{
+		Console.WriteLine(pow(5, 2));
+	}
+
+	public static int myStrcmp(string a, string b)
 	{
 		int index = 0;
 		int len1 = a.Length;
 		int len2 = b.Length;
 		int minlen = len1;
+
 		if (len1 > len2)
-		{
 			minlen = len2;
-		}
 
 		while (index < minlen && a[index] == b[index])
-		{
 			index++;
-		}
 
 		if (index == len1 && index == len2)
-		{
 			return 0;
-		}
 		else if (len1 == index)
-		{
 			return -1;
-		}
 		else if (len2 == index)
-		{
 			return 1;
-		}
 		else
-		{
 			return a[index] - b[index];
-		}
 	}
 
-	public void reverseString(char[] a)
+	public static void main10()
+	{
+		Console.WriteLine(myStrcmp("abs", "abs"));
+	}
+
+	public static string reverseString(string str)
+	{
+		char[] a = str.ToCharArray();
+		reverseStringUtil(a);
+		string expn = new string(a);
+		return expn;
+	}
+
+	public static void reverseStringUtil(char[] a)
 	{
 		int lower = 0;
 		int upper = a.Length - 1;
@@ -280,7 +331,7 @@ public class StringAlgo
 		}
 	}
 
-	public void reverseString(char[] a, int lower, int upper)
+	public static void reverseStringUtil(char[] a, int lower, int upper)
 	{
 		char tempChar;
 		while (lower < upper)
@@ -293,16 +344,16 @@ public class StringAlgo
 		}
 	}
 
-	public void reverseWords(char[] a)
+	public static string reverseWords(string str)
 	{
+		char[] a = str.ToCharArray();
 		int length = a.Length;
-		int lower, upper = -1;
-		lower = 0;
+		int lower = 0, upper = -1;
 		for (int i = 0; i <= length; i++)
 		{
-			if (a[i] == ' ' || a[i] == '\0')
+			if (i == length || a[i] == ' ')
 			{
-				reverseString(a, lower, upper);
+				reverseStringUtil(a, lower, upper);
 				lower = i + 1;
 				upper = i;
 			}
@@ -311,36 +362,57 @@ public class StringAlgo
 				upper++;
 			}
 		}
-		reverseString(a, 0, length - 1); //-1 because we do not want to reverse �\0�
+		reverseStringUtil(a, 0, length - 1);
+		string expn = new string(a);
+		return expn;
 	}
 
-	public void printAnagram(char[] a)
+	public static void main11()
 	{
-		int n = a.Length;
-		printAnagram(a, 0, n);
+		Console.WriteLine(reverseString("apple"));
+		Console.WriteLine(reverseWords("hello world"));
 	}
-	public void printAnagram(char[] a, int max, int n)
+
+	public static void printAnagram(string str)
+	{
+		char[] a = str.ToCharArray();
+		int n = a.Length;
+		printAnagram(a, n, n);
+	}
+
+	public static void printAnagram(char[] a, int max, int n)
 	{
 		if (max == 1)
-		{
-			Console.WriteLine(a.ToString());
-		}
+			Console.WriteLine(a);
+
+		char temp;
 		for (int i = -1; i < max - 1; i++)
 		{
 			if (i != -1)
 			{
-				a[i] ^= a[max - 1] ^= a[i] ^= a[max - 1];
+				temp = a[i];
+				a[i] = a[max - 1];
+				a[max - 1] = temp;
 			}
 			printAnagram(a, max - 1, n);
 			if (i != -1)
 			{
-				a[i] ^= a[max - 1] ^= a[i] ^= a[max - 1];
+				temp = a[i];
+				a[i] = a[max - 1];
+				a[max - 1] = temp;
 			}
 		}
 	}
 
-	public void shuffle(char[] ar, int n)
+	public static void main12()
 	{
+		printAnagram("123");
+	}
+
+	public static string shuffle(string str)
+	{
+		char[] ar = str.ToCharArray();
+		int n = ar.Length / 2;
 		int count = 0;
 		int k = 1;
 		char temp = '\0';
@@ -351,18 +423,31 @@ public class StringAlgo
 			do
 			{
 				k = (2 * k) % (2 * n - 1);
-				temp ^= ar[k] ^= temp ^= ar[k];
+				//Swap
+				char temp2 = temp;
+				temp = ar[k];
+				ar[k] = temp2;
+
 				count++;
 			} while (i != k);
+
 			if (count == (2 * n - 2))
-			{
 				break;
-			}
 		}
+		string st = new string(ar);
+		Console.WriteLine(st);
+		return st;
 	}
 
-	public char[] addBinary(char[] first, char[] second)
+	public static void main13()
 	{
+		shuffle("ABCDE12345");
+	}
+
+	public static char[] addBinary(string firstStr, string secondStr)
+	{
+		char[] first = firstStr.ToCharArray();
+		char[] second = secondStr.ToCharArray();
 		int size1 = first.Length;
 		int size2 = second.Length;
 		int totalIndex;
@@ -395,5 +480,28 @@ public class StringAlgo
 		}
 		total[totalIndex] = (carry == 0) ? '0' : '1';
 		return total;
+	}
+
+	public static void main14()
+	{
+		Console.WriteLine(addBinary("1000", "11111111"));
+	}
+
+	public static void Main(string[] args)
+	{
+		main1();
+		main2();
+		main3();
+		main4();
+		main5();
+		main6();
+		main7();
+		main8();
+		main9();
+		main10();
+		main11();
+		main12();
+		main13();
+		main14();
 	}
 }

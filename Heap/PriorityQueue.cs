@@ -149,34 +149,17 @@ public class PriorityQueue<T> where T : IComparable<T>
 	}
 }
 
-public class HeapDemo
+public class PQDemo
 {
-	public static void Main1(string[] args)
+	public static void Main(string[] args)
 	{
 		int[] a = new int[] { 1, 9, 6, 7, 8, 0, 2, 4, 5, 3 };
 		PriorityQueue<int> hp = new PriorityQueue<int>(a, true);
-
-		hp.add(100);
-		hp.add(-1);
 		hp.print();
 		Console.WriteLine();
 		while (hp.isEmpty() == false)
 		{
 			Console.Write(hp.remove() + " ");
-		}
-		Console.WriteLine();
-		int[] a2 = new int[] { 1, 9, 6, 7, 8, 0, 2, 4, 5, 3 };
-		PriorityQueue<int>.HeapSort(a2, true);
-		for (int i = 0; i < a2.Length; i++)
-		{
-			Console.Write(a2[i] + " ");
-		}
-		Console.WriteLine();
-		int[] a3 = new int[] { 1, 9, 6, 7, 8, 0, 2, 4, 5, 3 };
-		PriorityQueue<int>.HeapSort(a3, false);
-		for (int i = 0; i < a3.Length; i++)
-		{
-			Console.Write(a3[i] + " ");
 		}
 	}
 }
