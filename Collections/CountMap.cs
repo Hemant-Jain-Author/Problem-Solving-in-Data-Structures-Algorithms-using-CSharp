@@ -5,7 +5,7 @@ public class CountMap<T>
 {
 	internal Dictionary<T, int> hm = new Dictionary<T, int>();
 
-	public void add(T key)
+	public void Add(T key)
 	{
 		if (hm.ContainsKey(key))
 		{
@@ -17,7 +17,7 @@ public class CountMap<T>
 		}
 	}
 
-	public void remove(T key)
+	public void Remove(T key)
 	{
 		if (hm.ContainsKey(key))
 		{
@@ -32,7 +32,7 @@ public class CountMap<T>
 		}
 	}
 
-	public int get(T key)
+	public int Get(T key)
 	{
 		if (hm.ContainsKey(key))
 		{
@@ -41,7 +41,7 @@ public class CountMap<T>
 		return 0;
 	}
 
-	public bool containsKey(T key)
+	public bool ContainsKey(T key)
 	{
 		return hm.ContainsKey(key);
 	}
@@ -50,16 +50,18 @@ public class CountMap<T>
 	{
 		return hm.Count;
 	}
-
+}
+class countMapDemo
+{
 	public static void Main(string[] args)
 	{
 		CountMap<int> cm = new CountMap<int>();
-		cm.add(2);
-		cm.add(2);
-		Console.WriteLine("count is : " + cm.get(2));
-		cm.remove(2);
-		Console.WriteLine("count is : " + cm.get(2));
-		cm.remove(2);
-		Console.WriteLine("count is : " + cm.get(2));
+		cm.Add(2);
+		cm.Add(2);
+		Console.WriteLine("count is : " + cm.Get(2));
+		cm.Remove(2);
+		Console.WriteLine("count is : " + cm.Get(2));
+		cm.Remove(2);
+		Console.WriteLine("count is : " + cm.Get(2));
 	}
 }

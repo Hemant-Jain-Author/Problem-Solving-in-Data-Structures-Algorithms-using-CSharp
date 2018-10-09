@@ -25,7 +25,7 @@ public class ArrayDemo
 		{
 			for (int j = 0; j < 4; j++)
 			{
-				arr[i, j] = i * j;
+				arr[i, j] = i + j;
 			}
 		}
 
@@ -41,6 +41,7 @@ public class ArrayDemo
 
 	public static void Main(string[] args)
 	{
-
+		onedimension();
+		twodimension();
 	}
 }

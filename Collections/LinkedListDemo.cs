@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class LinkedListDemo
 {
-	public static void Main66(string[] args)
+	public static void Main(string[] args)
 	{
 		LinkedList<int> ll = new LinkedList<int>();
 		ll.AddFirst(10);
