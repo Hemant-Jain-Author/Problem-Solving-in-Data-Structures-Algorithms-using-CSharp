@@ -413,7 +413,7 @@ public class Graph
 			{
 				if (adn.dest == dest)
 				{
-					return depth;
+					return depth+1;
 				}
 				if (visited[adn.dest] == false)
 				{

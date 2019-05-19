@@ -246,7 +246,7 @@ public class HeapEx
 	{
 		PriorityQueue<int> pq = new PriorityQueue<int>();
 		int i = 0;
-		for (i = 0; i < size; i++)
+		for (i = 0; i < k; i++)
 		{
 			pq.add(arr[i]);
 		}
