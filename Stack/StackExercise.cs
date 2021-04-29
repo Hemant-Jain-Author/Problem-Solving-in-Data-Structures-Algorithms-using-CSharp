@@ -403,7 +403,7 @@ public static void sortStack(Stack<int> stk)
 	{
 		temp = stk.Pop();
 		sortStack(stk);
-		stk.Push(temp);
+		sortedInsert(stk, temp);
 	}
 }
 

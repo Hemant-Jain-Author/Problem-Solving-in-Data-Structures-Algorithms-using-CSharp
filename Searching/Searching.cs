@@ -890,9 +890,9 @@ public static void ABCTriplet(int[] arr, int size)
 {
 	int start, stop;
 	Array.Sort(arr);
-	for (int i = 0; i < (size - 2); i++)
+	for (int i = 0; i < (size - 1); i++)
 	{
-		start = i + 1;
+		start = 0;
 		stop = size - 1;
 		while (start < stop)
 		{
@@ -902,7 +902,7 @@ public static void ABCTriplet(int[] arr, int size)
 				start += 1;
 				stop -= 1;
 			}
-			else if (arr[i] > arr[start] + arr[stop])
+			else if (arr[i] < arr[start] + arr[stop])
 			{
 				stop -= 1;
 			}
@@ -1003,7 +1003,7 @@ public static int numberOfTriangles(int[] arr, int size)
 		{
 			for (k = j + 1; k < size; k++)
 			{
-				if (arr[i] + arr[j] > arr[k])
+				if ((arr[i] + arr[j] > arr[k]) && (arr[k] + arr[j] > arr[i]) && (arr[i] + arr[k] > arr[j]))
 				{
 					count += 1;
 				}

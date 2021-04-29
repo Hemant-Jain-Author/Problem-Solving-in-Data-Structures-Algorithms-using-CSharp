@@ -1,11 +1,11 @@
 ﻿using System;
 
-using Math;
+//using Math;
 
 public class Analysis
 {
 
-	public static int Main(string[] args)
+	public static int Main1(string[] args)
 	{
 		Analysis a = new Analysis();
 		System.Console.WriteLine("N = 100, Number of instructions :: " + a.fun1(100));

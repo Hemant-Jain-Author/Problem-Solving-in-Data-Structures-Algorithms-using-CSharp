@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class Introduction
+public class Introduction2
 {
 
 	public static void printArray(int[] arr, int count)
@@ -273,7 +273,7 @@ public class Introduction
 		}
 	}
 
-	public static void Main(string[] args)
+	public static void Main444(string[] args)
 	{
 		int[] arr = new int[] { 8, 5, 6, 1, 9, 3, 2, 7, 4, 10 };
 		int size = arr.Length;
