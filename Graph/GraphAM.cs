@@ -1,96 +1,95 @@
 ﻿using System;
-using System.Collections.Generic;
 
 public class GraphAM
 {
-	internal int count;
-	internal int[,] adj;
+	private int count;
+	private int[, ] adj;
 
-	internal GraphAM(int cnt)
+	public GraphAM(int cnt)
 	{
 		count = cnt;
 		adj = new int[count, count];
 	}
 
-	public virtual void addDirectedEdge(int src, int dst, int cost)
+	public void AddDirectedEdge(int src, int dst, int cost)
 	{
 		adj[src, dst] = cost;
 	}
 
-	public virtual void addUndirectedEdge(int src, int dst, int cost)
+	public void AddUndirectedEdge(int src, int dst, int cost)
 	{
-		addDirectedEdge(src, dst, cost);
-		addDirectedEdge(dst, src, cost);
+		AddDirectedEdge(src, dst, cost);
+		AddDirectedEdge(dst, src, cost);
 	}
 
-	public virtual void print()
+	public void Print()
 	{
 		for (int i = 0; i < count; i++)
 		{
-			Console.Write("Node index [ " + i + " ] is connected with : ");
+			Console.Write("Vertex " + i + " is connected to : ");
 			for (int j = 0; j < count; j++)
 			{
 				if (adj[i, j] != 0)
 				{
-					Console.Write(j + " ");
+					Console.Write("(" + j + ", " + adj[i, j] + ") ");
 				}
 			}
 			Console.WriteLine("");
 		}
 	}
 
-	public static void Main(string[] args)
+	public static void Main1()
 	{
 		GraphAM graph = new GraphAM(4);
-		graph.addUndirectedEdge(0, 1, 1);
-		graph.addUndirectedEdge(0, 2, 1);
-		graph.addUndirectedEdge(1, 2, 1);
-		graph.addUndirectedEdge(2, 3, 1);
-		graph.print();
+		graph.AddUndirectedEdge(0, 1, 1);
+		graph.AddUndirectedEdge(0, 2, 1);
+		graph.AddUndirectedEdge(1, 2, 1);
+		graph.AddUndirectedEdge(2, 3, 1);
+		graph.Print();
 	}
 
+/*
+Vertex 0 is connected to : (1, 1) (2, 1) 
+Vertex 1 is connected to : (0, 1) (2, 1) 
+Vertex 2 is connected to : (0, 1) (1, 1) (3, 1) 
+Vertex 3 is connected to : (2, 1)
+*/
 	private class Edge : IComparable<Edge>
 	{
-		internal int dest;
-		internal int cost;
+		internal int src, dest, cost;
 
-		public Edge(int dst, int cst)
+		public Edge(int s, int d, int c)
 		{
-			dest = dst;
-			cost = cst;
+			src = s;
+			dest = d;
+			cost = c;
 		}
 
-		int IComparable<Edge>.CompareTo(Edge other)
+		public int CompareTo(Edge compareEdge)
 		{
-			return cost - other.cost;
+			return this.cost - compareEdge.cost;
 		}
 	}
 
-	public static void dijkstra(GraphAM gph, int source)
+	public static void Dijkstra(GraphAM gph, int source)
 	{
 		int[] previous = new int[gph.count];
 		int[] dist = new int[gph.count];
 		bool[] visited = new bool[gph.count];
-
-		for (int i = 0; i < gph.count; i++)
-		{
-			previous[i] = -1;
-			dist[i] = int.MaxValue; // infinite
-			visited[i] = false;
-		}
+		Array.Fill(previous, -1);
+		Array.Fill(dist, int.MaxValue); // infinite
 
 		dist[source] = 0;
 		previous[source] = -1;
 
 		PriorityQueue<Edge> queue = new PriorityQueue<Edge>();
+		Edge node = new Edge(source, source, 0);
+		queue.Add(node);
 
-		Edge node = new Edge(source, 0);
-		queue.add(node);
-
-		while (queue.isEmpty() != true)
+		while (queue.IsEmpty() != true)
 		{
-			node = queue.peek();
-			queue.remove();
+			node = queue.Peek();
+			queue.Remove();
 			source = node.dest;
 			visited[source] = true;
 			for (int dest = 0; dest < gph.count; dest++)
@@ -104,8 +103,8 @@ public class GraphAM
 
 						dist[dest] = alt;
 						previous[dest] = source;
-						node = new Edge(dest, alt);
-						queue.add(node);
+						node = new Edge(source, dest, alt);
+						queue.Add(node);
 					}
 				}
 			}
@@ -116,39 +115,35 @@ public class GraphAM
 		{
 			if (dist[i] == int.MaxValue)
 			{
-				Console.WriteLine(" \n node id " + i + "  prev " + previous[i] + " distance : Unreachable");
+				Console.WriteLine("node id " + i + "  prev " + previous[i] + " distance : Unreachable");
 			}
 			else
 			{
-				Console.WriteLine(" node id " + i + "  prev " + previous[i] + " distance : " + dist[i]);
+				Console.WriteLine("node id " + i + "  prev " + previous[i] + " distance : " + dist[i]);
+
 			}
 		}
 	}
 
-	public static void prims(GraphAM gph)
+	public static void Prims(GraphAM gph)
 	{
 		int[] previous = new int[gph.count];
 		int[] dist = new int[gph.count];
 		int source = 0;
 		bool[] visited = new bool[gph.count];
-
-		for (int i = 0; i < gph.count; i++)
-		{
-			previous[i] = -1;
-			dist[i] = int.MaxValue; // infinite
-			visited[i] = false;
-		}
+		Array.Fill(previous, -1);
+		Array.Fill(dist, int.MaxValue); // infinite
 
 		dist[source] = 0;
 		previous[source] = -1;
 		PriorityQueue<Edge> queue = new PriorityQueue<Edge>();
-		Edge node = new Edge(source, 0);
-		queue.add(node);
+		Edge node = new Edge(source, source, 0);
+		queue.Add(node);
 
-		while (queue.isEmpty() != true)
+		while (queue.IsEmpty() != true)
 		{
-			node = queue.peek();
-			queue.remove();
+			node = queue.Peek();
+			queue.Remove();
 			source = node.dest;
 			visited[source] = true;
 			for (int dest = 0; dest < gph.count; dest++)
@@ -156,13 +151,12 @@ public class GraphAM
 				int cost = gph.adj[source, dest];
 				if (cost != 0)
 				{
-					int alt = cost;
-					if (dist[dest] > alt && visited[dest] == false)
+					if (dist[dest] > cost && visited[dest] == false)
 					{
-						dist[dest] = alt;
+						dist[dest] = cost;
 						previous[dest] = source;
-						node = new Edge(dest, alt);
-						queue.add(node);
+						node = new Edge(source, dest, cost);
+						queue.Add(node);
 					}
 				}
 			}
@@ -173,57 +167,120 @@ public class GraphAM
 		{
 			if (dist[i] == int.MaxValue)
 			{
-				Console.WriteLine(" \n node id " + i + "  prev " + previous[i] + " distance : Unreachable");
+				Console.WriteLine("node id " + i + "  prev " + previous[i] + " distance : Unreachable");
 			}
 			else
 			{
-				Console.WriteLine(" node id " + i + "  prev " + previous[i] + " distance : " + dist[i]);
+				Console.WriteLine("node id " + i + "  prev " + previous[i] + " distance : " + dist[i]);
 			}
 		}
 	}
 
-	public static void main40(string[] args)
+		public static void Main2()
 	{
 		GraphAM gph = new GraphAM(9);
-		gph.addUndirectedEdge(0, 1, 4);
-		gph.addUndirectedEdge(0, 7, 8);
-		gph.addUndirectedEdge(1, 2, 8);
-		gph.addUndirectedEdge(1, 7, 11);
-		gph.addUndirectedEdge(2, 3, 7);
-		gph.addUndirectedEdge(2, 8, 2);
-		gph.addUndirectedEdge(2, 5, 4);
-		gph.addUndirectedEdge(3, 4, 9);
-		gph.addUndirectedEdge(3, 5, 14);
-		gph.addUndirectedEdge(4, 5, 10);
-		gph.addUndirectedEdge(5, 6, 2);
-		gph.addUndirectedEdge(6, 7, 1);
-		gph.addUndirectedEdge(6, 8, 6);
-		gph.addUndirectedEdge(7, 8, 7);
-		gph.print();
-		prims(gph);
-		dijkstra(gph, 0);
+		gph.AddUndirectedEdge(0, 1, 4);
+		gph.AddUndirectedEdge(0, 7, 8);
+		gph.AddUndirectedEdge(1, 2, 8);
+		gph.AddUndirectedEdge(1, 7, 11);
+		gph.AddUndirectedEdge(2, 3, 7);
+		gph.AddUndirectedEdge(2, 8, 2);
+		gph.AddUndirectedEdge(2, 5, 4);
+		gph.AddUndirectedEdge(3, 4, 9);
+		gph.AddUndirectedEdge(3, 5, 14);
+		gph.AddUndirectedEdge(4, 5, 10);
+		gph.AddUndirectedEdge(5, 6, 2);
+		gph.AddUndirectedEdge(6, 7, 1);
+		gph.AddUndirectedEdge(6, 8, 6);
+		gph.AddUndirectedEdge(7, 8, 7);
+		//gph.Print();
+		Prims(gph);
+		//Dijkstra(gph, 0);
 	}
+/*
+Vertex 0 is connected to : (1, 4) (7, 8) 
+Vertex 1 is connected to : (0, 4) (2, 8) (7, 11) 
+Vertex 2 is connected to : (1, 8) (3, 7) (5, 4) (8, 2) 
+Vertex 3 is connected to : (2, 7) (4, 9) (5, 14) 
+Vertex 4 is connected to : (3, 9) (5, 10) 
+Vertex 5 is connected to : (2, 4) (3, 14) (4, 10) (6, 2) 
+Vertex 6 is connected to : (5, 2) (7, 1) (8, 6) 
+Vertex 7 is connected to : (0, 8) (1, 11) (6, 1) (8, 7) 
+Vertex 8 is connected to : (2, 2) (6, 6) (7, 7)  
 
-	public static void main41(string[] args)
+
+node id 0  prev -1 distance : 0
+node id 1  prev 0 distance : 4
+node id 2  prev 5 distance : 4
+node id 3  prev 2 distance : 7
+node id 4  prev 3 distance : 9
+node id 5  prev 6 distance : 2
+node id 6  prev 7 distance : 1
+node id 7  prev 0 distance : 8
+node id 8  prev 2 distance : 2
+
+node id 0  prev -1 distance : 0
+node id 1  prev 0 distance : 4
+node id 2  prev 1 distance : 12
+node id 3  prev 2 distance : 19
+node id 4  prev 5 distance : 21
+node id 5  prev 6 distance : 11
+node id 6  prev 7 distance : 9
+node id 7  prev 0 distance : 8
+node id 8  prev 2 distance : 14
+
+*/
+
+	public static void Main3()
 	{
 		GraphAM gph = new GraphAM(9);
-		gph.addUndirectedEdge(0, 2, 1);
-		gph.addUndirectedEdge(1, 2, 5);
-		gph.addUndirectedEdge(1, 3, 7);
-		gph.addUndirectedEdge(1, 4, 9);
-		gph.addUndirectedEdge(3, 2, 2);
-		gph.addUndirectedEdge(3, 5, 4);
-		gph.addUndirectedEdge(4, 5, 6);
-		gph.addUndirectedEdge(4, 6, 3);
-		gph.addUndirectedEdge(5, 7, 1);
-		gph.addUndirectedEdge(6, 7, 7);
-		gph.addUndirectedEdge(7, 8, 17);
-		gph.print();
-		prims(gph);
-		dijkstra(gph, 1);
+		gph.AddUndirectedEdge(0, 2, 1);
+		gph.AddUndirectedEdge(1, 2, 5);
+		gph.AddUndirectedEdge(1, 3, 7);
+		gph.AddUndirectedEdge(1, 4, 9);
+		gph.AddUndirectedEdge(3, 2, 2);
+		gph.AddUndirectedEdge(3, 5, 4);
+		gph.AddUndirectedEdge(4, 5, 6);
+		gph.AddUndirectedEdge(4, 6, 3);
+		gph.AddUndirectedEdge(5, 7, 1);
+		gph.AddUndirectedEdge(6, 7, 7);
+		gph.AddUndirectedEdge(7, 8, 17);
+		gph.Print();
+		Prims(gph);
+		Dijkstra(gph, 1);
 	}
+/*
+Vertex 0 is connected to : (2, 1) 
+Vertex 1 is connected to : (2, 5) (3, 7) (4, 9) 
+Vertex 2 is connected to : (0, 1) (1, 5) (3, 2) 
+Vertex 3 is connected to : (1, 7) (2, 2) (5, 4) 
+Vertex 4 is connected to : (1, 9) (5, 6) (6, 3) 
+Vertex 5 is connected to : (3, 4) (4, 6) (7, 1) 
+Vertex 6 is connected to : (4, 3) (7, 7) 
+Vertex 7 is connected to : (5, 1) (6, 7) (8, 17) 
+Vertex 8 is connected to : (7, 17)
 
-	public static bool hamiltonianPathUtil(GraphAM graph, int[] path, int pSize, int[] added)
+node id 0  prev -1 distance : 0
+node id 1  prev 2 distance : 5
+node id 2  prev 0 distance : 1
+node id 3  prev 2 distance : 2
+node id 4  prev 5 distance : 6
+node id 5  prev 3 distance : 4
+node id 6  prev 4 distance : 3
+node id 7  prev 5 distance : 1
+node id 8  prev 7 distance : 17
+
+node id 0  prev 2 distance : 6
+node id 1  prev -1 distance : 0
+node id 2  prev 1 distance : 5
+node id 3  prev 1 distance : 7
+node id 4  prev 1 distance : 9
+node id 5  prev 3 distance : 11
+node id 6  prev 4 distance : 12
+node id 7  prev 5 distance : 12
+node id 8  prev 7 distance : 29
+*/
+	public static bool HamiltonianPathUtil(GraphAM graph, int[] path, int pSize, int[] added)
 	{
 		// Base case full length path is found
 		if (pSize == graph.count)
@@ -232,13 +289,13 @@ public class GraphAM
 		}
 		for (int vertex = 0; vertex < graph.count; vertex++)
 		{
-			// there is a path from last element and next vertex
-			// and next vertex is not already included in path.
+			// There is an edge from last element of path and next vertex
+			// and the next vertex is not already included in the path.
 			if (pSize == 0 || (graph.adj[path[pSize - 1], vertex] == 1 && added[vertex] == 0))
 			{
 				path[pSize++] = vertex;
 				added[vertex] = 1;
-				if (hamiltonianPathUtil(graph, path, pSize, added))
+				if (HamiltonianPathUtil(graph, path, pSize, added))
 				{
 					return true;
 				}
@@ -250,27 +307,30 @@ public class GraphAM
 		return false;
 	}
 
-	public static bool hamiltonianPath(GraphAM graph)
+	public static bool HamiltonianPath(GraphAM graph)
 	{
 		int[] path = new int[graph.count];
 		int[] added = new int[graph.count];
 
-		if (hamiltonianPathUtil(graph, path, 0, added))
+		if (HamiltonianPathUtil(graph, path, 0, added))
 		{
-			Console.WriteLine("Hamiltonian Path found :: ");
+			Console.Write("Hamiltonian Path found :: ");
 			for (int i = 0; i < graph.count; i++)
 			{
-				Console.WriteLine(" " + path[i]);
+				Console.Write(" " + path[i]);
 			}
+			Console.WriteLine("");
 			return true;
 		}
+
 		Console.WriteLine("Hamiltonian Path not found");
 		return false;
 	}
 
-	public static bool hamiltonianCycleUtil(GraphAM graph, int[] path, int pSize, int[] added)
+	public static bool HamiltonianCycleUtil(GraphAM graph, int[] path, int pSize, int[] added)
 	{
-		// Base case full length path is found this last check can be modified to make it a path.
+		// Base case full length path is found
+		// this last check can be modified to make it a path.
 		if (pSize == graph.count)
 		{
 			if (graph.adj[path[pSize - 1], path[0]] == 1)
@@ -290,7 +350,7 @@ public class GraphAM
 			{
 				path[pSize++] = vertex;
 				added[vertex] = 1;
-				if (hamiltonianCycleUtil(graph, path, pSize, added))
+				if (HamiltonianCycleUtil(graph, path, pSize, added))
 				{
 					return true;
 				}
@@ -302,28 +362,29 @@ public class GraphAM
 		return false;
 	}
 
-	public static bool hamiltonianCycle(GraphAM graph)
+	public static bool HamiltonianCycle(GraphAM graph)
 	{
 		int[] path = new int[graph.count + 1];
 		int[] added = new int[graph.count];
-		if (hamiltonianCycleUtil(graph, path, 0, added))
+		if (HamiltonianCycleUtil(graph, path, 0, added))
 		{
-			Console.WriteLine("Hamiltonian Cycle found :: ");
+			Console.Write("Hamiltonian Cycle found :: ");
 			for (int i = 0; i <= graph.count; i++)
 			{
 				Console.Write(" " + path[i]);
 			}
+			Console.WriteLine("");
 			return true;
 		}
 		Console.WriteLine("Hamiltonian Cycle not found");
 		return false;
 	}
 
-	public static void main2(string[] args)
+		public static void Main4()
 	{
 		int count = 5;
 		GraphAM graph = new GraphAM(count);
-		int[,] adj = new int[,]
+		int[, ] adj = new int[, ]
 		{
 			{0, 1, 0, 1, 0},
 			{1, 0, 1, 1, 0},
@@ -338,15 +399,14 @@ public class GraphAM
 			{
 				if (adj[i, j] == 1)
 				{
-					graph.addDirectedEdge(i, j, 1);
+					graph.AddDirectedEdge(i, j, 1);
 				}
 			}
 		}
-		Console.WriteLine("hamiltonianPath : " + hamiltonianPath(graph));
-		Console.WriteLine("hamiltonianCycle : " + hamiltonianCycle(graph));
+		Console.WriteLine("HamiltonianPath : " + HamiltonianPath(graph));
 
 		GraphAM graph2 = new GraphAM(count);
-		int[,] adj2 = new int[,]
+		int[, ] adj2 = new int[, ]
 		{
 			{0, 1, 0, 1, 0},
 			{1, 0, 1, 1, 0},
@@ -360,17 +420,83 @@ public class GraphAM
 			{
 				if (adj2[i, j] == 1)
 				{
-					graph2.addDirectedEdge(i, j, 1);
+					graph2.AddDirectedEdge(i, j, 1);
 				}
 			}
 		}
 
-		Console.WriteLine("hamiltonianPath :  " + hamiltonianPath(graph2));
-		Console.WriteLine("hamiltonianCycle :  " + hamiltonianCycle(graph2));
+		Console.WriteLine("HamiltonianPath :  " + HamiltonianPath(graph2));
+	}
+/*
+Hamiltonian Path found ::  0 1 2 4 3
+HamiltonianPath : true
+
+Hamiltonian Path found ::  0 3 1 2 4
+HamiltonianPath :  true
+ */
+	public static void Main5()
+	{
+		int count = 5;
+		GraphAM graph = new GraphAM(count);
+		int[, ] adj = new int[, ]
+		{
+			{0, 1, 0, 1, 0},
+			{1, 0, 1, 1, 0},
+			{0, 1, 0, 0, 1},
+			{1, 1, 0, 0, 1},
+			{0, 1, 1, 1, 0}
+		};
+
+		for (int i = 0; i < count; i++)
+		{
+			for (int j = 0; j < count; j++)
+			{
+				if (adj[i, j] == 1)
+				{
+					graph.AddDirectedEdge(i, j, 1);
+				}
+			}
+		}
+		Console.WriteLine("HamiltonianCycle : " + HamiltonianCycle(graph));
+
+		GraphAM graph2 = new GraphAM(count);
+		int[, ] adj2 = new int[, ]
+		{
+			{0, 1, 0, 1, 0},
+			{1, 0, 1, 1, 0},
+			{0, 1, 0, 0, 1},
+			{1, 1, 0, 0, 0},
+			{0, 1, 1, 0, 0}
+		};
+		for (int i = 0; i < count; i++)
+		{
+			for (int j = 0; j < count; j++)
+			{
+				if (adj2[i, j] == 1)
+				{
+					graph2.AddDirectedEdge(i, j, 1);
+				}
+			}
+		}
+
+		Console.WriteLine("HamiltonianCycle :  " + HamiltonianCycle(graph2));
 	}
 
-}
+/*
+Hamiltonian Cycle found ::  0 1 2 4 3 0
+HamiltonianCycle : true
 
+Hamiltonian Cycle not found
+HamiltonianCycle :  false
+*/
+	public static void Main(string[] args)
+	{
+			Main1();
+			Main2();
+			Main3(); 
+			Main4(); 
+	}
+}
 public class PriorityQueue<T> where T : IComparable<T>
 {
 	private const int CAPACITY = 32;
@@ -393,12 +519,12 @@ public class PriorityQueue<T> where T : IComparable<T>
 		// Build Heap operation over array
 		for (int i = (Count / 2); i >= 0; i--)
 		{
-			proclateDown(i);
+			PercolateDown(i);
 		}
 	}
 
 	// Other Methods.
-	private bool compare(T[] arr, int first, int second)
+	private bool Compare(T[] arr, int first, int second)
 	{
 		if (isMinHeap)
 			return arr[first].CompareTo(arr[second]) > 0;
@@ -406,7 +532,7 @@ public class PriorityQueue<T> where T : IComparable<T>
 			return arr[first].CompareTo(arr[second]) < 0;
 	}
 
-	private void proclateDown(int parent)
+	private void PercolateDown(int parent)
 	{
 		int lChild = 2 * parent + 1;
 		int rChild = lChild + 1;
@@ -418,21 +544,21 @@ public class PriorityQueue<T> where T : IComparable<T>
 			child = lChild;
 		}
 
-		if (rChild < Count && compare(arr, lChild, rChild))
+		if (rChild < Count && Compare(arr, lChild, rChild))
 		{
 			child = rChild;
 		}
 
-		if (child != -1 && compare(arr, parent, child))
+		if (child != -1 && Compare(arr, parent, child))
 		{
 			temp = arr[parent];
 			arr[parent] = arr[child];
 			arr[child] = temp;
-			proclateDown(child);
+			PercolateDown(child);
 		}
 	}
 
-	private void proclateUp(int child)
+	private void PercolateUp(int child)
 	{
 		int parent = (child - 1) / 2;
 		T temp;
@@ -441,34 +567,34 @@ public class PriorityQueue<T> where T : IComparable<T>
 			return;
 		}
 
-		if (compare(arr, parent, child))
+		if (Compare(arr, parent, child))
 		{
 			temp = arr[child];
 			arr[child] = arr[parent];
 			arr[parent] = temp;
-			proclateUp(parent);
+			PercolateUp(parent);
 		}
 	}
 
-	public void add(T value)
+	public void Add(T value)
 	{
 		if (Count == arr.Length)
 		{
-			doubleSize();
+			DoubleSize();
 		}
 
 		arr[Count++] = value;
-		proclateUp(Count - 1);
+		PercolateUp(Count - 1);
 	}
 
-	private void doubleSize()
+	private void DoubleSize()
 	{
 		T[] old = arr;
 		arr = new T[arr.Length * 2];
 		Array.Copy(old, 0, arr, 0, Count);
 	}
 
-	public T remove()
+	public T Remove()
 	{
 		if (Count == 0)
 		{
@@ -478,11 +604,11 @@ public class PriorityQueue<T> where T : IComparable<T>
 		T value = arr[0];
 		arr[0] = arr[Count - 1];
 		Count--;
-		proclateDown(0);
+		PercolateDown(0);
 		return value;
 	}
 
-	public void print()
+	public void Print()
 	{
 		for (int i = 0; i < Count; i++)
 		{
@@ -490,17 +616,17 @@ public class PriorityQueue<T> where T : IComparable<T>
 		}
 	}
 
-	public bool isEmpty()
+	public bool IsEmpty()
 	{
 		return (Count == 0);
 	}
 
-	public int size()
+	public int Size()
 	{
 		return Count;
 	}
 
-	public T peek()
+	public T Peek()
 	{
 		if (Count == 0)
 		{
@@ -515,7 +641,7 @@ public class PriorityQueue<T> where T : IComparable<T>
 		PriorityQueue<int> hp = new PriorityQueue<int>(array, !inc);
 		for (int i = 0; i < array.Length; i++)
 		{
-			array[array.Length - i - 1] = hp.remove();
+			array[array.Length - i - 1] = hp.Remove();
 		}
 	}
 }

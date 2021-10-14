@@ -3,45 +3,45 @@
 public class CircularLinkedList
 {
 	private Node tail;
-	private int count = 0;
+	private int size = 0;
 
 	private class Node
 	{
 		internal int value;
 		internal Node next;
 
-		public Node(int v, Node n)
+		internal Node(int v, Node n)
 		{
 			value = v;
 			next = n;
 		}
 	}
-	public int size()
+
+	/* Other methods */
+
+	public int Size()
 	{
-		return count;
+		return size;
 	}
 
-	public bool Empty
+	public bool IsEmpty()
 	{
-		get
-		{
-			return count == 0;
-		}
+		return size == 0;
 	}
 
-	public int peek()
+	public int Peek()
 	{
-		if (Empty)
+		if (IsEmpty())
 		{
 			throw new System.InvalidOperationException("EmptyListException");
 		}
 		return tail.next.value;
 	}
 
-	public void addTail(int value)
+	public void AddTail(int value)
 	{
 		Node temp = new Node(value, null);
-		if (Empty)
+		if (IsEmpty())
 		{
 			tail = temp;
 			temp.next = temp;
@@ -52,13 +52,13 @@ public class CircularLinkedList
 			tail.next = temp;
 			tail = temp;
 		}
-		count++;
+		size++;
 	}
 
-	public void addHead(int value)
+	public void AddHead(int value)
 	{
 		Node temp = new Node(value, null);
-		if (Empty)
+		if (IsEmpty())
 		{
 			tail = temp;
 			temp.next = temp;
@@ -68,12 +68,11 @@ public class CircularLinkedList
 			temp.next = tail.next;
 			tail.next = temp;
 		}
-		count++;
+		size++;
 	}
-
-	public int removeHead()
+	public int RemoveHead()
 	{
-		if (Empty)
+		if (IsEmpty())
 		{
 			throw new System.InvalidOperationException("EmptyListException");
 		}
@@ -87,13 +86,13 @@ public class CircularLinkedList
 			tail.next = tail.next.next;
 		}
 
-		count--;
+		size--;
 		return value;
 	}
 
-	public bool removeNode(int key)
+	public bool DeleteNode(int key)
 	{
-		if (Empty)
+		if (IsEmpty())
 		{
 			return false;
 		}
@@ -131,51 +130,60 @@ public class CircularLinkedList
 			prev = curr;
 			curr = curr.next;
 		}
+
 		return false;
 	}
 
-	public CircularLinkedList copyListReversed()
+	public CircularLinkedList CopyListReversed()
 	{
 		CircularLinkedList cl = new CircularLinkedList();
+		if (tail == null)
+		{
+			return cl;
+		}
 		Node curr = tail.next;
 		Node head = curr;
 
 		if (curr != null)
 		{
-			cl.addHead(curr.value);
+			cl.AddHead(curr.value);
 			curr = curr.next;
 		}
 		while (curr != head)
 		{
-			cl.addHead(curr.value);
+			cl.AddHead(curr.value);
 			curr = curr.next;
 		}
 		return cl;
 	}
 
-	public CircularLinkedList copyList()
+	public CircularLinkedList CopyList()
 	{
 		CircularLinkedList cl = new CircularLinkedList();
+		if (tail == null)
+		{
+			return cl;
+		}
 		Node curr = tail.next;
 		Node head = curr;
 
 		if (curr != null)
 		{
-			cl.addTail(curr.value);
+			cl.AddTail(curr.value);
 			curr = curr.next;
 		}
 		while (curr != head)
 		{
-			cl.addTail(curr.value);
+			cl.AddTail(curr.value);
 			curr = curr.next;
 		}
 		return cl;
 	}
 
-	public bool searchList(int data)
+	public bool Search(int data)
 	{
 		Node temp = tail;
-		for (int i = 0; i < count; i++)
+		for (int i = 0; i < size; i++)
 		{
 			if (temp.value == data)
 			{
@@ -186,16 +194,17 @@ public class CircularLinkedList
 		return false;
 	}
 
-	public void deleteList()
+	public void DeleteList()
 	{
 		tail = null;
-		count = 0;
+		size = 0;
 	}
 
-	public void print()
+	public void Print()
 	{
-		if (Empty)
+		if (IsEmpty())
 		{
+			Console.WriteLine("Empty List.");
 			return;
 		}
 		Node temp = tail.next;
@@ -204,15 +213,106 @@ public class CircularLinkedList
 			Console.Write(temp.value + " ");
 			temp = temp.next;
 		}
-		Console.Write(temp.value);
+		Console.WriteLine(temp.value);
 	}
+
+	public static void Main1()
+	{
+		CircularLinkedList ll = new CircularLinkedList();
+		ll.AddHead(1);
+		ll.AddHead(2);
+		ll.AddHead(3);
+		ll.Print();
+		Console.WriteLine(ll.Size());
+		Console.WriteLine(ll.IsEmpty());
+		Console.WriteLine(ll.Peek());
+		Console.WriteLine(ll.Search(3));
+	}
+
+	/*
+3 2 1
+3
+False
+3
+True
+	*/
+
+	public static void Main2()
+	{
+		CircularLinkedList ll = new CircularLinkedList();
+		ll.AddTail(1);
+		ll.AddTail(2);
+		ll.AddTail(3);
+		ll.Print();
+	}
+
+	/*
+	1 2 3
+	*/
+
+	public static void Main3()
+	{
+		CircularLinkedList ll = new CircularLinkedList();
+		ll.AddHead(1);
+		ll.AddHead(2);
+		ll.AddHead(3);
+		ll.Print();
+		ll.RemoveHead();
+		ll.Print();
+		ll.DeleteNode(2);
+		ll.Print();
+		ll.DeleteList();
+		ll.Print();
+	}
+
+	/*
+3 2 1
+2 1
+1
+Empty List.
+	*/
+
+	public static void Main4()
+	{
+		CircularLinkedList ll = new CircularLinkedList();
+		ll.AddHead(1);
+		ll.AddHead(2);
+		ll.AddHead(3);
+		ll.Print();
+		CircularLinkedList ll2 = ll.CopyList();
+		ll2.Print();
+		CircularLinkedList ll3 = ll.CopyListReversed();
+		ll3.Print();
+	}
+
+	/*
+	3 2 1
+	3 2 1
+	1 2 3
+	*/
+
+	public static void Main5()
+	{
+		CircularLinkedList ll = new CircularLinkedList();
+		ll.AddHead(1);
+		ll.AddHead(2);
+		ll.AddHead(3);
+		ll.Print();
+		ll.DeleteNode(2);
+		ll.Print();
+	}
+
+	/*
+	3 2 1
+	3 1
+	*/
 
 	public static void Main(string[] args)
 	{
-		CircularLinkedList ll = new CircularLinkedList();
-		ll.addHead(1);
-		ll.addHead(2);
-		ll.addHead(3);
-		ll.print();
+		Main1();
+		Main2();
+		Main3();
+		Main4();
+		Main5();
 	}
 }

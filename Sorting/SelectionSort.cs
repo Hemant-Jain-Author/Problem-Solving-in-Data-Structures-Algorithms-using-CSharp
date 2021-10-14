@@ -2,12 +2,12 @@
 
 public class SelectionSort
 {
-	private bool more(int value1, int value2)
-	{
+	 private bool more(int value1, int value2)
+	 {
 		return value1 > value2;
-	}
+	 }
 
-	public static void sort(int[] arr) // sorted array created from back.
+	public void Sort(int[] arr) // Sorted array created in reverse order.
 	{
 		int size = arr.Length;
 		int i, j, max, temp;
@@ -27,40 +27,48 @@ public class SelectionSort
 		}
 	}
 
-public static void sort2(int[] arr) // sorted array created from front
-{
-	int size = arr.Length;
-	int i, j, min, temp;
-	for (i = 0; i < size - 1; i++)
+	public void Sort2(int[] arr) // Sorted array created in forward direction
 	{
-		min = i;
-		for (j = i + 1; j < size; j++)
+		int size = arr.Length;
+		int i, j, min, temp;
+		for (i = 0; i < size - 1; i++)
 		{
-			if (arr[j] < arr[min])
+			min = i;
+			for (j = i + 1; j < size; j++)
 			{
-				min = j;
+				if (arr[j] < arr[min])
+				{
+					min = j;
+				}
 			}
+			temp = arr[i];
+			arr[i] = arr[min];
+			arr[min] = temp;
 		}
-		temp = arr[i];
-		arr[i] = arr[min];
-		arr[min] = temp;
 	}
-}
 
 	public static void Main(string[] args)
 	{
-		int[] array = new int[] { 9, 1, 8, 2, 7, 3, 6, 4, 5 };
-		SelectionSort.sort(array);
+		int[] array = new int[] {9, 1, 8, 2, 7, 3, 6, 4, 5};
+		SelectionSort srt = new SelectionSort();
+		srt.Sort(array);
 		for (int i = 0; i < array.Length; i++)
 		{
 			Console.Write(array[i] + " ");
 		}
 		Console.WriteLine();
-		int[] array2 = new int[] { 9, 1, 8, 2, 7, 3, 6, 4, 5 };
-		SelectionSort.sort2(array2);
+
+		int[] array2 = new int[] {9, 1, 8, 2, 7, 3, 6, 4, 5};
+		srt = new SelectionSort();
+		srt.Sort2(array2);
 		for (int i = 0; i < array2.Length; i++)
 		{
 			Console.Write(array2[i] + " ");
 		}
 	}
 }
+
+/*
+1 2 3 4 5 6 7 8 9 
+1 2 3 4 5 6 7 8 9
+*/

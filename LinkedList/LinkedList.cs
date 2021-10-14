@@ -1,4 +1,5 @@
-﻿﻿using System;
+﻿using System;
+using System.Collections.Generic;
 
 public class LinkedList
 {
@@ -7,7 +8,7 @@ public class LinkedList
 		internal int value;
 		internal Node next;
 
-		public Node(int v, Node n)
+		internal Node(int v, Node n)
 		{
 			value = v;
 			next = n;
@@ -15,40 +16,36 @@ public class LinkedList
 	}
 
 	private Node head;
-	private int count = 0;
+	private int size = 0;
 
 	// Other Methods.
-	public int size()
+	public int Size()
 	{
-		return count;
+		return size;
 	}
 
-	public bool Empty
+	public bool IsEmpty()
 	{
-		get
-		{
-			return count == 0;
-		}
+		return size == 0;
 	}
 
 	// Other Methods.
-
-	public int peek()
+	public int Peek()
 	{
-		if (Empty)
+		if (IsEmpty())
 		{
 			throw new System.InvalidOperationException("EmptyListException");
 		}
 		return head.value;
 	}
 
-	public void addHead(int value)
+	public void AddHead(int value)
 	{
 		head = new Node(value, head);
-		count++;
+		size++;
 	}
 
-	public void addTail(int value)
+	public void AddTail(int value)
 	{
 		Node newNode = new Node(value, null);
 		Node curr = head;
@@ -65,19 +62,19 @@ public class LinkedList
 		curr.next = newNode;
 	}
 
-	public int removeHead()
+	public int RemoveHead()
 	{
-		if (Empty)
+		if (IsEmpty())
 		{
 			throw new System.InvalidOperationException("EmptyListException");
 		}
 		int value = head.value;
 		head = head.next;
-		count--;
+		size--;
 		return value;
 	}
 
-	public bool searchList(int data)
+	public bool Search(int data)
 	{
 		Node temp = head;
 		while (temp != null)
@@ -91,11 +88,11 @@ public class LinkedList
 		return false;
 	}
 
-	public bool deleteNode(int delValue)
+	public bool DeleteNode(int delValue)
 	{
 		Node temp = head;
 
-		if (Empty)
+		if (IsEmpty())
 		{
 			return false;
 		}
@@ -103,7 +100,7 @@ public class LinkedList
 		if (delValue == head.value)
 		{
 			head = head.next;
-			count--;
+			size--;
 			return true;
 		}
 
@@ -112,7 +109,7 @@ public class LinkedList
 			if (temp.next.value == delValue)
 			{
 				temp.next = temp.next.next;
-				count--;
+				size--;
 				return true;
 			}
 			temp = temp.next;
@@ -120,15 +117,16 @@ public class LinkedList
 		return false;
 	}
 
-	public void deleteNodes(int delValue)
+	public bool DeleteNodes(int delValue)
 	{
 		Node currNode = head;
 		Node nextNode;
-
-		while (currNode != null && currNode.value == delValue) // first node
-		{
+		bool found = false;
+		while (currNode != null && currNode.value == delValue)
+		{ // first node
 			head = currNode.next;
 			currNode = head;
+			found = true;
 		}
 
 		while (currNode != null)
@@ -137,15 +135,17 @@ public class LinkedList
 			if (nextNode != null && nextNode.value == delValue)
 			{
 				currNode.next = nextNode.next;
+				found = true;
 			}
 			else
 			{
 				currNode = nextNode;
 			}
 		}
+		return found;
 	}
 
-	private Node reverseRecurseUtil(Node currentNode, Node nextNode)
+	private Node ReverseRecurseUtil(Node currentNode, Node nextNode)
 	{
 		Node ret;
 		if (currentNode == null)
@@ -158,17 +158,17 @@ public class LinkedList
 			return currentNode;
 		}
 
-		ret = reverseRecurseUtil(currentNode.next, currentNode);
+		ret = ReverseRecurseUtil(currentNode.next, currentNode);
 		currentNode.next = nextNode;
 		return ret;
 	}
 
-	public void reverseRecurse()
+	public void ReverseRecurse()
 	{
-		head = reverseRecurseUtil(head, null);
+		head = ReverseRecurseUtil(head, null);
 	}
 
-	public void reverse()
+	public void Reverse()
 	{
 		Node curr = head;
 		Node prev = null;
@@ -183,7 +183,7 @@ public class LinkedList
 		head = prev;
 	}
 
-	public LinkedList copyListReversed()
+	public LinkedList CopyListReversed()
 	{
 		Node tempNode = null;
 		Node tempNode2 = null;
@@ -199,7 +199,7 @@ public class LinkedList
 		return ll2;
 	}
 
-	public LinkedList copyList()
+	public LinkedList CopyList()
 	{
 		Node headNode = null;
 		Node tailNode = null;
@@ -227,12 +227,12 @@ public class LinkedList
 		return ll2;
 	}
 
-	public bool compareList(LinkedList ll)
+	public bool CompareList(LinkedList ll)
 	{
-		return compareList(head, ll.head);
+		return CompareList(head, ll.head);
 	}
 
-	private bool compareList(Node head1, Node head2)
+	private bool CompareList(Node head1, Node head2)
 	{
 		if (head1 == null && head2 == null)
 		{
@@ -244,16 +244,16 @@ public class LinkedList
 		}
 		else
 		{
-			return compareList(head1.next, head2.next);
+			return CompareList(head1.next, head2.next);
 		}
 	}
 
-	public bool compareList2(LinkedList ll2)
+	public bool CompareList2(LinkedList ll2)
 	{
 		Node head1 = head;
 		Node head2 = ll2.head;
 
-		while (head1 == null && head2 == null)
+		while (head1 != null && head2 != null)
 		{
 			if (head1.value != head2.value)
 			{
@@ -270,7 +270,7 @@ public class LinkedList
 		return false;
 	}
 
-	public int findLength()
+	public int FindLength()
 	{
 		Node curr = head;
 		int count = 0;
@@ -282,9 +282,9 @@ public class LinkedList
 		return count;
 	}
 
-	public int nthNodeFromBegining(int index)
+	public int NthNodeFromBeginning(int index)
 	{
-		if (index > size() || index < 1)
+		if (index > Size() || index < 1)
 		{
 			return int.MaxValue;
 		}
@@ -298,19 +298,19 @@ public class LinkedList
 		return curr.value;
 	}
 
-	public int nthNodeFromEnd(int index)
+	public int NthNodeFromEnd(int index)
 	{
-		int size = findLength();
+		int size = FindLength();
 		int startIndex;
 		if (size != 0 && size < index)
 		{
 			return int.MaxValue;
 		}
 		startIndex = size - index + 1;
-		return nthNodeFromBegining(startIndex);
+		return NthNodeFromBeginning(startIndex);
 	}
 
-	public int nthNodeFromEnd2(int index)
+	public int NthNodeFromEnd2(int index)
 	{
 		int count = 1;
 		Node forward = head;
@@ -334,7 +334,8 @@ public class LinkedList
 		return curr.value;
 	}
 
-	public Node findIntersection(LinkedList lst2)
+
+	public int FindIntersection(LinkedList lst2)
 	{
 		Node head2 = lst2.head;
 		int l1 = 0;
@@ -353,11 +354,13 @@ public class LinkedList
 		}
 
 		int diff;
-		if (l1 < 12)
+		tempHead = this.head;
+		tempHead2 = head2;
+		if (l1 < l2)
 		{
-			Node temp = head;
-			head = head2;
-			head2 = temp;
+			Node temp = tempHead;
+			tempHead = tempHead2;
+			tempHead2 = temp;
 			diff = l2 - l1;
 		}
 		else
@@ -367,33 +370,34 @@ public class LinkedList
 
 		for (; diff > 0; diff--)
 		{
-			head = head.next;
+			tempHead = tempHead.next;
 		}
-		while (head != head2)
+		while (tempHead != tempHead2)
 		{
-			head = head.next;
-			head2 = head2.next;
+			tempHead = tempHead.next;
+			tempHead2 = tempHead2.next;
 		}
-		return head;
+		return (tempHead != null)? tempHead.value : -1;
 	}
 
-	public void deleteList()
+	public void DeleteList()
 	{
 		head = null;
-		count = 0;
+		size = 0;
 	}
 
-	public void print()
+	public void Print()
 	{
 		Node temp = head;
 		while (temp != null)
 		{
 			Console.Write(temp.value + " ");
-			temp = temp.next;
+		temp = temp.next;
 		}
+		Console.WriteLine("");
 	}
 
-	public void sortedInsert(int value)
+	public void SortedInsert(int value)
 	{
 		Node newNode = new Node(value, null);
 		Node curr = head;
@@ -413,7 +417,99 @@ public class LinkedList
 		curr.next = newNode;
 	}
 
-	public void removeDuplicate()
+	public void BubbleSort()
+	{
+		Node curr, end = null;
+		int temp;
+
+		if (head == null || head.next == null)
+		{
+			return;
+		}
+
+		bool flag = true;
+		while (flag)
+		{
+			flag = false;
+			curr = head;
+			while (curr.next != end)
+			{
+				if (curr.value > curr.next.value)
+				{
+					flag = true;
+					temp = curr.value;
+					curr.value = curr.next.value;
+					curr.next.value = temp;
+				}
+				curr = curr.next;
+			}
+			end = curr;
+		}
+	}
+
+	public void SelectionSort()
+	{
+		Node curr, end = null, maxNode;
+		int temp, max;
+
+		if (head == null || head.next == null)
+		{
+			return;
+		}
+
+		while (head != end)
+		{
+			curr = head;
+			max = curr.value;
+			maxNode = curr;
+			while (curr.next != end)
+			{
+				if (max < curr.next.value)
+				{
+					maxNode = curr.next;
+					max = curr.next.value;
+				}
+				curr = curr.next;
+			}
+			end = curr;
+			if (curr.value < max)
+			{
+				temp = curr.value;
+				curr.value = max;
+				maxNode.value = temp;
+			}
+		}
+	}
+
+	public void InsertionSort()
+	{
+		Node curr, stop;
+		int temp;
+
+		if (head == null || head.next == null)
+		{
+			return;
+		}
+
+		stop = head.next;
+		while (stop != null)
+		{
+			curr = head;
+			while (curr != stop)
+			{
+				if (curr.value > stop.value)
+				{
+					temp = curr.value;
+					curr.value = stop.value;
+					stop.value = temp;
+				}
+				curr = curr.next;
+			}
+			stop = stop.next;
+		}
+	}
+
+	public void RemoveDuplicate()
 	{
 		Node curr = head;
 		while (curr != null)
@@ -429,7 +525,7 @@ public class LinkedList
 		}
 	}
 
-	public void makeLoop()
+	public void MakeLoop()
 	{
 		Node temp = head;
 		while (temp != null)
@@ -443,7 +539,25 @@ public class LinkedList
 		}
 	}
 
-	public bool loopDetect()
+	public bool LoopDetect()
+	{
+		Node curr = head;
+		HashSet<Node> hs = new HashSet<Node>();
+		while (curr != null)
+		{
+			if (hs.Contains(curr))
+			{
+				Console.WriteLine("loop found");
+				return true;
+			}
+			hs.Add(curr);
+			curr = curr.next;
+		}
+		Console.WriteLine("loop not found");
+		return false;
+	}
+
+	public bool LoopDetect2()
 	{
 		Node slowPtr;
 		Node fastPtr;
@@ -463,25 +577,25 @@ public class LinkedList
 		return false;
 	}
 
-	public bool reverseListLoopDetect()
+	public bool ReverseListLoopDetect()
 	{
 		Node tempHead = head;
-		reverse();
+		Reverse();
 		if (tempHead == head)
 		{
-			reverse();
+			Reverse();
 			Console.WriteLine("loop found");
 			return true;
 		}
 		else
 		{
-			reverse();
+			Reverse();
 			Console.WriteLine("loop not found");
 			return false;
 		}
 	}
 
-	public int loopTypeDetect()
+	public int LoopTypeDetect()
 	{
 		Node slowPtr;
 		Node fastPtr;
@@ -499,7 +613,6 @@ public class LinkedList
 			if (slowPtr == fastPtr)
 			{
 				Console.WriteLine("loop found");
-
 				return 1;
 			}
 		}
@@ -507,7 +620,7 @@ public class LinkedList
 		return 0;
 	}
 
-	private Node loopPointDetect()
+	private Node LoopPointDetect()
 	{
 		Node slowPtr;
 		Node fastPtr;
@@ -525,16 +638,16 @@ public class LinkedList
 		return null;
 	}
 
-	public void removeLoop()
+	public void RemoveLoop()
 	{
-		Node loopPoint = loopPointDetect();
-		if (loopPoint != null)
+		Node LoopPoint = LoopPointDetect();
+		if (LoopPoint == null)
 		{
 			return;
 		}
 
 		Node firstPtr = head;
-		if (loopPoint == head)
+		if (LoopPoint == head)
 		{
 			while (firstPtr.next != head)
 			{
@@ -544,7 +657,7 @@ public class LinkedList
 			return;
 		}
 
-		Node secondPtr = loopPoint;
+		Node secondPtr = LoopPoint;
 		while (firstPtr.next != secondPtr.next)
 		{
 			firstPtr = firstPtr.next;
@@ -553,28 +666,271 @@ public class LinkedList
 		secondPtr.next = null;
 	}
 
-	public static void Main(string[] args)
+	public static void Main1()
 	{
 		LinkedList ll = new LinkedList();
-		ll.addHead(1);
-		ll.addHead(2);
-		Node nd = ll.head;
-		ll.addHead(3);
-		LinkedList ll2 = new LinkedList();
-		ll2.addHead(1);
-		ll2.head.next = nd;
-		ll2.addHead(2);
-		ll2.addHead(3);
-		ll2.print();
+		ll.AddHead(1);
+		ll.AddHead(2);
+		ll.AddHead(3);
+		ll.Print();
+		Console.WriteLine("Size : " + ll.Size());
+		Console.WriteLine("Size : " + ll.FindLength());
+		Console.WriteLine("Is empty : " + ll.IsEmpty());
+		ll.AddTail(4);
+		ll.Print();
+	}
 
-		Console.WriteLine((ll.findIntersection(ll2)).value);
-		/*
-			* LinkedList l2 = ll.copyList(); l2.print(); LinkedList l3 =
-			* ll.CopyListReversed(); l3.print()
-			* 
-			* System.out.println(ll.nthNodeFromBegining(2));
-			* System.out.println(ll.nthNodeFromEnd(2));
-			* System.out.println(ll.nthNodeFromEnd2(2));
-			*/
+	/*
+	3 2 1 
+	Size : 3
+	Size : 3
+	Is empty : False
+	3 2 1 4 
+	*/
+
+	public static void Main2()
+	{
+		LinkedList ll = new LinkedList();
+		ll.AddHead(1);
+		ll.AddHead(2);
+		ll.AddHead(3);
+		ll.Print();
+		Console.WriteLine("Search : " + ll.Search(2));
+		ll.RemoveHead();
+		ll.Print();
+	}
+
+	/*
+	3 2 1 
+	Search : True
+	2 1 
+	*/ 
+
+	public static void Main3()
+	{
+		LinkedList ll = new LinkedList();
+		ll.AddHead(1);
+		ll.AddHead(2);
+		ll.AddHead(1);
+		ll.AddHead(2);
+		ll.AddHead(1);
+		ll.AddHead(3);
+		ll.Print();
+		Console.WriteLine("DeleteNode : " + ll.DeleteNode(2));
+		ll.Print();
+		Console.WriteLine("DeleteNodes : " + ll.DeleteNodes(1));
+		ll.Print();
+	}
+
+	/*
+	3 1 2 1 2 1 
+	DeleteNode : True
+	3 1 1 2 1 
+	DeleteNodes : True
+	3 2 
+	*/
+
+	public static void Main4()
+	{
+		LinkedList ll = new LinkedList();
+		ll.AddHead(1);
+		ll.AddHead(2);
+		ll.AddHead(3);
+		ll.Print();
+
+		ll.Reverse();
+		ll.Print();
+
+		ll.ReverseRecurse();
+		ll.Print();
+
+		LinkedList l2 = ll.CopyList();
+		l2.Print();
+		LinkedList l3 = ll.CopyListReversed();
+		l3.Print();
+	}
+
+	/*
+	3 2 1 
+	1 2 3 
+	3 2 1 
+	3 2 1 
+	1 2 3 
+	*/
+
+	public static void Main5()
+	{
+		LinkedList ll = new LinkedList();
+		ll.AddHead(1);
+		ll.AddHead(2);
+		ll.AddHead(3);
+		ll.Print();
+
+		LinkedList l2 = ll.CopyList();
+		l2.Print();
+		LinkedList l3 = ll.CopyListReversed();
+		l3.Print();
+		Console.WriteLine("CompareList : " + ll.CompareList(l2));
+		Console.WriteLine("CompareList : " + ll.CompareList2(l2));
+		Console.WriteLine("CompareList : " + ll.CompareList(l3));
+		Console.WriteLine("CompareList : " + ll.CompareList2(l3));
+	}
+
+	/*
+	3 2 1 
+	3 2 1 
+	1 2 3 
+CompareList : True
+CompareList : True
+CompareList : False
+CompareList : False
+	*/
+
+	public static void Main6()
+	{
+		LinkedList ll = new LinkedList();
+		ll.AddHead(1);
+		ll.AddHead(2);
+		ll.AddHead(3);
+		ll.Print();
+		Console.WriteLine(ll.NthNodeFromBeginning(2));
+		Console.WriteLine(ll.NthNodeFromEnd(2));
+		Console.WriteLine(ll.NthNodeFromEnd2(2));
+	}
+
+	/*
+	3 2 1 
+	2
+	2
+	2
+	*/
+
+	public static void Main7()
+	{
+		LinkedList ll = new LinkedList();
+		ll.SortedInsert(1);
+		ll.SortedInsert(2);
+		ll.SortedInsert(3);
+		ll.Print();
+		ll.SortedInsert(1);
+		ll.SortedInsert(2);
+		ll.SortedInsert(3);
+		ll.Print();
+		ll.RemoveDuplicate();
+		ll.Print();
+	}
+
+	/*
+	1 2 3 
+	1 1 2 2 3 3 
+	1 2 3
+	*/
+
+		public static void Main8()
+	{
+		LinkedList ll = new LinkedList();
+		ll.AddHead(1);
+		ll.AddHead(2);
+		ll.AddHead(3);
+		ll.Print();
+		ll.MakeLoop();
+		ll.LoopDetect();
+		ll.LoopDetect2();
+		ll.LoopTypeDetect();
+		ll.RemoveLoop();
+		ll.LoopDetect2();
+	}
+
+	/*
+	3 2 1 
+	loop found
+	circular list loop found
+	loop not found
+	*/
+
+	public static void Main9()
+	{
+		LinkedList ll = new LinkedList();
+		ll.AddHead(1);
+		ll.AddHead(2);
+		LinkedList ll2 = new LinkedList();
+		ll2.AddHead(3);
+		ll2.head.next = ll.head;
+		ll.AddHead(4);
+		ll2.AddHead(5);
+		ll.Print();
+		ll2.Print();
+		int val = ll.FindIntersection(ll2);
+		Console.WriteLine("Intersection:: " + val);
+	}
+
+	/*
+	4 2 1 
+	5 3 2 1 
+	Intersection:: 2
+	*/
+
+	public static void Main10()
+	{
+		LinkedList ll = new LinkedList();
+		ll.AddHead(1);
+		ll.AddHead(10);
+		ll.AddHead(9);
+		ll.AddHead(7);
+		ll.AddHead(2);
+		ll.AddHead(3);
+		ll.AddHead(5);
+		ll.AddHead(4);
+		ll.AddHead(6);
+		ll.AddHead(8);
+
+        ll.BubbleSort();
+		ll.Print();
+
+		ll.AddHead(10);
+		ll.AddHead(9);
+		ll.AddHead(7);
+		ll.AddHead(2);
+		ll.AddHead(3);
+		ll.AddHead(5);
+		ll.AddHead(4);
+		ll.AddHead(6);
+		ll.AddHead(8);
+
+        ll.SelectionSort();
+		ll.Print();
+
+		ll.AddHead(10);
+		ll.AddHead(9);
+		ll.AddHead(7);
+		ll.AddHead(2);
+		ll.AddHead(3);
+		ll.AddHead(5);
+		ll.AddHead(4);
+		ll.AddHead(6);
+		ll.AddHead(8);
+
+        ll.InsertionSort();
+		ll.Print();
+	}
+
+/*
+1 2 3 4 5 6 7 8 9 10 
+1 2 2 3 3 4 4 5 5 6 6 7 7 8 8 9 9 10 10 
+1 2 2 2 3 3 3 4 4 4 5 5 5 6 6 6 7 7 7 8 8 8 9 9 9 10 10 10 
+*/
+
+	public static void Main(string[] args)
+	{
+        Main1();
+        Main2();
+        Main3();
+        Main4();
+        Main5();
+        Main6();
+        Main7();
+		Main8();
+	    Main9();
+	    Main10();
 	}
 }

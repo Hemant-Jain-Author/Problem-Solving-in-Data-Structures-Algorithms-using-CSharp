@@ -18,69 +18,82 @@ public class TST
 		}
 	}
 
-	public virtual void insert(string word)
+	public void Add(string word)
 	{
-		root = insert(root, word, 0);
+		root = Add(root, word, 0);
 	}
 
-	private Node insert(Node curr, string word, int wordIndex)
+	private Node Add(Node curr, string word, int wordIndex)
 	{
 		if (curr == null)
+		{
 			curr = new Node(word[wordIndex]);
-
+		}
 		if (word[wordIndex] < curr.data)
-			curr.left = insert(curr.left, word, wordIndex);
+		{
+			curr.left = Add(curr.left, word, wordIndex);
+		}
 		else if (word[wordIndex] > curr.data)
-			curr.right = insert(curr.right, word, wordIndex);
+		{
+			curr.right = Add(curr.right, word, wordIndex);
+		}
 		else
 		{
 			if (wordIndex < word.Length - 1)
-				curr.equal = insert(curr.equal, word, wordIndex + 1);
+			{
+				curr.equal = Add(curr.equal, word, wordIndex + 1);
+			}
 			else
+			{
 				curr.isLastChar = true;
+			}
 		}
 		return curr;
 	}
 
-	private bool find(Node curr, string word, int wordIndex)
+	private bool Find(Node curr, string word, int wordIndex)
 	{
 		if (curr == null)
+		{
 			return false;
-
+		}
 		if (word[wordIndex] < curr.data)
-			return find(curr.left, word, wordIndex);
+		{
+			return Find(curr.left, word, wordIndex);
+		}
 		else if (word[wordIndex] > curr.data)
-			return find(curr.right, word, wordIndex);
+		{
+			return Find(curr.right, word, wordIndex);
+		}
 		else
 		{
 			if (wordIndex == word.Length - 1)
+			{
 				return curr.isLastChar;
-			return find(curr.equal, word, wordIndex + 1);
+			}
+			return Find(curr.equal, word, wordIndex + 1);
 		}
 	}
 
-	public virtual bool find(string word)
+	public bool Find(string word)
 	{
-		bool ret = find(root, word, 0);
-		Console.Write(word + " :: ");
-		if (ret)
-			Console.WriteLine(" Found ");
-		else
-			Console.WriteLine("Not Found ");
+		bool ret = Find(root, word, 0);
 		return ret;
 	}
 
 	public static void Main(string[] args)
 	{
-
 		TST tt = new TST();
-		tt.insert("banana");
-		tt.insert("apple");
-		tt.insert("mango");
-		Console.WriteLine("\nSearch results for apple, banana, grapes and mango :");
-		tt.find("apple");
-		tt.find("banana");
-		tt.find("mango");
-		tt.find("grapes");
+		tt.Add("banana");
+		tt.Add("apple");
+		tt.Add("mango");
+		Console.WriteLine("Apple Found : " + tt.Find("apple"));
+		Console.WriteLine("Banana Found : " + tt.Find("banana"));
+		Console.WriteLine("Grapes Found : " + tt.Find("grapes"));
 	}
 }
+/*
+Apple Found : True
+Banana Found : True
+Grapes Found : False
+*/

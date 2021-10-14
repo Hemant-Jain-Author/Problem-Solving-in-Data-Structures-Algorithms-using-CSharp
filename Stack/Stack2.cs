@@ -19,24 +19,21 @@ public class Stack2
 
 	/* Other methods */
 
-	public int size()
+	public int Size()
 	{
 		return (top + 1);
 	}
 
-	public bool Empty
+	public bool IsEmpty()
 	{
-		get
-		{
-			return (top == -1);
-		}
+		return (top == -1);
 	}
 
 	public void Push(int value)
 	{
-		if (size() == capacity)
+		if (Size() == capacity)
 		{
-			Console.WriteLine("size dubbelled");
+			Console.WriteLine("size doubled");
 			int[] newData = new int[capacity * 2];
 			Array.Copy(data, 0, newData, 0, capacity);
 			data = newData;
@@ -48,7 +45,7 @@ public class Stack2
 
 	public int Peek()
 	{
-		if (Empty)
+		if (IsEmpty())
 		{
 			throw new System.InvalidOperationException("StackEmptyException");
 		}
@@ -57,16 +54,16 @@ public class Stack2
 
 	public int Pop()
 	{
-		if (Empty)
+		if (IsEmpty())
 		{
 			throw new System.InvalidOperationException("StackEmptyException");
 		}
 
 		int topVal = data[top];
 		top--;
-		if (size() == capacity / 2 && capacity > minCapacity)
+		if (Size() == capacity / 2 && capacity > minCapacity)
 		{
-			Console.WriteLine("size halfed");
+			Console.WriteLine("size halved");
 			capacity = capacity / 2;
 			int[] newData = new int[capacity];
 			Array.Copy(data, 0, newData, 0, capacity);
@@ -75,25 +72,33 @@ public class Stack2
 		return topVal;
 	}
 
-	public void print()
+	public void Print()
 	{
 		for (int i = top; i > -1; i--)
 		{
-			Console.Write(" " + data[i]);
+			Console.Write(data[i] + " ");
 		}
+		Console.WriteLine();
 	}
 
 	public static void Main(string[] args)
 	{
-		Stack2 s = new Stack2(10);
-		for (int i = 1; i <= 100; i++)
+		Stack2 s = new Stack2(5);
+		for (int i = 1; i <= 11; i++)
 		{
 			s.Push(i);
 		}
-		for (int i = 1; i <= 100; i++)
+		s.Print();
+		for (int i = 1; i <= 11; i++)
 		{
 			s.Pop();
 		}
-		s.print();
 	}
 }
+/*
+size doubled
+size doubled
+11 10 9 8 7 6 5 4 3 2 1 
+size halved
+size halved
+*/

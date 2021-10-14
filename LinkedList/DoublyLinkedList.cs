@@ -4,7 +4,7 @@ public class DoublyLinkedList
 {
 	private Node head;
 	private Node tail;
-	private int count = 0;
+	private int size = 0;
 
 	private class Node
 	{
@@ -12,49 +12,39 @@ public class DoublyLinkedList
 		internal Node next;
 		internal Node prev;
 
-		public Node(int v, Node nxt, Node prv)
+		internal Node(int v, Node nxt, Node prv)
 		{
 			value = v;
 			next = nxt;
 			prev = prv;
 		}
-
-		public Node(int v)
-		{
-			value = v;
-			next = null;
-			prev = null;
-		}
 	}
 
 	/* Other methods */
 
-	public int size()
+	public int Size()
 	{
-		return count;
+		return size;
 	}
 
-	public bool Empty
+	public bool IsEmpty()
 	{
-		get
-		{
-			return count == 0;
-		}
+		return size == 0;
 	}
 
-	public int peek()
+	public int Peek()
 	{
-		if (Empty)
+		if (IsEmpty())
 		{
 			throw new System.InvalidOperationException("EmptyListException");
 		}
 		return head.value;
 	}
 
-	public void addHead(int value)
+	public void AddHead(int value)
 	{
 		Node newNode = new Node(value, null, null);
-		if (count == 0)
+		if (size == 0)
 		{
 			tail = head = newNode;
 		}
@@ -64,13 +54,13 @@ public class DoublyLinkedList
 			newNode.next = head;
 			head = newNode;
 		}
-		count++;
+		size++;
 	}
 
-	public void addTail(int value)
+	public void AddTail(int value)
 	{
 		Node newNode = new Node(value, null, null);
-		if (count == 0)
+		if (size == 0)
 		{
 			head = tail = newNode;
 		}
@@ -80,12 +70,12 @@ public class DoublyLinkedList
 			tail.next = newNode;
 			tail = newNode;
 		}
-		count++;
+		size++;
 	}
 
-	public int removeHead()
+	public int RemoveHead()
 	{
-		if (Empty)
+		if (IsEmpty())
 		{
 			throw new System.InvalidOperationException("EmptyListException");
 		}
@@ -101,11 +91,11 @@ public class DoublyLinkedList
 			head.prev = null;
 		}
 
-		count--;
+		size--;
 		return value;
 	}
 
-	public bool removeNode(int key)
+	public bool DeleteNode(int key)
 	{
 		Node curr = head;
 		if (curr == null) // empty list
@@ -116,7 +106,7 @@ public class DoublyLinkedList
 		if (curr.value == key) // head is the node with value key.
 		{
 			head = head.next;
-			count--;
+			size--;
 			if (head != null)
 			{
 				head.prev = null;
@@ -139,9 +129,9 @@ public class DoublyLinkedList
 				}
 				else
 				{
-					curr.next = curr;
+					curr.next.prev = curr;
 				}
-				count--;
+				size--;
 				return true;
 			}
 			curr = curr.next;
@@ -149,7 +139,7 @@ public class DoublyLinkedList
 		return false;
 	}
 
-	public bool isPresent(int key)
+	public bool Search(int key)
 	{
 		Node temp = head;
 		while (temp != null)
@@ -163,14 +153,14 @@ public class DoublyLinkedList
 		return false;
 	}
 
-	public void deleteList()
+	public void DeleteList()
 	{
 		head = null;
 		tail = null;
-		count = 0;
+		size = 0;
 	}
 
-	public void print()
+	public void Print()
 	{
 		Node temp = head;
 		while (temp != null)
@@ -178,28 +168,31 @@ public class DoublyLinkedList
 			Console.Write(temp.value + " ");
 			temp = temp.next;
 		}
+		Console.WriteLine("");
 	}
 
-	// SORTED INSERT DECREASING
-	public void sortedInsert(int value)
+	// Sorted insert increasing
+	public void SortedInsert(int value)
 	{
-		Node temp = new Node(value);
+		Node temp = new Node(value, null, null);
 
 		Node curr = head;
 		if (curr == null) // first element
 		{
 			head = temp;
 			tail = temp;
+			return;
 		}
 
-		if (head.value <= value) // at the begining
+		if (head.value > value) // at the beginning
 		{
 			temp.next = head;
 			head.prev = temp;
 			head = temp;
+			return;
 		}
 
-		while (curr.next != null && curr.next.value > value) // treversal
+		while (curr.next != null && curr.next.value < value) // traversal
 		{
 			curr = curr.next;
 		}
@@ -220,10 +213,10 @@ public class DoublyLinkedList
 	}
 
 	/*
-	* Reverse a doubly linked List iteratively
-	*/
+	 * Reverse a doubly linked List iteratively
+	 */
 
-	public void reverseList()
+	public void ReverseList()
 	{
 		Node curr = head;
 		Node tempNode;
@@ -246,18 +239,19 @@ public class DoublyLinkedList
 	}
 
 	/* Remove Duplicate */
-	public void removeDuplicate()
+	public void RemoveDuplicate()
 	{
 		Node curr = head;
-		Node deleteMe;
 		while (curr != null)
 		{
 			if ((curr.next != null) && curr.value == curr.next.value)
 			{
-				deleteMe = curr.next;
-				curr.next = deleteMe.next;
-				curr.next.prev = curr;
-				if (deleteMe == tail)
+				curr.next = curr.next.next;
+				if (curr.next != null)
+				{
+					curr.next.prev = curr;
+				}
+				if (curr.next == null)
 				{
 					tail = curr;
 				}
@@ -269,50 +263,126 @@ public class DoublyLinkedList
 		}
 	}
 
-	public DoublyLinkedList copyListReversed()
+	public DoublyLinkedList CopyListReversed()
 	{
 		DoublyLinkedList dll = new DoublyLinkedList();
 		Node curr = head;
 
 		while (curr != null)
 		{
-			dll.addHead(curr.value);
+			dll.AddHead(curr.value);
 			curr = curr.next;
 		}
 		return dll;
 	}
 
-	public DoublyLinkedList copyList()
+	public DoublyLinkedList CopyList()
 	{
 		DoublyLinkedList dll = new DoublyLinkedList();
 		Node curr = head;
 
 		while (curr != null)
 		{
-			dll.addTail(curr.value);
+			dll.AddTail(curr.value);
 			curr = curr.next;
 		}
 		return dll;
 	}
+
+	public static void Main1()
+	{
+		DoublyLinkedList ll = new DoublyLinkedList();
+		ll.AddHead(1);
+		ll.AddHead(2);
+		ll.AddHead(3);
+		ll.Print();
+		ll.RemoveHead();
+		ll.Print();
+		Console.WriteLine(ll.Search(2));
+	}
+	/*
+	3 2 1 
+	2 1 
+	True
+	*/
+
+	public static void Main2()
+	{
+		DoublyLinkedList ll = new DoublyLinkedList();
+		ll.SortedInsert(1);
+		ll.SortedInsert(2);
+		ll.SortedInsert(3);
+		ll.Print();
+		ll.SortedInsert(1);
+		ll.SortedInsert(2);
+		ll.SortedInsert(3);
+		ll.Print();
+		ll.RemoveDuplicate();
+		ll.Print();
+	}
+	/*
+	1 2 3 
+	1 1 2 2 3 3 
+	1 2 3 
+	*/
+
+	public static void Main3()
+	{
+		DoublyLinkedList ll = new DoublyLinkedList();
+		ll.AddHead(1);
+		ll.AddHead(2);
+		ll.AddHead(3);
+		ll.Print();
+
+		DoublyLinkedList l2 = ll.CopyList();
+		l2.Print();
+		DoublyLinkedList l3 = ll.CopyListReversed();
+		l3.Print();
+	}
+	/*
+	3 2 1 
+	3 2 1 
+	1 2 3
+	*/
+
+	public static void Main4()
+	{
+		DoublyLinkedList ll = new DoublyLinkedList();
+		ll.AddHead(1);
+		ll.AddHead(2);
+		ll.AddHead(3);
+		ll.Print();
+		ll.DeleteNode(2);
+		ll.Print();
+	}
+
+	/*
+	3 2 1 
+	3 1 
+	*/
+
+	public static void Main5()
+	{
+		DoublyLinkedList ll = new DoublyLinkedList();
+		ll.AddHead(1);
+		ll.AddHead(2);
+		ll.AddHead(3);
+		ll.Print();
+		ll.ReverseList();
+		ll.Print();
+	}
+
+	/*
+	3 2 1
+	1 2 3
+	*/
 
 	public static void Main(string[] args)
 	{
-		DoublyLinkedList ll = new DoublyLinkedList();
-		ll.addHead(1);
-		ll.addHead(2);
-		ll.addHead(3);
-		ll.addHead(4);
-		ll.addHead(5);
-		ll.addHead(6);
-		ll.removeHead();
-		ll.deleteList();
-		ll.print();
-		ll.addHead(11);
-		ll.addHead(21);
-		ll.addHead(31);
-		ll.addHead(41);
-		ll.addHead(51);
-		ll.addHead(61);
-		ll.print();
+		Main1();
+		Main2();
+		Main3();
+		Main4();
+		Main5();
 	}
 }

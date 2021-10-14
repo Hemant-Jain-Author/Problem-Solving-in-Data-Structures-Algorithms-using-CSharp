@@ -4,7 +4,7 @@ public class DoublyCircularLinkedList
 {
 	private Node head = null;
 	private Node tail = null;
-	private int count = 0;
+	private int size = 0;
 
 	private class Node
 	{
@@ -12,48 +12,37 @@ public class DoublyCircularLinkedList
 		internal Node next;
 		internal Node prev;
 
-		public Node(int v, Node nxt, Node prv)
+		internal Node(int v, Node nxt, Node prv)
 		{
 			value = v;
 			next = nxt;
 			prev = prv;
 		}
-
-		public Node(int v)
-		{
-			value = v;
-			next = this;
-			prev = this;
-		}
 	}
 	/* Other methods */
-
-	public int size()
+	public int Size()
 	{
-		return count;
+		return size;
 	}
 
-	public bool Empty
+	public bool IsEmpty()
 	{
-		get
-		{
-			return count == 0;
-		}
+		return size == 0;
 	}
 
-	public int peekHead()
+	public int PeekHead()
 	{
-		if (Empty)
+		if (IsEmpty())
 		{
 			throw new System.InvalidOperationException("EmptyListException");
 		}
 		return head.value;
 	}
 
-	public void addHead(int value)
+	public void AddHead(int value)
 	{
 		Node newNode = new Node(value, null, null);
-		if (count == 0)
+		if (size == 0)
 		{
 			tail = head = newNode;
 			newNode.next = newNode;
@@ -67,13 +56,13 @@ public class DoublyCircularLinkedList
 			newNode.prev.next = newNode;
 			head = newNode;
 		}
-		count++;
+		size++;
 	}
 
-	public void addTail(int value)
+	public void AddTail(int value)
 	{
 		Node newNode = new Node(value, null, null);
-		if (count == 0)
+		if (size == 0)
 		{
 			head = tail = newNode;
 			newNode.next = newNode;
@@ -87,20 +76,20 @@ public class DoublyCircularLinkedList
 			newNode.next.prev = newNode;
 			tail = newNode;
 		}
-		count++;
+		size++;
 	}
 
-	public int removeHead()
+	public int RemoveHead()
 	{
-		if (count == 0)
+		if (size == 0)
 		{
 			throw new System.InvalidOperationException("EmptyListException");
 		}
 
 		int value = head.value;
-		count--;
+		size--;
 
-		if (count == 0)
+		if (size == 0)
 		{
 			head = null;
 			tail = null;
@@ -114,17 +103,17 @@ public class DoublyCircularLinkedList
 		return value;
 	}
 
-	public int removeTail()
+	public int RemoveTail()
 	{
-		if (count == 0)
+		if (size == 0)
 		{
 			throw new System.InvalidOperationException("EmptyListException");
 		}
 
 		int value = tail.value;
-		count--;
+		size--;
 
-		if (count == 0)
+		if (size == 0)
 		{
 			head = null;
 			tail = null;
@@ -138,7 +127,7 @@ public class DoublyCircularLinkedList
 		return value;
 	}
 
-	public bool isPresent(int key)
+	public bool Search(int key)
 	{
 		Node temp = head;
 		if (head == null)
@@ -158,17 +147,18 @@ public class DoublyCircularLinkedList
 		return false;
 	}
 
-	public void deleteList()
+	public void DeleteList()
 	{
 		head = null;
 		tail = null;
-		count = 0;
+		size = 0;
 	}
 
-	public void print()
+	public void Print()
 	{
-		if (Empty)
+		if (IsEmpty())
 		{
+			Console.WriteLine("Empty List.");
 			return;
 		}
 		Node temp = head;
@@ -177,18 +167,89 @@ public class DoublyCircularLinkedList
 			Console.Write(temp.value + " ");
 			temp = temp.next;
 		}
-		Console.Write(temp.value);
+		Console.WriteLine(temp.value);
 	}
 
-	public static void Main(string[] args)
+	public static void Main1()
 	{
 		DoublyCircularLinkedList ll = new DoublyCircularLinkedList();
-		ll.addHead(1);
-		ll.addHead(2);
-		ll.addHead(3);
-		ll.addHead(1);
-		ll.addHead(2);
-		ll.addHead(3);
-		ll.print();
+		ll.AddHead(1);
+		ll.AddHead(2);
+		ll.AddHead(3);
+		ll.Print();
+		Console.WriteLine(ll.Size());
+		Console.WriteLine(ll.IsEmpty());
+		Console.WriteLine(ll.PeekHead());
+		Console.WriteLine(ll.Search(3));
+	}
+
+/*
+3 2 1
+3
+False
+3
+True
+*/
+
+	public static void Main2()
+	{
+		DoublyCircularLinkedList ll = new DoublyCircularLinkedList();
+		ll.AddTail(1);
+		ll.AddTail(2);
+		ll.AddTail(3);
+		ll.Print();
+
+		ll.RemoveHead();
+		ll.Print();
+		ll.RemoveTail();
+		ll.Print();
+		ll.DeleteList();
+		ll.Print();
+	}
+
+/*
+1 2 3
+2 3
+2
+Empty List.
+*/
+
+	public static void Main3()
+	{
+		DoublyCircularLinkedList ll = new DoublyCircularLinkedList();
+		ll.AddHead(1);
+		ll.AddHead(2);
+		ll.AddHead(3);
+		ll.Print();
+
+		ll.RemoveHead();
+		ll.Print();
+
+	}
+/*
+3 2 1
+2 1
+*/
+	public static void Main4()
+	{
+		DoublyCircularLinkedList ll = new DoublyCircularLinkedList();
+		ll.AddHead(1);
+		ll.AddHead(2);
+		ll.AddHead(3);
+		ll.Print();
+
+		ll.RemoveTail();
+		ll.Print();
+	}
+/*
+3 2 1
+3 2
+*/
+	public static void Main(string[] args)
+	{
+		Main1();
+		Main2();
+		Main3();
+		Main4();
 	}
 }

@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Collections;
 
 public class Stack
 {
+
 	private int capacity = 1000;
 	private int[] data;
 	private int top = -1;
@@ -19,24 +19,21 @@ public class Stack
 	}
 	/* Other methods */
 
-	public int size()
+	public int Size()
 	{
 		return (top + 1);
 	}
 
-	public bool Empty
+	public bool IsEmpty()
 	{
-		get
-		{
-			return (top == -1);
-		}
+		return (top == -1);
 	}
 
 	public void Push(int value)
 	{
-		if (size() == data.Length)
+		if (Size() == data.Length)
 		{
-			throw new System.InvalidOperationException("StackOvarflowException");
+			throw new System.InvalidOperationException("StackOverflowException");
 		}
 		top++;
 		data[top] = value;
@@ -44,7 +41,7 @@ public class Stack
 
 	public int Peek()
 	{
-		if (Empty)
+		if (IsEmpty())
 		{
 			throw new System.InvalidOperationException("StackEmptyException");
 		}
@@ -53,7 +50,7 @@ public class Stack
 
 	public int Pop()
 	{
-		if (Empty)
+		if (IsEmpty())
 		{
 			throw new System.InvalidOperationException("StackEmptyException");
 		}
@@ -79,6 +76,11 @@ public class Stack
 		s.Push(3);
 		s.Print();
 		Console.WriteLine(s.Pop());
-		s.Print();
+		Console.WriteLine(s.Pop());
 	}
 }
+/*
+3 2 1 
+3
+2
+*/

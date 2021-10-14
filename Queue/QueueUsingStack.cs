@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public class QueueUsingStack
 {
+
 	private Stack<int> stk1;
 	private Stack<int> stk2;
 
@@ -12,12 +13,12 @@ public class QueueUsingStack
 		stk2 = new Stack<int>();
 	}
 
-	internal void add(int value)
+	internal void Add(int value)
 	{
 		stk1.Push(value);
 	}
 
-	internal int remove()
+	internal int Remove()
 	{
 		int value;
 		if (stk2.Count > 0)
@@ -36,12 +37,17 @@ public class QueueUsingStack
 	public static void Main(string[] args)
 	{
 		QueueUsingStack que = new QueueUsingStack();
-		que.add(1);
-		que.add(2);
-		que.add(3);
+		que.Add(1);
+		que.Add(2);
+		que.Add(3);
 		for (int i = 0; i < 3; i++)
 		{
-			Console.WriteLine(q.remove());
+			Console.WriteLine(que.Remove());
 		}
 	}
 }
+/*
+1
+2
+3
+*/

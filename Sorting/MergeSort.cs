@@ -2,7 +2,7 @@
 
 public class MergeSort
 {
-	private static void merge(int[] arr, int[] tempArray, int lowerIndex, int middleIndex, int upperIndex)
+	private void Merge(int[] arr, int[] tempArray, int lowerIndex, int middleIndex, int upperIndex)
 	{
 		int lowerStart = lowerIndex;
 		int lowerStop = middleIndex;
@@ -34,32 +34,34 @@ public class MergeSort
 		}
 	}
 
-	private static void mergeSrt(int[] arr, int[] tempArray, int lowerIndex, int upperIndex)
+	private void MergeSrt(int[] arr, int[] tempArray, int lowerIndex, int upperIndex)
 	{
 		if (lowerIndex >= upperIndex)
 		{
 			return;
 		}
 		int middleIndex = (lowerIndex + upperIndex) / 2;
-		mergeSrt(arr, tempArray, lowerIndex, middleIndex);
-		mergeSrt(arr, tempArray, middleIndex + 1, upperIndex);
-		merge(arr, tempArray, lowerIndex, middleIndex, upperIndex);
+		MergeSrt(arr, tempArray, lowerIndex, middleIndex);
+		MergeSrt(arr, tempArray, middleIndex + 1, upperIndex);
+		Merge(arr, tempArray, lowerIndex, middleIndex, upperIndex);
 	}
 
-	public static void sort(int[] arr)
+	public void Sort(int[] arr)
 	{
 		int size = arr.Length;
 		int[] tempArray = new int[size];
-		mergeSrt(arr, tempArray, 0, size - 1);
+		MergeSrt(arr, tempArray, 0, size - 1);
 	}
 
 	public static void Main(string[] args)
 	{
-		int[] array = new int[] { 3, 4, 2, 1, 6, 5, 7, 8, 1, 1 };
-		MergeSort.sort(array);
+		int[] array = new int[] {3, 4, 2, 1, 6, 5, 7, 8};
+		MergeSort m = new MergeSort();
+		m.Sort(array);
 		for (int i = 0; i < array.Length; i++)
 		{
 			Console.Write(array[i] + " ");
 		}
 	}
 }
+// 1 2 3 4 5 6 7 8

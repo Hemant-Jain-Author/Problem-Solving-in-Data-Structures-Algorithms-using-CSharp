@@ -1,37 +1,86 @@
 ﻿using System;
+using System.Collections.Generic;
 
+// Allowed values from 0 to maxValue.
 public class BucketSort
 {
 
-	public static void sort(int[] array, int lowerRange, int upperRange)
+	public void Sort(int[] arr, int maxValue)
 	{
-		int i, j;
-		int size = array.Length;
-		int range = upperRange - lowerRange;
-		int[] count = new int[range];
+		int numBucket = 5;
+		Sort(arr, maxValue, numBucket);
+	}
 
-		for (i = 0; i < size; i++)
+	public void Sort(int[] arr, int maxValue, int numBucket)
+	{
+		int length = arr.Length;
+		if (length == 0)
 		{
-			count[array[i] - lowerRange]++;
+			return;
 		}
 
-		j = 0;
-		for (i = 0; i < range; i++)
+		List<List<int>> bucket = new List<List<int>>(numBucket);
+
+		// Create empty buckets
+		for (int i = 0; i < numBucket; i++)
 		{
-			for (; count[i] > 0; (count[i])--)
+			bucket.Add(new List<int>());
+		}
+
+		int div = (int)Math.Ceiling((double)maxValue / (numBucket));
+
+		// Add elements into the buckets
+		for (int i = 0; i < length; i++)
+		{
+			if (arr[i] < 0 || arr[i] > maxValue)
 			{
-				array[j++] = i + lowerRange;
+				Console.WriteLine("Value out of range.");
+				return;
+			}
+
+			int bucketIndex = (arr[i] / div);
+
+			// Maximum value will be assigned to last bucket.
+			if (bucketIndex >= numBucket)
+			{
+				bucketIndex = numBucket - 1;
+			}
+
+			bucket[bucketIndex].Add(arr[i]);
+		}
+
+		// Sort the elements of each bucket.
+		for (int i = 0; i < numBucket; i++)
+		{
+			bucket[i].Sort();
+		}
+
+		// Populate output from the Sorted subarray.
+		int index = 0, count;
+		for (int i = 0; i < numBucket; i++)
+		{
+			List<int> temp = bucket[i];
+			count = temp.Count;
+			for (int j = 0; j < count; j++)
+			{
+				arr[index++] = temp[j];
 			}
 		}
 	}
 
 	public static void Main(string[] args)
 	{
-		int[] array = new int[] { 23, 24, 22, 21, 26, 25, 27, 28, 21, 21 };
-		BucketSort.sort(array, 20, 30);
+		int[] array = new int[] {1, 34, 7, 99, 5, 23, 45, 88, 77, 19, 91, 100};
+		int maxValue = 100;
+		BucketSort b = new BucketSort();
+		b.Sort(array, maxValue);
 		for (int i = 0; i < array.Length; i++)
 		{
 			Console.Write(array[i] + " ");
 		}
 	}
 }
+
+/*
+1 5 7 19 23 34 45 77 88 91 99 100
+ */

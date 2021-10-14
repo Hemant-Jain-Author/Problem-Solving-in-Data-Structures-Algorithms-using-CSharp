@@ -2,12 +2,12 @@
 
 public class InsertionSort
 {
-	private static bool more(int value1, int value2)
+	private bool more(int value1, int value2)
 	{
 		return value1 > value2;
 	}
 
-	public static void sort(int[] arr)
+	public void Sort(int[] arr)
 	{
 		int size = arr.Length;
 		int temp, j;
@@ -24,8 +24,9 @@ public class InsertionSort
 
 	public static void Main(string[] args)
 	{
-		int[] array = new int[] { 9, 1, 8, 2, 7, 3, 6, 4, 5 };
-		InsertionSort.sort(array);
+		int[] array = new int[] {9, 1, 8, 2, 7, 3, 6, 4, 5};
+		InsertionSort srt = new InsertionSort();
+		srt.Sort(array);
 		for (int i = 0; i < array.Length; i++)
 		{
 			Console.Write(array[i] + " ");
@@ -33,3 +34,6 @@ public class InsertionSort
 		}
 	}
 }
+/*
+1 2 3 4 5 6 7 8 9
+*/

@@ -1,75 +1,99 @@
 ﻿using System;
-using System.Collections;
 
 public class Queue
 {
-	private int count;
+	private int size;
 	private int capacity = 100;
 	private int[] data;
 	internal int front = 0;
 	internal int back = 0;
 
-	public Queue()
+	public Queue(int n)
 	{
-		count = 0;
-		data = new int[100];
+		size = 0;
+		capacity = n;
+		data = new int[n];
 	}
 
-	public virtual bool add(int value)
+	public bool add(int value)
 	{
-		if (count >= capacity)
+		if (size >= capacity)
 		{
 			Console.WriteLine("Queue is full.");
 			return false;
 		}
 		else
 		{
-			count++;
+			size++;
 			data[back] = value;
-			back = (++back) % (capacity - 1);
+			back = (++back) % capacity;
 		}
 		return true;
 	}
 
-	public virtual int remove()
+	public int remove()
 	{
 		int value;
-		if (count <= 0)
+		if (size <= 0)
 		{
 			Console.WriteLine("Queue is empty.");
 			return -999;
 		}
 		else
 		{
-			count--;
+			size--;
 			value = data[front];
-			front = (++front) % (capacity - 1);
+			front = (++front) % capacity;
 		}
 		return value;
 	}
 
-	internal virtual bool Empty
+	internal bool isEmpty()
 	{
-		get
-		{
-			return count == 0;
-		}
+		return size == 0;
 	}
 
-	internal virtual int size()
+	internal int Size()
 	{
-		return count;
+		return size;
+	}
+
+	internal void print()
+	{
+		if (size == 0)
+		{
+			Console.Write("Queue is empty.");
+			return;
+		}
+		int temp = front;
+		int s = size;
+		Console.Write("Queue is : ");
+		while (s > 0)
+		{
+			s--;
+			Console.Write(data[temp] + " ");
+			temp = (++temp) % capacity;
+		}
+		Console.WriteLine();
 	}
 
 	public static void Main(string[] args)
 	{
-		Queue q = new Queue();
-		q.add(1);
-		q.add(2);
-		q.add(3);
-		for (int i = 0; i < 3; i++)
+		Queue que = new Queue(5);
+		for (int i = 0;i < 5;i++)
 		{
-			Console.WriteLine(q.remove());
+			que.add(i);
+		}
+		que.print();
+
+		for (int i = 0; i < 5; i++)
+		{
+			Console.Write(que.remove() + " ");
 		}
 	}
 }
+
+/*
+Queue is : 0 1 2 3 4 
+0 1 2 3 4 
+*/

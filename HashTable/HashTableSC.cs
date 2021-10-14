@@ -27,21 +27,21 @@ public class HashTableSC
 		}
 	}
 
-	private int computeHash(int key) // division method
+	private int ComputeHash(int key) // division method
 	{
 		int hashValue = key;
 		return hashValue % tableSize;
 	}
 
-	public void add(int value)
+	public void Add(int value)
 	{
-		int index = computeHash(value);
+		int index = ComputeHash(value);
 		listArray[index] = new Node(value, listArray[index]);
 	}
 
-	public bool remove(int value)
+	public bool Remove(int value)
 	{
-		int index = computeHash(value);
+		int index = ComputeHash(value);
 		Node nextNode, head = listArray[index];
 		if (head != null && head.value == value)
 		{
@@ -64,23 +64,24 @@ public class HashTableSC
 		return false;
 	}
 
-	public void print()
+	public void Print()
 	{
+		Console.Write("Hash Table contains ::");
 		for (int i = 0; i < tableSize; i++)
 		{
-			Console.WriteLine("printing for index value :: " + i + "List of value printing :: ");
 			Node head = listArray[i];
 			while (head != null)
 			{
-				Console.WriteLine(head.value);
+				Console.Write(head.value + " ");
 				head = head.next;
 			}
 		}
+		Console.WriteLine();
 	}
 
-	public bool find(int value)
+	public bool Find(int value)
 	{
-		int index = computeHash(value);
+		int index = ComputeHash(value);
 		Node head = listArray[index];
 		while (head != null)
 		{
@@ -96,14 +97,17 @@ public class HashTableSC
 	public static void Main(string[] args)
 	{
 		HashTableSC ht = new HashTableSC();
-
-		for (int i = 100; i < 110; i++)
-		{
-			ht.add(i);
-		}
-		Console.WriteLine("search 100 :: " + ht.find(100));
-		Console.WriteLine("remove 100 :: " + ht.remove(100));
-		Console.WriteLine("search 100 :: " + ht.find(100));
-		Console.WriteLine("remove 100 :: " + ht.remove(100));
+		ht.Add(1);
+		ht.Add(2);
+		ht.Add(3);
+		ht.Print();
+		Console.WriteLine("Find key 2 : " + ht.Find(2));
+		ht.Remove(2);
+		Console.WriteLine("Find key 2 : " + ht.Find(2));
 	}
 }
+/*
+Hash Table contains ::1 2 3 
+Find key 2 : true
+Find key 2 : false
+*/
