@@ -73,7 +73,21 @@ class Program
     }
 }
 /*
+  static void Main(string[] args)
+    {
+        int []input = {2, 1, 1, 3, 2, 3, 4, 5, 6, 7, 8, 9};  
+        int size = input.Length;  
+        FenWickTree tree = new FenWickTree(input, size);  
 
+        Console.WriteLine("Sum of elements in arr[0..5] is "+ tree.getSufixSum(5));  
+          
+        tree.add(3, 6);  
+  
+        Console.WriteLine("Sum of elements in arr[0..5] after update is " + tree.getSufixSum(5));
+        tree.remove(3, 6);
+        Console.WriteLine("Sum of elements in arr[0..5] after update is " + tree.getSufixSum(5));
+
+    }
     static void Main(string[] args)
     {
         float []input = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};  
@@ -93,19 +107,3 @@ class Program
     } */ 
 
 
-  static void Main1(string[] args)
-    {
-        int []input = {2, 1, 1, 3, 2, 3, 4, 5, 6, 7, 8, 9};  
-        int size = input.Length;  
-        FenWickTree tree = new FenWickTree(input, size);  
-
-        Console.WriteLine("Sum of elements in arr[0..5] is "+ tree.getSufixSum(5));  
-          
-        tree.add(3, 6);  
-  
-        Console.WriteLine("Sum of elements in arr[0..5] after update is " + tree.getSufixSum(5));
-        tree.remove(3, 6);
-        Console.WriteLine("Sum of elements in arr[0..5] after update is " + tree.getSufixSum(5));
-
-    }
- */

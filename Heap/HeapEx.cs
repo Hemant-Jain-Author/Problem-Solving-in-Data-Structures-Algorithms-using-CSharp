@@ -10,14 +10,14 @@ public class HeapEx
 
 		foreach (int i in arr)
 		{
-			pq.add(i);
+			pq.Enqueue(i);
 		}
 		Console.WriteLine("Printing Priority Queue Heap : " + pq);
 
 		Console.Write("Dequeue elements of Priority Queue ::");
-		while (pq.isEmpty() == false)
+		while (pq.IsEmpty() == false)
 		{
-			Console.Write(" " + pq.remove());
+			Console.Write(" " + pq.Dequeue());
 		}
 	}
 
@@ -32,47 +32,47 @@ public class HeapEx
 		PriorityQueue<int> pq = new PriorityQueue<int>();
 		for (int i = 0; i < size; i++)
 		{
-			pq.add(arr[i]);
+			pq.Enqueue(arr[i]);
 		}
 		for (int i = 0; i < k - 1; i++)
 		{
-			pq.remove();
+			pq.Dequeue();
 		}
-		return pq.peek();
+		return pq.Peek();
 	}
 
 	public static int KthSmallest3(int[] arr, int size, int k)
 	{
-		PriorityQueue<int> pq = new PriorityQueue<int>(Collections.reverseOrder());
+		PriorityQueue<int> pq = new PriorityQueue<int>(false);
 		for (int i = 0; i < size; i++)
 		{
 			if (i < k)
 			{
-				pq.add(arr[i]);
+				pq.Enqueue(arr[i]);
 			}
 			else
 			{
-				if (pq.peek() > arr[i])
+				if (pq.Peek() > arr[i])
 				{
-					pq.add(arr[i]);
-					pq.remove();
+					pq.Enqueue(arr[i]);
+					pq.Dequeue();
 				}
 			}
 		}
-		return pq.peek();
+		return pq.Peek();
 	}
 
 	public static int KthLargest(int[] arr, int size, int k)
 	{
 		int value = 0;
-		PriorityQueue<int> pq = new PriorityQueue<int>(Collections.reverseOrder());
+		PriorityQueue<int> pq = new PriorityQueue<int>(false);
 		for (int i = 0; i < size; i++)
 		{
-			pq.add(arr[i]);
+			pq.Enqueue(arr[i]);
 		}
 		for (int i = 0; i < k; i++)
 		{
-			value = pq.remove();
+			value = pq.Dequeue();
 		}
 		return value;
 	}
@@ -209,12 +209,12 @@ public class HeapEx
 		int product = 1;
 		for (i = 0; i < size; i++)
 		{
-			pq.add(arr[i]);
+			pq.Enqueue(arr[i]);
 		}
 		i = 0;
 		while (i < size && i < k)
 		{
-			product *= pq.remove();
+			product *= pq.Dequeue();
 			i += 1;
 		}
 		return product;
@@ -222,26 +222,26 @@ public class HeapEx
 
 	public static int KSmallestProduct4(int[] arr, int size, int k)
 	{
-		PriorityQueue<int> pq = new PriorityQueue<int>(Collections.reverseOrder());
+		PriorityQueue<int> pq = new PriorityQueue<int>(false);
 		for (int i = 0; i < size; i++)
 		{
 			if (i < k)
 			{
-				pq.add(arr[i]);
+				pq.Enqueue(arr[i]);
 			}
 			else
 			{
-				if (pq.peek() > arr[i])
+				if (pq.Peek() > arr[i])
 				{
-					pq.add(arr[i]);
-					pq.remove();
+					pq.Enqueue(arr[i]);
+					pq.Dequeue();
 				}
 			}
 		}
 		int product = 1;
 		for (int i = 0; i < k; i++)
 		{
-			product *= pq.remove();
+			product *= pq.Dequeue();
 		}
 		return product;
 	}
@@ -280,14 +280,14 @@ public class HeapEx
 		PriorityQueue<int> pq = new PriorityQueue<int>();
 		for (int i = 0; i < size; i++)
 		{
-			pq.add(arr[i]);
+			pq.Enqueue(arr[i]);
 		}
 
 		for (int i = 0; i < size / 2; i++)
 		{
-			pq.remove();
+			pq.Dequeue();
 		}
-		Console.WriteLine(pq);
+		pq.Print();
 	}
 
 	public static void PrintLargerHalf3(int[] arr, int size)
@@ -312,7 +312,7 @@ public class HeapEx
 
 	/*
 	 * 6 7 7 8 
-	 * [6, 7, 7, 8] 
+	 * 6 7 7 8 
 	 * 6 7 7 8
 	 */
 
@@ -322,7 +322,7 @@ public class HeapEx
 		int i = 0;
 		for (i = 0; i < k; i++)
 		{
-			pq.add(arr[i]);
+			pq.Enqueue(arr[i]);
 		}
 
 		int[] output = new int[size];
@@ -330,12 +330,12 @@ public class HeapEx
 
 		for (i = k; i < size; i++)
 		{
-			output[index++] = pq.remove();
-			pq.add(arr[i]);
+			output[index++] = pq.Dequeue();
+			pq.Enqueue(arr[i]);
 		}
-		while (pq.size() > 0)
+		while (pq.Size() > 0)
 		{
-			output[index++] = pq.remove();
+			output[index++] = pq.Dequeue();
 		}
 
 		for (i = k; i < size; i++)
@@ -361,6 +361,161 @@ public class HeapEx
 	 */
 	public static void Main(string[] args)
 	{
+		Main1();
 		Main2();
+		Main3();
+		Main4();
+	}
+}
+
+
+public class PriorityQueue<T> where T : IComparable<T>
+{
+	private int CAPACITY = 32;
+	private int count; // Number of elements in Heap
+	private T[] arr; // The Heap array
+	private bool isMinHeap;
+
+	public PriorityQueue(bool isMin = true)
+	{
+		arr = new T[CAPACITY];
+		count = 0;
+		isMinHeap = isMin;
+	}
+
+	public PriorityQueue(T[] array, bool isMin = true)
+	{
+		CAPACITY = count = array.Length;
+		arr = array;
+		isMinHeap = isMin;
+		// Build Heap operation over array
+		for (int i = (count / 2); i >= 0; i--)
+		{
+			PercolateDown(i);
+		}
+	}
+
+	// Other Methods.
+	private bool Compare(T[] arr, int first, int second)
+	{
+		if (isMinHeap)
+			return arr[first].CompareTo(arr[second]) > 0;
+		else
+			return arr[first].CompareTo(arr[second]) < 0;
+	}
+
+	private void PercolateDown(int parent)
+	{
+		int lChild = 2 * parent + 1;
+		int rChild = lChild + 1;
+		int child = -1;
+		T temp;
+
+		if (lChild < count)
+		{
+			child = lChild;
+		}
+
+		if (rChild < count && Compare(arr, lChild, rChild))
+		{
+			child = rChild;
+		}
+
+		if (child != -1 && Compare(arr, parent, child))
+		{
+			temp = arr[parent];
+			arr[parent] = arr[child];
+			arr[child] = temp;
+			PercolateDown(child);
+		}
+	}
+
+	private void PercolateUp(int child)
+	{
+		int parent = (child - 1) / 2;
+		T temp;
+		if (parent < 0)
+		{
+			return;
+		}
+
+		if (Compare(arr, parent, child))
+		{
+			temp = arr[child];
+			arr[child] = arr[parent];
+			arr[parent] = temp;
+			PercolateUp(parent);
+		}
+	}
+
+	public void Enqueue(T value)
+	{
+		if (count == CAPACITY)
+		{
+			DoubleSize();
+		}
+
+		arr[count++] = value;
+		PercolateUp(count - 1);
+	}
+
+	private void DoubleSize()
+	{
+		T[] old = arr;
+		arr = new T[arr.Length * 2];
+		CAPACITY *= 2;
+		Array.Copy(old, 0, arr, 0, count);
+	}
+
+	public T Dequeue()
+	{
+		if (count == 0)
+		{
+			throw new System.InvalidOperationException();
+		}
+
+		T value = arr[0];
+		arr[0] = arr[count - 1];
+		count--;
+		PercolateDown(0);
+		return value;
+	}
+
+	public void Print()
+	{
+		for (int i = 0; i < count; i++)
+		{
+			Console.Write(arr[i] + " ");
+		}
+		Console.WriteLine();
+	}
+
+	public bool IsEmpty()
+	{
+		return (count == 0);
+	}
+
+	public int Size()
+	{
+		return count;
+	}
+
+	public T Peek()
+	{
+		if (count == 0)
+		{
+			throw new System.InvalidOperationException();
+		}
+		return arr[0];
+	}
+
+	public static void HeapSort(int[] array, bool inc)
+	{
+		// Create max heap for increasing order sorting.
+		PriorityQueue<int> hp = new PriorityQueue<int>(array, !inc);
+		for (int i = 0; i < array.Length; i++)
+		{
+			array[array.Length - i - 1] = hp.Dequeue();
+		}
 	}
 }

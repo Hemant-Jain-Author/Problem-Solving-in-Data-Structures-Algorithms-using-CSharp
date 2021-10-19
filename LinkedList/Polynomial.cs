@@ -103,5 +103,7 @@ public class Polynomial
 }
 
 /*
+6x^2 + 5x^1 + 4x^0
+3x^3 + 2x^1 + 1x^0
 3x^3 + 6x^2 + 7x^1 + 5x^0
 */

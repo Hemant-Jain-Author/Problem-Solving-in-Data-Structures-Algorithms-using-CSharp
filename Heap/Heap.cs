@@ -80,7 +80,7 @@ public class Heap
 		}
 	}
 
-	public void Add(int value)
+	public void Enqueue(int value)
 	{
 		if (size == arr.Length)
 		{
@@ -97,7 +97,7 @@ public class Heap
 		Array.Copy(old, 0, arr, 0, size);
 	}
 
-	public int Remove()
+	public int Dequeue()
 	{
 		if (IsEmpty())
 		{
@@ -119,20 +119,20 @@ public class Heap
 		}
 	}
 
-public bool Delete(int value)
-{
-	for (int i = 0; i < size; i++)
+	public bool Delete(int value)
 	{
-		if (arr[i] == value)
+		for (int i = 0; i < size; i++)
 		{
-			arr[i] = arr[size-1];
-			size -= 1;
-			PercolateDown(i);
-			return true;
+			if (arr[i] == value)
+			{
+				arr[i] = arr[size-1];
+				size -= 1;
+				PercolateDown(i);
+				return true;
+			}
 		}
+		return false;
 	}
-	return false;
-}
 
 
 	public bool IsEmpty()
@@ -160,14 +160,20 @@ public bool Delete(int value)
 		Heap hp = new Heap(a, true);
 		hp.Print();
 		Console.WriteLine();
-	hp.Delete(5);
-	hp.Print();
-	Console.WriteLine();
-	}
+		hp.Delete(5);
+		hp.Print();
+		Console.WriteLine();
+		Console.WriteLine(hp.Dequeue());
+		hp.Print();
+		Console.WriteLine();
 
-	/*
-	1 3 2 5 8 6 4 9 7 
-	1 2 3 4 5 6 7 8 9 
+
+	}	
+/*
+1 3 2 5 8 6 4 9 7 
+1 3 2 7 8 6 4 9 
+1
+2 3 4 7 8 6 9 
 	*/
 
 	public static void HeapSort(int[] array, bool inc)
@@ -176,7 +182,7 @@ public bool Delete(int value)
 		Heap hp = new Heap(array, !inc);
 		for (int i = 0; i < array.Length; i++)
 		{
-			array[array.Length - i - 1] = hp.Remove();
+			array[array.Length - i - 1] = hp.Dequeue();
 		}
 	}
 

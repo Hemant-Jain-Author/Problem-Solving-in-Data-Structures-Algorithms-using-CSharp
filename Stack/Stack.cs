@@ -2,7 +2,6 @@
 
 public class Stack
 {
-
 	private int capacity = 1000;
 	private int[] data;
 	private int top = -1;

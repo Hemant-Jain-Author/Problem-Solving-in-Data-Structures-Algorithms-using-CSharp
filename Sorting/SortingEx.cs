@@ -261,18 +261,18 @@ public static void Main4()
 // [ 8 2 6 4 5 3 7 1 9 ]
 // [ 4 6 8 2 7 3 1 9 5 ]
 
-public static bool AbsMore(int value1, int value2, int @ref)
+public static bool AbsMore(int value1, int value2, int reference)
 {
-	return (Math.Abs(value1 - @ref) > Math.Abs(value2 - @ref));
+	return (Math.Abs(value1 - reference) > Math.Abs(value2 - reference));
 }
 
-public static void AbsBubbleSort(int[] arr, int size, int @ref)
+public static void AbsBubbleSort(int[] arr, int size, int reference)
 {
 	for (int i = 0; i < (size - 1); i++)
 	{
 		for (int j = 0; j < (size - i - 1); j++)
 		{
-			if (AbsMore(arr[j], arr[j + 1], @ref))
+			if (AbsMore(arr[j], arr[j + 1], reference))
 			{
 				Swap(arr, j, j + 1);
 			}
@@ -489,20 +489,11 @@ public static void Main9()
 }
 // True
 
-public static int Min(int X, int Y)
-{
-	if (X < Y)
-	{
-		return X;
-	}
-	return Y;
-}
-
 public static void UnionIntersectionSorted(int[] arr1, int size1, int[] arr2, int size2)
 {
 	int first = 0, second = 0;
 	int[] unionArr = new int[size1 + size2];
-	int[] interArr = new int[min(size1, size2)];
+	int[] interArr = new int[Math.Min(size1, size2)];
 	int uIndex = 0;
 	int iIndex = 0;
 
@@ -540,7 +531,7 @@ public static void UnionIntersectionSorted(int[] arr1, int size1, int[] arr2, in
 	PrintArray(interArr, iIndex);
 }
 
-public static void unionIntersectionUnsorted(int[] arr1, int size1, int[] arr2, int size2)
+public static void UnionIntersectionUnsorted(int[] arr1, int size1, int[] arr2, int size2)
 {
 	Array.Sort(arr1);
 	Array.Sort(arr2);
@@ -551,7 +542,7 @@ public static void Main10()
 {
 	int[] arr1 = new int[] {1, 11, 2, 3, 14, 5, 6, 8, 9};
 	int[] arr2 = new int[] {2, 4, 5, 12, 7, 8, 13, 10};
-	unionIntersectionUnsorted(arr1, arr1.Length, arr2, arr2.Length);
+	UnionIntersectionUnsorted(arr1, arr1.Length, arr2, arr2.Length);
 }
 /*
 [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 ]

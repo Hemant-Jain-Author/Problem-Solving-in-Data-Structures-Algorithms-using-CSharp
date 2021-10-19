@@ -2,7 +2,7 @@
 
 public class QuickSort
 {
-	private void QuickSort(int[] arr, int lower, int upper)
+	private void Sort(int[] arr, int lower, int upper)
 	{
 		if (upper <= lower)
 		{
@@ -28,14 +28,14 @@ public class QuickSort
 			}
 		}
 		Swap(arr, upper, start); // upper is the pivot position
-		QuickSort(arr, start, upper - 1); // pivot -1 is the upper for left sub array.
-		QuickSort(arr, upper + 1, stop); // pivot + 1 is the lower for right sub array
+		Sort(arr, start, upper - 1); // pivot -1 is the upper for left sub array.
+		Sort(arr, upper + 1, stop); // pivot + 1 is the lower for right sub array
 	}
 
-	public void sort(int[] arr)
+	public void Sort(int[] arr)
 	{
 		int size = arr.Length;
-		QuickSort(arr, 0, size - 1);
+		Sort(arr, 0, size - 1);
 	}
 
 	private void Swap(int[] arr, int first, int second)
@@ -49,7 +49,7 @@ public class QuickSort
 	{
 		int[] array = new int[] {3, 4, 2, 1, 6, 5, 7, 8, 10, 9};
 		QuickSort srt = new QuickSort();
-		srt.sort(array);
+		srt.Sort(array);
 		for (int i = 0; i < array.Length; i++)
 		{
 			Console.Write(array[i] + " ");

@@ -13,6 +13,7 @@ public class ArrayDemo
 		{
 			Console.Write(arr[i] + " ");
 		}
+		Console.WriteLine();
 	}
 
 	private static void twoD()
@@ -45,7 +46,9 @@ public class ArrayDemo
 }
 
 /*
-0 1 2 3 4 5 6 7 8 9 0123 
+0 1 2 3 4 5 6 7 8 9 
+
+0123 
 1234 
 2345 
 3456 

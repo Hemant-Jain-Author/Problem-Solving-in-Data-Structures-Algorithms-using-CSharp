@@ -128,7 +128,7 @@ public class Knapsack
 		return dp[capacity]; // Number of weights considered and final capacity.
 	}
 
-	public static void Main(string[] args)
+	public static void Main1(string[] args)
 	{
 		int[] wt = new int[] {5, 10, 15};
 		int[] cost = new int[] {10, 30, 20};
@@ -144,7 +144,7 @@ public class Knapsack
 		Console.WriteLine("Maximum cost obtained = " + maxCost);
 	}
 
-	public static void main2(string[] args)
+	public static void Main(string[] args)
 	{
 		int[] wt = new int[] {10, 40, 20, 30};
 		int[] cost = new int[] {60, 40, 90, 120};

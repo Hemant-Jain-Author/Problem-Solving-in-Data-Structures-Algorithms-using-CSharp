@@ -1,27 +1,61 @@
 ﻿using System;
 
+public class PriorityQueueDemo
+{
+	public static void Main(string[] args)
+	{
+
+		PriorityQueue<int> pq = new PriorityQueue<int>();
+		int[] arr = new int[] {1, 2, 10, 8, 7, 3, 4, 6, 5, 9};
+		foreach (int i in arr)
+		{
+			pq.Enqueue(i);
+		}
+
+		Console.Write("Heap Array: ");
+		pq.Print();
+		while (pq.IsEmpty() == false)
+		{
+			Console.Write(pq.Dequeue() + " ");
+		}
+		Console.WriteLine();
+
+		pq = new PriorityQueue<int>(false);
+		foreach (int i in arr)
+		{
+			pq.Enqueue(i);
+		}
+
+		Console.Write("Heap Array: ");
+		pq.Print();
+		while (pq.IsEmpty() == false)
+		{
+			Console.Write(pq.Dequeue() + " ");
+		}
+	}
+}
 
 public class PriorityQueue<T> where T : IComparable<T>
 {
-	private const int CAPACITY = 32;
-	private int Count; // Number of elements in Heap
+	private int CAPACITY = 32;
+	private int count; // Number of elements in Heap
 	private T[] arr; // The Heap array
 	private bool isMinHeap;
 
 	public PriorityQueue(bool isMin = true)
 	{
 		arr = new T[CAPACITY];
-		Count = 0;
+		count = 0;
 		isMinHeap = isMin;
 	}
 
 	public PriorityQueue(T[] array, bool isMin = true)
 	{
-		Count = array.Length;
+		CAPACITY = count = array.Length;
 		arr = array;
 		isMinHeap = isMin;
 		// Build Heap operation over array
-		for (int i = (Count / 2); i >= 0; i--)
+		for (int i = (count / 2); i >= 0; i--)
 		{
 			PercolateDown(i);
 		}
@@ -43,12 +77,12 @@ public class PriorityQueue<T> where T : IComparable<T>
 		int child = -1;
 		T temp;
 
-		if (lChild < Count)
+		if (lChild < count)
 		{
 			child = lChild;
 		}
 
-		if (rChild < Count && Compare(arr, lChild, rChild))
+		if (rChild < count && Compare(arr, lChild, rChild))
 		{
 			child = rChild;
 		}
@@ -80,59 +114,61 @@ public class PriorityQueue<T> where T : IComparable<T>
 		}
 	}
 
-	public void Add(T value)
+	public void Enqueue(T value)
 	{
-		if (Count == arr.Length)
+		if (count == CAPACITY)
 		{
 			DoubleSize();
 		}
 
-		arr[Count++] = value;
-		PercolateUp(Count - 1);
+		arr[count++] = value;
+		PercolateUp(count - 1);
 	}
 
 	private void DoubleSize()
 	{
 		T[] old = arr;
 		arr = new T[arr.Length * 2];
-		Array.Copy(old, 0, arr, 0, Count);
+		CAPACITY *= 2;
+		Array.Copy(old, 0, arr, 0, count);
 	}
 
-	public T Remove()
+	public T Dequeue()
 	{
-		if (Count == 0)
+		if (count == 0)
 		{
 			throw new System.InvalidOperationException();
 		}
 
 		T value = arr[0];
-		arr[0] = arr[Count - 1];
-		Count--;
+		arr[0] = arr[count - 1];
+		count--;
 		PercolateDown(0);
 		return value;
 	}
 
 	public void Print()
 	{
-		for (int i = 0; i < Count; i++)
+		for (int i = 0; i < count; i++)
 		{
 			Console.Write(arr[i] + " ");
 		}
+		Console.WriteLine();
 	}
 
 	public bool IsEmpty()
 	{
-		return (Count == 0);
+		return (count == 0);
 	}
 
 	public int Size()
 	{
-		return Count;
+		return count;
 	}
 
 	public T Peek()
 	{
-		if (Count == 0)
+		if (count == 0)
 		{
 			throw new System.InvalidOperationException();
 		}
@@ -145,7 +181,8 @@ public class PriorityQueue<T> where T : IComparable<T>
 		PriorityQueue<int> hp = new PriorityQueue<int>(array, !inc);
 		for (int i = 0; i < array.Length; i++)
 		{
-			array[array.Length - i - 1] = hp.Remove();
+			array[array.Length - i - 1] = hp.Dequeue();
 		}
 	}
 }
+

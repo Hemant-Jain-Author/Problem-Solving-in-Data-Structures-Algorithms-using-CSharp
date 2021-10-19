@@ -218,26 +218,26 @@ public class Tree
 
 	public void PrintDepthFirst()
 	{
-		Queue<Node> stk = new Queue<Node>();
+		Stack<Node> stk = new Stack<Node>();
 		Node temp;
 
 		if (root != null)
 		{
-			stk.Enqueue(root);
+			stk.Push(root);
 		}
 
 		while (stk.Count > 0)
 		{
-			temp = stk.Dequeue();
+			temp = stk.Pop();
 			Console.Write(temp.value + " ");
 
 			if (temp.lChild != null)
 			{
-				stk.Enqueue(temp.lChild);
+				stk.Push(temp.lChild);
 			}
 			if (temp.rChild != null)
 			{
-				stk.Enqueue(temp.rChild);
+				stk.Push(temp.rChild);
 			}
 		}
 		Console.WriteLine();
@@ -1659,14 +1659,13 @@ False
 	public static void Main(string[] args)
 	{
 		Main1();
-		/*Main2();
+		Main2();
 		Main3();
 		Main4();
 		Main5();
 		Main6();
 		Main7();
-		*/
-		//Main8();
+		Main8();
 
 	}
 }
