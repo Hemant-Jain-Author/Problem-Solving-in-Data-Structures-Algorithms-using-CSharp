@@ -6,6 +6,7 @@ public class ChotaBhim
 	{
 		int time = 60;
 		Array.Sort(cups);
+		Array.Reverse(cups);
 		int total = 0;
 		int index, temp;
 		while (time > 0)

@@ -17,7 +17,7 @@ public class LargestPalindromicSubstr
 
 		for (int l = 1; l < n; l++)
 		{
-			for (int i = 0, j = i + l; j < n; i++, j++)
+			for (int i = 0, j = l; j < n; i++, j++)
 			{
 				if (str[i] == str[j] && dp[i + 1, j - 1] == j - i - 1)
 				{
