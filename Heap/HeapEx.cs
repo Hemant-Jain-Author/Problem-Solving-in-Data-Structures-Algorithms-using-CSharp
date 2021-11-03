@@ -338,7 +338,7 @@ public class HeapEx
 			output[index++] = pq.Dequeue();
 		}
 
-		for (i = k; i < size; i++)
+		for (i = 0; i < size; i++)
 		{
 			arr[i] = output[i];
 		}
