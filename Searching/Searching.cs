@@ -478,12 +478,17 @@ public class Searching
 	{
 		for (int i = 0; i < size; i++)
 		{
-			arr[(arr[i]-1) % size] += size;
+			// len(arr)+1 value should be ignored.
+			if(arr[i] != size+1 && arr[i] != size*3 +1)
+			{
+				// 1 should not become (len(arr)+1) so multiplied by 2
+				arr[(arr[i]-1) % size] += (size*2);
+			}
 		}
 
 		for (int i = 0; i < size; i++)
 		{
-			if (arr[i] < size+1)
+			if (arr[i] < (size*2))
 			{
 				return i + 1;
 			}
@@ -540,7 +545,8 @@ public class Searching
 		Console.WriteLine(FindMissingNumber5(first, first.Length));
 		Console.WriteLine(FindMissingNumber7(first, first.Length));
 		Console.WriteLine(FindMissingNumber8(first, first.Length));
-		Console.WriteLine(FindMissingNumber6(first, first.Length));
+		int[] second = new int[] {1, 5, 4, 3, 2, 7, 8, 9};
+		Console.WriteLine(FindMissingNumber6(second, second.Length));
 
 	}
 	/*
@@ -3446,12 +3452,12 @@ true    */
 
 	public static void Main(string[] args)
 	{
-		Main1();
+		/*Main1();
 		Main2();
 		Main3();
-		Main4();
+		Main4();*/
 		Main5();
-		Main6();
+		/*Main6();
 		Main7();
 		Main8();
 		Main9();
@@ -3496,6 +3502,6 @@ true    */
 		Main47();
 		Main48();
 		Main49();
-		Main50();
+		Main50();*/
 	}
 }

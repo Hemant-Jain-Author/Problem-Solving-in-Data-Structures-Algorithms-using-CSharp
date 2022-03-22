@@ -10,19 +10,13 @@ public class GridMinCost
 
 	public static int MinCost(int[, ] cost, int m, int n)
 	{
-		if (m == 0 && n == 0)
+		if (m == 0 || n == 0)
 		{
-			return 0;
+			return 99999;
 		}
 
-		if (m == 0)
-		{
-			return cost[0, n - 1] + MinCost(cost, 0, n - 1);
-		}
-
-		if (n == 0)
-		{
-			return cost[m - 1, 0] + MinCost(cost, m - 1, 0);
+		if(m == 1 && n == 1) {
+            return cost[0, 0];
 		}
 
 		return cost[m - 1, n - 1] + Min(MinCost(cost, m - 1, n - 1), MinCost(cost, m - 1, n), MinCost(cost, m, n - 1));
