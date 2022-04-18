@@ -9,7 +9,7 @@ public class IsPrime
 		{
 			if (n % i == 0)
 			{
-				answer = true;
+				answer = false;
 				break;
 			}
 		}
