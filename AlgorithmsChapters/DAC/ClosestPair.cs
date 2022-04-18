@@ -36,7 +36,6 @@ public class ClosestPair
 		return Math.Sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
 	}
 
-
 	internal class xComp : IComparer<Point>
 	{
 		public int Compare(Point s1, Point s2)
@@ -44,6 +43,7 @@ public class ClosestPair
 			return (s1.x - s2.x);
 		}
 	}
+	
 	internal class yComp : IComparer<Point>
 	{
 		public int Compare(Point s1, Point s2)

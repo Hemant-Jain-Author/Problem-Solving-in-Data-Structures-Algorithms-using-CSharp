@@ -719,15 +719,13 @@ public class Introduction
 	*/
 	public static int Gcd(int m, int n)
 	{
-		if (m < n)
-		{
-			return (Gcd(n, m));
-		}
-		if (m % n == 0)
-		{
-			return (n);
-		}
-		return (Gcd(n, m % n));
+        if (n == 0)
+            return m;
+
+        if (m == 0)
+            return n;
+
+        return (Gcd(n, m % n));
 	}
 
 	/* Testing code */

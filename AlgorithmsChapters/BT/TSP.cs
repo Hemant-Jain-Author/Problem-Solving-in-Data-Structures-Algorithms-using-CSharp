@@ -2,15 +2,20 @@
 
 public class TSP
 {
-	// Function to find the minimum weight Hamiltonian Cycle 
-	internal static int FindPath(int[, ] graph, int n, int[] path, int pSize, int pCost, bool[] visited, int ans)
+    // Function to find the minimum weight Hamiltonian Cycle 
+    internal static int TSPPath(int[,] graph, int n, int[] path, int pSize, int pCost, bool[] visited, int ans, int[] ansPath)
 	{
-		int curr = path[n - 1];
-		if (pSize == n && graph[curr, 0] > 0)
-		{
-			ans = Math.Min(ans, pCost + graph[curr, 0]);
-			return ans;
-		}
+        int curr = path[pSize - 1];
+        if (pSize == n)
+        {
+            if (graph[curr, 0] > 0 && ans > pCost + graph[curr,0])
+            {
+                ans = pCost + graph[curr, 0];
+                for (int i = 0; i <= n; i++)
+                    ansPath[i] = path[i % n];
+            }
+            return ans;
+        }
 
 		for (int i = 0; i < n; i++)
 		{
@@ -18,23 +23,28 @@ public class TSP
 			{
 				visited[i] = true;
 				path[pSize] = i;
-				ans = FindPath(graph, n, path, pSize+1, pCost + graph[curr, i],visited, ans);
+				ans = TSPPath(graph, n, path, pSize+1, pCost + graph[curr, i],visited, ans, ansPath);
 				visited[i] = false;
 			}
 		}
 		return ans;
 	}
 
-	internal static int FindPath(int[, ] graph, int n)
+	internal static int TSPPath(int[, ] graph, int n)
 	{
 		bool[] visited = new bool[n];
 		int[] path = new int[n];
+        int[] ansPath = new int[n + 1];
+
 		path[0] = 0;
 		visited[0] = true;
 		int ans = int.MaxValue;
-		ans = FindPath(graph, n, path, 1, 0, visited, ans);
-		Console.WriteLine(ans);
-		return ans;
+		ans = TSPPath(graph, n, path, 1, 0, visited, ans, ansPath);
+		Console.WriteLine("Path length : " + ans);
+        Console.Write("Path : ");
+        for (int i = 0; i <= n; i++)
+            Console.Write(ansPath[i] + " ");
+        return ans;
 	}
 
 	public static void Main(string[] args)
@@ -47,8 +57,11 @@ public class TSP
 			{15, 35, 0, 30},
 			{20, 25, 30, 0}
 		};
-		TSP.FindPath(graph, n);
+		TSP.TSPPath(graph, n);
 	}
 }
 
-// 65
+/*
+Path length : 80
+Path : 0 1 3 2 0 
+*/

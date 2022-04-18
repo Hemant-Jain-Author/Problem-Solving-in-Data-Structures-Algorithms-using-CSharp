@@ -63,15 +63,14 @@ public class Graph
 			Console.Write("Vertex " + i + " is connected to : ");
 			foreach (Edge adn in ad)
 			{
-				Console.Write("(" + adn.dest + ", " + adn.cost + ") ");
+                Console.Write(adn.dest + "(cost: " + adn.cost + ") ");
 			}
 			Console.WriteLine();
 		}
 	}
 
-	public static bool DFSStack(Graph gph, int source, int target)
-	{
-		int count = gph.count;
+    public bool DFSStack(int source, int target)
+    {
 		bool[] visited = new bool[count];
 		Stack<int> stk = new Stack<int>();
 		stk.Push(source);
@@ -80,7 +79,7 @@ public class Graph
 		while (stk.Count > 0)
 		{
 			int curr = stk.Pop();
-			List<Edge> adl = gph.Adj[curr];
+            List<Edge> adl = Adj[curr];
 			foreach (Edge adn in adl)
 			{
 				if (visited[adn.dest] == false)
@@ -93,44 +92,42 @@ public class Graph
 		return visited[target];
 	}
 
-	public static bool DFS(Graph gph, int source, int target)
-	{
-		int count = gph.count;
+    public bool DFS(int source, int target)
+    {
 		bool[] visited = new bool[count];
-		DFSUtil(gph, source, visited);
+        DFSUtil(source, visited);
 		return visited[target];
 	}
 
-	private static void DFSUtil(Graph gph, int index, bool[] visited)
+    private void DFSUtil(int index, bool[] visited)
 	{
 		visited[index] = true;
-		List<Edge> adl = gph.Adj[index];
+        List<Edge> adl = Adj[index];
 		foreach (Edge adn in adl)
 		{
 			if (visited[adn.dest] == false)
 			{
-				DFSUtil(gph, adn.dest, visited);
+                DFSUtil(adn.dest, visited);
 			}
 		}
 	}
 
-	public static void DFSUtil2(Graph gph, int index, bool[] visited, Stack<int> stk)
+    public void DFSUtil2(int index, bool[] visited, Stack<int> stk)
 	{
 		visited[index] = true;
-		List<Edge> adl = gph.Adj[index];
+        List<Edge> adl = Adj[index];
 		foreach (Edge adn in adl)
 		{
 			if (visited[adn.dest] == false)
 			{
-				DFSUtil2(gph, adn.dest, visited, stk);
+                DFSUtil2(adn.dest, visited, stk);
 			}
 		}
 		stk.Push(index);
 	}
 
-	public static bool BFS(Graph gph, int source, int target)
-	{
-		int count = gph.count;
+    public bool BFS(int source, int target)
+    {
 		bool[] visited = new bool[count];
 		Queue<int> que = new Queue<int>();
 		que.Enqueue(source);
@@ -139,7 +136,7 @@ public class Graph
 		while (que.Count > 0)
 		{
 			int curr = que.Dequeue();
-			List<Edge> adl = gph.Adj[curr];
+            List<Edge> adl = Adj[curr];
 			foreach (Edge adn in adl)
 			{
 				if (visited[adn.dest] == false)
@@ -150,47 +147,54 @@ public class Graph
 			}
 		}
 		return visited[target];
+    }
+
+    // Testing Code
+    public static void Main1()
+    {
+        Graph gph = new Graph(4);
+        gph.AddDirectedEdge(0, 1);
+        gph.AddDirectedEdge(0, 2);
+        gph.AddDirectedEdge(1, 2);
+        gph.AddDirectedEdge(2, 3);
+        gph.Print();
+    }
+
+    // Testing Code
+    public static void Main2()
+    {
+        Graph gph = new Graph(8);
+        gph.AddUndirectedEdge(0, 3);
+        gph.AddUndirectedEdge(0, 2);
+        gph.AddUndirectedEdge(0, 1);
+        gph.AddUndirectedEdge(1, 4);
+        gph.AddUndirectedEdge(2, 5);
+        gph.AddUndirectedEdge(3, 6);
+        gph.AddUndirectedEdge(6, 7);
+        gph.AddUndirectedEdge(5, 7);
+        gph.AddUndirectedEdge(4, 7);
+
+        Console.WriteLine("Path between 0 & 6 : " + gph.DFS(0, 6));
+        Console.WriteLine("Path between 0 & 6 : " + gph.BFS(0, 6));
+        Console.WriteLine("Path between 0 & 6 : " + gph.DFSStack(0, 6));
 	}
 
-	// Testing Code
-	public static void Main1()
-	{
-		Graph gph = new Graph(5);
-		gph.AddDirectedEdge(0, 1, 3);
-		gph.AddDirectedEdge(0, 4, 2);
-		gph.AddDirectedEdge(1, 2, 1);
-		gph.AddDirectedEdge(2, 3, 1);
-		gph.AddDirectedEdge(4, 1, -2);
-		gph.AddDirectedEdge(4, 3, 1);
-		gph.Print();
-
-		Console.WriteLine(Graph.DFS(gph, 0, 2));
-		Console.WriteLine(Graph.BFS(gph, 0, 2));
-		Console.WriteLine(Graph.DFSStack(gph, 0, 2));
-	}
-
-	/*
-	Vertex 0 is connected to : (1, 3) (4, 2) 
-	Vertex 1 is connected to : (2, 1) 
-	Vertex 2 is connected to : (3, 1) 
-	Vertex 3 is connected to : 
-	Vertex 4 is connected to : (1, -2) (3, 1) 
-True
-True
-True
+    /*
+Path between 0 & 6 : True
+Path between 0 & 6 : True
+Path between 0 & 6 : True
 	*/
 
-	public static void TopologicalSort(Graph gph)
+    public void TopologicalSort()
 	{
-		Stack<int> stk = new Stack<int>();
-		int count = gph.count;
+        Stack<int> stk = new Stack<int>();
 		bool[] visited = new bool[count];
 
 		for (int i = 0; i < count; i++)
 		{
 			if (visited[i] == false)
 			{
-				DFSUtil2(gph, i, visited, stk);
+                DFSUtil2(i, visited, stk);
 			}
 		}
 		Console.Write("Topological Sort::");
@@ -200,8 +204,8 @@ True
 		}
 	}
 
-	// Testing Code
-	public static void Main2()
+    // Testing Code
+    public static void Main3()
 	{
 		Graph gph = new Graph(9);
 		gph.AddDirectedEdge(0, 2);
@@ -215,22 +219,21 @@ True
 		gph.AddDirectedEdge(5, 7);
 		gph.AddDirectedEdge(6, 7);
 		gph.AddDirectedEdge(7, 8);
-		TopologicalSort(gph);
+        gph.TopologicalSort();
 	}
 
-	/*
+    /*
 	    TopologicalSort ::  1 4 6 3 5 7 8 0 2
 	*/
 
-	public static bool PathExist(Graph gph, int source, int dest)
-	{
-		int count = gph.count;
+    public bool PathExist(int source, int dest)
+    {
 		bool[] visited = new bool[count];
-		DFSUtil(gph, source, visited);
+        DFSUtil(source, visited);
 		return visited[dest];
 	}
 
-	public static int CountAllPathDFS(Graph gph, bool[] visited, int source, int dest)
+    public int CountAllPathDFS(bool[] visited, int source, int dest)
 	{
 		if (source == dest)
 		{
@@ -238,26 +241,25 @@ True
 		}
 		int count = 0;
 		visited[source] = true;
-		List<Edge> adl = gph.Adj[source];
+        List<Edge> adl = Adj[source];
 		foreach (Edge adn in adl)
 		{
 			if (visited[adn.dest] == false)
 			{
-				count += CountAllPathDFS(gph, visited, adn.dest, dest);
+                count += CountAllPathDFS(visited, adn.dest, dest);
 			}
 		}
 		visited[source] = false;
 		return count;
 	}
 
-	public static int CountAllPath(Graph gph, int src, int dest)
-	{
-		int count = gph.count;
+    public int CountAllPath(int src, int dest)
+    {
 		bool[] visited = new bool[count];
-		return CountAllPathDFS(gph, visited, src, dest);
+        return CountAllPathDFS(visited, src, dest);
 	}
 
-	public static void PrintAllPathDFS(Graph gph, bool[] visited, int source, int dest, Stack<int> path)
+    public void PrintAllPathDFS(bool[] visited, int source, int dest, Stack<int> path)
 	{
 		path.Push(source);
 		if (source == dest)
@@ -269,27 +271,27 @@ True
 			return;
 		}
 		visited[source] = true;
-		List<Edge> adl = gph.Adj[source];
+        List<Edge> adl = Adj[source];
 		foreach (Edge adn in adl)
 		{
 			if (visited[adn.dest] == false)
 			{
-				PrintAllPathDFS(gph, visited, adn.dest, dest, path);
+                PrintAllPathDFS(visited, adn.dest, dest, path);
 			}
 		}
 		visited[source] = false;
 		path.Pop();
 	}
 
-	public static void PrintAllPath(Graph gph, int src, int dest)
+    public void PrintAllPath(int src, int dest)
 	{
-		bool[] visited = new bool[gph.count];
+        bool[] visited = new bool[count];
 		Stack<int> path = new Stack<int>();
-		PrintAllPathDFS(gph, visited, src, dest, path);
+        PrintAllPathDFS(visited, src, dest, path);
 	}
 
-		// Testing Code
-	public static void Main3()
+    // Testing Code
+    public static void Main4()
 	{
 		Graph gph = new Graph(5);
 		gph.AddDirectedEdge(0, 1);
@@ -298,38 +300,28 @@ True
 		gph.AddDirectedEdge(1, 3);
 		gph.AddDirectedEdge(3, 4);
 		gph.AddDirectedEdge(1, 4);
-		gph.Print();
-		Console.WriteLine("PathExist :: " + PathExist(gph, 0, 4));
-
-		Console.WriteLine();
-		Console.WriteLine(CountAllPath(gph, 0, 4));
-		PrintAllPath(gph, 0, 4);
+        Console.WriteLine("PathExist :: " + gph.PathExist(0, 4));
+        Console.WriteLine("Path Count :: " + gph.CountAllPath(0, 4));
+        gph.PrintAllPath(0, 4);
 	}
 
-	/*
-	Vertex 0 is connected to : (1, 1) (2, 1) 
-	Vertex 1 is connected to : (3, 1) (4, 1) 
-	Vertex 2 is connected to : (3, 1) 
-	Vertex 3 is connected to : (4, 1) 
-	Vertex 4 is connected to : 
-	PathExist :: True
-
-	3
-4 3 1 0
-4 1 0
+    /*
+PathExist :: True
+Path Count :: 3
+4 3 1 0 
+4 1 0 
 4 3 2 0 
 	*/
 
-	public static int RootVertex(Graph gph)
-	{
-		int count = gph.count;
+    public int RootVertex()
+    {
 		bool[] visited = new bool[count];
 		int retVal = -1;
 		for (int i = 0; i < count; i++)
 		{
 			if (visited[i] == false)
 			{
-				DFSUtil(gph, i, visited);
+                DFSUtil(i, visited);
 				retVal = i;
 			}
 		}
@@ -337,8 +329,8 @@ True
 		return retVal;
 	}
 
-		// Testing Code
-	public static void Main4()
+    // Testing Code
+    public static void Main5()
 	{
 		Graph gph = new Graph(7);
 		gph.AddDirectedEdge(0, 1);
@@ -349,52 +341,43 @@ True
 		gph.AddDirectedEdge(5, 6);
 		gph.AddDirectedEdge(5, 2);
 		gph.AddDirectedEdge(6, 0);
-		gph.Print();
-		RootVertex(gph);
+        gph.RootVertex();
 	}
 
-	/*
-	Vertex 0 is connected to : (1, 1) (2, 1) 
-	Vertex 1 is connected to : (3, 1) 
-	Vertex 2 is connected to : 
-	Vertex 3 is connected to : 
-	Vertex 4 is connected to : (1, 1) 
-	Vertex 5 is connected to : (6, 1) (2, 1) 
-	Vertex 6 is connected to : (4, 1) (0, 1) 
-	Root vertex is :: 5
-	*/
+    /*
+    Root vertex is :: 5
+    */
 
-	/*
+    /*
 	* Given a directed graph, Find transitive closure matrix or reach ability
 	* matrix vertex v is reachable form vertex u if their is a path from u to v.
 	*/
 
-	public static void TransitiveClosureUtil(Graph gph, int source, int dest, int[, ] tc)
+    public void TransitiveClosureUtil(int source, int dest, int[,] tc)
 	{
 		tc[source, dest] = 1;
-		List<Edge> adl = gph.Adj[dest];
+        List<Edge> adl = Adj[dest];
 		foreach (Edge adn in adl)
 		{
 			if (tc[source, adn.dest] == 0)
 			{
-				TransitiveClosureUtil(gph, source, adn.dest, tc);
+                TransitiveClosureUtil(source, adn.dest, tc);
 			}
 		}
 	}
 
-	public static int[, ] TransitiveClosure(Graph gph)
-	{
-		int count = gph.count;
+    public int[,] TransitiveClosure()
+    {
 		int[, ] tc = new int[count, count];
 		for (int i = 0; i < count; i++)
 		{
-			TransitiveClosureUtil(gph, i, i, tc);
+            TransitiveClosureUtil(i, i, tc);
 		}
 		return tc;
 	}
 
-	// Testing Code
-	public static void Main5()
+    // Testing Code
+    public static void Main6()
 	{
 		Graph gph = new Graph(4);
 		gph.AddDirectedEdge(0, 1);
@@ -403,7 +386,7 @@ True
 		gph.AddDirectedEdge(2, 0);
 		gph.AddDirectedEdge(2, 3);
 		gph.AddDirectedEdge(3, 3);
-		int[, ] tc = TransitiveClosure(gph);
+        int[,] tc = gph.TransitiveClosure();
 		for (int i = 0; i < 4; i++)
 		{
 			for (int j = 0; j < 4; j++)
@@ -414,16 +397,15 @@ True
 		}
 	}
 
-	/*
+    /*
 	1 1 1 1 
 	1 1 1 1 
 	1 1 1 1 
 	0 0 0 1 
 	*/
 
-	public static void BFSLevelNode(Graph gph, int source)
-	{
-		int count = gph.count;
+    public void BFSLevelNode(int source)
+    {
 		bool[] visited = new bool[count];
 		int[] level = new int[count];
 		visited[source] = true;
@@ -436,7 +418,7 @@ True
 		{
 			int curr = que.Dequeue();
 			int depth = level[curr];
-			List<Edge> adl = gph.Adj[curr];
+            List<Edge> adl = Adj[curr];
 			Console.WriteLine(curr + " - " + depth);
 			foreach (Edge adn in adl)
 			{
@@ -450,9 +432,8 @@ True
 		}
 	}
 
-	public static int BFSDistance(Graph gph, int source, int dest)
-	{
-		int count = gph.count;
+    public int BFSDistance(int source, int dest)
+    {
 		bool[] visited = new bool[count];
 		Queue<int> que = new Queue<int>();
 		que.Enqueue(source);
@@ -464,7 +445,7 @@ True
 		{
 			int curr = que.Dequeue();
 			int depth = level[curr];
-			List<Edge> adl = gph.Adj[curr];
+            List<Edge> adl = Adj[curr];
 			foreach (Edge adn in adl)
 			{
 				if (adn.dest == dest)
@@ -482,8 +463,8 @@ True
 		return -1;
 	}
 
-			// Testing Code
-	public static void Main6()
+    // Testing Code
+    public static void Main7()
 	{
 		Graph gph = new Graph(7);
 		gph.AddUndirectedEdge(0, 1);
@@ -494,41 +475,33 @@ True
 		gph.AddUndirectedEdge(3, 4);
 		gph.AddUndirectedEdge(4, 5);
 		gph.AddUndirectedEdge(4, 6);
-		gph.Print();
-		BFSLevelNode(gph, 1);
-		Console.WriteLine(BFSDistance(gph, 1, 6));
+        gph.BFSLevelNode(1);
+        Console.WriteLine("BfsDistance(1, 6) : " + gph.BFSDistance(1, 6));
 	}
-	/*
-	Vertex 0 is connected to : (1, 1) (2, 1) (4, 1) 
-	Vertex 1 is connected to : (0, 1) (2, 1) 
-	Vertex 2 is connected to : (0, 1) (1, 1) (5, 1) 
-	Vertex 3 is connected to : (4, 1) 
-	Vertex 4 is connected to : (0, 1) (3, 1) (5, 1) (6, 1) 
-	Vertex 5 is connected to : (2, 1) (4, 1) 
-	Vertex 6 is connected to : (4, 1) 
+    /*
+Node  - Level
+1 - 0
+0 - 1
+2 - 1
+4 - 2
+5 - 2
+3 - 3
+6 - 3
 
-	Node  - Level
-	1 - 0
-	0 - 1
-	2 - 1
-	4 - 2
-	5 - 2
-	3 - 3
-	6 - 3
-	3
+BfsDistance(1, 6) : 3
 	*/
 
-	public static bool IsCyclePresentUndirectedDFS(Graph graph, int index, int parentIndex, bool[] visited)
+    public bool IsCyclePresentUndirectedDFS(int index, int parentIndex, bool[] visited)
 	{
 		visited[index] = true;
 		int dest;
-		List<Edge> adl = graph.Adj[index];
+        List<Edge> adl = Adj[index];
 		foreach (Edge adn in adl)
 		{
 			dest = adn.dest;
 			if (visited[dest] == false)
 			{
-				if (IsCyclePresentUndirectedDFS(graph, dest, index, visited))
+                if (IsCyclePresentUndirectedDFS(dest, index, visited))
 				{
 					return true;
 				}
@@ -541,13 +514,12 @@ True
 		return false;
 	}
 
-	public static bool IsCyclePresentUndirected(Graph graph)
-	{
-		int count = graph.count;
+    public bool IsCyclePresentUndirected()
+    {
 		bool[] visited = new bool[count];
 		for (int i = 0; i < count; i++)
 		{
-			if (visited[i] == false && IsCyclePresentUndirectedDFS(graph, i, -1, visited))
+            if (visited[i] == false && IsCyclePresentUndirectedDFS(i, -1, visited))
 			{
 					return true;
 			}
@@ -555,7 +527,7 @@ True
 		return false;
 	}
 
-	public static int Find(int[] parent, int index)
+    public int Find(int[] parent, int index)
 	{
 		int p = parent[index];
 		while (p != -1)
@@ -566,21 +538,20 @@ True
 		return index;
 	}
 
-	public static void union(int[] parent, int x, int y)
+    public void union(int[] parent, int x, int y)
 	{
 		parent[y] = x;
 	}
 
-	public static bool IsCyclePresentUndirected2(Graph gph)
-	{
-		int count = gph.count;
+    public bool IsCyclePresentUndirected2()
+    {
 		int[] parent = new int[count];
 		Array.Fill(parent, -1);
 		List<Edge> edge = new List<Edge>();
 		bool[, ] flags = new bool[count, count];
 		for (int i = 0; i < count; i++)
 		{
-			List<Edge> ad = gph.Adj[i];
+            List<Edge> ad = Adj[i];
 			foreach (Edge adn in ad)
 			{
 				// Using flags[, ] array, if considered edge x to y, 
@@ -606,9 +577,8 @@ True
 		return false;
 	}
 
-	public static bool IsCyclePresentUndirected3(Graph gph)
-	{
-		int count = gph.count;
+    public bool IsCyclePresentUndirected3()
+    {
 		//Different subsets are created.
 		Sets[] sets = new Sets[count];
 		for (int i = 0; i < count; i++)
@@ -620,7 +590,7 @@ True
 		bool[, ] flags = new bool[count, count];
 		for (int i = 0; i < count; i++)
 		{
-			List<Edge> ad = gph.Adj[i];
+            List<Edge> ad = Adj[i];
 			foreach (Edge adn in ad)
 			{
 				// Using flags[, ] array, if considered edge x to y, 
@@ -646,8 +616,8 @@ True
 		return false;
 	}
 
-		// Testing Code
-	public static void Main7()
+    // Testing Code
+    public static void Main8()
 	{
 		Graph gph = new Graph(6);
 		gph.AddUndirectedEdge(0, 1);
@@ -655,26 +625,32 @@ True
 		gph.AddUndirectedEdge(3, 4);
 		gph.AddUndirectedEdge(4, 2);
 		gph.AddUndirectedEdge(2, 5);
-		gph.AddUndirectedEdge(4, 1);
-		Console.WriteLine(IsCyclePresentUndirected(gph));
-		Console.WriteLine(IsCyclePresentUndirected2(gph));
-		Console.WriteLine(IsCyclePresentUndirected3(gph));
+        Console.WriteLine("Cycle Presen : " + gph.IsCyclePresentUndirected());
+        Console.WriteLine("Cycle Presen : " + gph.IsCyclePresentUndirected2());
+        Console.WriteLine("Cycle Presen : " + gph.IsCyclePresentUndirected3());
+        gph.AddUndirectedEdge(4, 1);
+        Console.WriteLine("Cycle Presen : " + gph.IsCyclePresentUndirected());
+        Console.WriteLine("Cycle Presen : " + gph.IsCyclePresentUndirected2());
+        Console.WriteLine("Cycle Presen : " + gph.IsCyclePresentUndirected3());
 	}
 
-	/*
-	True
-True
-True
+    /*
+Cycle Presen : False
+Cycle Presen : False
+Cycle Presen : False
+Cycle Presen : True
+Cycle Presen : True
+Cycle Presen : True
 	*/
 
-	/*
+    /*
 	* Given a directed graph Find if there is a cycle in it.
 	*/
-	public static bool IsCyclePresentDFS(Graph graph, int index, bool[] visited, int[] marked)
+    public bool IsCyclePresentDFS(int index, bool[] visited, int[] marked)
 	{
 		visited[index] = true;
 		marked[index] = 1;
-		List<Edge> adl = graph.Adj[index];
+        List<Edge> adl = Adj[index];
 		foreach (Edge adn in adl)
 		{
 			int dest = adn.dest;
@@ -685,7 +661,7 @@ True
 
 			if (visited[dest] == false)
 			{
-				if (IsCyclePresentDFS(graph, dest, visited, marked))
+                if (IsCyclePresentDFS(dest, visited, marked))
 				{
 					return true;
 				}
@@ -695,16 +671,16 @@ True
 		return false;
 	}
 
-	public static bool IsCyclePresent(Graph graph)
+    public bool IsCyclePresent()
 	{
-		int count = graph.count;
-		bool[] visited = new bool[count];
+
+        bool[] visited = new bool[count];
 		int[] marked = new int[count];
 		for (int index = 0; index < count; index++)
 		{
 			if (!visited[index])
 			{
-				if (IsCyclePresentDFS(graph, index, visited, marked))
+                if (IsCyclePresentDFS(index, visited, marked))
 				{
 					return true;
 				}
@@ -713,11 +689,11 @@ True
 		return false;
 	}
 
-	public static bool IsCyclePresentDFSColour(Graph graph, int index, int[] visited)
+    public bool IsCyclePresentDFSColour(int index, int[] visited)
 	{
 		visited[index] = 1; // 1 = grey
 		int dest;
-		List<Edge> adl = graph.Adj[index];
+        List<Edge> adl = Adj[index];
 		foreach (Edge adn in adl)
 		{
 			dest = adn.dest;
@@ -728,7 +704,7 @@ True
 
 			if (visited[dest] == 0) // "White":
 			{
-				if (IsCyclePresentDFSColour(graph, dest, visited))
+                if (IsCyclePresentDFSColour(dest, visited))
 				{
 					return true;
 				}
@@ -738,15 +714,15 @@ True
 		return false;
 	}
 
-	public static bool IsCyclePresentColour(Graph graph)
+    public bool IsCyclePresentColour()
 	{
-		int count = graph.count;
-		int[] visited = new int[count];
+
+        int[] visited = new int[count];
 		for (int i = 0; i < count; i++)
 		{
 			if (visited[i] == 0) // "White"
 			{
-				if (IsCyclePresentDFSColour(graph, i, visited))
+                if (IsCyclePresentDFSColour(i, visited))
 				{
 					return true;
 				}
@@ -755,8 +731,8 @@ True
 		return false;
 	}
 
-	// Testing Code
-	public static void Main8()
+    // Testing Code
+    public static void Main9()
 	{
 		Graph gph = new Graph(5);
 		gph.AddDirectedEdge(0, 1);
@@ -764,23 +740,26 @@ True
 		gph.AddDirectedEdge(2, 3);
 		gph.AddDirectedEdge(1, 3);
 		gph.AddDirectedEdge(3, 4);
-		//gph.AddDirectedEdge(4, 1);
-		Console.WriteLine(IsCyclePresent(gph));
-		Console.WriteLine(IsCyclePresentColour(gph));
-	}
+        Console.WriteLine("isCyclePresent : " + gph.IsCyclePresent());
+        Console.WriteLine("isCyclePresent : " + gph.IsCyclePresentColour());
+        gph.AddDirectedEdge(4, 1);
+        Console.WriteLine("isCyclePresent : " + gph.IsCyclePresent());
+        Console.WriteLine("isCyclePresent : " + gph.IsCyclePresentColour());
+    }
 
-	/*
-	False
-False
+    /*
+isCyclePresent : False
+isCyclePresent : False
+isCyclePresent : True
+isCyclePresent : True
 	*/
 
-	public static Graph TransposeGraph(Graph gph)
-	{
-		int count = gph.count;
+    public Graph TransposeGraph()
+    {
 		Graph g = new Graph(count);
 		for (int i = 0; i < count; i++)
 		{
-			List<Edge> adl = gph.Adj[i];
+            List<Edge> adl = Adj[i];
 			foreach (Edge adn in adl)
 			{
 				int dest = adn.dest;
@@ -790,12 +769,36 @@ False
 		return g;
 	}
 
-	public static bool IsConnectedUndirected(Graph gph)
-	{
-		int count = gph.count;
+    // Testing Code
+    public static void Main10()
+    {
+        Graph gph = new Graph(5);
+        gph.AddDirectedEdge(0, 1);
+        gph.AddDirectedEdge(0, 2);
+        gph.AddDirectedEdge(2, 3);
+        gph.AddDirectedEdge(1, 3);
+        gph.AddDirectedEdge(3, 4);
+        gph.AddDirectedEdge(4, 1);
+
+        Graph gReversed = gph.TransposeGraph();
+        gReversed.Print();
+    }
+
+    /*
+Vertex 0 is connected to : 
+Vertex 1 is connected to : 0(cost: 1) 4(cost: 1) 
+Vertex 2 is connected to : 0(cost: 1) 
+Vertex 3 is connected to : 1(cost: 1) 2(cost: 1) 
+Vertex 4 is connected to : 3(cost: 1) 
+	*/
+
+
+
+    public bool IsConnectedUndirected()
+    {
 		bool[] visited = new bool[count];
 
-		DFSUtil(gph, 0, visited);
+        DFSUtil(0, visited);
 		for (int i = 0; i < count; i++)
 		{
 			if (visited[i] == false)
@@ -806,69 +809,67 @@ False
 		return true;
 	}
 
-		/*
-	* Kosaraju Algorithm
-	* 
-	* Kosaraju's Algorithm to Find strongly connected directed graph based on DFS :
-	* 1) Create a visited array of size V, and Initialize all count in visited array as 0. 
-	* 2) Choose any vertex and perform a DFS traversal of graph. For 
-	* all visited count mark them visited as 1. 
-	* 3) If DFS traversal does not mark
-	* all count as 1, then return 0. 
-	* 4) Find transpose or reverse of graph 
-	* 5) Repeat step 1, 2 and 3 for the reversed graph. 
-	* 6) If DFS traversal mark all the count as 1, then return 1.
+    public static void Main11()
+    {
+        Graph gph = new Graph(6);
+        gph.AddUndirectedEdge(0, 1);
+        gph.AddUndirectedEdge(1, 2);
+        gph.AddUndirectedEdge(3, 4);
+        gph.AddUndirectedEdge(2, 5);
+        gph.AddUndirectedEdge(4, 2);
+        Console.WriteLine("IsConnectedUndirected:: " + gph.IsConnectedUndirected());
+    }
+
+    /*
+    IsConnectedUndirected:: True
 	*/
+    public bool IsStronglyConnected()
+    {
+        bool[] visited = new bool[count];
 
-	public static bool IsStronglyConnected(Graph gph)
-	{
-		int count = gph.count;
-		bool[] visited = new bool[count];
+        DFSUtil(0, visited);
+        for (int i = 0; i < count; i++)
+        {
+            if (visited[i] == false)
+            {
+                return false;
+            }
+        }
+        Graph gReversed = TransposeGraph();
+        for (int i = 0; i < count; i++)
+        {
+            visited[i] = false;
+        }
+        gReversed.DFSUtil(0, visited);
+        for (int i = 0; i < count; i++)
+        {
+            if (visited[i] == false)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
-		DFSUtil(gph, 0, visited);
-		for (int i = 0; i < count; i++)
-		{
-			if (visited[i] == false)
-			{
-				return false;
-			}
-		}
-		Graph gReversed = TransposeGraph(gph);
-		for (int i = 0; i < count; i++)
-		{
-			visited[i] = false;
-		}
-		DFSUtil(gReversed, 0, visited);
-		for (int i = 0; i < count; i++)
-		{
-			if (visited[i] == false)
-			{
-				return false;
-			}
-		}
-		return true;
-	}
+    // Testing Code
+    public static void Main12()
+    {
+        Graph gph = new Graph(5);
+        gph.AddDirectedEdge(0, 1);
+        gph.AddDirectedEdge(1, 2);
+        gph.AddDirectedEdge(2, 3);
+        gph.AddDirectedEdge(3, 0);
+        gph.AddDirectedEdge(2, 4);
+        gph.AddDirectedEdge(4, 2);
+        Console.WriteLine("IsStronglyConnected:: " + gph.IsStronglyConnected());
+    }
 
-	// Testing Code
-	public static void Main9()
-	{
-		Graph gph = new Graph(5);
-		gph.AddDirectedEdge(0, 1);
-		gph.AddDirectedEdge(1, 2);
-		gph.AddDirectedEdge(2, 3);
-		gph.AddDirectedEdge(3, 0);
-		gph.AddDirectedEdge(2, 4);
-		gph.AddDirectedEdge(4, 2);
-		Console.WriteLine("IsStronglyConnected:: " + IsStronglyConnected(gph));
-	}
+    /*
+    IsStronglyConnected:: True
+    */
 
-	/*
-	IsStronglyConnected:: True
-	*/
-
-	public static void stronglyConnectedComponent(Graph gph)
-	{
-		int count = gph.count;
+    public void stronglyConnectedComponent()
+    {
 		bool[] visited = new bool[count];
 
 		Stack<int> stk = new Stack<int>();
@@ -876,11 +877,11 @@ False
 		{
 			if (visited[i] == false)
 			{
-				DFSUtil2(gph, i, visited, stk);
+                DFSUtil2(i, visited, stk);
 			}
 		}
 
-		Graph gReversed = TransposeGraph(gph);
+        Graph gReversed = TransposeGraph();
 		Array.Fill(visited, false);
 
 		Stack<int> stk2 = new Stack<int>();
@@ -890,7 +891,7 @@ False
 			if (visited[index] == false)
 			{
 				stk2.Clear();
-				DFSUtil2(gReversed, index, visited, stk2);
+                gReversed.DFSUtil2(index, visited, stk2);
 				foreach(var ele in stk2)
 					Console.Write(ele + " ");
 				Console.WriteLine();
@@ -898,8 +899,8 @@ False
 		}
 	}
 
-	// Testing Code
-	public static void Main10()
+    // Testing Code
+    public static void Main13()
 	{
 		Graph gph = new Graph(7);
 		gph.AddDirectedEdge(0, 1);
@@ -910,32 +911,29 @@ False
 		gph.AddDirectedEdge(4, 5);
 		gph.AddDirectedEdge(5, 3);
 		gph.AddDirectedEdge(5, 6);
-		stronglyConnectedComponent(gph);
+        gph.stronglyConnectedComponent();
 
-		Graph gReversed = TransposeGraph(gph);
-		gReversed.Print();
 	}
 
-	/*
+    /*
 0 2 1 
 3 5 4 
 6 
 	*/
 
-		public static void primsMST(Graph gph)
-	{
-		int count = gph.count;
+    public void PrimsMST()
+    {
 		int[] previous = new int[count];
-		Array.Fill(previous, -1);
-
+        Array.Fill(previous, -1);
 		int[] dist = new int[count];
-		Array.Fill(dist, 9999); // infinite
-		bool[] visited = new bool[count];
-		int source = 1;
+        Array.Fill(dist, 99999); // infinite
+        bool[] visited = new bool[count];
 
+        int source = 0;
 		dist[source] = 0;
-		previous[source] = -1;
-		PriorityQueue<Edge> pq = new PriorityQueue<Edge>();
+        previous[source] = source;
+
+        PriorityQueue<Edge> pq = new PriorityQueue<Edge>();
 		Edge node = new Edge(source, source, 0);
 		pq.Enqueue(node);
 
@@ -945,7 +943,7 @@ False
 			pq.Dequeue();
 			visited[source] = true;
 			source = node.dest;
-			List<Edge> adl = gph.Adj[source];
+            List<Edge> adl = Adj[source];
 			foreach (Edge adn in adl)
 			{
 				int dest = adn.dest;
@@ -962,63 +960,33 @@ False
 		// Printing result.
 		int sum = 0;
 		bool isMst = true;
+        string output = "Edges are ";
 		for (int i = 0; i < count; i++)
 		{
 			if (dist[i] == 99999)
 			{
-				Console.WriteLine("Node id " + i + "  prev " + previous[i] + " distance : Unreachable");
+                output += ("(" + i + ", Unreachable) ");
 				isMst = false;
 			}
 			else
 			{
-				Console.WriteLine("Node id " + i + "  prev " + previous[i] + " distance : " + dist[i]);
+                output += ("(" + previous[i] + "->" + i + " @ " + dist[i] + ") ");
 				sum += dist[i];
 			}
 		}
 
 		if (isMst)
 		{
-			Console.Write("Total MST cost: " + sum);
+            Console.WriteLine(output);
+            Console.WriteLine("Total MST cost: " + sum);
 		}
 		else
 		{
-			Console.Write("Not a mst");
-		}
+            Console.WriteLine("Can't get a Spanning Tree");
+        }
+    }
 
-	}
-	/*
-	public static void kruskalMST((Graph gph) {
-	    int count = gph.count;
-	    int[] parent = new int[count];
-	    Array.Fill(parent, -1);
-	    Edge edge[] = new Edge[100];
-	    List<Edge> output = new List<Edge>();
-	    
-	    int E = 0;
-	    for (int i = 0; i < count; i++) {
-	        List<Edge> ad = gph.Adj[i];
-	        for (Edge adn : ad) {
-	            edge[E++] = adn;
-	        }
-	    }
-
-	    int sum=0;
-	    Arrays.sort(edge, 0, E-1);
-	    for (int i = 0; i < E; i++) {
-	        int x = Find(parent, edge[i].src);
-	        int y = Find(parent, edge[i].dest);            
-	        if(x != y) {
-	            System.out.Print("(" + edge[i].src + ", " + edge[i].dest + ", " + edge[i].cost + ") ");
-	            sum += edge[i].cost;
-	            output.Add(edge[i]);
-	            union(parent, x, y);
-	        }
-	    }
-
-	    System.out.Print("\nTotal MST cost: " + sum);
-	}
-	*/
-	public class Sets
+    public class Sets
 	{
 		internal int parent;
 		internal int rank;
@@ -1029,7 +997,7 @@ False
 		}
 	}
 
-	public static int Find(Sets[] sets, int index)
+    public int Find(Sets[] sets, int index)
 	{
 		int p = sets[index].parent;
 		while (p != index)
@@ -1040,8 +1008,8 @@ False
 		return index;
 	}
 
-	// consider x and y are roots of sets.
-	public static void union(Sets[] sets, int x, int y)
+    // consider x and y are roots of sets.
+    public void union(Sets[] sets, int x, int y)
 	{
 		if (sets[x].rank < sets[y].rank)
 		{
@@ -1058,10 +1026,8 @@ False
 		}
 	}
 
-	public static void kruskalMST(Graph gph)
-	{
-		int count = gph.count;
-
+    public void KruskalMST()
+    {
 		//Different subsets are created.
 		Sets[] sets = new Sets[count];
 		for (int i = 0; i < count; i++)
@@ -1074,7 +1040,7 @@ False
 		Edge[] edge = new Edge[100];
 		for (int i = 0; i < count; i++)
 		{
-			List<Edge> ad = gph.Adj[i];
+            List<Edge> ad = Adj[i];
 			foreach (Edge adn in ad)
 			{
 				edge[E++] = adn;
@@ -1083,24 +1049,24 @@ False
 		Array.Sort(edge, 0, E-1);
 
 		int sum = 0;
-		List<Edge> output = new List<Edge>();
-		for (int i = 0; i < E; i++)
+        string output = "Edges are ";
+        for (int i = 0; i < E; i++)
 		{
 			int x = Find(sets, edge[i].src);
 			int y = Find(sets, edge[i].dest);
 			if (x != y)
 			{
-				Console.Write("(" + edge[i].src + ", " + edge[i].dest + ", " + edge[i].cost + ") ");
-				sum += edge[i].cost;
-				output.Add(edge[i]);
+                output += ("(" + edge[i].src + "->" + edge[i].dest + " @ " + edge[i].cost + ") ");
+                sum += edge[i].cost;
 				union(sets, x, y);
 			}
 		}
-		Console.Write("\nTotal MST cost: " + sum);
+        Console.WriteLine(output);
+        Console.WriteLine("Total MST cost: " + sum);
 	}
 
-	// Testing Code
-	public static void Main11()
+    // Testing Code
+    public static void Main14()
 	{
 		Graph gph = new Graph(9);
 		gph.AddUndirectedEdge(0, 1, 4);
@@ -1117,197 +1083,136 @@ False
 		gph.AddUndirectedEdge(6, 7, 1);
 		gph.AddUndirectedEdge(6, 8, 6);
 		gph.AddUndirectedEdge(7, 8, 7);
-		//gph.Print();
-		//gph.out.Println();
-		//primsMST(gph);
-		//System.out.Println();
-		//kruskalMST(gph);
-		Dijkstra(gph, 0);
-		//FloydWarshall(gph);
-	}
+        gph.PrimsMST();
+        Console.WriteLine();
+        gph.KruskalMST();
+        Console.WriteLine();
+        gph.Dijkstra(0);
+    }
 
-	/*
-	Vertex 0 is connected to : (1, 4) (7, 8) 
-	Vertex 1 is connected to : (0, 4) (2, 8) (7, 11) 
-	Vertex 2 is connected to : (1, 8) (3, 7) (8, 2) (5, 4) 
-	Vertex 3 is connected to : (2, 7) (4, 9) (5, 14) 
-	Vertex 4 is connected to : (3, 9) (5, 10) 
-	Vertex 5 is connected to : (2, 4) (3, 14) (4, 10) (6, 2) 
-	Vertex 6 is connected to : (5, 2) (7, 1) (8, 6) 
-	Vertex 7 is connected to : (0, 8) (1, 11) (6, 1) (8, 7) 
-	Vertex 8 is connected to : (2, 2) (6, 6) (7, 7) 
+    /*
+Edges are (0->0 @ 0) (0->1 @ 4) (5->2 @ 4) (2->3 @ 7) (3->4 @ 9) (6->5 @ 2) (7->6 @ 1) (0->7 @ 8) (2->8 @ 2) 
+Total MST cost: 37
 
-	node id 0  prev 1 distance : 4
-	node id 1  prev -1 distance : 0
-	node id 2  prev 1 distance : 8
-	node id 3  prev 2 distance : 7
-	node id 4  prev 3 distance : 9
-	node id 5  prev 2 distance : 4
-	node id 6  prev 5 distance : 2
-	node id 7  prev 6 distance : 1
-	node id 8  prev 2 distance : 2
+Edges are (7->6 @ 1) (6->5 @ 2) (2->8 @ 2) (0->1 @ 4) (2->5 @ 4) (3->2 @ 7) (2->1 @ 8) (4->3 @ 9) 
+Total MST cost: 37
 
-	node id 0  prev -1 distance : 0
-	node id 1  prev 0 distance : 4
-	node id 2  prev 1 distance : 12
-	node id 3  prev 2 distance : 19
-	node id 4  prev 5 distance : 21
-	node id 5  prev 6 distance : 11
-	node id 6  prev 7 distance : 9
-	node id 7  prev 0 distance : 8
-	node id 8  prev 2 distance : 14
+
+Shortest Paths: (0->1 @ 4) (0->1->2 @ 12) (0->1->2->3 @ 19) (0->7->6->5->4 @ 21) (0->7->6->5 @ 11) (0->7->6 @ 9) (0->7 @ 8) (0->1->2->8 @ 14) 
+
+
 	*/
 
-	// Unweighed graph
-	public static void shortestPath(Graph gph, int source)
+    // Unweighed graph
+    public void ShortestPath(int source)
 	{
-		int curr;
-		int count = gph.count;
+        int curr;
 		int[] distance = new int[count];
-		int[] path = new int[count];
-		for (int i = 0; i < count; i++)
-		{
-			distance[i] = -1;
-		}
-		Queue<int> que = new Queue<int>();
+        int[] previous = new int[count];
+        Array.Fill(distance, -1);
+        Array.Fill(previous, -1);
+
+        Queue<int> que = new Queue<int>();
 		que.Enqueue(source);
 		distance[source] = 0;
-		while (que.Count > 0)
+        previous[source] = source;
+
+        while (que.Count > 0)
 		{
 			curr = que.Dequeue();
-			List<Edge> adl = gph.Adj[curr];
+            List<Edge> adl = Adj[curr];
 			foreach (Edge adn in adl)
 			{
 				if (distance[adn.dest] == -1)
 				{
 					distance[adn.dest] = distance[curr] + 1;
-					path[adn.dest] = curr;
+                    previous[adn.dest] = curr;
 					que.Enqueue(adn.dest);
 				}
 			}
 		}
-		for (int i = 0; i < count; i++)
-		{
-			Console.WriteLine(path[i] + " to " + i + " weight " + distance[i]);
-		}
+        PrintPath(previous, distance, count, source);
 	}
 
-	// Testing Code
-	public static void Main12()
+    public void Dijkstra(int source)
 	{
-		Graph gph = new Graph(9);
-		gph.AddUndirectedEdge(0, 2, 1);
-		gph.AddUndirectedEdge(1, 2, 5);
-		gph.AddUndirectedEdge(1, 3, 7);
-		gph.AddUndirectedEdge(1, 4, 9);
-		gph.AddUndirectedEdge(3, 2, 2);
-		gph.AddUndirectedEdge(3, 5, 4);
-		gph.AddUndirectedEdge(4, 5, 6);
-		gph.AddUndirectedEdge(4, 6, 3);
-		gph.AddUndirectedEdge(5, 7, 1);
-		gph.AddUndirectedEdge(6, 7, 7);
-		gph.AddUndirectedEdge(7, 8, 17);
-		BellmanFordShortestPath(gph, 1);
-		// Dijkstra(gph, 1);
-		primsMST(gph);
-		//System.out.Println("IsConnectedUndirected :: " + IsConnectedUndirected(gph));
-		Console.WriteLine();
-		kruskalMST(gph);
-	}
-
-	/*
-	2 to 0 weight 6
-	-1 to 1 weight 0
-	1 to 2 weight 5
-	1 to 3 weight 7
-	1 to 4 weight 9
-	3 to 5 weight 11
-	4 to 6 weight 12
-	5 to 7 weight 12
-	7 to 8 weight 29
-
-
-ode id 0  prev 2 distance : 1
-Node id 1  prev -1 distance : 0
-Node id 2  prev 1 distance : 5
-Node id 3  prev 2 distance : 2
-Node id 4  prev 5 distance : 6
-Node id 5  prev 3 distance : 4
-Node id 6  prev 4 distance : 3
-Node id 7  prev 5 distance : 1
-Node id 8  prev 7 distance : 17
-Total MST cost: 39
-
-
-(0, 2, 1) (5, 7, 1) (2, 3, 2) (6, 4, 3) (3, 5, 4) (1, 2, 5) (4, 5, 6) (7, 8, 17) 
-Total MST cost: 39	
-
-*/
-
-	public static void Dijkstra(Graph gph, int source)
-	{
-		int[] previous = new int[gph.count];
+        int[] previous = new int[count];
 		Array.Fill(previous, -1);
-		int[] dist = new int[gph.count];
+        int[] dist = new int[count];
 		Array.Fill(dist, int.MaxValue); // infinite
-		bool[] visited = new bool[gph.count];
+        bool[] visited = new bool[count];
 
 		dist[source] = 0;
-		previous[source] = -1;
+        previous[source] = source;
 
 		PriorityQueue<Edge> pq = new PriorityQueue<Edge>();
 		Edge node = new Edge(source, source, 0);
 		pq.Enqueue(node);
+        int curr;
 
 		while (pq.IsEmpty() != true)
 		{
 			node = pq.Peek();
 			pq.Dequeue();
-			source = node.dest;
-			visited[source] = true;
-			List<Edge> adl = gph.Adj[source];
+            curr = node.dest;
+            visited[curr] = true;
+            List<Edge> adl = Adj[curr];
 			foreach (Edge adn in adl)
 			{
 				int dest = adn.dest;
-				int alt = adn.cost + dist[source];
+                int alt = adn.cost + dist[curr];
 				if (dist[dest] > alt && visited[dest] == false)
 				{
 
 					dist[dest] = alt;
-					previous[dest] = source;
-					node = new Edge(source, dest, alt);
+                    previous[dest] = curr;
+                    node = new Edge(curr, dest, alt);
 					pq.Enqueue(node);
 				}
 			}
 		}
+        PrintPath(previous, dist, count, source);
+    }
 
-		int count = gph.count;
-		for (int i = 0; i < count; i++)
-		{
-			if (dist[i] == int.MaxValue)
-			{
-				Console.WriteLine("node id " + i + "  prev " + previous[i] + " distance : Unreachable");
-			}
-			else
-			{
-				Console.WriteLine("node id " + i + "  prev " + previous[i] + " distance : " + dist[i]);
+    String PrintPathUtil(int[] previous, int source, int dest)
+    {
+        String path = "";
+        if (dest == source)
+            path += source;
+        else
+        {
+            path += PrintPathUtil(previous, source, previous[dest]);
+            path += ("->" + dest);
+        }
+        return path;
+    }
 
-			}
-		}
-	}
+    public void PrintPath(int[] previous, int[] dist, int count, int source)
+    {
+        string output = "Shortest Paths: ";
+        for (int i = 0; i < count; i++)
+        {
+            if (dist[i] == 99999)
+                output += ("(" + source + "->" + i + " @ Unreachable) ");
+            else if (i != previous[i])
+            {
+                output += "(";
+                output += PrintPathUtil(previous, source, i);
+                output += (" @ " + dist[i] + ") ");
+            }
+        }
+        Console.WriteLine(output);
+    }
 
-		public static void BellmanFordShortestPath(Graph gph, int source)
-	{
-		int count = gph.count;
+    public void BellmanFordShortestPath(int source)
+    {
 		int[] distance = new int[count];
 		int[] path = new int[count];
+        Array.Fill(distance, 99999); // infinite
+        Array.Fill(path, -1);
 
-		for (int i = 0; i < count; i++)
-		{
-			distance[i] = 99999; // infinite
-			path[i] = -1;
-		}
 		distance[source] = 0;
+        path[source] = source;
 		// Outer loop will run (V-1) number of times.
 		// Inner for loop and while loop runs combined will
 		// run for Edges number of times.
@@ -1317,7 +1222,7 @@ Total MST cost: 39
 		{
 			for (int j = 0; j < count; j++)
 			{
-				List<Edge> adl = gph.Adj[j];
+                List<Edge> adl = Adj[j];
 				foreach (Edge adn in adl)
 				{
 					int newDistance = distance[j] + adn.cost;
@@ -1330,14 +1235,11 @@ Total MST cost: 39
 				}
 			}
 		}
-		for (int i = 0; i < count; i++)
-		{
-			Console.WriteLine(path[i] + " to " + i + " weight " + distance[i]);
-		}
+        PrintPath(path, distance, count, source);
 	}
 
-	// Testing Code
-	public static void Main13()
+    // Testing Code
+    public static void Main16()
 	{
 		Graph gph = new Graph(5);
 		gph.AddDirectedEdge(0, 1, 3);
@@ -1346,26 +1248,15 @@ Total MST cost: 39
 		gph.AddDirectedEdge(2, 3, 1);
 		gph.AddDirectedEdge(4, 1, -2);
 		gph.AddDirectedEdge(4, 3, 1);
-		gph.Print();
-		Console.WriteLine();
-		BellmanFordShortestPath(gph, 0);
+        gph.BellmanFordShortestPath(0);
 	}
 
-	/*
-	Vertex 0 is connected to : (1, 3) (4, 2) 
-	Vertex 1 is connected to : (2, 1) 
-	Vertex 2 is connected to : (3, 1) 
-	Vertex 3 is connected to : 
-	Vertex 4 is connected to : (1, -2) (3, 1) 
+    /*
+Shortest Paths: (0->4->1 @ 0) (0->4->1->2 @ 1) (0->4->1->2->3 @ 2) (0->4 @ 2) 
 
-	-1 to 0 weight 0
-	4 to 1 weight 0
-	1 to 2 weight 1
-	2 to 3 weight 2
-	0 to 4 weight 2
 	*/
 
-	public static int HeightTreeParentArr(int[] arr)
+    public static int HeightTreeParentArr(int[] arr)
 	{
 		int count = arr.Length;
 		int[] heightArr = new int[count];
@@ -1375,7 +1266,7 @@ Total MST cost: 39
 		{
 			if (arr[i] != -1)
 			{
-				gph.AddDirectedEdge(arr[i], i);
+                gph.AddDirectedEdge(arr[i], i);
 			}
 			else
 			{
@@ -1396,7 +1287,7 @@ Total MST cost: 39
 			{
 				maxHight = height;
 			}
-			List<Edge> adl = gph.Adj[curr];
+            List<Edge> adl = gph.Adj[curr];
 			foreach (Edge adn in adl)
 			{
 				if (visited[adn.dest] == false)
@@ -1410,7 +1301,7 @@ Total MST cost: 39
 		return maxHight;
 	}
 
-	public static int GetHeight(int[] arr, int[] height, int index)
+    public static int GetHeight(int[] arr, int[] height, int index)
 	{
 		if (arr[index] == -1)
 		{
@@ -1422,7 +1313,7 @@ Total MST cost: 39
 		}
 	}
 
-	public static int HeightTreeParentArr2(int[] arr)
+    public static int HeightTreeParentArr2(int[] arr)
 	{
 		int count = arr.Length;
 		int[] height = new int[count];
@@ -1435,25 +1326,25 @@ Total MST cost: 39
 		return maxHeight;
 	}
 
-	// Testing Code
-	public static void Main14()
+    // Testing Code
+    public static void Main17()
 	{
 		int[] parentArray = new int[] {-1, 0, 1, 2, 3};
 		Console.WriteLine(HeightTreeParentArr(parentArray));
 		Console.WriteLine(HeightTreeParentArr2(parentArray));
 	}
 
-	/*
+    /*
 	4
 	4
 	*/
 
-		public static int BestFirstSearchPQ(Graph gph, int source, int dest)
+    public int BestFirstSearchPQ(int source, int dest)
 	{
-		int[] previous = new int[gph.count];
-		int[] dist = new int[gph.count];
-		bool[] visited = new bool[gph.count];
-		for (int i = 0; i < gph.count; i++)
+        int[] previous = new int[count];
+        int[] dist = new int[count];
+        bool[] visited = new bool[count];
+        for (int i = 0; i < count; i++)
 		{
 			previous[i] = -1;
 			dist[i] = int.MaxValue; // infinite
@@ -1475,7 +1366,7 @@ Total MST cost: 39
 			}
 			visited[source] = true;
 
-			List<Edge> adl = gph.Adj[source];
+            List<Edge> adl = Adj[source];
 			foreach (Edge adn in adl)
 			{
 				int curr = adn.dest;
@@ -1493,27 +1384,26 @@ Total MST cost: 39
 		return -1;
 	}
 
-	public static bool IsConnected(Graph graph)
-	{
-		int count = graph.count;
-		bool[] visited = new bool[count];
+    public bool IsConnected()
+    {
+        bool[] visited = new bool[count];
 
 		// Find a vertex with non - zero degree
 		// DFS traversal of graph from a vertex with non - zero degree
 		List<Edge> adl;
 		for (int i = 0; i < count; i++)
 		{
-			adl = graph.Adj[i];
+            adl = Adj[i];
 			if (adl.Count > 0)
 			{
-				DFSUtil(graph, i, visited);
+                DFSUtil(i, visited);
 				break;
 			}
 		}
 		// Check if all non - zero degree count are visited
 		for (int i = 0; i < count; i++)
 		{
-			adl = graph.Adj[i];
+            adl = Adj[i];
 			if (adl.Count > 0)
 			{
 				if (visited[i] == false)
@@ -1525,20 +1415,19 @@ Total MST cost: 39
 		return true;
 	}
 
-	/*
+    /*
 	* The function returns one of the following values Return 0 if graph is not
 	* Eulerian Return 1 if graph has an Euler path (Semi-Eulerian) Return 2 if
 	* graph has an Euler Circuit (Eulerian)
 	*/
-	public static int IsEulerian(Graph graph)
-	{
-		int count = graph.count;
-		int odd;
+    public int IsEulerian()
+    {
+        int odd;
 		int[] inDegree;
 		int[] outDegree;
 		List<Edge> adl;
-		// Check if all non - zero degree nodes are connected
-		if (IsConnected(graph) == false)
+        // Check if all non - zero degree nodes are connected
+        if (IsConnected() == false)
 		{
 			Console.WriteLine("graph is not Eulerian");
 			return 0;
@@ -1552,7 +1441,7 @@ Total MST cost: 39
 
 			for (int i = 0; i < count; i++)
 			{
-				adl = graph.Adj[i];
+                adl = Adj[i];
 				foreach (Edge adn in adl)
 				{
 					outDegree[i] += 1;
@@ -1585,8 +1474,8 @@ Total MST cost: 39
 		}
 	}
 
-	// Testing Code
-	public static void Main15()
+    // Testing Code
+    public static void Main18()
 	{
 		Graph gph = new Graph(5);
 		gph.AddDirectedEdge(1, 0);
@@ -1594,51 +1483,52 @@ Total MST cost: 39
 		gph.AddDirectedEdge(2, 1);
 		gph.AddDirectedEdge(0, 3);
 		gph.AddDirectedEdge(3, 4);
-		Console.WriteLine(IsEulerian(gph));
+        gph.IsEulerian();
+        gph.AddDirectedEdge(4, 0);
+        gph.IsEulerian();
 	}
 
-	/*
-	graph is Semi-Eulerian
-	1
+    /*
+graph is Semi-Eulerian
+graph is Eulerian
 	*/
 
-		public static bool IsStronglyConnected2(Graph graph)
-	{
-		int count = graph.count;
-		bool[] visited = new bool[count];
+    public bool IsStronglyConnected2()
+    {
+        bool[] visited = new bool[count];
 		Graph gReversed;
 		int index;
 		// Find a vertex with non - zero degree
 		List<Edge> adl;
 		for (index = 0; index < count; index++)
 		{
-			adl = graph.Adj[index];
+            adl = Adj[index];
 			if (adl.Count > 0)
 			{
 				break;
 			}
 		}
-		// DFS traversal of graph from a vertex with non - zero degree
-		DFSUtil(graph, index, visited);
+        // DFS traversal of graph from a vertex with non - zero degree
+        DFSUtil(index, visited);
 		for (int i = 0; i < count; i++)
 		{
-			adl = graph.Adj[i];
+            adl = Adj[i];
 			if (visited[i] == false && adl.Count > 0)
 			{
 				return false;
 			}
 		}
 
-		gReversed = TransposeGraph(graph);
+        gReversed = TransposeGraph();
 		for (int i = 0; i < count; i++)
 		{
 			visited[i] = false;
 		}
-		DFSUtil(gReversed, index, visited);
+        gReversed.DFSUtil(index, visited);
 
 		for (int i = 0; i < count; i++)
 		{
-			adl = graph.Adj[i];
+            adl = Adj[i];
 			if (visited[i] == false && adl.Count > 0)
 			{
 				return false;
@@ -1647,13 +1537,12 @@ Total MST cost: 39
 		return true;
 	}
 
-	public static bool IsEulerianCycle(Graph graph)
+    public bool IsEulerianCycle()
 	{
-		// Check if all non - zero degree count are connected
-		int count = graph.count;
-		int[] inDegree = new int[count];
+        // Check if all non - zero degree count are connected
+        int[] inDegree = new int[count];
 		int[] outDegree = new int[count];
-		if (!IsStronglyConnected2(graph))
+        if (!IsStronglyConnected2())
 		{
 			return false;
 		}
@@ -1661,7 +1550,7 @@ Total MST cost: 39
 		// Check if in degree and out degree of every vertex is same
 		for (int i = 0; i < count; i++)
 		{
-			List<Edge> adl = graph.Adj[i];
+            List<Edge> adl = Adj[i];
 			foreach (Edge adn in adl)
 			{
 				outDegree[i] += 1;
@@ -1678,8 +1567,8 @@ Total MST cost: 39
 		return true;
 	}
 
-	// Testing Code
-	public static void Main16()
+    // Testing Code
+    public static void Main19()
 	{
 		Graph gph = new Graph(5);
 		gph.AddDirectedEdge(0, 1);
@@ -1688,42 +1577,15 @@ Total MST cost: 39
 		gph.AddDirectedEdge(0, 4);
 		gph.AddDirectedEdge(4, 3);
 		gph.AddDirectedEdge(3, 0);
-		Console.WriteLine(IsEulerianCycle(gph));
+        Console.WriteLine(gph.IsEulerianCycle());
 	}
 
-	/*
+    /*
 	True
 	*/
 
-	// Testing Code
-	public static void Main17()
-	{
-		Graph gph = new Graph(7);
-		gph.AddDirectedEdge(0, 1);
-		gph.AddDirectedEdge(1, 2);
-		gph.AddDirectedEdge(2, 0);
-		gph.AddDirectedEdge(2, 3);
-		gph.AddDirectedEdge(3, 4);
-		gph.AddDirectedEdge(4, 5);
-		gph.AddDirectedEdge(5, 3);
-		gph.AddDirectedEdge(5, 6);
-
-		Graph gReversed = TransposeGraph(gph);
-		gReversed.Print();
-	}
-
-	/*
-	Vertex 0 is connected to : (2, 1) 
-	Vertex 1 is connected to : (0, 1) 
-	Vertex 2 is connected to : (1, 1) 
-	Vertex 3 is connected to : (2, 1) (5, 1) 
-	Vertex 4 is connected to : (3, 1) 
-	Vertex 5 is connected to : (4, 1) 
-	Vertex 6 is connected to : (5, 1) 
-	*/
-
-	// Testing Code
-	public static void Main18()
+    // Testing Code
+    public static void Main20()
 	{
 		Graph gph = new Graph(9);
 		gph.AddUndirectedEdge(0, 1);
@@ -1740,23 +1602,16 @@ Total MST cost: 39
 		gph.AddUndirectedEdge(6, 7);
 		gph.AddUndirectedEdge(6, 8);
 		gph.AddUndirectedEdge(7, 8);
-		shortestPath(gph, 0);
+        gph.ShortestPath(0);
 	}
 
-	/*
-	0 to 0 weight 0
-	0 to 1 weight 1
-	1 to 2 weight 2
-	2 to 3 weight 3
-	3 to 4 weight 4
-	2 to 5 weight 3
-	7 to 6 weight 2
-	0 to 7 weight 1
-	7 to 8 weight 2
+    /*
+Shortest Paths: (0->1 @ 1) (0->1->2 @ 2) (0->1->2->3 @ 3) (0->1->2->3->4 @ 4) (0->1->2->5 @ 3) (0->7->6 @ 2) (0->7 @ 1) (0->7->8 @ 2) 
+
 	*/
-	internal static void FloydWarshall(Graph gph)
+    internal void FloydWarshall()
 	{
-		int V = gph.count;
+        int V = count;
 		int[, ] dist = new int[V, V];
 		int[, ] path = new int[V, V];
 
@@ -1778,7 +1633,7 @@ Total MST cost: 39
 
 		for (int i = 0; i < V; i++)
 		{
-			List<Edge> adl = gph.Adj[i];
+            List<Edge> adl = Adj[i];
 			foreach (Edge adn in adl)
 			{
 				path[adn.src, adn.dest] = adn.src;
@@ -1815,35 +1670,36 @@ Total MST cost: 39
 		PrintSolution(dist, path, V);
 	}
 
-		private static void PrintSolution(int[, ] cost, int[, ] path, int V)
+    private void PrintSolution(int[,] cost, int[,] path, int V)
+	{
+        Console.Write("Shortest Paths : ");
+        for (int u = 0; u < V; u++)
 		{
-			for (int u = 0; u < V; u++)
+			for (int v = 0; v < V; v++)
 			{
-				for (int v = 0; v < V; v++)
+				if (u != v && path[u, v] != -1)
 				{
-					if (u != v && path[u, v] != -1)
-					{
-						Console.Write("Shortest Path from {0:D} —> {1:D} ", u, v);
-					Console.Write("Cost:" + cost[u, v] + " Path:");
-					PrintPath(path, u, v);
-					Console.WriteLine();
-					}
+				Console.Write("(");
+				PrintPath(path, u, v);
+                Console.Write(" @ " + cost[u, v] + ") ");
 				}
 			}
 		}
+        Console.WriteLine();
+	}
 
-	private static void PrintPath(int[, ] path, int u, int v)
+    private void PrintPath(int[,] path, int u, int v)
 	{
 		if (path[u, v] == u)
 		{
-			Console.Write(u + " " + v + " ");
+			Console.Write(u + "->" + v);
 			return;
 		}
 		PrintPath(path, u, path[u, v]);
-		Console.Write(v + " ");
+		Console.Write("->" + v);
 	}
 
-	public static void Main19()
+    public static void Main21()
 	{
 		Graph gph = new Graph(4);
 		gph.AddDirectedEdge(0, 0, 0);
@@ -1855,19 +1711,14 @@ Total MST cost: 39
 		gph.AddDirectedEdge(0, 3, 10);
 		gph.AddDirectedEdge(1, 2, 3);
 		gph.AddDirectedEdge(2, 3, 1);
-		FloydWarshall(gph);
+        gph.FloydWarshall();
 	}
 
-/*
-Shortest Path from 0 —> 1 Cost:5 Path:0 1 
-Shortest Path from 0 —> 2 Cost:8 Path:0 1 2 
-Shortest Path from 0 —> 3 Cost:9 Path:0 1 2 3 
-Shortest Path from 1 —> 2 Cost:3 Path:1 2 
-Shortest Path from 1 —> 3 Cost:4 Path:1 2 3 
-Shortest Path from 2 —> 3 Cost:1 Path:2 3
-*/
+    /*
+Shortest Paths : (0->1 @ 5) (0->1->2 @ 8) (0->1->2->3 @ 9) (1->2 @ 3) (1->2->3 @ 4) (2->3 @ 1) 
+    */
 
-	internal static void PrintSolution(int[, ] dist, int V)
+    internal void PrintSolution(int[,] dist, int V)
 	{	
 		for (int i = 0; i < V; i++)
 		{
@@ -1889,29 +1740,27 @@ Shortest Path from 2 —> 3 Cost:1 Path:2 3
 
 	public static void Main(string[] args)
 	{
-		Main1();
-		Main2(); 
-		Main3(); 
-		Main4(); 
-		Main5(); 
-		Main6(); 
-		
-		// Main7(); 
-		// Main8();
-		// Main9();
-
-		// Main10(); 
-		// Main11(); 
-		// Main12();
-		// Main13(); 
-		//Main14();
-		//Main15(); 
-		//Main16();
-		//Main17();
-		//Main18();
-		Main19();
-		
-	}
+        Main1();
+        Main2(); 
+        Main3(); 
+        Main4(); 
+        Main5();
+        Main6();
+        Main7();
+        Main8();
+        Main9();
+        Main10();
+        Main11();
+        Main12();
+        Main13();
+        Main14();
+        Main16();
+        Main17();
+        Main18();
+        Main19();
+        Main20();
+        Main21();
+    }
 }
 
 
@@ -2055,7 +1904,7 @@ public class PriorityQueue<T> where T : IComparable<T>
 		return arr[0];
 	}
 
-	public static void HeapSort(int[] array, bool inc)
+    public void HeapSort(int[] array, bool inc)
 	{
 		// Create max heap for increasing order sorting.
 		PriorityQueue<int> hp = new PriorityQueue<int>(array, !inc);

@@ -107,11 +107,11 @@ public class Permutations
 	/* Testing code */
 	public static void Main(string[] args)
 	{
-		int[] arr = new int[4];
-		for (int i = 0; i < 4; i++)
-		{
-			arr[i] = i + 1;
-		}
+		int[] arr = {1, 2, 3, 4};
+		Permutation(arr, 0, 4);
+		Console.WriteLine();
+		Permutation2(arr, 0, 4);
+		Console.WriteLine();
 		Permutation3(arr, 0, 4);
 	}
 }

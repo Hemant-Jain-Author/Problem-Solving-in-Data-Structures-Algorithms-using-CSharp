@@ -4,33 +4,25 @@ public class Fibo
 {
 	public static int Fibonacci(int n)
 	{
-		if (n <= 2)
+		if (n < 2)
 		{
-			return n - 1;
+			return n;
 		}
 		return Fibonacci(n - 1) + Fibonacci(n - 2);
 	}
 
-	public static void FibonacciSeries(int n)
-	{
-		for (int i = 1;i <= n;i++)
-		{
-			Console.Write(Fibonacci(i) + " ");
-		}
-	}
 
-
-	public static int FibonacciBU(int n)
+	public static int FibonacciBU2(int n)
 	{
-		if (n <= 2)
+		if (n < 2)
 		{
-			return n - 1;
+			return n;
 		}
 
 		int first = 0, second = 1;
 		int temp = 0;
 
-		for (int i = 2; i < n; i++)
+		for (int i = 2; i <= n; i++)
 		{
 			temp = first + second;
 			first = second;
@@ -39,81 +31,56 @@ public class Fibo
 		return temp;
 	}
 
-	public static void FibonacciSeriesBU(int n)
+	public static int FibonacciBU(int n)
 	{
-		if (n < 1)
+		if (n < 2)
 		{
-			return;
+			return n;
 		}
 
-		int[] dp = new int[n];
+		int[] dp = new int[n+1];
 		dp[0] = 0;
 		dp[1] = 1;
 
-		for (int i = 2; i < n; i++)
+		for (int i = 2; i <= n; i++)
 		{
 			dp[i] = dp[i - 2] + dp[i - 1];
 		}
 
-		for (int i = 0;i < n;i++)
-		{
-			Console.Write(dp[i] + " ");
-		}
+		return dp[n];
 	}
 
-	public static void FibonacciSeriesTD(int n)
+	public static int FibonacciTD(int n)
 	{
-		if (n < 1)
-		{
-			return;
-		}
-		int[] dp = new int[n];
-
-		FibonacciSeriesTD(n - 1, dp);
-
-		for (int i = 0;i < n;i++)
-		{
-			Console.Write(dp[i] + " ");
-		}
+		int[] dp = new int[n+1];
+		FibonacciTD(n, dp);
+		return dp[n];
 	}
 
-	private static int FibonacciSeriesTD(int n, int[] dp)
+	private static int FibonacciTD(int n, int[] dp)
 	{
-		if (n <= 1)
-		{
+		if (n < 2)
 			return dp[n] = n;
-		}
 
 		if (dp[n] != 0)
-		{
 			return dp[n];
-		}
 
-		dp[n] = FibonacciSeriesTD(n - 1, dp) + FibonacciSeriesTD(n - 2, dp);
+		dp[n] = FibonacciTD(n-1, dp) + FibonacciTD(n-2, dp);
 		return dp[n];
 	}
 
 	public static void Main(string[] args)
 	{
-		
-		FibonacciSeries(6);
-		Console.WriteLine();
-
-		FibonacciSeriesBU(6);
-		Console.WriteLine();
-
-		FibonacciSeriesTD(6);
-		Console.WriteLine();
-
-		Console.WriteLine(Fibonacci(6));
-		Console.WriteLine(FibonacciBU(6));
+		Console.WriteLine(Fibonacci(10));
+		Console.WriteLine(FibonacciBU2(10));
+		Console.WriteLine(FibonacciBU(10));
+		Console.WriteLine(FibonacciTD(10));
 	}
 }
 
 /*
-0 1 1 2 3 5 
-0 1 1 2 3 5 
-0 1 1 2 3 5 
-5
-5
+55
+55
+55
+55
 */

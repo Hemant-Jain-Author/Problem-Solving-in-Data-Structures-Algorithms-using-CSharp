@@ -17,7 +17,7 @@ public class TOH
 
 	public static void TOHSteps(int num)
 	{
-		Console.WriteLine("The sequence of moves involved in the Tower of Hanoi are :");
+		Console.WriteLine("Moves involved in the Tower of Hanoi are :");
 		TOHUtil(num, 'A', 'C', 'B');
 	}
 
@@ -27,7 +27,7 @@ public class TOH
 	}
 }
 /*
-The sequence of moves involved in the Tower of Hanoi are :
+Moves involved in the Tower of Hanoi are :
 Move disk 1 from peg A to peg C
 Move disk 2 from peg A to peg B
 Move disk 1 from peg C to peg B

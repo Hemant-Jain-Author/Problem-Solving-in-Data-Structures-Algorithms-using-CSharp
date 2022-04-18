@@ -4,11 +4,12 @@ public class NutsAndBolts
 {
 	private static void PrintArray(int[] arr)
 	{
+		Console.Write("[ ");
 		foreach (int i in arr)
 		{
 			Console.Write(i + " ");
 		}
-		Console.WriteLine();
+		Console.WriteLine("]");
 	}
 
 	public static void MakePairs(int[] nuts, int[] bolts)
@@ -73,6 +74,6 @@ public class NutsAndBolts
 
 /*
 Matched nuts and bolts are : 
-1 2 3 4 5 6 
-1 2 3 4 5 6 
+[ 1 2 3 4 5 6 ]
+[ 1 2 3 4 5 6 ]
 */
