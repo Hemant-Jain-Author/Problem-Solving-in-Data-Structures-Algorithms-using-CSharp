@@ -2,49 +2,49 @@
 
 public class NQueens
 {
-	public static void Print(int[] Q, int n)
-	{
-		for (int i = 0; i < n; i++)
-		{
-			Console.Write(" " + Q[i]);
-		}
-		Console.WriteLine(" ");
-	}
+    public static void Print(int[] Q, int n)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write(" " + Q[i]);
+        }
+        Console.WriteLine(" ");
+    }
 
-	public static bool Feasible(int[] Q, int k)
-	{
-		for (int i = 0; i < k; i++)
-		{
-			if (Q[k] == Q[i] || Math.Abs(Q[i] - Q[k]) == Math.Abs(i - k))
-			{
-				return false;
-			}
-		}
-		return true;
-	}
+    public static bool Feasible(int[] Q, int k)
+    {
+        for (int i = 0; i < k; i++)
+        {
+            if (Q[k] == Q[i] || Math.Abs(Q[i] - Q[k]) == Math.Abs(i - k))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
 
-	public static void Arrange(int[] Q, int k, int n)
-	{
-		if (k == n)
-		{
-			Print(Q, n);
-			return;
-		}
-		for (int i = 0; i < n; i++)
-		{
-			Q[k] = i;
-			if (Feasible(Q, k))
-			{
-				Arrange(Q, k + 1, n);
-			}
-		}
-	}
+    public static void Arrange(int[] Q, int k, int n)
+    {
+        if (k == n)
+        {
+            Print(Q, n);
+            return;
+        }
+        for (int i = 0; i < n; i++)
+        {
+            Q[k] = i;
+            if (Feasible(Q, k))
+            {
+                Arrange(Q, k + 1, n);
+            }
+        }
+    }
 
-	public static void Main(string[] args)
-	{
-		int[] Q = new int[8];
-		NQueens.Arrange(Q, 0, 8);
-	}
+    public static void Main(string[] args)
+    {
+        int[] Q = new int[8];
+        NQueens.Arrange(Q, 0, 8);
+    }
 }
 
 /*

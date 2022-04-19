@@ -8,25 +8,25 @@ Both keys and values are objects. The keys must be unique, but the values may be
 
 public class DictionaryDemo
 {
-	public static void Main(string[] args)
-	{
-		// Create a dictionary.
-		Dictionary<string, int> hm = new Dictionary<string, int>();
+    public static void Main(string[] args)
+    {
+        // Create a dictionary.
+        Dictionary<string, int> hm = new Dictionary<string, int>();
 
-		// Add elements into the dictionary.
-		hm["Apple"] = 40;
-		hm["Banana"] = 10;
-		hm["Mango"] = 20;
+        // Add elements into the dictionary.
+        hm["Apple"] = 40;
+        hm["Banana"] = 10;
+        hm["Mango"] = 20;
 
-		Console.WriteLine("Size :: " + hm.Count);
-		foreach (string key in hm.Keys)
-		{
-			Console.WriteLine(key + " cost :" + hm[key]);
-		}
-		
-		Console.WriteLine("Apple present ::" + hm.ContainsKey("Apple"));
-		Console.WriteLine("Grapes present :: " + hm.ContainsKey("Grapes"));
-	}
+        Console.WriteLine("Size :: " + hm.Count);
+        foreach (string key in hm.Keys)
+        {
+            Console.WriteLine(key + " cost :" + hm[key]);
+        }
+        
+        Console.WriteLine("Apple present ::" + hm.ContainsKey("Apple"));
+        Console.WriteLine("Grapes present :: " + hm.ContainsKey("Grapes"));
+    }
 }
 
 /*

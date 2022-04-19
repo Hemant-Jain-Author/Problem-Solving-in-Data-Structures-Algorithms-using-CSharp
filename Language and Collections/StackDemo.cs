@@ -3,22 +3,22 @@ using System.Collections.Generic;
 
 public class StackDemo
 {
-	public static void Main(string[] args)
-	{
-		Stack<int> stack = new Stack<int>();
-		stack.Push(1);
-		stack.Push(2);
-		stack.Push(3);
-		Console.WriteLine("Stack size : " + stack.Count);
-		Console.Write("Stack : ");
-		foreach(var ele in stack)
-			Console.Write(ele + " ");
-		Console.WriteLine();
+    public static void Main(string[] args)
+    {
+        Stack<int> stack = new Stack<int>();
+        stack.Push(1);
+        stack.Push(2);
+        stack.Push(3);
+        Console.WriteLine("Stack size : " + stack.Count);
+        Console.Write("Stack : ");
+        foreach(var ele in stack)
+            Console.Write(ele + " ");
+        Console.WriteLine();
 
-		Console.WriteLine("Stack pop : " + stack.Pop());
-		Console.WriteLine("Stack top : " + stack.Peek());
-		Console.WriteLine("Stack isEmpty : " + (stack.Count == 0));
-	}
+        Console.WriteLine("Stack pop : " + stack.Pop());
+        Console.WriteLine("Stack top : " + stack.Peek());
+        Console.WriteLine("Stack isEmpty : " + (stack.Count == 0));
+    }
 }
 
 /* 

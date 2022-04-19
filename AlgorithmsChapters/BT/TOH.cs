@@ -3,28 +3,28 @@
 // Towers Of Hanoi problem.
 public class TOH
 {
-	private static void TOHUtil(int num, char from, char to, char temp)
-	{
-		if (num < 1)
-		{
-			return;
-		}
+    private static void TOHUtil(int num, char from, char to, char temp)
+    {
+        if (num < 1)
+        {
+            return;
+        }
 
-		TOHUtil(num - 1, from, temp, to);
-		Console.WriteLine("Move disk " + num + " from peg " + from + " to peg " + to);
-		TOHUtil(num - 1, temp, to, from);
-	}
+        TOHUtil(num - 1, from, temp, to);
+        Console.WriteLine("Move disk " + num + " from peg " + from + " to peg " + to);
+        TOHUtil(num - 1, temp, to, from);
+    }
 
-	public static void TOHSteps(int num)
-	{
-		Console.WriteLine("Moves involved in the Tower of Hanoi are :");
-		TOHUtil(num, 'A', 'C', 'B');
-	}
+    public static void TOHSteps(int num)
+    {
+        Console.WriteLine("Moves involved in the Tower of Hanoi are :");
+        TOHUtil(num, 'A', 'C', 'B');
+    }
 
-	public static void Main(string[] args)
-	{
-		TOH.TOHSteps(3);
-	}
+    public static void Main(string[] args)
+    {
+        TOH.TOHSteps(3);
+    }
 }
 /*
 Moves involved in the Tower of Hanoi are :

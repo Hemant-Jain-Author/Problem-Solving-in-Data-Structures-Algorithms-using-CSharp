@@ -4,14 +4,14 @@ class FenWickTree{
     float[] sum;
 
     public FenWickTree(float[] input, int n)
-	{
+    {
         size = n;
-		sum = new float[size+1];
+        sum = new float[size+1];
         for(int i =0;i<n;i++)
         {
             add(i, input[i]);
         }
-	}
+    }
 
     public void add(int index, float val)  
     {  
