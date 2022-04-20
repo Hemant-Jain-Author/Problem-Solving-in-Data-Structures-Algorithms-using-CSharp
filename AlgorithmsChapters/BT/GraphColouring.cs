@@ -108,6 +108,7 @@ public class GraphColouring
         return false;
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         bool[, ] graph = new bool[, ]

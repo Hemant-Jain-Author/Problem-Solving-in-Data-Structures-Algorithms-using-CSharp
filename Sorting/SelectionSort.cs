@@ -2,7 +2,7 @@
 
 public class SelectionSort
 {
-     private bool more(int value1, int value2)
+     private bool Greater(int value1, int value2)
      {
         return value1 > value2;
      }
@@ -47,6 +47,7 @@ public class SelectionSort
         }
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] array = new int[] {9, 1, 8, 2, 7, 3, 6, 4, 5};

@@ -21,6 +21,7 @@ public class TOH
         TOHUtil(num, 'A', 'C', 'B');
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         TOH.TOHSteps(3);

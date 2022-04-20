@@ -55,8 +55,7 @@ public class Stack
         return value;
     }
 
-
-
+    // Testing code.
     public static void Main(string[] args)
     {
         Stack s = new Stack();

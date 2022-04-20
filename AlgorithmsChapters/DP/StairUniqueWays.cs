@@ -40,6 +40,7 @@ public class StairUniqueWays
         return ways[n - 1];
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         Console.WriteLine("Unique way to reach top:: " + diffWaysBU(4));

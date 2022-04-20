@@ -40,6 +40,7 @@ public class NQueens
         }
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] Q = new int[8];

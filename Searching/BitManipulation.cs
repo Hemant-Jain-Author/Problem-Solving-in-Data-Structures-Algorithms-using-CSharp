@@ -90,6 +90,7 @@ public class BitManipulation
         return count;
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int a = 4;

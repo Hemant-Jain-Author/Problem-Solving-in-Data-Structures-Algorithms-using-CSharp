@@ -265,6 +265,7 @@ public class AVLTree
         return (a > b) ? a : b;
     }
 
+    // Testing code.
     public static void Main(string[] arg)
     {
         AVLTree t = new AVLTree();

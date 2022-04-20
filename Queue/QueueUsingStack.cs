@@ -34,6 +34,7 @@ public class QueueUsingStack
         return stk2.Pop();
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         QueueUsingStack que = new QueueUsingStack();

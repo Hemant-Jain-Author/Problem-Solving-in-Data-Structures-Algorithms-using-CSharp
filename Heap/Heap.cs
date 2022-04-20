@@ -154,6 +154,7 @@ public class Heap
         return arr[0];
     }
 
+    // Testing code.
     public static void main1()
     {
         int[] a = new int[] {1, 9, 6, 7, 8, 2, 4, 5, 3};
@@ -186,6 +187,7 @@ public class Heap
         }
     }
 
+    // Testing code.
     public static void main2()
     {
         int[] a2 = new int[] {1, 9, 6, 7, 8, 2, 4, 5, 3};

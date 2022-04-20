@@ -11,7 +11,7 @@ public class StackDemo
         stack.Push(3);
         Console.WriteLine("Stack size : " + stack.Count);
         Console.Write("Stack : ");
-        foreach(var ele in stack)
+        foreach (var ele in stack)
             Console.Write(ele + " ");
         Console.WriteLine();
 

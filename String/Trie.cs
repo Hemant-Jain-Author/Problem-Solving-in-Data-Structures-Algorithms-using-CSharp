@@ -101,6 +101,7 @@ public class Trie
         return Find(curr.child[str[index] - 'a'], str, index + 1);
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         Trie tt = new Trie();

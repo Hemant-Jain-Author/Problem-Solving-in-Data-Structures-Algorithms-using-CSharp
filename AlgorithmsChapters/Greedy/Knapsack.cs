@@ -48,6 +48,7 @@ public class Knapsack
         return totalCost;
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] wt = new int[] {10, 40, 20, 30};

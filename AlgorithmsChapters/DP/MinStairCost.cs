@@ -22,6 +22,7 @@ public class MinStairCost
         return Math.Min(dp[n - 2], dp[n - 1]);
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] a = new int[] {1, 5, 6, 3, 4, 7, 9, 1, 2, 11};

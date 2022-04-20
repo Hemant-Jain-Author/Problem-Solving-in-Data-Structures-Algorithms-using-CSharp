@@ -46,7 +46,7 @@ public class MultipleStageGraph
         return dist[n - 1];
     }
 
-    // Driver code
+    // Testing code.
     public static void Main(string[] args)
     {
         // Graph stored in the form of an

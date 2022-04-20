@@ -125,10 +125,12 @@ public static void Main1()
     Partition012_(arr3, arr3.Length);
     PrintArray(arr3, arr3.Length);
 }
+
 /*
 [ 0 0 0 0 0 0 1 1 1 1 1 1 ]
 [ 0 0 0 0 0 1 1 1 1 1 2 2 ]
 */
+
 public static void RangePartition(int[] arr, int size, int lower, int higher)
 {
     int start = 0;
@@ -161,6 +163,7 @@ public static void Main2()
     RangePartition(arr, arr.Length, 9, 12);
     PrintArray(arr, arr.Length);
 }
+
 /*
 [ 1 2 3 4 5 6 7 8 10 12 9 11 14 13 15 16 17 18 ]
 */
@@ -200,6 +203,7 @@ public static void Main3()
  Console.WriteLine("MinSwaps " + MinSwaps(array, array.Length, 10));
 
 }
+
 // MinSwaps 3
 
 public static void SeparateEvenAndOdd(int[] data, int size)
@@ -258,10 +262,11 @@ public static void Main4()
     SeparateEvenAndOdd2(array2, array2.Length);
     PrintArray(array2, array2.Length);
 }
+
 // [ 8 2 6 4 5 3 7 1 9 ]
 // [ 4 6 8 2 7 3 1 9 5 ]
 
-public static bool AbsMore(int value1, int value2, int reference)
+public static bool AbsGreater(int value1, int value2, int reference)
 {
     return (Math.Abs(value1 - reference) > Math.Abs(value2 - reference));
 }
@@ -272,7 +277,7 @@ public static void AbsBubbleSort(int[] arr, int size, int reference)
     {
         for (int j = 0; j < (size - i - 1); j++)
         {
-            if (AbsMore(arr[j], arr[j + 1], reference))
+            if (AbsGreater(arr[j], arr[j + 1], reference))
             {
                 Swap(arr, j, j + 1);
             }
@@ -288,10 +293,12 @@ public static void Main5()
     AbsBubbleSort(array, array.Length, reference);
     PrintArray(array, array.Length);
 }
+
 /*
 [ 5 6 4 7 3 8 2 9 1 ]
 */
-public static bool EqMore(int value1, int value2, int A)
+
+public static bool EqGreater(int value1, int value2, int A)
 {
     value1 = A * value1 * value1;
     value2 = A * value2 * value2;
@@ -324,6 +331,7 @@ public static void Main6()
     int[] arr = new int[] {5, 1, 1, 1, 2, 3, 5};
     ArrayReduction(arr, arr.Length);
 }
+
 /*
 4
 3
@@ -332,7 +340,7 @@ public static void Main6()
 Total number of reductions: 4
 */
 
-    public static void SortByOrder(int[] arr, int size, int[] arr2, int size2)
+public static void SortByOrder(int[] arr, int size, int[] arr2, int size2)
 {
     Dictionary<int, int> ht = new Dictionary<int, int>();
     int value;
@@ -384,9 +392,11 @@ public static void Main7()
     SortByOrder(arr, arr.Length, arr2, arr2.Length);
     Console.WriteLine();
 }
+
 /*
 2 2 1 1 8 8 3 5 7 9 6 
 */
+
 public static void Merge(int[] arr1, int size1, int[] arr2, int size2)
 {
     int index = 0;
@@ -429,6 +439,7 @@ public static void Main8()
     PrintArray(arr1, arr1.Length);
     PrintArray(arr2, arr2.Length);
 }
+
 /*
 [ 1 2 3 5 8 9 ]
 [ 10 13 15 20 ]
@@ -482,11 +493,14 @@ public static bool CheckReverse(int[] arr, int size)
     }
     return true;
 }
+
+// Testing code.
 public static void Main9()
 {
     int[] arr1 = new int[] {1, 2, 6, 5, 4, 7};
     Console.WriteLine(CheckReverse(arr1, arr1.Length));
 }
+
 // True
 
 public static void UnionIntersectionSorted(int[] arr1, int size1, int[] arr2, int size2)
@@ -538,12 +552,14 @@ public static void UnionIntersectionUnsorted(int[] arr1, int size1, int[] arr2, 
     UnionIntersectionSorted(arr1, size1, arr2, size2);
 }
 
+// Testing code.
 public static void Main10()
 {
     int[] arr1 = new int[] {1, 11, 2, 3, 14, 5, 6, 8, 9};
     int[] arr2 = new int[] {2, 4, 5, 12, 7, 8, 13, 10};
     UnionIntersectionUnsorted(arr1, arr1.Length, arr2, arr2.Length);
 }
+
 /*
 [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 ]
 [ 2 5 8 ]

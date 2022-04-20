@@ -8,6 +8,8 @@ Both keys and values are objects. The keys must be unique, but the values may be
 
 public class DictionaryDemo
 {
+
+    // Testing code.
     public static void Main(string[] args)
     {
         // Create a dictionary.
@@ -18,19 +20,19 @@ public class DictionaryDemo
         hm["Banana"] = 10;
         hm["Mango"] = 20;
 
-        Console.WriteLine("Size :: " + hm.Count);
+        Console.WriteLine("Dictionary Size :: " + hm.Count);
         foreach (string key in hm.Keys)
         {
             Console.WriteLine(key + " cost :" + hm[key]);
         }
-        
+
         Console.WriteLine("Apple present ::" + hm.ContainsKey("Apple"));
         Console.WriteLine("Grapes present :: " + hm.ContainsKey("Grapes"));
     }
 }
 
 /*
-Size :: 3
+Dictionary Size :: 3
 Apple cost :40
 Banana cost :10
 Mango cost :20

@@ -75,7 +75,8 @@ public class BinaryIndexTree
     }
 
 
-    // Main function
+
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] arr = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};

@@ -55,6 +55,7 @@ public class LongestCommonSubseq
         }
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         string X = "carpenter";

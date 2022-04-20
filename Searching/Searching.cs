@@ -151,6 +151,7 @@ public class Searching
         return false;
     }
 
+    // Testing code.
     public static void Main1()
     {
         int[] first = new int[] {1, 3, 5, 7, 9, 25, 30};
@@ -229,7 +230,7 @@ public class Searching
         return 0;
     }
 
-
+    // Testing code.
     public static void Main2()
     {
         int[] first = new int[] {1, 3, 5, 3, 9, 1, 30};
@@ -313,6 +314,7 @@ public class Searching
         Console.WriteLine();
     }
 
+    // Testing code.
     public static void Main3()
     {
         int[] first = new int[] {1, 3, 5, 3, 9, 1, 30};
@@ -363,6 +365,7 @@ public class Searching
         return ret;
     }
 
+    // Testing code.
     public static void Main4()
     {
         int[] first = new int[] {1, 3, 5, 3, 9, 1, 30};
@@ -535,6 +538,7 @@ public class Searching
         return -1;
     }
 
+    // Testing code.
     public static void Main5()
     {
         int[] first = new int[] {1, 5, 4, 3, 2, 7, 8, 9};
@@ -641,6 +645,7 @@ public class Searching
         Console.WriteLine();
     }
 
+    // Testing code.
     public static void Main6()
     {
         int[] arr = new int[] {11, 14, 13, 17, 21, 18, 19, 23, 24};
@@ -726,6 +731,7 @@ public class Searching
         Console.WriteLine("Odd values: " + first + " " + second);
     }
 
+    // Testing code.
     public static void Main7()
     {
         int[] arr = new int[] {10, 25, 30, 10, 15, 25, 15};
@@ -836,6 +842,7 @@ public class Searching
         Console.WriteLine("Minimum sum elements are : " + arr[minFirst] + " , " + arr[minSecond]);
     }
 
+    // Testing code.
     public static void Main9()
     {
         int[] first = new int[] {1, 5, -10, 3, 2, -6, 8, 9, 6};
@@ -920,6 +927,7 @@ public static bool FindPair4(int[] arr, int size, int range, int value)
     return false;
 }
 
+    // Testing code.
     public static void Main10()
     {
         int[] first = new int[] {1, 5, 4, 3, 2, 7, 8, 9, 6};
@@ -1036,6 +1044,7 @@ public static bool FindPair4(int[] arr, int size, int range, int value)
         return false;
     }
 
+    // Testing code.
     public static void Main10A()
     {
         int[] first = new int[] {1, 5, 4, 3, 2, 7, 8, 9, 6};
@@ -1102,6 +1111,8 @@ true    */
         }
         return false;
     }
+    
+    // Testing code.
     public static void Main11()
     {
         int[] first = new int[] {1, 5, 4, 3, 2, 7, 8, 9, 6};
@@ -1147,6 +1158,7 @@ true    */
         return diff;
     }
 
+    // Testing code.
     public static void Main12()
     {
         int[] second = new int[] {1, 6, 4, 19, 17, 20};
@@ -1212,6 +1224,7 @@ true    */
         return minDiff;
     }
 
+    // Testing code.
     public static void Main13()
     {
         int[] first = new int[] {1, 5, 4, 3, 2, 7, 8, 9, 6};
@@ -1282,6 +1295,7 @@ true    */
         Console.WriteLine("closest pair is :: " + first + " " + second);
     }
 
+    // Testing code.
     public static void Main14()
     {
         int[] first = new int[] {10, 20, 3, 4, 50, 80};
@@ -1325,7 +1339,8 @@ true    */
         return false;
     }
 
-        public static void Main15()
+    // Testing code.
+    public static void Main15()
     {
         int[] first = new int[] {1, 2, 4, 8, 16, 15};
         Console.WriteLine(SumPairRestArray(first, first.Length));
@@ -1381,6 +1396,7 @@ true    */
         }
     }
 
+    // Testing code.
     public static void Main16()
     {
         int[] first = new int[] {0, -1, 2, -3, 1};
@@ -1439,6 +1455,7 @@ true    */
         }
     }
 
+    // Testing code.
     public static void Main17()
     {
         int[] first = new int[] {1, 5, 15, 6, 9, 8};
@@ -1498,6 +1515,7 @@ true    */
         }
     }
 
+    // Testing code.
     public static void Main18()
     {
         int[] first = new int[] {1, 5, 15, 6, 9, 8};
@@ -1556,6 +1574,7 @@ true    */
         Console.WriteLine("SmallerThenTripletCount:: " + count);
     }
 
+    // Testing code.
     public static void Main19()
     {
         int[] first = new int[] {-2, -1, 0, 1};
@@ -1594,6 +1613,7 @@ true    */
         }
     }
 
+    // Testing code.
     public static void Main20()
     {
         int[] arr = new int[] {2, 4, 10, 12, 14, 18, 36};
@@ -1632,6 +1652,7 @@ true    */
         }
     }
 
+    // Testing code.
     public static void Main21()
     {
         int[] arr = new int[] {1, 2, 4, 8, 16};
@@ -1688,6 +1709,7 @@ true    */
         return count;
     }
 
+    // Testing code.
     public static void Main22()
     {
         int[] arr = new int[] {1, 2, 3, 4, 5};
@@ -1762,6 +1784,7 @@ true    */
         return max;
     }
 
+    // Testing code.
     public static void Main23()
     {
         int[] first = new int[] {1, 30, 5, 13, 9, 31, 5};
@@ -1867,6 +1890,7 @@ true    */
         }
     }
 
+    // Testing code.
     public static void Main24()
     {
         int[] first = new int[] {1, 5, 5, 13, 5, 31, 5};
@@ -1894,6 +1918,7 @@ true    */
         return arr[size / 2];
     }
 
+    // Testing code.
     public static void Main25()
     {
         int[] first = new int[] {1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30};
@@ -2004,6 +2029,7 @@ true    */
         return -1;
     }
 
+    // Testing code.
     public static void Main26()
     {
         int[] first = new int[] {1, 5, 10, 13, 20, 30, 8, 7, 6};
@@ -2080,6 +2106,7 @@ true    */
         return (lastIndex - FirstIndex + 1);
     }
 
+    // Testing code.
     public static void Main27()
     {
         int[] first = new int[] {1, 5, 10, 13, 20, 30, 8, 7, 6};
@@ -2157,6 +2184,7 @@ true    */
         return false;
     }
 
+    // Testing code.
     public static void Main28()
     {
         int[] arr = new int[] {3, 3, 3, 3, 4, 5, 10};
@@ -2166,6 +2194,7 @@ true    */
     /*
     true
     */
+    
     public static int MaxProfit(int[] stocks, int size)
     {
         int maxProfit = 0;
@@ -2213,6 +2242,7 @@ true    */
         return maxProfit;
     }
 
+    // Testing code.
     public static void Main29()
     {
         int[] first = new int[] {10, 150, 6, 67, 61, 16, 86, 6, 67, 78, 150, 3, 28, 143};
@@ -2254,6 +2284,7 @@ true    */
         }
     }
 
+    // Testing code.
     public static void Main30()
     {
         int[] first = new int[] {1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30};
@@ -2263,7 +2294,6 @@ true    */
     /*
     6
     */
-
 
 
     public static int Search01(int[] arr, int size)
@@ -2308,6 +2338,7 @@ true    */
         }
     }
 
+    // Testing code.
     public static void Main31()
     {
         int[] first = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1};
@@ -2359,6 +2390,7 @@ true    */
         return RotationMaxUtil(arr, 0, size - 1);
     }
 
+    // Testing code.
     public static void Main32()
     {
         int[] first = new int[] {34, 56, 77, 1, 5, 6, 6, 8, 10, 20, 30, 34};
@@ -2411,6 +2443,7 @@ true    */
         return FindRotationMaxUtil(arr, 0, size - 1);
     }
 
+    // Testing code.
     public static void Main33()
     {
         int[] first = new int[] {34, 56, 77, 1, 5, 6, 6, 8, 10, 20, 30, 34};
@@ -2426,6 +2459,8 @@ true    */
         int maxIndex = FindRotationMaxUtil(arr, 0, size - 1);
         return (maxIndex + 1) % size;
     }
+    
+    // Testing code.
     public static void Main34()
     {
         int[] first = new int[] {34, 56, 77, 1, 5, 6, 6, 8, 10, 20, 30, 34};
@@ -2487,6 +2522,7 @@ true    */
         return BinarySearchRotateArrayUtil(arr, 0, size - 1, key);
     }
 
+    // Testing code.
     public static void Main35()
     {
         int[] first = new int[] {34, 56, 77, 1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30};
@@ -2545,6 +2581,8 @@ true    */
             }
         }
     }
+    
+    // Testing code.
     public static void Main37()
     {
         char[] str = "aaaabbbb".ToCharArray();
@@ -2632,6 +2670,7 @@ true    */
         return true;
     }
 
+    // Testing code.
     public static void Main38()
     {
         char[] str1 = "aaaabbbb".ToCharArray();
@@ -2767,6 +2806,7 @@ true    */
         return true;
     }
 
+    // Testing code.
     public static void Main39()
     {
         int[] arr = new int[] {20, 25, 15, 5, 0, 10, 35, 30};
@@ -2876,6 +2916,7 @@ true    */
         return -1;
     }
 
+    // Testing code.
     public static void Main41()
     {
         int[] arr = new int[] {2, 4, 8, 16};
@@ -2919,6 +2960,7 @@ true    */
         return output;
     }
 
+    // Testing code.
     public static void Main42()
     {
         int[] arr = new int[] {2, 4, 8, 16};
@@ -2928,7 +2970,7 @@ true    */
     8
     */
 
-        public static bool DuplicateKDistance(int[] arr, int size, int k)
+    public static bool DuplicateKDistance(int[] arr, int size, int k)
     {
         Dictionary<int, int> hm = new Dictionary<int, int>();
 
@@ -2953,9 +2995,11 @@ true    */
         int[] arr = new int[] {1, 2, 3, 1, 4, 5};
         DuplicateKDistance(arr, arr.Length, 3);
     }
+    
     /*
     Value:1 Index: 0 & 3
     */
+    
     public static void FrequencyCounts(int[] arr, int size)
     {
         Dictionary<int, int> hm = new Dictionary<int, int>();
@@ -3044,6 +3088,7 @@ true    */
         Console.WriteLine();
     }
 
+    // Testing code.
     public static void Main44()
     {
         int[] arr = new int[] {1, 2, 2, 2, 1};
@@ -3135,6 +3180,7 @@ true    */
         Console.WriteLine();
     }
 
+    // Testing code.
     public static void Main45()
     {
         int[] arr = new int[] {10, 50, 30, 60, 15};
@@ -3186,6 +3232,7 @@ true    */
         return -1;
     }
 
+    // Testing code.
     public static void Main46()
     {
         int[] arr = new int[] {-10, -2, 0, 3, 11, 12, 35, 51, 200};
@@ -3220,6 +3267,7 @@ true    */
         }
     }
 
+    // Testing code.
     public static void Main47()
     {
         int[] arr = new int[] {15, 5, 5, 20, 10, 5, 5, 20, 10, 10};
@@ -3315,6 +3363,7 @@ true    */
         return maximum;
     }
 
+    // Testing code.
     public static void Main48()
     {
         int[] arr = new int[] {1, 2, -3, 4, 5, -10, 6, 7};
@@ -3403,6 +3452,7 @@ true    */
         return water;
     }
 
+    // Testing code.
     public static void Main49()
     {
         int[] arr = new int[] {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
@@ -3436,6 +3486,7 @@ true    */
         }
     }
 
+    // Testing code.
     public static void Main50()
     {
         int[] first = new int[] {1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30};
@@ -3452,12 +3503,12 @@ true    */
 
     public static void Main(string[] args)
     {
-        /*Main1();
+        Main1();
         Main2();
         Main3();
-        Main4();*/
+        Main4();
         Main5();
-        /*Main6();
+        Main6();
         Main7();
         Main8();
         Main9();
@@ -3502,6 +3553,6 @@ true    */
         Main47();
         Main48();
         Main49();
-        Main50();*/
+        Main50();
     }
 }

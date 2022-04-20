@@ -154,6 +154,7 @@ public class OptimalBST
         return cost[0, n - 1];
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] keys = new int[] {9, 15, 25};

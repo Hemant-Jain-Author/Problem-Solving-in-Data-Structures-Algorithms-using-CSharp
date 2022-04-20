@@ -111,6 +111,7 @@ public class HeapEx
         return true;
     }
 
+    // Testing code.
     public static void Main0(string[] args)
     {
         int[] arr = new int[] {8, 7, 6, 5, 7, 5, 2, 1};
@@ -118,11 +119,13 @@ public class HeapEx
         int[] arr2 = new int[] {8, 7, 6, 5, 7, 5, 2, 1};
         Console.WriteLine("Kth Smallest :: " + KthSmallest2(arr2, arr2.Length, 3));
     }
+    
     /*
     Kth Smallest :: 5
     Kth Smallest :: 5
     */
 
+    // Testing code.
     public static void Main1()
     {
         int[] arr3 = new int[] {8, 7, 6, 5, 7, 5, 2, 1};
@@ -135,6 +138,7 @@ public class HeapEx
     IsMaxHeap :: true
     IsMinHeap :: true     
     */
+    
     public static int KSmallestProduct(int[] arr, int size, int k)
     {
         Array.Sort(arr);
@@ -246,6 +250,7 @@ public class HeapEx
         return product;
     }
 
+    // Testing code.
     public static void Main2()
     {
         int[] arr = new int[] {8, 7, 6, 5, 7, 5, 2, 1};
@@ -300,6 +305,7 @@ public class HeapEx
         Console.WriteLine();
     }
 
+    // Testing code.
     public static void Main3()
     {
         int[] arr = new int[] {8, 7, 6, 5, 7, 5, 2, 1};

@@ -70,6 +70,7 @@ public class EditDist
         return dp[m, n];
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         string str1 = "sunday";

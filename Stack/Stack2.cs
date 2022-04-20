@@ -81,6 +81,7 @@ public class Stack2
         Console.WriteLine();
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         Stack2 s = new Stack2(5);

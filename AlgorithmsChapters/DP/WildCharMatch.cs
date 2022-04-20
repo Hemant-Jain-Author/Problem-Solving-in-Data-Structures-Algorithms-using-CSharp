@@ -83,6 +83,7 @@ public class WildCharMatch
         return lookup[m, n];
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         Console.WriteLine(matchExp("*llo,?World?", "Hello, World!"));
@@ -93,6 +94,7 @@ True
 True
 */
 
+    // Testing code.
     public static void main2(string[] args)
     {
         string str = "baaabab";

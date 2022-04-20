@@ -123,6 +123,7 @@ public class RmqST
         return segArr[index];
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] arr = new int[] {2, 3, 1, 7, 12, 5};

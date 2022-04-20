@@ -666,6 +666,7 @@ public class LinkedList
         secondPtr.next = null;
     }
 
+    // Testing code.
     public static void Main1()
     {
         LinkedList ll = new LinkedList();
@@ -688,6 +689,7 @@ public class LinkedList
     3 2 1 4 
     */
 
+    // Testing code.
     public static void Main2()
     {
         LinkedList ll = new LinkedList();
@@ -706,6 +708,7 @@ public class LinkedList
     2 1 
     */ 
 
+    // Testing code.
     public static void Main3()
     {
         LinkedList ll = new LinkedList();
@@ -730,6 +733,7 @@ public class LinkedList
     3 2 
     */
 
+    // Testing code.
     public static void Main4()
     {
         LinkedList ll = new LinkedList();
@@ -758,6 +762,7 @@ public class LinkedList
     1 2 3 
     */
 
+    // Testing code.
     public static void Main5()
     {
         LinkedList ll = new LinkedList();
@@ -786,6 +791,7 @@ CompareList : False
 CompareList : False
     */
 
+    // Testing code.
     public static void Main6()
     {
         LinkedList ll = new LinkedList();
@@ -805,6 +811,7 @@ CompareList : False
     2
     */
 
+    // Testing code.
     public static void Main7()
     {
         LinkedList ll = new LinkedList();
@@ -826,6 +833,7 @@ CompareList : False
     1 2 3
     */
 
+    // Testing code.
         public static void Main8()
     {
         LinkedList ll = new LinkedList();
@@ -848,6 +856,7 @@ CompareList : False
     loop not found
     */
 
+    // Testing code.
     public static void Main9()
     {
         LinkedList ll = new LinkedList();
@@ -870,6 +879,7 @@ CompareList : False
     Intersection:: 2
     */
 
+    // Testing code.
     public static void Main10()
     {
         LinkedList ll = new LinkedList();

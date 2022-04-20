@@ -55,6 +55,7 @@ public class QuickSelect
         return arr[k - 1];
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] array = new int[] {3, 4, 2, 1, 6, 5, 7, 8};

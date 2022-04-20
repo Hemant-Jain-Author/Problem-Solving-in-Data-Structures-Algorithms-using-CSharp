@@ -83,6 +83,7 @@ public class Polynomial
         Console.WriteLine();
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] c1 = new int[] {6, 5, 4};

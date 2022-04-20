@@ -55,6 +55,7 @@ public class JoinRopes
         return total;
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] ropes = new int[] {4, 3, 2, 6};

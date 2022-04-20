@@ -24,6 +24,7 @@ public class CountSort
         }
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] array = new int[] {23, 24, 22, 21, 26, 25, 27, 28, 21, 21};

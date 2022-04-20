@@ -42,6 +42,7 @@ public class LargestBitonicSubseq
         return max;
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] arr = new int[] {1, 6, 3, 11, 1, 9, 5, 12, 3, 14, 6, 17, 3, 19, 2, 19};

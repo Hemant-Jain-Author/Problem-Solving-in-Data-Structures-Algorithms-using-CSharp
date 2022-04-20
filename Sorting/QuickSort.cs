@@ -45,6 +45,7 @@ public class QuickSort
         arr[second] = temp;
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] array = new int[] {3, 4, 2, 1, 6, 5, 7, 8, 10, 9};

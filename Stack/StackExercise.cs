@@ -64,6 +64,7 @@ Main line 2
         return stk.Count == 0;
     }
 
+    // Testing code.
     public static void Main2()
     {
         string expn = "{()}[]";
@@ -112,6 +113,7 @@ public static int PostfixEvaluate(string expn)
     return stk.Pop();
 }
 
+    // Testing code.
     public static void Main3()
     {
         string expn = "6 5 2 3 + 8 * + 3 + *";
@@ -210,6 +212,7 @@ public static int PostfixEvaluate(string expn)
         return output.ToCharArray();
     }
 
+    // Testing code.
     public static void Main4()
     {
         string expn = "10+((3))*5/(16-4)";
@@ -267,6 +270,7 @@ public static int PostfixEvaluate(string expn)
         }
     }
 
+    // Testing code.
     public static void Main5()
     {
         string expn = "10+((3))*5/(16-4)";
@@ -314,7 +318,7 @@ public static int PostfixEvaluate(string expn)
         return SR;
     }
 
-
+    // Testing code.
     public static void Main6()
     {
         int[] arr = new int[] {6, 5, 4, 3, 2, 4, 5, 7, 9};
@@ -394,6 +398,7 @@ public static int PostfixEvaluate(string expn)
         return maxArea;
     }
 
+    // Testing code.
     public static void Main7()
     {
         int[] arr = new int[] {7, 6, 5, 4, 4, 1, 6, 3, 1};
@@ -418,6 +423,7 @@ public static void StockAnalystAdd(Stack<int> stk, int value)
     stk.Push(value);
 }
 
+// Testing code.
 public static void Main7a()
 {
     int[] arr = new int[] {20, 19, 10, 21, 40, 35, 39, 50, 45, 42};
@@ -446,6 +452,7 @@ public static void Main7a()
         }
     }
 
+    // Testing code.
     public static void Main8()
     {
         Stack<int> stk = new Stack<int>();
@@ -496,7 +503,7 @@ public static void Main7a()
         }
     }
 
-
+    // Testing code.
     public static void Main9()
     {
         Stack<int> stk = new Stack<int>();
@@ -548,6 +555,7 @@ public static void Main7a()
         }
     }
 
+    // Testing code.
     public static void Main10()
     {
         Stack<int> stk = new Stack<int>();
@@ -663,6 +671,7 @@ public static void reverseQueue(Queue<int> que)
         }
     }
 
+    // Testing code.
     public static void Main11()
     {
         Stack<int> stk = new Stack<int>();
@@ -676,6 +685,7 @@ public static void reverseQueue(Queue<int> que)
 
     // [1, 2, 3]
 
+    // Testing code.
     public static void Main12()
     {
         Stack<int> stk = new Stack<int>();
@@ -706,6 +716,7 @@ public static void reverseQueue(Queue<int> que)
     [1, 2, 4, 3]
     */
 
+    // Testing code.
     public static void Main13()
     {
         Queue<int> que = new Queue<int>();
@@ -787,6 +798,7 @@ public static void reverseQueue(Queue<int> que)
         return maxDepth;
     }
 
+    // Testing code.
     public static void Main14()
     {
         string expn = "((((A)))((((BBB()))))()()()())";
@@ -827,6 +839,8 @@ public static void reverseQueue(Queue<int> que)
         }
         return length;
     }
+    
+    // Testing code.
     public static void Main15()
     {
         string expn = "())((()))(())()(()";
@@ -882,6 +896,7 @@ public static void reverseQueue(Queue<int> que)
         return reversal;
     }
 
+    // Testing code.
     public static void Main16()
     {
         string expn2 = ")(())(((";
@@ -922,6 +937,7 @@ public static void reverseQueue(Queue<int> que)
         return false;
     }
 
+    // Testing code.
     public static void Main17()
     {
         string expn = "(((a+b))+c)";
@@ -958,6 +974,7 @@ public static void reverseQueue(Queue<int> que)
         Console.WriteLine("Parenthesis Count " + output);
     }
 
+    // Testing code.
     public static void Main18()
     {
         string expn1 = "(((a+(b))+(c+d)))";
@@ -1080,6 +1097,7 @@ public static void reverseQueue(Queue<int> que)
         Console.WriteLine();
     }
 
+    // Testing code.
     public static void Main19()
     {
         int[] arr = new int[] {13, 21, 3, 6, 20, 3};
@@ -1150,6 +1168,7 @@ public static void reverseQueue(Queue<int> que)
         Console.WriteLine();
     }
 
+    // Testing code.
     public static void Main20()
     {
         int[] arr = new int[] {6, 3, 9, 8, 10, 2, 1, 15, 7};
@@ -1250,6 +1269,7 @@ public static void reverseQueue(Queue<int> que)
         return first;
     }
 
+    // Testing code.
     public static void Main21()
     {
         int[, ] arr = new int[, ]

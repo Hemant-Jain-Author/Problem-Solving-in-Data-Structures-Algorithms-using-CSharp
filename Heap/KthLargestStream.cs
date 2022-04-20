@@ -49,6 +49,7 @@ public class KthLargestStream
         size += 1;
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         KthLargestStream kt = new KthLargestStream(10);

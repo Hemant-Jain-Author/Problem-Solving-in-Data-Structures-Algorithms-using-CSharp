@@ -643,9 +643,7 @@ Cycle Presen : True
 Cycle Presen : True
     */
 
-    /*
-    * Given a directed graph Find if there is a cycle in it.
-    */
+
     public bool IsCyclePresentDFS(int index, bool[] visited, int[] marked)
     {
         visited[index] = true;
@@ -823,6 +821,7 @@ Vertex 4 is connected to : 3(cost: 1)
     /*
     IsConnectedUndirected:: True
     */
+    
     public bool IsStronglyConnected()
     {
         bool[] visited = new bool[count];
@@ -957,6 +956,7 @@ Vertex 4 is connected to : 3(cost: 1)
                 }
             }
         }
+        
         // Printing result.
         int sum = 0;
         bool isMst = true;
@@ -1099,11 +1099,9 @@ Total MST cost: 37
 
 
 Shortest Paths: (0->1 @ 4) (0->1->2 @ 12) (0->1->2->3 @ 19) (0->7->6->5->4 @ 21) (0->7->6->5 @ 11) (0->7->6 @ 9) (0->7 @ 8) (0->1->2->8 @ 14) 
-
-
     */
 
-    // Unweighed graph
+
     public void ShortestPath(int source)
     {
         int curr;
@@ -1253,7 +1251,6 @@ Shortest Paths: (0->1 @ 4) (0->1->2 @ 12) (0->1->2->3 @ 19) (0->7->6->5->4 @ 21)
 
     /*
 Shortest Paths: (0->4->1 @ 0) (0->4->1->2 @ 1) (0->4->1->2->3 @ 2) (0->4 @ 2) 
-
     */
 
     public static int HeightTreeParentArr(int[] arr)
@@ -1415,11 +1412,6 @@ Shortest Paths: (0->4->1 @ 0) (0->4->1->2 @ 1) (0->4->1->2->3 @ 2) (0->4 @ 2)
         return true;
     }
 
-    /*
-    * The function returns one of the following values Return 0 if graph is not
-    * Eulerian Return 1 if graph has an Euler path (Semi-Eulerian) Return 2 if
-    * graph has an Euler Circuit (Eulerian)
-    */
     public int IsEulerian()
     {
         int odd;
@@ -1607,8 +1599,8 @@ graph is Eulerian
 
     /*
 Shortest Paths: (0->1 @ 1) (0->1->2 @ 2) (0->1->2->3 @ 3) (0->1->2->3->4 @ 4) (0->1->2->5 @ 3) (0->7->6 @ 2) (0->7 @ 1) (0->7->8 @ 2) 
-
     */
+    
     internal void FloydWarshall()
     {
         int V = count;
@@ -1699,6 +1691,7 @@ Shortest Paths: (0->1 @ 1) (0->1->2 @ 2) (0->1->2->3 @ 3) (0->1->2->3->4 @ 4) (0
         Console.Write("->" + v);
     }
 
+    // Testing code.
     public static void Main21()
     {
         Graph gph = new Graph(4);

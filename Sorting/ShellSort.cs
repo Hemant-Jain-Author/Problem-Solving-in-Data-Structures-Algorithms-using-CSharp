@@ -2,7 +2,7 @@
 
 public class ShellSort
 {
-    private bool more(int value1, int value2)
+    private bool Greater(int value1, int value2)
     {
         return value1 > value2;
     }
@@ -22,7 +22,7 @@ public class ShellSort
                 // Shift elements of already Sorted list
                 // to find right position for curr value.
                 int j;
-                for (j = i; j >= gap && more(arr[j - gap], curr); j -= gap)
+                for (j = i; j >= gap && Greater(arr[j - gap], curr); j -= gap)
                 {
                     arr[j] = arr[j - gap];
                 }
@@ -33,6 +33,7 @@ public class ShellSort
         }
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] array = new int[] {36, 32, 11, 6, 19, 31, 17, 3};

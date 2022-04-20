@@ -115,6 +115,7 @@ public class SegmentTree
         return diff;
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] arr = new int[] {1, 2, 4, 8, 16, 32, 64};

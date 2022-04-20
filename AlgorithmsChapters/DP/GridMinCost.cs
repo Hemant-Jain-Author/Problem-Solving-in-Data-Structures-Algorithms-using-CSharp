@@ -48,6 +48,7 @@ public class GridMinCost
         return tc[m - 1, n - 1];
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[, ] cost = new int[, ]

@@ -1405,6 +1405,7 @@ public class Tree
         return true;
     }
 
+    // Testing code.
     public static void Main1()
     {
         Tree t = new Tree();
@@ -1474,6 +1475,7 @@ public class Tree
         */
     }
 
+    // Testing code.
     public static void Main2()
     {
         Tree t = new Tree();
@@ -1505,6 +1507,7 @@ public class Tree
         // 6
     }
 
+    // Testing code.
     public static void Main3()
     {
         Tree t = new Tree();
@@ -1543,6 +1546,7 @@ True
     */
     }
 
+    // Testing code.
     public static void Main4()
     {
         Tree t = new Tree();
@@ -1573,6 +1577,7 @@ True
 
     }
 
+    // Testing code.
     public static void Main8()
     {
         Tree t = new Tree();
@@ -1593,6 +1598,7 @@ Before delete operation: 1 2 3 4
 After delete operation: 1 3 4 
     */
 
+    // Testing code.
     public static void Main5()
     {
         Tree t = new Tree();
@@ -1615,6 +1621,7 @@ After delete operation: 1 3 4
     LCA does not exist
     */
 
+    // Testing code.
     public static void Main6()
     {
         Tree t = new Tree();
@@ -1632,6 +1639,7 @@ After delete operation: 1 3 4
     4 5 6 7 
     */
 
+    // Testing code.
     public static void Main7()
     {
         Tree t = new Tree();

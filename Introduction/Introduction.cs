@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 public class Introduction
 {
-
     public static void PrintArray(int[] arr, int count)
     {
         Console.Write("[");
@@ -39,6 +38,7 @@ public class Introduction
         int[] arr = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
         Console.WriteLine("Sum of values in array:" + SumArray(arr));
     }
+    
     /*
     Sum of values in array:45
     */
@@ -62,6 +62,7 @@ public class Introduction
         Function1();
         Console.WriteLine("Main line 2");
     }
+    
     /*
     Main line 1
     Fun1 line 1
@@ -69,6 +70,7 @@ public class Introduction
     Fun1 line 2
     Main line 2
     */
+    
     public static int SequentialSearch(int[] arr, int size, int value)
     {
         for (int i = 0; i < size; i++)
@@ -110,16 +112,19 @@ public class Introduction
         return -1;
     }
 
+    // Testing code.
     public static void Main3()
     {
         int[] arr = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
         Console.WriteLine("SequentialSearch:" + SequentialSearch(arr, arr.Length, 7));
         Console.WriteLine("BinarySearch:" + BinarySearch(arr, arr.Length, 7));
     }
+    
     /*
     SequentialSearch:6
     BinarySearch:6
     */
+    
     public static void RotateArray(int[] a, int n, int k)
     {
         ReverseArray(a, 0, k - 1);
@@ -156,9 +161,11 @@ public class Introduction
         RotateArray(arr, arr.Length, 2);
         PrintArray(arr, arr.Length);
     }
+    
     /*
     [ 3 4 5 6 1 2 ]
     */
+    
     public static int MaxSubArraySum(int[] a, int size)
     {
         int maxSoFar = 0, maxEndingHere = 0;
@@ -184,9 +191,11 @@ public class Introduction
         int[] arr = new int[] {1, -2, 3, 4, -4, 6, -4, 3, 2};
         Console.WriteLine("Max sub array sum :" + MaxSubArraySum(arr, 9));
     }
+    
     /*
     Max sub array sum :10
     */
+    
     public static void WaveArray2(int[] arr)
     {
         int size = arr.Length;
@@ -225,10 +234,12 @@ public class Introduction
         WaveArray2(arr2);
         PrintArray(arr2, arr2.Length);
     }
+    
     /*
     [ 2 1 3 2 4 4 6 5 8 ]
     [ 8 1 3 2 5 4 6 2 4 ]
     */
+    
     public static void IndexArray(int[] arr, int size)
     {
         for (int i = 0; i < size; i++)
@@ -274,6 +285,7 @@ public class Introduction
         int size = arr.Length;
         IndexArray2(arr, size);
         PrintArray(arr, size);
+        
         int[] arr2 = new int[] {8, -1, 6, 1, 9, 3, 2, 7, 4, -1};
         size = arr2.Length;
         IndexArray(arr2, size);
@@ -323,16 +335,19 @@ public class Introduction
         int size = arr.Length;
         Sort1toN2(arr, size);
         PrintArray(arr, size);
+        
         int[] arr2 = new int[] {8, 5, 6, 1, 9, 3, 2, 7, 4, 10};
         size = arr2.Length;
         Sort1toN(arr2, size);
         PrintArray(arr2, size);
 
     }
+    
     /*
     [ 1 2 3 4 5 6 7 8 9 10 ]
     [ 1 2 3 4 5 6 7 8 9 10 ]
     */
+    
     public static int SmallestPositiveMissingNumber(int[] arr, int size)
     {
         int found;
@@ -434,6 +449,7 @@ public class Introduction
     SmallestPositiveMissingNumber :3
     SmallestPositiveMissingNumber :3
     */
+    
     public static void MaxMinArr(int[] arr, int size)
     {
         int[] aux = new int[size];
@@ -480,15 +496,18 @@ public class Introduction
         int size = arr.Length;
         MaxMinArr(arr, size);
         PrintArray(arr, size);
+        
         int[] arr2 = new int[] {1, 2, 3, 4, 5, 6, 7};
         int size2 = arr.Length;
         MaxMinArr2(arr2, size2);
         PrintArray(arr2, size2);
     }
+    
     /*
     [ 7 1 6 2 5 3 4 ]
     [ 7 1 6 2 5 3 4 ]
     */
+    
     public static int MaxCircularSum(int[] arr, int size)
     {
         int sumAll = 0;
@@ -518,9 +537,11 @@ public class Introduction
         int[] arr = new int[] {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
         Console.WriteLine("MaxCircularSum: " + MaxCircularSum(arr, arr.Length));
     }
+    
     /*
     MaxCircularSum: 290
     */
+    
     public static int ArrayIndexMaxDiff(int[] arr, int size)
     {
         int maxDiff = -1;
@@ -576,6 +597,7 @@ public class Introduction
         Console.WriteLine("ArrayIndexMaxDiff : " + ArrayIndexMaxDiff(arr, arr.Length));
         Console.WriteLine("ArrayIndexMaxDiff : " + ArrayIndexMaxDiff2(arr, arr.Length));
     }
+    
     /*
     ArrayIndexMaxDiff : 7
     ArrayIndexMaxDiff : 7
@@ -630,9 +652,11 @@ public class Introduction
         int[] arr2 = new int[] {11, 15, 18, 19, 20, 26, 30, 31};
         Console.WriteLine("Max Path Sum :: " + MaxPathSum(arr1, arr1.Length, arr2, arr2.Length));
     }
+    
     /*
     Max Path Sum :: 201
     */
+    
 public static int Factorial(int i)
 {
     // Termination Condition
@@ -677,15 +701,13 @@ public static void PrintInt(int number, int outputbase)
 /* Testing code */
 public static void Main15()
 {
-    PrintInt10(50);
-    Console.WriteLine();
     PrintInt(500, 16);
     Console.WriteLine();
 }
-    /*
-    50
-    1F4
-    */
+
+/*
+1F4
+*/
 
 
 public static void TowerOfHanoi(int num, char src, char dst, char temp)
@@ -707,16 +729,18 @@ public static void Main16()
     Console.WriteLine("Moves involved in the Tower of Hanoi are:");
     TowerOfHanoi(num, 'A', 'C', 'B');
 }
-    /*
-    Moves involved in the Tower of Hanoi are:
-    Move 1 disk  from peg A to peg C
-    Move 2 disk  from peg A to peg B
-    Move 1 disk  from peg C to peg B
-    Move 3 disk  from peg A to peg C
-    Move 1 disk  from peg B to peg A
-    Move 2 disk  from peg B to peg C
-    Move 1 disk  from peg A to peg C
-    */
+
+/*
+Moves involved in the Tower of Hanoi are:
+Move 1 disk  from peg A to peg C
+Move 2 disk  from peg A to peg B
+Move 1 disk  from peg C to peg B
+Move 3 disk  from peg A to peg C
+Move 1 disk  from peg B to peg A
+Move 2 disk  from peg B to peg C
+Move 1 disk  from peg A to peg C
+*/
+
 public static int Gcd(int m, int n)
 {
     if (n == 0)
@@ -821,10 +845,12 @@ public static void Main18()
         Console.WriteLine(BinarySearchRecursive(arr, 0, arr.Length - 1, 6));
         Console.WriteLine(BinarySearchRecursive(arr, 0, arr.Length - 1, 16));
     }
+    
     /*
     5
     -1
     */
+    
     public static void Main(string[] args)
     {
         Main1();

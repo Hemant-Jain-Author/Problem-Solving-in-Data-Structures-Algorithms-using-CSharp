@@ -3,16 +3,6 @@ using System.Collections.Generic;
 
 public class HashTableExercise
 {
-
-    public static void Main(string[] args)
-    {
-        Main1();
-        Main2();
-        Main3();
-        Main4();
-        Main5();
-    }
-
     public static bool IsAnagram(char[] str1, char[] str2)
     {
         int size1 = str1.Length;
@@ -49,6 +39,7 @@ public class HashTableExercise
         return true;
     }
 
+    // Testing code.
     public static void Main1()
     {
         char[] first = "hello".ToCharArray();
@@ -79,6 +70,7 @@ public class HashTableExercise
         return output;
     }
 
+    // Testing code.
     public static void Main2()
     {
         char[] first = "hello".ToCharArray();
@@ -106,6 +98,7 @@ public class HashTableExercise
         return int.MaxValue;
     }
 
+    // Testing code.
     public static void Main3()
     {
         int[] arr = new int[] {1, 2, 3, 5, 6, 7, 8, 9, 10};
@@ -132,6 +125,8 @@ public class HashTableExercise
             }
         }
     }
+    
+    // Testing code.
     public static void Main4()
     {
         int[] arr1 = new int[] {1, 2, 3, 4, 4, 5, 6, 7, 8, 9, 1};
@@ -159,6 +154,7 @@ public class HashTableExercise
         Console.WriteLine("First Repeating number is:" + firstRepeating);
     }
 
+    // Testing code.
     public static void Main5()
     {
         int[] arr1 = new int[] {1, 2, 3, 4, 4, 5, 6, 7, 8, 9, 1};
@@ -179,4 +175,14 @@ public class HashTableExercise
         }
         return h;
     }
+    
+    public static void Main(string[] args)
+    {
+        Main1();
+        Main2();
+        Main3();
+        Main4();
+        Main5();
+    }
+
 }

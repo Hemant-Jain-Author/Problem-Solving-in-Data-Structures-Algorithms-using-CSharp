@@ -60,6 +60,8 @@ class InventoryManager{
 
 class Program
 {
+	
+    // Testing code.
     static void Main(string[] args)
     {
         InventoryManager im = new InventoryManager(10);

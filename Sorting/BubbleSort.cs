@@ -7,7 +7,7 @@ public class BubbleSort
         return value1 < value2;
     }
 
-    private bool More(int value1, int value2)
+    private bool Greater(int value1, int value2)
     {
         return value1 > value2;
     }
@@ -20,7 +20,7 @@ public class BubbleSort
         {
             for (j = 0; j < size - i - 1; j++)
             {
-                if (More(arr[j], arr[j + 1]))
+                if (Greater(arr[j], arr[j + 1]))
                 {
                     /* Swapping */
                     temp = arr[j];
@@ -40,7 +40,7 @@ public class BubbleSort
             swapped = 0;
             for (j = 0; j < size - i - 1; j++)
             {
-                if (More(arr[j], arr[j + 1]))
+                if (Greater(arr[j], arr[j + 1]))
                 {
                     temp = arr[j];
                     arr[j] = arr[j + 1];
@@ -51,6 +51,7 @@ public class BubbleSort
         }
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] array = new int[] {9, 1, 8, 2, 7, 3, 6, 4, 5};

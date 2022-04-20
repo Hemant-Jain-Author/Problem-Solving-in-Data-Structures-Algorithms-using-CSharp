@@ -2,7 +2,7 @@
 
 public class InsertionSort
 {
-    private bool more(int value1, int value2)
+    private bool Greater(int value1, int value2)
     {
         return value1 > value2;
     }
@@ -14,7 +14,7 @@ public class InsertionSort
         for (int i = 1; i < size; i++)
         {
             temp = arr[i];
-            for (j = i; j > 0 && more(arr[j - 1], temp); j--)
+            for (j = i; j > 0 && Greater(arr[j - 1], temp); j--)
             {
                 arr[j] = arr[j - 1];
             }
@@ -22,6 +22,7 @@ public class InsertionSort
         }
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] array = new int[] {9, 1, 8, 2, 7, 3, 6, 4, 5};

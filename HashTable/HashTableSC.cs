@@ -94,6 +94,7 @@ public class HashTableSC
         return false;
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         HashTableSC ht = new HashTableSC();
@@ -106,6 +107,7 @@ public class HashTableSC
         Console.WriteLine("Find key 2 : " + ht.Find(2));
     }
 }
+
 /*
 Hash Table contains ::1 2 3 
 Find key 2 : true

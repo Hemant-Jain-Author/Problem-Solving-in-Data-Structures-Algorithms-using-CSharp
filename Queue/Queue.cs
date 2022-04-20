@@ -77,6 +77,7 @@ public class Queue
         Console.WriteLine();
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         Queue que = new Queue(5);

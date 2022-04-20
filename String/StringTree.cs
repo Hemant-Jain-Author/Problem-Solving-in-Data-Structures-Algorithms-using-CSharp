@@ -126,6 +126,7 @@ public class StringTree
         root = null;
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         StringTree tt = new StringTree();

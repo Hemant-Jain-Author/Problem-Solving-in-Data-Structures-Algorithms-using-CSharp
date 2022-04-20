@@ -68,9 +68,7 @@ public class ALS
         f[1, i] = Math.Min(f[1, i - 1] + a[1, i], f[0, i - 1] + t[0, i - 1] + a[1, i]);
     }
 
-
-
-    // Driver code
+    // Testing code.
     public static void Main(string[] args)
     {
         int[, ] a = new int[, ]

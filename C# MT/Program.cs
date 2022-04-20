@@ -11,7 +11,8 @@ class Program
                 Thread.Sleep(1);
         }
     }
-    
+
+    // Testing code.
     public static void Main1() {
         Console.WriteLine("Start of Main");
 
@@ -36,6 +37,7 @@ class Program
         Console.WriteLine("End of Main");
     }
 
+    // Testing code.
     public static void Main2() {
         Console.WriteLine("Start of Main");
         ThreadStart ths = new ThreadStart(thfun);
@@ -61,6 +63,7 @@ class Program
         Console.WriteLine("End of Main");
     }
 
+    // Testing code.
     public static void Main3() {
         Console.WriteLine("Start of Main");
         ThreadStart ths = new ThreadStart(thfun);
@@ -84,17 +87,10 @@ class Program
         Console.WriteLine("End of Main");
     }
 
-        static readonly object _object = new object();
-        static int count = 0;   
-        static void lockFunc() {              
-                lock (_object)   
-                {   
-                        for(int i = 0;i<100;i++)
-                                count += 1;
-                }   
-            }   
+ 
        
 
+    // Testing code.
     public static void Main4() {
         Console.WriteLine("Start of Main");
         

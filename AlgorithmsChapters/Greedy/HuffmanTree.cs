@@ -64,6 +64,7 @@ public class HuffmanTree
         Print(root, "");
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         char[] ar = new char[] {'A', 'B', 'C', 'D', 'E'};

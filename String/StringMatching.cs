@@ -156,6 +156,7 @@ public class StringMatching
         return count;
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         string st1 = "hello, world!";

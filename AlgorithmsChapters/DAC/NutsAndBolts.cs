@@ -64,6 +64,7 @@ public class NutsAndBolts
         return i;
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] nuts = new int[] {1, 2, 6, 5, 4, 3};

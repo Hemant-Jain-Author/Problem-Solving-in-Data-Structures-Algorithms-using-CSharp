@@ -24,6 +24,7 @@ public class OptimalMergePattern
         return total;
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] lists = new int[] {4, 3, 2, 6};

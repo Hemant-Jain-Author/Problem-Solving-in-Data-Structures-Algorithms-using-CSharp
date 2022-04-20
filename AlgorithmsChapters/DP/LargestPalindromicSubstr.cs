@@ -38,6 +38,7 @@ public class LargestPalindromicSubstr
         return max;
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         string str = "ABCAUCBCxxCBA";

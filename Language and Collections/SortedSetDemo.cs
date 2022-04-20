@@ -11,7 +11,8 @@ public class SortedSetDemo
         ts.Add("Banana");
         ts.Add("Apple");
         ts.Add("Mango");
-        foreach(var ele in ts){
+        foreach (var ele in ts)
+        {
             Console.Write(ele + " ");
         }
         Console.WriteLine();

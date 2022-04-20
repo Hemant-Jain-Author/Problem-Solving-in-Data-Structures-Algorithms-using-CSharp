@@ -24,6 +24,7 @@ public class StringEx
         return false;
     }
 
+    // Testing code.
     public static void Main2()
     {
         Console.WriteLine(Match("harrypottermustnotgotoschool", "pottergo"));
@@ -55,6 +56,7 @@ public class StringEx
         return answer;
     }
 
+    // Testing code.
     public static void Main3()
     {
         Console.Write("Prime numbers under 10 :: ");
@@ -81,6 +83,7 @@ public class StringEx
         return value;
     }
 
+    // Testing code.
     public static void Main4()
     {
         Console.WriteLine(MyAtoi("1000"));
@@ -124,6 +127,7 @@ public class StringEx
         return true;
     }
 
+    // Testing code.
     public static void Main5()
     {
         IsUniqueChar("aple");
@@ -164,6 +168,7 @@ public class StringEx
         return s;
     }
 
+    // Testing code.
     public static void Main6()
     {
         Console.WriteLine(ToLower('A'));
@@ -206,6 +211,7 @@ public class StringEx
         return true;
     }
 
+    // Testing code.
     public static void Main7()
     {
         Console.WriteLine(IsPermutation("apple", "plepa"));
@@ -235,6 +241,7 @@ public class StringEx
         }
     }
 
+    // Testing code.
     public static void Main8()
     {
         IsPalindrome("hello");
@@ -264,6 +271,7 @@ public class StringEx
         }
     }
 
+    // Testing code.
     public static void Main9()
     {
         Console.WriteLine(Pow(5, 2));
@@ -300,6 +308,7 @@ public class StringEx
         }
     }
 
+    // Testing code.
     public static void Main10()
     {
         Console.WriteLine(MyStrcmp("abs", "abs"));
@@ -365,6 +374,7 @@ public class StringEx
         return expn;
     }
 
+    // Testing code.
     public static void Main11()
     {
         Console.WriteLine(ReverseString("apple"));
@@ -412,6 +422,7 @@ public class StringEx
         arr[j] = temp;
     }
 
+    // Testing code.
     public static void Main12()
     {
         PrintAnagram("123");
@@ -425,6 +436,7 @@ public class StringEx
     132
     312
     */
+    
     public static void Shuffle(string str)
     {
         char[] ar = str.ToCharArray();
@@ -452,6 +464,7 @@ public class StringEx
         Console.WriteLine(ar);
     }
 
+    // Testing code.
     public static void Main13()
     {
         Shuffle("ABCDE12345");
@@ -480,11 +493,13 @@ public class StringEx
         return new string(total);
     }
 
+    // Testing code.
     public static void Main14()
     {
         Console.WriteLine(AddBinary("1000", "11111111"));
     }
-    // 100000111 
+    // 100000111
+     
     public static void Main(string[] args)
     {
         Main2();

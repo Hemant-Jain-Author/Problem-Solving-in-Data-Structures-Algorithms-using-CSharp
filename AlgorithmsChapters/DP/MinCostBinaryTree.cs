@@ -83,6 +83,7 @@ public class MinCostBinaryTree
         return dp[0, n - 1];
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] arr = new int[] {6, 2, 4};

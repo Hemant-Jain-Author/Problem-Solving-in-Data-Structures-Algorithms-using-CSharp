@@ -43,6 +43,7 @@ public class SubsetSum
         FindSubsetSum(arr, n, flags, sum, curr + 1, target);
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] arr = new int[] {15, 22, 14, 26, 32, 9, 16, 8};

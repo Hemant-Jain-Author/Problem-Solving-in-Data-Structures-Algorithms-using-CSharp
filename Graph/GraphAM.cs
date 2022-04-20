@@ -47,6 +47,7 @@ public class GraphAM
         }
     }
 
+    // Testing code.
     public static void Main1()
     {
         GraphAM graph = new GraphAM(4);
@@ -216,6 +217,7 @@ public class GraphAM
         }
     }
 
+    // Testing code.
     public static void Main2()
     {
         GraphAM gph = new GraphAM(9);
@@ -342,6 +344,7 @@ Shortest Paths: (0->1 @ 4) (0->1->2 @ 12) (0->1->2->3 @ 19) (0->7->6->5->4 @ 21)
         return false;
     }
 
+    // Testing code.
     public static void Main3()
     {
         int count = 5;
@@ -396,6 +399,8 @@ HamiltonianPath : true
 Hamiltonian Path found ::  0 3 1 2 4
 HamiltonianPath :  true
  */
+
+    // Testing code.
     public static void Main4()
     {
         int count = 5;

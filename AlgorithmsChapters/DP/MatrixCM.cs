@@ -93,7 +93,8 @@ public class MatrixCM
         return dp[1, n - 1];
     }
 
-    // Driver Code
+
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] arr = new int[] {1, 2, 3, 4};

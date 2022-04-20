@@ -67,6 +67,7 @@ public class Stack
         Console.WriteLine("");
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         Stack s = new Stack();

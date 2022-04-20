@@ -523,6 +523,7 @@ public class BTree
         return;
     }
 
+    // Testing code.
     public static void Main(string[] arg)
     {
         BTree t = new BTree(3); // A B-Tree with max key 3

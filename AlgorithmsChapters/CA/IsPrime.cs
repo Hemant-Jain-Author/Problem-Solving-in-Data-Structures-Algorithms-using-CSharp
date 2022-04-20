@@ -16,6 +16,7 @@ public class IsPrime
         return answer;
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         Console.WriteLine(IsPrime.TestPrime(7));

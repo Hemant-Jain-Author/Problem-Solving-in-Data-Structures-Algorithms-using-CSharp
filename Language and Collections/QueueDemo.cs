@@ -11,7 +11,7 @@ class QueueDemo
         que.Enqueue(3);
 
         Console.Write("Queue : ");
-        foreach(var ele in que)
+        foreach (var ele in que)
             Console.Write(ele + " ");
         Console.WriteLine();
 

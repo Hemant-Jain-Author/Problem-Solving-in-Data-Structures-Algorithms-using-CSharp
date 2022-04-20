@@ -179,7 +179,7 @@ public static int Fun13(int n)
     return m;
 }
 
-    // Testing code.
+// Testing code.
 public static void Main(string[] args)
 {
     Console.WriteLine("N = 100, Number of instructions in O(n)::" + Fun1(100));

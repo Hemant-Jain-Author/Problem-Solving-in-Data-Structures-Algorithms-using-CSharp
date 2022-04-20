@@ -127,6 +127,7 @@ public class ClosestPair
         return ClosestPairUtil(p, 0, n - 1, q, n);
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[, ] arr = new int[,]

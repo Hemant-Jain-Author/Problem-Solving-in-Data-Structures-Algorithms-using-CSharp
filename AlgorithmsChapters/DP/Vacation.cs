@@ -27,6 +27,7 @@ public class Vacation
         return dp[max];
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] days = new int[] {1, 3, 5, 7, 12, 20, 30};

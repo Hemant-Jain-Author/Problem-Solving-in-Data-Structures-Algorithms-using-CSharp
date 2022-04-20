@@ -110,6 +110,8 @@ public class HashTableLP
         Console.WriteLine();
     }
 
+    
+    // Testing code.
     public static void Main(string[] args)
     {
         HashTableLP ht = new HashTableLP(1000);

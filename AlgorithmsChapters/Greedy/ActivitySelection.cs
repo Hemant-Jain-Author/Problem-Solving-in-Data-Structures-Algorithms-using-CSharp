@@ -51,6 +51,7 @@ internal class ActivitySelection
         }
     }
 
+    // Testing code.
     public static void Main(string[] args)
     {
         int[] s = new int[] {1, 5, 0, 3, 5, 6, 8};
