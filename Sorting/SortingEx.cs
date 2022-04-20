@@ -3,567 +3,857 @@ using System.Collections.Generic;
 
 public class SortingEx
 {
-
-public static void PrintArray(int[] arr, int count)
-{
-    Console.Write("[");
-    for (int i = 0; i < count; i++)
+    public static void PrintArray(int[] arr, int count)
     {
-        Console.Write(" " + arr[i]);
+        Console.Write("[");
+        for (int i = 0; i < count; i++)
+        {
+            Console.Write(" " + arr[i]);
+        }
+        Console.WriteLine(" ]");
     }
-    Console.WriteLine(" ]");
-}
 
-public static void Swap(int[] arr, int x, int y)
-{
-    int temp = arr[x];
-    arr[x] = arr[y];
-    arr[y] = temp;
-    return;
-}
-
-public static int Partition01(int[] arr, int size)
-{
-    int left = 0;
-    int right = size - 1;
-    int count = 0;
-    while (left < right)
+    public static void Swap(int[] arr, int x, int y)
     {
-        while (arr[left] == 0)
-        {
-            left += 1;
-        }
-
-        while (arr[right] == 1)
-        {
-            right -= 1;
-        }
-
-        if (left < right)
-        {
-            Swap(arr, left, right);
-            count += 1;
-        }
+        int temp = arr[x];
+        arr[x] = arr[y];
+        arr[y] = temp;
+        return;
     }
-    return count;
-}
 
-public static void Partition012_(int[] arr, int size)
-{
-    int zero = 0, one = 0, two = 0;
-
-    for (int i = 0; i < size;i++)
+    public static int Partition01(int[] arr, int size)
     {
-        if (arr[i] == 0)
+        int left = 0;
+        int right = size - 1;
+        int count = 0;
+        while (left < right)
         {
-            zero += 1;
-        }
-        else if (arr[i] == 1)
-        {
-            one += 1;
-        }
-        else
-        {
-            two += 1;
-        }
-    }
-    int index = 0;
-    while (zero > 0)
-    {
-        arr[index++] = 0;
-        zero -= 1;
-    }
-    while (one > 0)
-    {
-        arr[index++] = 1;
-        one -= 1;
-    }
-    while (two > 0)
-    {
-        arr[index++] = 2;
-        two -= 1;
-    }
-}
-
-public static void Partition012(int[] arr, int size)
-{
-    int left = 0;
-    int right = size - 1;
-    int i = 0;
-    while (i <= right)
-    {
-        if (arr[i] == 0)
-        {
-            Swap(arr, i, left);
-            i += 1;
-            left += 1;
-        }
-        else if (arr[i] == 2)
-        {
-            Swap(arr, i, right);
-            right -= 1;
-        }
-        else
-        {
-            i += 1;
-        }
-    }
-}
-
-// Testing code
-public static void Main1()
-{
-    int[] arr = new int[] {0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1};
-    Partition01(arr, arr.Length);
-    PrintArray(arr, arr.Length);
-
-    int[] arr2 = new int[] {0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1};
-    Partition012(arr2, arr2.Length);
-    PrintArray(arr2, arr2.Length);
-
-    int[] arr3 = new int[] {0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1};
-    Partition012_(arr3, arr3.Length);
-    PrintArray(arr3, arr3.Length);
-}
-
-/*
-[ 0 0 0 0 0 0 1 1 1 1 1 1 ]
-[ 0 0 0 0 0 1 1 1 1 1 2 2 ]
-*/
-
-public static void RangePartition(int[] arr, int size, int lower, int higher)
-{
-    int start = 0;
-    int end = size - 1;
-    int i = 0;
-    while (i <= end)
-    {
-        if (arr[i] < lower)
-        {
-            Swap(arr, i, start);
-            i += 1;
-            start += 1;
-        }
-        else if (arr[i] > higher)
-        {
-            Swap(arr, i, end);
-            end -= 1;
-        }
-        else
-        {
-            i += 1;
-        }
-    }
-}
-
-// Testing code
-public static void Main2()
-{
-    int[] arr = new int[] {1, 2, 3, 4, 18, 5, 17, 6, 16, 7, 15, 8, 14, 9, 13, 10, 12, 11};
-    RangePartition(arr, arr.Length, 9, 12);
-    PrintArray(arr, arr.Length);
-}
-
-/*
-[ 1 2 3 4 5 6 7 8 10 12 9 11 14 13 15 16 17 18 ]
-*/
-
-
-public static int MinSwaps(int[] arr, int size, int val)
-{
-    int SwapCount = 0;
-    int first = 0;
-    int second = size - 1;
-    int temp;
-    while (first < second)
-    {
-        if (arr[first] <= val)
-        {
-            first += 1;
-        }
-        else if (arr[second] > val)
-        {
-            second -= 1;
-        }
-        else
-        {
-            temp = arr[first];
-            arr[first] = arr[second];
-            arr[second] = temp;
-            SwapCount += 1;
-        }
-    }
-    return SwapCount;
-}
-
-//Testing code
-public static void Main3()
-{
- int[] array = new int[] {1, 2, 3, 4, 18, 5, 17, 6, 16, 7, 15, 8, 14, 9, 13, 10, 12, 11};
- Console.WriteLine("MinSwaps " + MinSwaps(array, array.Length, 10));
-
-}
-
-// MinSwaps 3
-
-public static void SeparateEvenAndOdd(int[] data, int size)
-{
-    int left = 0, right = size - 1;
-    int[] aux = new int[size];
-
-    for (int i = 0;i < size;i++)
-    {
-        if (data[i] % 2 == 0)
-        {
-            aux[left] = data[i];
-            left++;
-        }
-        else if (data[i] % 2 == 1)
-        {
-            aux[right] = data[i];
-            right--;
-        }
-    }
-    for (int i = 0;i < size;i++)
-    {
-        data[i] = aux[i];
-    }
-}
-
-public static void SeparateEvenAndOdd2(int[] data, int size)
-{
-    int left = 0, right = size - 1;
-    while (left < right)
-    {
-        if (data[left] % 2 == 0)
-        {
-            left++;
-        }
-        else if (data[right] % 2 == 1)
-        {
-            right--;
-        }
-        else
-        {
-            Swap(data, left, right);
-            left++;
-            right--;
-        }
-    }
-}
-
-// Testing code
-public static void Main4()
-{
-    int[] array = new int[] {9, 1, 8, 2, 7, 3, 6, 4, 5};
-    SeparateEvenAndOdd(array, array.Length);
-    PrintArray(array, array.Length);
-    int[] array2 = new int[] {9, 1, 8, 2, 7, 3, 6, 4, 5};
-    SeparateEvenAndOdd2(array2, array2.Length);
-    PrintArray(array2, array2.Length);
-}
-
-// [ 8 2 6 4 5 3 7 1 9 ]
-// [ 4 6 8 2 7 3 1 9 5 ]
-
-public static bool AbsGreater(int value1, int value2, int reference)
-{
-    return (Math.Abs(value1 - reference) > Math.Abs(value2 - reference));
-}
-
-public static void AbsBubbleSort(int[] arr, int size, int reference)
-{
-    for (int i = 0; i < (size - 1); i++)
-    {
-        for (int j = 0; j < (size - i - 1); j++)
-        {
-            if (AbsGreater(arr[j], arr[j + 1], reference))
+            while (arr[left] == 0)
             {
-                Swap(arr, j, j + 1);
+                left += 1;
+            }
+
+            while (arr[right] == 1)
+            {
+                right -= 1;
+            }
+
+            if (left < right)
+            {
+                Swap(arr, left, right);
+                count += 1;
+            }
+        }
+        return count;
+    }
+
+    public static void Partition012_(int[] arr, int size)
+    {
+        int zero = 0, one = 0, two = 0;
+
+        for (int i = 0; i < size; i++)
+        {
+            if (arr[i] == 0)
+            {
+                zero += 1;
+            }
+            else if (arr[i] == 1)
+            {
+                one += 1;
+            }
+            else
+            {
+                two += 1;
+            }
+        }
+        int index = 0;
+        while (zero > 0)
+        {
+            arr[index++] = 0;
+            zero -= 1;
+        }
+        while (one > 0)
+        {
+            arr[index++] = 1;
+            one -= 1;
+        }
+        while (two > 0)
+        {
+            arr[index++] = 2;
+            two -= 1;
+        }
+    }
+
+    public static void Partition012(int[] arr, int size)
+    {
+        int left = 0;
+        int right = size - 1;
+        int i = 0;
+        while (i <= right)
+        {
+            if (arr[i] == 0)
+            {
+                Swap(arr, i, left);
+                i += 1;
+                left += 1;
+            }
+            else if (arr[i] == 2)
+            {
+                Swap(arr, i, right);
+                right -= 1;
+            }
+            else
+            {
+                i += 1;
             }
         }
     }
-}
 
-// Testing code
-public static void Main5()
-{
-    int[] array = new int[] {9, 1, 8, 2, 7, 3, 6, 4, 5};
-    int reference = 5;
-    AbsBubbleSort(array, array.Length, reference);
-    PrintArray(array, array.Length);
-}
-
-/*
-[ 5 6 4 7 3 8 2 9 1 ]
-*/
-
-public static bool EqGreater(int value1, int value2, int A)
-{
-    value1 = A * value1 * value1;
-    value2 = A * value2 * value2;
-    return value1 > value2;
-}
-
-public static void ArrayReduction(int[] arr, int size)
-{
-    Array.Sort(arr);
-    int count = 1;
-    int reduction = arr[0];
-
-    for (int i = 0; i < size; i++)
+    // Testing code
+    public static void Main1()
     {
-        if (arr[i] - reduction > 0)
-        {
-            reduction = arr[i];
-            count += 1;
-            Console.WriteLine(size - i);
-        }
-    }
-    Console.WriteLine(0); // after all the reduction the array will be empty.
+        int[] arr = new int[] { 0, 1, 1, 0, 1, 0, 1, 1, 0, 0, 0, 1 };
+        Partition01(arr, arr.Length);
+        PrintArray(arr, arr.Length);
 
-    Console.WriteLine("Total number of reductions: " + count);
-}
+        int[] arr2 = new int[] { 0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1 };
+        Partition012(arr2, arr2.Length);
+        PrintArray(arr2, arr2.Length);
 
-// Testing code
-public static void Main6()
-{
-    int[] arr = new int[] {5, 1, 1, 1, 2, 3, 5};
-    ArrayReduction(arr, arr.Length);
-}
-
-/*
-4
-3
-2
-0
-Total number of reductions: 4
-*/
-
-public static void SortByOrder(int[] arr, int size, int[] arr2, int size2)
-{
-    Dictionary<int, int> ht = new Dictionary<int, int>();
-    int value;
-    for (int i = 0; i < size; i++)
-    {
-        if (ht.ContainsKey(arr[i]))
-        {
-            value = ht[arr[i]];
-            ht[arr[i]] = value + 1;
-        }
-        else
-        {
-            ht[arr[i]] = 1;
-        }
+        int[] arr3 = new int[] { 0, 1, 1, 0, 1, 2, 1, 2, 0, 0, 0, 1 };
+        Partition012_(arr3, arr3.Length);
+        PrintArray(arr3, arr3.Length);
     }
 
-    for (int j = 0; j < size2; j++)
+    /*
+    [ 0 0 0 0 0 0 1 1 1 1 1 1 ]
+    [ 0 0 0 0 0 1 1 1 1 1 2 2 ]
+    */
+
+    public static void RangePartition(int[] arr, int size, int lower, int higher)
     {
-        if (ht.ContainsKey(arr2[j]))
+        int start = 0;
+        int end = size - 1;
+        int i = 0;
+        while (i <= end)
         {
-            value = ht[arr2[j]];
-            for (int k = 0; k < value; k++)
+            if (arr[i] < lower)
             {
-                Console.Write(arr2[j] + " ");
+                Swap(arr, i, start);
+                i += 1;
+                start += 1;
             }
-            ht.Remove(arr2[j]);
-        }
-    }
-
-    for (int i = 0; i < size; i++)
-    {
-        if (ht.ContainsKey(arr[i]))
-        {
-            value = ht[arr[i]];
-            for (int k = 0; k < value; k++)
+            else if (arr[i] > higher)
             {
-                Console.Write(arr[i] + " ");
+                Swap(arr, i, end);
+                end -= 1;
             }
-            ht.Remove(arr[i]);
+            else
+            {
+                i += 1;
+            }
         }
     }
-}
 
-// Testing code
-public static void Main7()
-{
-    int[] arr = new int[] {2, 1, 2, 5, 7, 1, 9, 3, 6, 8, 8};
-    int[] arr2 = new int[] {2, 1, 8, 3};
-    SortByOrder(arr, arr.Length, arr2, arr2.Length);
-    Console.WriteLine();
-}
-
-/*
-2 2 1 1 8 8 3 5 7 9 6 
-*/
-
-public static void Merge(int[] arr1, int size1, int[] arr2, int size2)
-{
-    int index = 0;
-    int temp;
-    while (index < size1)
+    // Testing code
+    public static void Main2()
     {
-        if (arr1[index] <= arr2[0])
+        int[] arr = new int[] { 1, 2, 3, 4, 18, 5, 17, 6, 16, 7, 15, 8, 14, 9, 13, 10, 12, 11 };
+        RangePartition(arr, arr.Length, 9, 12);
+        PrintArray(arr, arr.Length);
+    }
+
+    /*
+    [ 1 2 3 4 5 6 7 8 10 12 9 11 14 13 15 16 17 18 ]
+    */
+
+
+    public static int MinSwaps(int[] arr, int size, int val)
+    {
+        int SwapCount = 0;
+        int first = 0;
+        int second = size - 1;
+        int temp;
+        while (first < second)
         {
-            index += 1;
-        }
-        else
-        {
-            // always first element of arr2 is compared.
-            temp = arr1[index];
-            arr1[index] = arr2[0];
-            arr2[0] = temp;
-            index += 1;
-            // After Swap arr2 may be unsorted.
-            // Insertion of the element in proper sorted position.
-            for (int i = 0; i < (size2 - 1); i++)
+            if (arr[first] <= val)
             {
-                if (arr2[i] < arr2[i + 1])
+                first += 1;
+            }
+            else if (arr[second] > val)
+            {
+                second -= 1;
+            }
+            else
+            {
+                temp = arr[first];
+                arr[first] = arr[second];
+                arr[second] = temp;
+                SwapCount += 1;
+            }
+        }
+        return SwapCount;
+    }
+
+    //Testing code
+    public static void Main3()
+    {
+        int[] array = new int[] { 1, 2, 3, 4, 18, 5, 17, 6, 16, 7, 15, 8, 14, 9, 13, 10, 12, 11 };
+        Console.WriteLine("MinSwaps " + MinSwaps(array, array.Length, 10));
+
+    }
+
+    // MinSwaps 3
+
+    public static void SeparateEvenAndOdd(int[] data, int size)
+    {
+        int left = 0, right = size - 1;
+        int[] aux = new int[size];
+
+        for (int i = 0; i < size; i++)
+        {
+            if (data[i] % 2 == 0)
+            {
+                aux[left] = data[i];
+                left++;
+            }
+            else if (data[i] % 2 == 1)
+            {
+                aux[right] = data[i];
+                right--;
+            }
+        }
+        for (int i = 0; i < size; i++)
+        {
+            data[i] = aux[i];
+        }
+    }
+
+    public static void SeparateEvenAndOdd2(int[] data, int size)
+    {
+        int left = 0, right = size - 1;
+        while (left < right)
+        {
+            if (data[left] % 2 == 0)
+            {
+                left++;
+            }
+            else if (data[right] % 2 == 1)
+            {
+                right--;
+            }
+            else
+            {
+                Swap(data, left, right);
+                left++;
+                right--;
+            }
+        }
+    }
+
+    // Testing code
+    public static void Main4()
+    {
+        int[] array = new int[] { 9, 1, 8, 2, 7, 3, 6, 4, 5 };
+        SeparateEvenAndOdd(array, array.Length);
+        PrintArray(array, array.Length);
+        int[] array2 = new int[] { 9, 1, 8, 2, 7, 3, 6, 4, 5 };
+        SeparateEvenAndOdd2(array2, array2.Length);
+        PrintArray(array2, array2.Length);
+    }
+
+    // [ 8 2 6 4 5 3 7 1 9 ]
+    // [ 4 6 8 2 7 3 1 9 5 ]
+
+    public static bool AbsGreater(int value1, int value2, int reference)
+    {
+        return (Math.Abs(value1 - reference) > Math.Abs(value2 - reference));
+    }
+
+    public static void AbsBubbleSort(int[] arr, int size, int reference)
+    {
+        for (int i = 0; i < (size - 1); i++)
+        {
+            for (int j = 0; j < (size - i - 1); j++)
+            {
+                if (AbsGreater(arr[j], arr[j + 1], reference))
                 {
-                    break;
+                    Swap(arr, j, j + 1);
                 }
-                temp = arr2[i];
-                arr2[i] = arr2[i + 1];
-                arr2[i + 1] = temp;
             }
         }
     }
-}
 
-// Testing code.
-public static void Main8()
-{
-    int[] arr1 = new int[] {1, 5, 9, 10, 15, 20};
-    int[] arr2 = new int[] {2, 3, 8, 13};
-    Merge(arr1, arr1.Length, arr2, arr2.Length);
-    PrintArray(arr1, arr1.Length);
-    PrintArray(arr2, arr2.Length);
-}
-
-/*
-[ 1 2 3 5 8 9 ]
-[ 10 13 15 20 ]
-*/
-
-public static bool CheckReverse(int[] arr, int size)
-{
-    int start = -1;
-    int stop = -1;
-    for (int i = 0; i < (size - 1); i++)
+    // Testing code
+    public static void Main5()
     {
-        if (arr[i] > arr[i + 1])
+        int[] array = new int[] { 9, 1, 8, 2, 7, 3, 6, 4, 5 };
+        int reference = 5;
+        AbsBubbleSort(array, array.Length, reference);
+        PrintArray(array, array.Length);
+    }
+
+    /*
+    [ 5 6 4 7 3 8 2 9 1 ]
+    */
+
+    public static bool EqGreater(int value1, int value2, int A)
+    {
+        value1 = A * value1 * value1;
+        value2 = A * value2 * value2;
+        return value1 > value2;
+    }
+
+    public static void ArrayReduction(int[] arr, int size)
+    {
+        Array.Sort(arr);
+        int count = 1;
+        int reduction = arr[0];
+
+        for (int i = 0; i < size; i++)
         {
-            start = i;
-            break;
+            if (arr[i] - reduction > 0)
+            {
+                reduction = arr[i];
+                count += 1;
+                Console.WriteLine(size - i);
+            }
+        }
+        Console.WriteLine(0); // after all the reduction the array will be empty.
+
+        Console.WriteLine("Total number of reductions: " + count);
+    }
+
+    // Testing code
+    public static void Main6()
+    {
+        int[] arr = new int[] { 5, 1, 1, 1, 2, 3, 5 };
+        ArrayReduction(arr, arr.Length);
+    }
+
+    /*
+    4
+    3
+    2
+    0
+    Total number of reductions: 4
+    */
+
+    public static void SortByOrder(int[] arr, int size, int[] arr2, int size2)
+    {
+        Dictionary<int, int> ht = new Dictionary<int, int>();
+        int value;
+        for (int i = 0; i < size; i++)
+        {
+            if (ht.ContainsKey(arr[i]))
+            {
+                value = ht[arr[i]];
+                ht[arr[i]] = value + 1;
+            }
+            else
+            {
+                ht[arr[i]] = 1;
+            }
+        }
+
+        for (int j = 0; j < size2; j++)
+        {
+            if (ht.ContainsKey(arr2[j]))
+            {
+                value = ht[arr2[j]];
+                for (int k = 0; k < value; k++)
+                {
+                    Console.Write(arr2[j] + " ");
+                }
+                ht.Remove(arr2[j]);
+            }
+        }
+
+        for (int i = 0; i < size; i++)
+        {
+            if (ht.ContainsKey(arr[i]))
+            {
+                value = ht[arr[i]];
+                for (int k = 0; k < value; k++)
+                {
+                    Console.Write(arr[i] + " ");
+                }
+                ht.Remove(arr[i]);
+            }
         }
     }
 
-    if (start == -1)
+    // Testing code
+    public static void Main7()
     {
-        return true;
+        int[] arr = new int[] { 2, 1, 2, 5, 7, 1, 9, 3, 6, 8, 8 };
+        int[] arr2 = new int[] { 2, 1, 8, 3 };
+        SortByOrder(arr, arr.Length, arr2, arr2.Length);
+        Console.WriteLine();
     }
 
-    for (int i = start; i < (size - 1); i++)
+    /*
+    2 2 1 1 8 8 3 5 7 9 6 
+    */
+
+    public static void Merge(int[] arr1, int size1, int[] arr2, int size2)
     {
-        if (arr[i] < arr[i + 1])
+        int index = 0;
+        int temp;
+        while (index < size1)
         {
-            stop = i;
-            break;
+            if (arr1[index] <= arr2[0])
+            {
+                index += 1;
+            }
+            else
+            {
+                // always first element of arr2 is compared.
+                temp = arr1[index];
+                arr1[index] = arr2[0];
+                arr2[0] = temp;
+                index += 1;
+                // After Swap arr2 may be unsorted.
+                // Insertion of the element in proper sorted position.
+                for (int i = 0; i < (size2 - 1); i++)
+                {
+                    if (arr2[i] < arr2[i + 1])
+                    {
+                        break;
+                    }
+                    temp = arr2[i];
+                    arr2[i] = arr2[i + 1];
+                    arr2[i + 1] = temp;
+                }
+            }
         }
     }
 
-    if (stop == -1)
+    // Testing code.
+    public static void Main8()
     {
-        return true;
+        int[] arr1 = new int[] { 1, 5, 9, 10, 15, 20 };
+        int[] arr2 = new int[] { 2, 3, 8, 13 };
+        Merge(arr1, arr1.Length, arr2, arr2.Length);
+        PrintArray(arr1, arr1.Length);
+        PrintArray(arr2, arr2.Length);
     }
 
-    // increasing property
-    // after reversal the sub array should fit in the array.
-    if (arr[start - 1] > arr[stop] || arr[stop + 1] < arr[start])
-    {
-        return false;
-    }
+    /*
+    [ 1 2 3 5 8 9 ]
+    [ 10 13 15 20 ]
+    */
 
-    for (int i = stop + 1; i < size - 1; i++)
+    public static bool CheckReverse(int[] arr, int size)
     {
-        if (arr[i] > arr[i + 1])
+        int start = -1;
+        int stop = -1;
+        for (int i = 0; i < (size - 1); i++)
+        {
+            if (arr[i] > arr[i + 1])
+            {
+                start = i;
+                break;
+            }
+        }
+
+        if (start == -1)
+        {
+            return true;
+        }
+
+        for (int i = start; i < (size - 1); i++)
+        {
+            if (arr[i] < arr[i + 1])
+            {
+                stop = i;
+                break;
+            }
+        }
+
+        if (stop == -1)
+        {
+            return true;
+        }
+
+        // increasing property
+        // after reversal the sub array should fit in the array.
+        if (arr[start - 1] > arr[stop] || arr[stop + 1] < arr[start])
         {
             return false;
         }
+
+        for (int i = stop + 1; i < size - 1; i++)
+        {
+            if (arr[i] > arr[i + 1])
+            {
+                return false;
+            }
+        }
+        return true;
     }
-    return true;
-}
 
-// Testing code.
-public static void Main9()
-{
-    int[] arr1 = new int[] {1, 2, 6, 5, 4, 7};
-    Console.WriteLine(CheckReverse(arr1, arr1.Length));
-}
-
-// True
-
-public static void UnionIntersectionSorted(int[] arr1, int size1, int[] arr2, int size2)
-{
-    int first = 0, second = 0;
-    int[] unionArr = new int[size1 + size2];
-    int[] interArr = new int[Math.Min(size1, size2)];
-    int uIndex = 0;
-    int iIndex = 0;
-
-    while (first < size1 && second < size2)
+    // Testing code.
+    public static void Main9()
     {
-        if (arr1[first] == arr2[second])
+        int[] arr1 = new int[] { 1, 2, 6, 5, 4, 7 };
+        Console.WriteLine(CheckReverse(arr1, arr1.Length));
+    }
+
+    // True
+
+    public static void UnionIntersectionSorted(int[] arr1, int size1, int[] arr2, int size2)
+    {
+        int first = 0, second = 0;
+        int[] unionArr = new int[size1 + size2];
+        int[] interArr = new int[Math.Min(size1, size2)];
+        int uIndex = 0;
+        int iIndex = 0;
+
+        while (first < size1 && second < size2)
+        {
+            if (arr1[first] == arr2[second])
+            {
+                unionArr[uIndex++] = arr1[first];
+                interArr[iIndex++] = arr1[first];
+                first += 1;
+                second += 1;
+            }
+            else if (arr1[first] < arr2[second])
+            {
+                unionArr[uIndex++] = arr1[first];
+                first += 1;
+            }
+            else
+            {
+                unionArr[uIndex++] = arr2[second];
+                second += 1;
+            }
+        }
+        while (first < size1)
         {
             unionArr[uIndex++] = arr1[first];
-            interArr[iIndex++] = arr1[first];
-            first += 1;
-            second += 1;
-        }
-        else if (arr1[first] < arr2[second])
-        {
-            unionArr[uIndex++] = arr1[first];
             first += 1;
         }
-        else
+        while (second < size2)
         {
             unionArr[uIndex++] = arr2[second];
             second += 1;
         }
+        PrintArray(unionArr, uIndex);
+        PrintArray(interArr, iIndex);
     }
-    while (first < size1)
+
+    public static void UnionIntersectionUnsorted(int[] arr1, int size1, int[] arr2, int size2)
     {
-        unionArr[uIndex++] = arr1[first];
-        first += 1;
+        Array.Sort(arr1);
+        Array.Sort(arr2);
+        UnionIntersectionSorted(arr1, size1, arr2, size2);
     }
-    while (second < size2)
+
+    // Testing code.
+    public static void Main10()
     {
-        unionArr[uIndex++] = arr2[second];
-        second += 1;
+        int[] arr1 = new int[] { 1, 11, 2, 3, 14, 5, 6, 8, 9 };
+        int[] arr2 = new int[] { 2, 4, 5, 12, 7, 8, 13, 10 };
+        UnionIntersectionUnsorted(arr1, arr1.Length, arr2, arr2.Length);
     }
-    PrintArray(unionArr, uIndex);
-    PrintArray(interArr, iIndex);
-}
 
-public static void UnionIntersectionUnsorted(int[] arr1, int size1, int[] arr2, int size2)
-{
-    Array.Sort(arr1);
-    Array.Sort(arr2);
-    UnionIntersectionSorted(arr1, size1, arr2, size2);
-}
+    /*
+    [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 ]
+    [ 2 5 8 ]
+    */
 
-// Testing code.
-public static void Main10()
-{
-    int[] arr1 = new int[] {1, 11, 2, 3, 14, 5, 6, 8, 9};
-    int[] arr2 = new int[] {2, 4, 5, 12, 7, 8, 13, 10};
-    UnionIntersectionUnsorted(arr1, arr1.Length, arr2, arr2.Length);
-}
+    public static void RotateArray(int[] a, int n, int k)
+    {
+        ReverseArray(a, 0, k - 1);
+        ReverseArray(a, k, n - 1);
+        ReverseArray(a, 0, n - 1);
+    }
 
-/*
-[ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 ]
-[ 2 5 8 ]
-*/
+    public static void ReverseArray(int[] a, int start, int end)
+    {
+        for (int i = start, j = end; i < j; i++, j--)
+        {
+            int temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
+        }
+    }
+
+    public static void ReverseArray2(int[] a)
+    {
+        int start = 0;
+        int end = a.Length - 1;
+        for (int i = start, j = end; i < j; i++, j--)
+        {
+            int temp = a[i];
+            a[i] = a[j];
+            a[j] = temp;
+        }
+    }
+
+    /* Testing code */
+    public static void Main4()
+    {
+        int[] arr = new int[] { 1, 2, 3, 4, 5, 6 };
+        RotateArray(arr, arr.Length, 2);
+        PrintArray(arr, arr.Length);
+    }
+
+    /*
+    [ 3 4 5 6 1 2 ]
+    */
+
+    public static void Sort1toN(int[] arr, int size)
+    {
+        int curr, value, next;
+        for (int i = 0; i < size; i++)
+        {
+            curr = i;
+            value = -1;
+            /* Swaps to move elements in proper position. */
+            while (curr >= 0 && curr < size && arr[curr] != curr + 1)
+            {
+                next = arr[curr];
+                arr[curr] = value;
+                value = next;
+                curr = next - 1;
+            }
+        }
+    }
+
+    public static void Sort1toN2(int[] arr, int size)
+    {
+        int temp;
+        for (int i = 0; i < size; i++)
+        {
+            while (arr[i] != i + 1 && arr[i] > 1)
+            {
+                temp = arr[i];
+                arr[i] = arr[temp - 1];
+                arr[temp - 1] = temp;
+            }
+        }
+    }
+
+    /* Testing code */
+    public static void Main8()
+    {
+        int[] arr = new int[] { 8, 5, 6, 1, 9, 3, 2, 7, 4, 10 };
+        int size = arr.Length;
+        Sort1toN(arr, size);
+        PrintArray(arr, size);
+
+        int[] arr2 = new int[] { 8, 5, 6, 1, 9, 3, 2, 7, 4, 10 };
+        size = arr2.Length;
+        Sort1toN2(arr2, size);
+        PrintArray(arr2, size);
+
+    }
+
+    /*
+    [ 1 2 3 4 5 6 7 8 9 10 ]
+    [ 1 2 3 4 5 6 7 8 9 10 ]
+    */
+
+    public static void MaxMinArr(int[] arr, int size)
+    {
+        int[] aux = new int[size];
+        Array.Copy(arr, aux, size);
+        int start = 0;
+        int stop = size - 1;
+        for (int i = 0; i < size; i++)
+        {
+            if (i % 2 == 0)
+            {
+                arr[i] = aux[stop];
+                stop -= 1;
+            }
+            else
+            {
+                arr[i] = aux[start];
+                start += 1;
+            }
+        }
+    }
+
+    public static void ReverseArr(int[] arr, int start, int stop)
+    {
+        while (start < stop)
+        {
+            Swap(arr, start, stop);
+            start += 1;
+            stop -= 1;
+        }
+    }
+
+    public static void MaxMinArr2(int[] arr, int size)
+    {
+        for (int i = 0; i < (size - 1); i++)
+        {
+            ReverseArr(arr, i, size - 1);
+        }
+    }
+
+    /* Testing code */
+    public static void Main10()
+    {
+        int[] arr = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+        int size = arr.Length;
+        MaxMinArr(arr, size);
+        PrintArray(arr, size);
+
+        int[] arr2 = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+        int size2 = arr.Length;
+        MaxMinArr2(arr2, size2);
+        PrintArray(arr2, size2);
+    }
+
+    /*
+    [ 7 1 6 2 5 3 4 ]
+    [ 7 1 6 2 5 3 4 ]
+    */
+
+
+    public static int MaxCircularSum(int[] arr, int size)
+    {
+        int sumAll = 0;
+        int currVal = 0;
+        int maxVal;
+
+        for (int i = 0; i < size; i++)
+        {
+            sumAll += arr[i];
+            currVal += (i * arr[i]);
+        }
+        maxVal = currVal;
+        for (int i = 1; i < size; i++)
+        {
+            currVal = (currVal + sumAll) - (size * arr[size - i]);
+            if (currVal > maxVal)
+            {
+                maxVal = currVal;
+            }
+        }
+        return maxVal;
+    }
+
+    /* Testing code */
+    public static void Main11()
+    {
+        int[] arr = new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+        Console.WriteLine("MaxCircularSum: " + MaxCircularSum(arr, arr.Length));
+    }
+
+    /*
+    MaxCircularSum: 290
+    */
+
+
+
+    public static void WaveArray2(int[] arr)
+    {
+        int size = arr.Length;
+        /* Odd elements are lesser then even elements. */
+        for (int i = 1; i < size; i += 2)
+        {
+            if ((i - 1) >= 0 && arr[i] > arr[i - 1])
+            {
+                Swap(arr, i, i - 1);
+            }
+            if ((i + 1) < size && arr[i] > arr[i + 1])
+            {
+                Swap(arr, i, i + 1);
+            }
+        }
+    }
+
+    public static void WaveArray(int[] arr)
+    {
+        int size = arr.Length;
+        Array.Sort(arr);
+        for (int i = 0; i < size - 1; i += 2)
+        {
+            Swap(arr, i, i + 1);
+        }
+    }
+
+
+    /* Testing code */
+    public static void Main6()
+    {
+        int[] arr = new int[] { 8, 1, 2, 3, 4, 5, 6, 4, 2 };
+        WaveArray(arr);
+        PrintArray(arr, arr.Length);
+        int[] arr2 = new int[] { 8, 1, 2, 3, 4, 5, 6, 4, 2 };
+        WaveArray2(arr2);
+        PrintArray(arr2, arr2.Length);
+    }
+
+    /*
+    [ 2 1 3 2 4 4 6 5 8 ]
+    [ 8 1 3 2 5 4 6 2 4 ]
+    */
+
+    public static void IndexArray(int[] arr, int size)
+    {
+        for (int i = 0; i < size; i++)
+        {
+            int curr = i;
+            int value = -1;
+
+            /* Swaps to move elements in proper position. */
+            while (arr[curr] != -1 && arr[curr] != curr)
+            {
+                int temp = arr[curr];
+                arr[curr] = value;
+                value = curr = temp;
+            }
+
+            /* check if some Swaps happened. */
+            if (value != -1)
+            {
+                arr[curr] = value;
+            }
+        }
+    }
+
+    public static void IndexArray2(int[] arr, int size)
+    {
+        int temp;
+        for (int i = 0; i < size; i++)
+        {
+            while (arr[i] != -1 && arr[i] != i)
+            {
+                /* Swap arr[i] and arr[arr[i]] */
+                temp = arr[i];
+                arr[i] = arr[temp];
+                arr[temp] = temp;
+            }
+        }
+    }
+
+    /* Testing code */
+    public static void Main7()
+    {
+        int[] arr = new int[] { 8, -1, 6, 1, 9, 3, 2, 7, 4, -1 };
+        int size = arr.Length;
+        IndexArray(arr, size);
+        PrintArray(arr, size);
+
+        int[] arr2 = new int[] { 8, -1, 6, 1, 9, 3, 2, 7, 4, -1 };
+        size = arr2.Length;
+        IndexArray2(arr2, size);
+        PrintArray(arr2, size);
+    }
+    /*
+    [ -1 1 2 3 4 -1 6 7 8 9 ]
+    [ -1 1 2 3 4 -1 6 7 8 9 ]
+    */
+
+
+
     public static void Main(string[] args)
     {
         Main1();

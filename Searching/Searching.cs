@@ -125,7 +125,7 @@ public class Searching
         int low = 0;
         while (fibN > 1)
         { // Fibonacci series start with 0, 1, 1, 2
-            int i = Math.Min(low + fibNMn2, size-1);
+            int i = Math.Min(low + fibNMn2, size - 1);
             if (arr[i] == value)
             {
                 return true;
@@ -154,33 +154,56 @@ public class Searching
     // Testing code.
     public static void Main1()
     {
-        int[] first = new int[] {1, 3, 5, 7, 9, 25, 30};
-    /*    Console.WriteLine(LinearSearchUnsorted(first, 7, 8));
+        int[] first = new int[] { 1, 3, 5, 7, 9, 25, 30 };
+        Console.WriteLine(LinearSearchUnsorted(first, 7, 8));
         Console.WriteLine(LinearSearchSorted(first, 7, 8));
         Console.WriteLine(BinarySearch(first, 7, 8));
         Console.WriteLine(BinarySearchRec(first, 7, 8));
-    
+        Console.WriteLine(FibonacciSearch(first, 7, 8));
+
+        Console.WriteLine(FibonacciSearch(first, 7, 25));
         Console.WriteLine(LinearSearchUnsorted(first, 7, 25));
         Console.WriteLine(LinearSearchSorted(first, 7, 25));
         Console.WriteLine(BinarySearch(first, 7, 25));
         Console.WriteLine(BinarySearchRec(first, 7, 25));
-*/
-    for (int i = 0;i < 32;i++)
-    {
-        Console.WriteLine(i + " : " + FibonacciSearch(first, 7, i));
     }
-    }
+
     /*
-    false
-    false
-    false
-    false
-    
-    true
-    true
-    true
-    true
+    False
+    False
+    False
+    False
+    False
+    True
+    True
+    True
+    True
+    True
     */
+
+    public static int SumArray(int[] arr)
+    {
+        int size = arr.Length;
+        int total = 0;
+        for (int index = 0; index < size; index++)
+        {
+            total = total + arr[index];
+        }
+        return total;
+    }
+
+    /* Testing code */
+    public static void Main2()
+    {
+        int[] arr = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+        Console.WriteLine("Sum of values in array:" + SumArray(arr));
+    }
+
+    /*
+    Sum of values in array:45
+    */
+
+
 
     public static void Swap(int[] arr, int first, int second)
     {
@@ -231,9 +254,9 @@ public class Searching
     }
 
     // Testing code.
-    public static void Main2()
+    public static void Main3()
     {
-        int[] first = new int[] {1, 3, 5, 3, 9, 1, 30};
+        int[] first = new int[] { 1, 3, 5, 3, 9, 1, 30 };
         Console.WriteLine(FirstRepeated(first, first.Length));
         Console.WriteLine(FirstRepeated2(first, first.Length));
 
@@ -315,9 +338,9 @@ public class Searching
     }
 
     // Testing code.
-    public static void Main3()
+    public static void Main4()
     {
-        int[] first = new int[] {1, 3, 5, 3, 9, 1, 30};
+        int[] first = new int[] { 1, 3, 5, 3, 9, 1, 30 };
         PrintRepeating(first, first.Length);
         PrintRepeating2(first, first.Length);
         PrintRepeating3(first, first.Length);
@@ -343,7 +366,7 @@ public class Searching
             }
         }
         int[] ret = new int[j + 1];
-        Array.Copy(array, ret,  j + 1);
+        Array.Copy(array, ret, j + 1);
         return ret;
     }
 
@@ -366,9 +389,9 @@ public class Searching
     }
 
     // Testing code.
-    public static void Main4()
+    public static void Main5()
     {
-        int[] first = new int[] {1, 3, 5, 3, 9, 1, 30};
+        int[] first = new int[] { 1, 3, 5, 3, 9, 1, 30 };
         int[] ret = RemoveDuplicates(first, first.Length);
         for (int i = 0; i < ret.Length; i++)
         {
@@ -376,7 +399,7 @@ public class Searching
         }
         Console.WriteLine();
 
-        int[] first2 = new int[] {1, 3, 5, 3, 9, 1, 30};
+        int[] first2 = new int[] { 1, 3, 5, 3, 9, 1, 30 };
         int[] ret2 = RemoveDuplicates2(first2, first2.Length);
         for (int i = 0; i < ret2.Length; i++)
         {
@@ -444,7 +467,7 @@ public class Searching
 
     public static int FindMissingNumber4(int[] arr, int size)
     {
-        int[] count = new int[size+1];
+        int[] count = new int[size + 1];
         Array.Fill(count, -1);
         for (int i = 0; i < size; i++)
         {
@@ -466,7 +489,7 @@ public class Searching
     {
         int sum = 0;
         // Element value range is from 1 to size+1.
-        for (int i = 1; i < (size+2); i++)
+        for (int i = 1; i < (size + 2); i++)
         {
             sum += i;
         }
@@ -482,16 +505,16 @@ public class Searching
         for (int i = 0; i < size; i++)
         {
             // len(arr)+1 value should be ignored.
-            if(arr[i] != size+1 && arr[i] != size*3 +1)
+            if (arr[i] != size + 1 && arr[i] != size * 3 + 1)
             {
                 // 1 should not become (len(arr)+1) so multiplied by 2
-                arr[(arr[i]-1) % size] += (size*2);
+                arr[(arr[i] - 1) % size] += (size * 2);
             }
         }
 
         for (int i = 0; i < size; i++)
         {
-            if (arr[i] < (size*2))
+            if (arr[i] < (size * 2))
             {
                 return i + 1;
             }
@@ -504,7 +527,7 @@ public class Searching
         int i;
         int xorSum = 0;
         // Element value range is from 1 to size+1.
-        for (i = 1; i < (size+2); i++)
+        for (i = 1; i < (size + 2); i++)
         {
             xorSum ^= i;
         }
@@ -539,9 +562,9 @@ public class Searching
     }
 
     // Testing code.
-    public static void Main5()
+    public static void Main6()
     {
-        int[] first = new int[] {1, 5, 4, 3, 2, 7, 8, 9};
+        int[] first = new int[] { 1, 5, 4, 3, 2, 7, 8, 9 };
         Console.WriteLine(FindMissingNumber(first, first.Length));
         Console.WriteLine(FindMissingNumber2(first, first.Length));
         Console.WriteLine(FindMissingNumber3(first, first.Length));
@@ -549,7 +572,7 @@ public class Searching
         Console.WriteLine(FindMissingNumber5(first, first.Length));
         Console.WriteLine(FindMissingNumber7(first, first.Length));
         Console.WriteLine(FindMissingNumber8(first, first.Length));
-        int[] second = new int[] {1, 5, 4, 3, 2, 7, 8, 9};
+        int[] second = new int[] { 1, 5, 4, 3, 2, 7, 8, 9 };
         Console.WriteLine(FindMissingNumber6(second, second.Length));
 
     }
@@ -580,7 +603,7 @@ public class Searching
         for (int i = min + 1; i < max; i++)
         {
             found = false;
-            for (int j = 0;j < size; j++)
+            for (int j = 0; j < size; j++)
             {
                 if (arr[j] == i)
                 {
@@ -596,7 +619,7 @@ public class Searching
         Console.WriteLine();
     }
 
-        public static void MissingValues2(int[] arr, int size)
+    public static void MissingValues2(int[] arr, int size)
     {
         Array.Sort(arr);
         int value = arr[0];
@@ -646,9 +669,9 @@ public class Searching
     }
 
     // Testing code.
-    public static void Main6()
+    public static void Main7()
     {
-        int[] arr = new int[] {11, 14, 13, 17, 21, 18, 19, 23, 24};
+        int[] arr = new int[] { 11, 14, 13, 17, 21, 18, 19, 23, 24 };
         int size = arr.Length;
         MissingValues(arr, size);
         MissingValues2(arr, size);
@@ -701,9 +724,9 @@ public class Searching
         int second = 0;
         int setBit;
         /*
-         * xor of all elements in arr[] even occurrence will cancel each other. sum will
-         * contain sum of two odd elements.
-         */
+            * xor of all elements in arr[] even occurrence will cancel each other. sum will
+            * contain sum of two odd elements.
+            */
         for (int i = 0; i < size; i++)
         {
             xorSum = xorSum ^ arr[i];
@@ -713,10 +736,10 @@ public class Searching
         setBit = xorSum & ~(xorSum - 1);
 
         /*
-         * Dividing elements in two group: Elements having setBit bit as 1. Elements
-         * having setBit bit as 0. Even elements cancelled themselves if group and we
-         * get our numbers.
-         */
+        * Dividing elements in two group: Elements having setBit bit as 1. Elements
+        * having setBit bit as 0. Even elements cancelled themselves if group and we
+        * get our numbers.
+        */
         for (int i = 0; i < size; i++)
         {
             if ((arr[i] & setBit) != 0)
@@ -732,13 +755,13 @@ public class Searching
     }
 
     // Testing code.
-    public static void Main7()
+    public static void Main8()
     {
-        int[] arr = new int[] {10, 25, 30, 10, 15, 25, 15};
+        int[] arr = new int[] { 10, 25, 30, 10, 15, 25, 15 };
         int size = arr.Length;
         OddCount(arr, size);
         OddCount2(arr, size);
-        int[] arr2 = new int[] {10, 25, 30, 10, 15, 25, 15, 40};
+        int[] arr2 = new int[] { 10, 25, 30, 10, 15, 25, 15, 40 };
         int size2 = arr2.Length;
         OddCount3(arr2, size2);
     }
@@ -763,9 +786,9 @@ public class Searching
         Console.WriteLine("sum : " + sum);
     }
 
-    public static void Main8()
+    public static void Main9()
     {
-        int[] arr = new int[] {1, 2, 3, 1, 1, 4, 5, 6};
+        int[] arr = new int[] { 1, 2, 3, 1, 1, 4, 5, 6 };
         int size = arr.Length;
         SumDistinct(arr, size);
     }
@@ -773,7 +796,7 @@ public class Searching
     sum : 21
     */
 
-        public static void MinAbsSumPair(int[] arr, int size)
+    public static void MinAbsSumPair(int[] arr, int size)
     {
         int l, r, minSum, sum, minFirst, minSecond;
         // Array should have at least two elements
@@ -843,9 +866,9 @@ public class Searching
     }
 
     // Testing code.
-    public static void Main9()
+    public static void Main10()
     {
-        int[] first = new int[] {1, 5, -10, 3, 2, -6, 8, 9, 6};
+        int[] first = new int[] { 1, 5, -10, 3, 2, -6, 8, 9, 6 };
         MinAbsSumPair2(first, first.Length);
         MinAbsSumPair(first, first.Length);
 
@@ -911,26 +934,26 @@ public class Searching
         return false;
     }
 
-public static bool FindPair4(int[] arr, int size, int range, int value)
-{
-    int[] count = new int[range+1];
-    Array.Fill(count, 0);
-    for (int i = 0; i < size; i++)
+    public static bool FindPair4(int[] arr, int size, int range, int value)
     {
-        if (count[value - arr[i]] > 0)
+        int[] count = new int[range + 1];
+        Array.Fill(count, 0);
+        for (int i = 0; i < size; i++)
         {
-            Console.WriteLine("The pair is : " + arr[i] + ", " + (value - arr[i]));
-            return true;
+            if (count[value - arr[i]] > 0)
+            {
+                Console.WriteLine("The pair is : " + arr[i] + ", " + (value - arr[i]));
+                return true;
+            }
+            count[arr[i]] += 1;
         }
-        count[arr[i]] += 1;
+        return false;
     }
-    return false;
-}
 
     // Testing code.
-    public static void Main10()
+    public static void Main11()
     {
-        int[] first = new int[] {1, 5, 4, 3, 2, 7, 8, 9, 6};
+        int[] first = new int[] { 1, 5, 4, 3, 2, 7, 8, 9, 6 };
         Console.WriteLine(FindPair(first, first.Length, 8));
         Console.WriteLine(FindPair2(first, first.Length, 8));
         Console.WriteLine(FindPair3(first, first.Length, 8));
@@ -964,7 +987,7 @@ public static bool FindPair4(int[] arr, int size, int range, int value)
         return false;
     }
 
-        public static bool FindPairTwoLists2(int[] arr1, int size1, int[] arr2, int size2, int value)
+    public static bool FindPairTwoLists2(int[] arr1, int size1, int[] arr2, int size2, int value)
     {
         Array.Sort(arr2);
         for (int i = 0; i < size1; i++)
@@ -1025,7 +1048,7 @@ public static bool FindPair4(int[] arr, int size, int range, int value)
 
     public static bool FindPairTwoLists5(int[] arr1, int size1, int[] arr2, int size2, int range, int value)
     {
-        int[] count = new int[range+1];
+        int[] count = new int[range + 1];
         Array.Fill(count, 0);
 
         for (int i = 0; i < size2; i++)
@@ -1045,10 +1068,10 @@ public static bool FindPair4(int[] arr, int size, int range, int value)
     }
 
     // Testing code.
-    public static void Main10A()
+    public static void Main12()
     {
-        int[] first = new int[] {1, 5, 4, 3, 2, 7, 8, 9, 6};
-        int[] second = new int[] {1, 5, 4, 3, 2, 7, 8, 9, 6};
+        int[] first = new int[] { 1, 5, 4, 3, 2, 7, 8, 9, 6 };
+        int[] second = new int[] { 1, 5, 4, 3, 2, 7, 8, 9, 6 };
         Console.WriteLine(FindPairTwoLists(first, first.Length, second, second.Length, 8));
         Console.WriteLine(FindPairTwoLists2(first, first.Length, second, second.Length, 8));
         Console.WriteLine(FindPairTwoLists3(first, first.Length, second, second.Length, 8));
@@ -1056,17 +1079,17 @@ public static bool FindPair4(int[] arr, int size, int range, int value)
         Console.WriteLine(FindPairTwoLists5(first, first.Length, second, second.Length, 9, 8));
     }
 
-/*
-The pair is : 1, 7
-true
-The pair is 1, 7
-true
-The pair is 1, 7
-true
-The pair is : 1, 7
-true
-The pair is : 1, 7
-true    */
+    /*
+    The pair is : 1, 7
+    true
+    The pair is 1, 7
+    true
+    The pair is 1, 7
+    true
+    The pair is : 1, 7
+    true
+    The pair is : 1, 7
+    true    */
 
 
 
@@ -1111,11 +1134,11 @@ true    */
         }
         return false;
     }
-    
+
     // Testing code.
-    public static void Main11()
+    public static void Main13()
     {
-        int[] first = new int[] {1, 5, 4, 3, 2, 7, 8, 9, 6};
+        int[] first = new int[] { 1, 5, 4, 3, 2, 7, 8, 9, 6 };
         Console.WriteLine(FindDifference(first, first.Length, 6));
         Console.WriteLine(FindDifference2(first, first.Length, 6));
     }
@@ -1159,9 +1182,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main12()
+    public static void Main14()
     {
-        int[] second = new int[] {1, 6, 4, 19, 17, 20};
+        int[] second = new int[] { 1, 6, 4, 19, 17, 20 };
         Console.WriteLine("FindMinDiff : " + FindMinDiff(second, second.Length));
         Console.WriteLine("FindMinDiff : " + FindMinDiff2(second, second.Length));
     }
@@ -1225,10 +1248,10 @@ true    */
     }
 
     // Testing code.
-    public static void Main13()
+    public static void Main15()
     {
-        int[] first = new int[] {1, 5, 4, 3, 2, 7, 8, 9, 6};
-        int[] second = new int[] {6, 4, 19, 17, 20};
+        int[] first = new int[] { 1, 5, 4, 3, 2, 7, 8, 9, 6 };
+        int[] second = new int[] { 6, 4, 19, 17, 20 };
         MinDiffPair(first, first.Length, second, second.Length);
         MinDiffPair(first, first.Length, second, second.Length);
 
@@ -1296,9 +1319,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main14()
+    public static void Main16()
     {
-        int[] first = new int[] {10, 20, 3, 4, 50, 80};
+        int[] first = new int[] { 10, 20, 3, 4, 50, 80 };
         ClosestPair(first, first.Length, 47);
         ClosestPair2(first, first.Length, 47);
     }
@@ -1340,14 +1363,14 @@ true    */
     }
 
     // Testing code.
-    public static void Main15()
+    public static void Main17()
     {
-        int[] first = new int[] {1, 2, 4, 8, 16, 15};
+        int[] first = new int[] { 1, 2, 4, 8, 16, 15 };
         Console.WriteLine(SumPairRestArray(first, first.Length));
     }
     /*
     Pair is :: 8 15
-    true
+    True
     */
 
     public static void ZeroSumTriplets(int[] arr, int size)
@@ -1397,9 +1420,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main16()
+    public static void Main18()
     {
-        int[] first = new int[] {0, -1, 2, -3, 1};
+        int[] first = new int[] { 0, -1, 2, -3, 1 };
         ZeroSumTriplets(first, first.Length);
         ZeroSumTriplets2(first, first.Length);
     }
@@ -1456,9 +1479,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main17()
+    public static void Main19()
     {
-        int[] first = new int[] {1, 5, 15, 6, 9, 8};
+        int[] first = new int[] { 1, 5, 15, 6, 9, 8 };
         FindTriplet(first, first.Length, 22);
         FindTriplet2(first, first.Length, 22);
     }
@@ -1472,18 +1495,18 @@ true    */
 
     public static void AbcTriplet(int[] arr, int size)
     {
-        for (int i = 0; i < size-1; i++)
+        for (int i = 0; i < size - 1; i++)
         {
-        for (int j = i + 1; j < size; j++)
-        {
-            for (int k = 0; k < size; k++)
+            for (int j = i + 1; j < size; j++)
             {
-                if (k != i && k != j && arr[i] + arr[j] == arr[k])
+                for (int k = 0; k < size; k++)
                 {
-                    Console.WriteLine("AbcTriplet:: " + arr[i] + " " + arr[j] + " " + arr[k]);
+                    if (k != i && k != j && arr[i] + arr[j] == arr[k])
+                    {
+                        Console.WriteLine("AbcTriplet:: " + arr[i] + " " + arr[j] + " " + arr[k]);
+                    }
                 }
             }
-        }
         }
     }
 
@@ -1516,9 +1539,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main18()
+    public static void Main20()
     {
-        int[] first = new int[] {1, 5, 15, 6, 9, 8};
+        int[] first = new int[] { 1, 5, 15, 6, 9, 8 };
         AbcTriplet(first, first.Length);
         AbcTriplet2(first, first.Length);
     }
@@ -1532,18 +1555,18 @@ true    */
     public static void SmallerThenTripletCount(int[] arr, int size, int value)
     {
         int count = 0;
-        for (int i = 0; i < size-1; i++)
+        for (int i = 0; i < size - 1; i++)
         {
-        for (int j = i + 1; j < size; j++)
-        {
-        for (int k = j + 1; k < size; k++)
-        {
-            if (arr[i] + arr[j] + arr[k] < value)
+            for (int j = i + 1; j < size; j++)
             {
-                count += 1;
+                for (int k = j + 1; k < size; k++)
+                {
+                    if (arr[i] + arr[j] + arr[k] < value)
+                    {
+                        count += 1;
+                    }
+                }
             }
-        }
-        }
         }
         Console.WriteLine("SmallerThenTripletCount:: " + count);
     }
@@ -1575,9 +1598,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main19()
+    public static void Main21()
     {
-        int[] first = new int[] {-2, -1, 0, 1};
+        int[] first = new int[] { -2, -1, 0, 1 };
         SmallerThenTripletCount(first, first.Length, 2);
         SmallerThenTripletCount(first, first.Length, 2);
     }
@@ -1614,9 +1637,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main20()
+    public static void Main22()
     {
-        int[] arr = new int[] {2, 4, 10, 12, 14, 18, 36};
+        int[] arr = new int[] { 2, 4, 10, 12, 14, 18, 36 };
         APTriplets(arr, arr.Length);
     }
     /*
@@ -1653,9 +1676,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main21()
+    public static void Main23()
     {
-        int[] arr = new int[] {1, 2, 4, 8, 16};
+        int[] arr = new int[] { 1, 2, 4, 8, 16 };
         GPTriplets(arr, arr.Length);
     }
     /*
@@ -1695,9 +1718,9 @@ true    */
             for (j = i + 1; j < (size - 1); j++)
             {
                 /*
-                 * if sum of arr[i] & arr[j] is greater arr[k] then sum of arr[i] & arr[j + 1]
-                 * is also greater than arr[k] this improvement make algo O(n2)
-                 */
+                * if sum of arr[i] & arr[j] is greater arr[k] then sum of arr[i] & arr[j + 1]
+                * is also greater than arr[k] this improvement make algo O(n2)
+                */
                 while (k < size && arr[i] + arr[j] > arr[k])
                 {
                     k += 1;
@@ -1710,9 +1733,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main22()
+    public static void Main24()
     {
-        int[] arr = new int[] {1, 2, 3, 4, 5};
+        int[] arr = new int[] { 1, 2, 3, 4, 5 };
         Console.WriteLine(NumberOfTriangles(arr, arr.Length));
         Console.WriteLine(NumberOfTriangles2(arr, arr.Length));
     }
@@ -1785,9 +1808,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main23()
+    public static void Main25()
     {
-        int[] first = new int[] {1, 30, 5, 13, 9, 31, 5};
+        int[] first = new int[] { 1, 30, 5, 13, 9, 31, 5 };
         Console.WriteLine(GetMax(first, first.Length));
         Console.WriteLine(GetMax2(first, first.Length));
         Console.WriteLine(GetMax3(first, first.Length, 50));
@@ -1891,9 +1914,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main24()
+    public static void Main26()
     {
-        int[] first = new int[] {1, 5, 5, 13, 5, 31, 5};
+        int[] first = new int[] { 1, 5, 5, 13, 5, 31, 5 };
         Console.WriteLine(GetMajority(first, first.Length));
         Console.WriteLine(GetMajority2(first, first.Length));
         Console.WriteLine(GetMajority3(first, first.Length));
@@ -1919,9 +1942,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main25()
+    public static void Main27()
     {
-        int[] first = new int[] {1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30};
+        int[] first = new int[] { 1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30 };
         Console.WriteLine(GetMedian(first, first.Length));
         Console.WriteLine(GetMedian(first, first.Length));
     }
@@ -1932,7 +1955,7 @@ true    */
 
     public static int SearchBitonicArrayMax(int[] arr, int size)
     {
-        for (int i = 0; i < size-2; i++)
+        for (int i = 0; i < size - 2; i++)
         {
             if (arr[i] > arr[i + 1])
             {
@@ -2030,9 +2053,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main26()
+    public static void Main28()
     {
-        int[] first = new int[] {1, 5, 10, 13, 20, 30, 8, 7, 6};
+        int[] first = new int[] { 1, 5, 10, 13, 20, 30, 8, 7, 6 };
         Console.WriteLine(SearchBitonicArrayMax(first, first.Length));
         Console.WriteLine(SearchBitonicArrayMax2(first, first.Length));
         Console.WriteLine(SearchBitonicArray(first, first.Length, 7));
@@ -2107,9 +2130,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main27()
+    public static void Main29()
     {
-        int[] first = new int[] {1, 5, 10, 13, 20, 30, 8, 7, 6};
+        int[] first = new int[] { 1, 5, 10, 13, 20, 30, 8, 7, 6 };
         Console.WriteLine(FindKeyCount(first, first.Length, 6));
         Console.WriteLine(FindKeyCount2(first, first.Length, 6));
     }
@@ -2128,9 +2151,9 @@ true    */
         }
 
         /*
-         * Find first occurrence of value, either it should be the first element of the
-         * array or the value before it is smaller than it.
-         */
+        * Find first occurrence of value, either it should be the first element of the
+        * array or the value before it is smaller than it.
+        */
         if ((mid == 0 || arr[mid - 1] < value) && (arr[mid] == value))
         {
             return mid;
@@ -2151,9 +2174,9 @@ true    */
         int majority = arr[size / 2];
         int i = FirstIndex(arr, size, 0, size - 1, majority);
         /*
-         * we are using majority element form array so we will get some valid index
-         * always.
-         */
+        * we are using majority element form array so we will get some valid index
+        * always.
+        */
         if (((i + size / 2) <= (size - 1)) && arr[i + size / 2] == majority)
         {
             return true;
@@ -2169,7 +2192,7 @@ true    */
     {
         int count = 0;
         int mid = arr[size / 2];
-        for (int i = 0;i < size;i++)
+        for (int i = 0; i < size; i++)
         {
             if (arr[i] == mid)
             {
@@ -2185,24 +2208,24 @@ true    */
     }
 
     // Testing code.
-    public static void Main28()
+    public static void Main30()
     {
-        int[] arr = new int[] {3, 3, 3, 3, 4, 5, 10};
+        int[] arr = new int[] { 3, 3, 3, 3, 4, 5, 10 };
         Console.WriteLine(IsMajority(arr, arr.Length));
         Console.WriteLine(IsMajority2(arr, arr.Length));
     }
     /*
     true
     */
-    
+
     public static int MaxProfit(int[] stocks, int size)
     {
         int maxProfit = 0;
         int buy = 0, sell = 0;
 
-        for (int i = 0;i < size-1;i++)
+        for (int i = 0; i < size - 1; i++)
         {
-            for (int j = i + 1;j < size ;j++)
+            for (int j = i + 1; j < size; j++)
             {
                 if (maxProfit < stocks[j] - stocks[i])
                 {
@@ -2243,12 +2266,11 @@ true    */
     }
 
     // Testing code.
-    public static void Main29()
+    public static void Main31()
     {
-        int[] first = new int[] {10, 150, 6, 67, 61, 16, 86, 6, 67, 78, 150, 3, 28, 143};
-        Console.WriteLine(MaxProfit(first, first.Length));
-        Console.WriteLine(MaxProfit2(first, first.Length));
-
+        int[] first = new int[] { 10, 150, 6, 67, 61, 16, 86, 6, 67, 78, 150, 3, 28, 143 };
+        Console.WriteLine("Profit : " + MaxProfit(first, first.Length));
+        Console.WriteLine("Profit : " + MaxProfit2(first, first.Length));
     }
     /*
     Purchase day is- 2 at price 6
@@ -2258,8 +2280,7 @@ true    */
 
     public static int FindMedian(int[] arrFirst, int sizeFirst, int[] arrSecond, int sizeSecond)
     {
-        int medianIndex = ((sizeFirst + sizeSecond) + (sizeFirst + sizeSecond) % 2) / 2; // ceiling
-                                                                                        // function.
+        int medianIndex = ((sizeFirst + sizeSecond) + (sizeFirst + sizeSecond) % 2) / 2; // ceiling                                                                                       // function.
         int i = 0, j = 0;
         int count = 0;
         while (count < medianIndex - 1)
@@ -2285,10 +2306,10 @@ true    */
     }
 
     // Testing code.
-    public static void Main30()
+    public static void Main32()
     {
-        int[] first = new int[] {1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30};
-        int[] second = new int[] {1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30};
+        int[] first = new int[] { 1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30 };
+        int[] second = new int[] { 1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30 };
         Console.WriteLine(FindMedian(first, first.Length, second, second.Length));
     }
     /*
@@ -2298,7 +2319,7 @@ true    */
 
     public static int Search01(int[] arr, int size)
     {
-        for (int i = 0;i < size;i++)
+        for (int i = 0; i < size; i++)
         {
             if (arr[i] == 1)
             {
@@ -2339,9 +2360,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main31()
+    public static void Main33()
     {
-        int[] first = new int[] {0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1};
+        int[] first = new int[] { 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1 };
         Console.WriteLine(Search01(first, first.Length));
         Console.WriteLine(BinarySearch01(first, first.Length));
 
@@ -2352,7 +2373,7 @@ true    */
 
     public static int RotationMax(int[] arr, int size)
     {
-        for (int i = 0;i < size-1;i++)
+        for (int i = 0; i < size - 1; i++)
         {
             if (arr[i] > arr[i + 1])
             {
@@ -2391,19 +2412,19 @@ true    */
     }
 
     // Testing code.
-    public static void Main32()
+    public static void Main34()
     {
-        int[] first = new int[] {34, 56, 77, 1, 5, 6, 6, 8, 10, 20, 30, 34};
+        int[] first = new int[] { 34, 56, 77, 1, 5, 6, 6, 8, 10, 20, 30, 34 };
         Console.WriteLine(RotationMax(first, first.Length));
         Console.WriteLine(RotationMax2(first, first.Length));
     }
     /*
     77
-    */   
+    */
 
     public static int FindRotationMax(int[] arr, int size)
     {
-        for (int i = 0;i < size-1;i++)
+        for (int i = 0; i < size - 1; i++)
         {
             if (arr[i] > arr[i + 1])
             {
@@ -2444,9 +2465,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main33()
+    public static void Main35()
     {
-        int[] first = new int[] {34, 56, 77, 1, 5, 6, 6, 8, 10, 20, 30, 34};
+        int[] first = new int[] { 34, 56, 77, 1, 5, 6, 6, 8, 10, 20, 30, 34 };
         Console.WriteLine(FindRotationMax(first, first.Length));
         Console.WriteLine(FindRotationMax2(first, first.Length));
     }
@@ -2459,11 +2480,11 @@ true    */
         int maxIndex = FindRotationMaxUtil(arr, 0, size - 1);
         return (maxIndex + 1) % size;
     }
-    
+
     // Testing code.
-    public static void Main34()
+    public static void Main36()
     {
-        int[] first = new int[] {34, 56, 77, 1, 5, 6, 6, 8, 10, 20, 30, 34};
+        int[] first = new int[] { 34, 56, 77, 1, 5, 6, 6, 8, 10, 20, 30, 34 };
         Console.WriteLine(CountRotation(first, first.Length));
     }
     /*
@@ -2472,7 +2493,7 @@ true    */
 
     public static int SearchRotateArray(int[] arr, int size, int key)
     {
-        for (int i = 0;i < size-1;i++)
+        for (int i = 0; i < size - 1; i++)
         {
             if (arr[i] == key)
             {
@@ -2523,9 +2544,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main35()
+    public static void Main37()
     {
-        int[] first = new int[] {34, 56, 77, 1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30};
+        int[] first = new int[] { 34, 56, 77, 1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30 };
         Console.WriteLine(SearchRotateArray(first, first.Length, 20));
         Console.WriteLine(BinarySearchRotateArray(first, first.Length, 20));
         Console.WriteLine(CountRotation(first, first.Length));
@@ -2554,9 +2575,9 @@ true    */
     }
 
     // Testing Code
-    public static void Main36()
+    public static void Main38()
     {
-        int[] arr = new int[] {5, 29, 18, 51, 11};
+        int[] arr = new int[] { 5, 29, 18, 51, 11 };
         Console.WriteLine(MinAbsDiffAdjCircular(arr, arr.Length));
     }
     /*
@@ -2581,9 +2602,9 @@ true    */
             }
         }
     }
-    
+
     // Testing code.
-    public static void Main37()
+    public static void Main39()
     {
         char[] str = "aaaabbbb".ToCharArray();
         TransformArrayAB1(str, str.Length);
@@ -2644,7 +2665,6 @@ true    */
         return true;
     }
 
-
     public static bool CheckPermutation3(char[] array1, int size1, char[] array2, int size2)
     {
         if (size1 != size2)
@@ -2671,7 +2691,7 @@ true    */
     }
 
     // Testing code.
-    public static void Main38()
+    public static void Main40()
     {
         char[] str1 = "aaaabbbb".ToCharArray();
         char[] str2 = "bbaaaabb".ToCharArray();
@@ -2684,7 +2704,7 @@ true    */
     true
     */
 
-    public static bool FindElementIn2DArray(int[, ] arr, int r, int c, int value)
+    public static bool FindElementIn2DArray(int[,] arr, int r, int c, int value)
     {
         int row = 0;
         int column = c - 1;
@@ -2764,8 +2784,6 @@ true    */
         return true;
     }
 
-
-
     public static bool IsAP3(int[] arr, int size)
     {
         int first = 9999999;
@@ -2807,9 +2825,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main39()
+    public static void Main41()
     {
-        int[] arr = new int[] {20, 25, 15, 5, 0, 10, 35, 30};
+        int[] arr = new int[] { 20, 25, 15, 5, 0, 10, 35, 30 };
         Console.WriteLine(IsAP(arr, arr.Length));
         Console.WriteLine(IsAP2(arr, arr.Length));
         Console.WriteLine(IsAP3(arr, arr.Length));
@@ -2847,9 +2865,9 @@ true    */
     }
 
     // Testing Code
-    public static void Main40()
+    public static void Main42()
     {
-        int[] arr = new int[] {-7, 1, 5, 2, -4, 3, 0};
+        int[] arr = new int[] { -7, 1, 5, 2, -4, 3, 0 };
         Console.WriteLine(FindBalancedPoint(arr, arr.Length));
 
     }
@@ -2866,10 +2884,10 @@ true    */
         {
             mid = (start + stop) / 2;
             /*
-             * search value is equal to arr[mid] value.. search value is greater than mid
-             * index value and less than mid+1 index value. value is greater than
-             * arr[size-1] then floor is arr[size-1]
-             */
+            * search value is equal to arr[mid] value.. search value is greater than mid
+            * index value and less than mid+1 index value. value is greater than
+            * arr[size-1] then floor is arr[size-1]
+            */
             if (arr[mid] == value || (arr[mid] < value && (mid == size - 1 || arr[mid + 1] > value)))
             {
                 return arr[mid];
@@ -2896,10 +2914,10 @@ true    */
         {
             mid = (start + stop) / 2;
             /*
-             * search value is equal to arr[mid] value.. search value is less than mid index
-             * value and greater than mid-1 index value. value is less than arr[0] then ceil
-             * is arr[0]
-             */
+            * search value is equal to arr[mid] value.. search value is less than mid index
+            * value and greater than mid-1 index value. value is less than arr[0] then ceil
+            * is arr[0]
+            */
             if (arr[mid] == value || (arr[mid] > value && (mid == 0 || arr[mid - 1] < value)))
             {
                 return arr[mid];
@@ -2917,15 +2935,15 @@ true    */
     }
 
     // Testing code.
-    public static void Main41()
+    public static void Main43()
     {
-        int[] arr = new int[] {2, 4, 8, 16};
-        Console.WriteLine(FindFloor(arr, arr.Length, 5));
-        Console.WriteLine(FindCeil(arr, arr.Length, 5));
+        int[] arr = new int[] { 2, 4, 8, 16 };
+        Console.WriteLine("Floor : " + FindFloor(arr, arr.Length, 5));
+        Console.WriteLine("Ceil : " + FindCeil(arr, arr.Length, 5));
     }
     /*
-    1
-    2
+    Floor : 4
+    Ceil : 8
     */
 
     public static int ClosestNumber(int[] arr, int size, int num)
@@ -2961,9 +2979,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main42()
+    public static void Main44()
     {
-        int[] arr = new int[] {2, 4, 8, 16};
+        int[] arr = new int[] { 2, 4, 8, 16 };
         Console.WriteLine(ClosestNumber(arr, arr.Length, 9));
     }
     /*
@@ -2990,16 +3008,16 @@ true    */
     }
 
     // Testing Code
-    public static void Main43()
+    public static void Main45()
     {
-        int[] arr = new int[] {1, 2, 3, 1, 4, 5};
+        int[] arr = new int[] { 1, 2, 3, 1, 4, 5 };
         DuplicateKDistance(arr, arr.Length, 3);
     }
-    
+
     /*
     Value:1 Index: 0 & 3
     */
-    
+
     public static void FrequencyCounts(int[] arr, int size)
     {
         Dictionary<int, int> hm = new Dictionary<int, int>();
@@ -3037,18 +3055,18 @@ true    */
                 count = 1;
             }
         }
-        Console.Write("(" + arr[size-1] + " : " + count + ") ");
+        Console.Write("(" + arr[size - 1] + " : " + count + ") ");
         Console.WriteLine();
     }
 
     public static void FrequencyCounts3(int[] arr, int size)
     {
-        int[] aux = new int[size+1];
+        int[] aux = new int[size + 1];
         for (int i = 0; i < size; i++)
         {
             aux[arr[i]] += 1;
         }
-        for (int i = 0; i < size+1; i++)
+        for (int i = 0; i < size + 1; i++)
         {
             if (aux[i] > 0)
             {
@@ -3089,20 +3107,20 @@ true    */
     }
 
     // Testing code.
-    public static void Main44()
+    public static void Main46()
     {
-        int[] arr = new int[] {1, 2, 2, 2, 1};
+        int[] arr = new int[] { 1, 2, 2, 2, 1 };
         FrequencyCounts(arr, arr.Length);
         FrequencyCounts2(arr, arr.Length);
         FrequencyCounts3(arr, arr.Length);
         FrequencyCounts4(arr, arr.Length);
     }
-/*
-(1 : 2) (2 : 3) 
-(1 : 2) (2 : 3) 
-(1 : 2) (2 : 3) 
-(1 : 2) (2 : 3)    
-*/
+    /*
+    (1 : 2) (2 : 3) 
+    (1 : 2) (2 : 3) 
+    (1 : 2) (2 : 3) 
+    (1 : 2) (2 : 3)    
+    */
 
     public static void KLargestElements(int[] arrIn, int size, int k)
     {
@@ -3181,9 +3199,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main45()
+    public static void Main47()
     {
-        int[] arr = new int[] {10, 50, 30, 60, 15};
+        int[] arr = new int[] { 10, 50, 30, 60, 15 };
         KLargestElements(arr, arr.Length, 2);
         KLargestElements2(arr, arr.Length, 2);
     }
@@ -3202,8 +3220,8 @@ true    */
             {
                 return i;
             }
-        } // fix point not found so return invalid index
-        return -1;
+        }
+        return -1; // fix point not found so return invalid index
     }
 
     /* Binary search method */
@@ -3228,14 +3246,14 @@ true    */
                 high = mid - 1;
             }
         }
-        /* fix point not found so return invalid index */
-        return -1;
+
+        return -1; /* fix point not found so return invalid index */
     }
 
     // Testing code.
-    public static void Main46()
+    public static void Main48()
     {
-        int[] arr = new int[] {-10, -2, 0, 3, 11, 12, 35, 51, 200};
+        int[] arr = new int[] { -10, -2, 0, 3, 11, 12, 35, 51, 200 };
         Console.WriteLine(FixPoint(arr, arr.Length));
         Console.WriteLine(FixPoint2(arr, arr.Length));
     }
@@ -3262,23 +3280,19 @@ true    */
 
             if (sum == value)
             {
-                Console.WriteLine(start + " " + (end - 1));
+                Console.Write("(" + start + " to " + (end - 1) + ") ");
             }
         }
     }
 
     // Testing code.
-    public static void Main47()
+    public static void Main49()
     {
-        int[] arr = new int[] {15, 5, 5, 20, 10, 5, 5, 20, 10, 10};
+        int[] arr = new int[] { 15, 5, 5, 20, 10, 5, 5, 20, 10, 10 };
         SubArraySums(arr, arr.Length, 20);
     }
     /*
-    0 1
-    3 3
-    4 6
-    7 7
-    8 9
+    (0 to 1) (3 to 3) (4 to 6) (7 to 7) (8 to 9)
     */
 
     public static int MaxConSub(int[] arr, int size)
@@ -3364,12 +3378,12 @@ true    */
     }
 
     // Testing code.
-    public static void Main48()
+    public static void Main50()
     {
-        int[] arr = new int[] {1, 2, -3, 4, 5, -10, 6, 7};
+        int[] arr = new int[] { 1, 2, -3, 4, 5, -10, 6, 7 };
         MaxConSub(arr, arr.Length);
-        int[] arr2 = new int[] {1, 2, 3, 4, 5, -10, 6, 7, 3};
-        int[] arr3 = new int[] {1, 3};
+        int[] arr2 = new int[] { 1, 2, 3, 4, 5, -10, 6, 7, 3 };
+        int[] arr3 = new int[] { 1, 3 };
         MaxConSubArr(arr2, arr2.Length, arr3, arr3.Length);
         MaxConSubArr2(arr2, arr2.Length, arr3, arr3.Length);
     }
@@ -3453,9 +3467,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main49()
+    public static void Main51()
     {
-        int[] arr = new int[] {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
+        int[] arr = new int[] { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 };
         RainWater(arr, arr.Length);
         RainWater2(arr, arr.Length);
     }
@@ -3487,9 +3501,9 @@ true    */
     }
 
     // Testing code.
-    public static void Main50()
+    public static void Main52()
     {
-        int[] first = new int[] {1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30};
+        int[] first = new int[] { 1, 5, 6, 6, 6, 6, 6, 6, 7, 8, 10, 13, 20, 30 };
         SeparateEvenAndOdd(first, first.Length);
         foreach (int val in first)
         {
@@ -3500,6 +3514,258 @@ true    */
     /*
     30 20 6 6 6 6 6 6 10 8 7 13 5 1
     */
+
+
+    public static int MaxSubArraySum(int[] a, int size)
+    {
+        int maxSoFar = 0, maxEndingHere = 0;
+
+        for (int i = 0; i < size; i++)
+        {
+            maxEndingHere = maxEndingHere + a[i];
+            if (maxEndingHere < 0)
+            {
+                maxEndingHere = 0;
+            }
+            if (maxSoFar < maxEndingHere)
+            {
+                maxSoFar = maxEndingHere;
+            }
+        }
+        return maxSoFar;
+    }
+
+    /* Testing code */
+    public static void Main53()
+    {
+        int[] arr = new int[] { 1, -2, 3, 4, -4, 6, -4, 3, 2 };
+        Console.WriteLine("Max sub array sum :" + MaxSubArraySum(arr, 9));
+    }
+
+    /*
+    Max sub array sum :10
+    */
+
+    public static int SmallestPositiveMissingNumber(int[] arr, int size)
+    {
+        int found;
+        for (int i = 1; i < size + 1; i++)
+        {
+            found = 0;
+            for (int j = 0; j < size; j++)
+            {
+                if (arr[j] == i)
+                {
+                    found = 1;
+                    break;
+                }
+            }
+            if (found == 0)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static int SmallestPositiveMissingNumber2(int[] arr, int size)
+    {
+        Dictionary<int, int> hs = new Dictionary<int, int>();
+        for (int i = 0; i < size; i++)
+        {
+            hs[arr[i]] = 1;
+        }
+        for (int i = 1; i < size + 1; i++)
+        {
+            if (hs.ContainsKey(i) == false)
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static int SmallestPositiveMissingNumber3(int[] arr, int size)
+    {
+        int[] aux = new int[size];
+        Array.Fill(aux, -1);
+
+        for (int i = 0; i < size; i++)
+        {
+            if (arr[i] > 0 && arr[i] <= size)
+            {
+                aux[arr[i] - 1] = arr[i];
+            }
+        }
+        for (int i = 0; i < size; i++)
+        {
+            if (aux[i] != i + 1)
+            {
+                return i + 1;
+            }
+        }
+        return -1;
+    }
+
+    public static int SmallestPositiveMissingNumber4(int[] arr, int size)
+    {
+        int temp;
+        for (int i = 0; i < size; i++)
+        {
+            while (arr[i] != i + 1 && arr[i] > 0 && arr[i] <= size)
+            {
+                temp = arr[i];
+                arr[i] = arr[temp - 1];
+                arr[temp - 1] = temp;
+            }
+        }
+        for (int i = 0; i < size; i++)
+        {
+            if (arr[i] != i + 1)
+            {
+                return i + 1;
+            }
+        }
+        return -1;
+    }
+
+    /* Testing code */
+    public static void Main54()
+    {
+        int[] arr = new int[] { 8, 5, 6, 1, 9, 11, 2, 7, 4, 10 };
+        int size = arr.Length;
+
+        Console.WriteLine("SmallestPositiveMissingNumber :" + SmallestPositiveMissingNumber(arr, size));
+        Console.WriteLine("SmallestPositiveMissingNumber :" + SmallestPositiveMissingNumber2(arr, size));
+        Console.WriteLine("SmallestPositiveMissingNumber :" + SmallestPositiveMissingNumber3(arr, size));
+        Console.WriteLine("SmallestPositiveMissingNumber :" + SmallestPositiveMissingNumber4(arr, size));
+    }
+
+    /*
+    SmallestPositiveMissingNumber :3
+    SmallestPositiveMissingNumber :3
+    SmallestPositiveMissingNumber :3
+    SmallestPositiveMissingNumber :3
+    */
+
+
+
+    public static int MaxPathSum(int[] arr1, int size1, int[] arr2, int size2)
+    {
+        int i = 0, j = 0, result = 0, sum1 = 0, sum2 = 0;
+
+        while (i < size1 && j < size2)
+        {
+            if (arr1[i] < arr2[j])
+            {
+                sum1 += arr1[i];
+                i += 1;
+            }
+            else if (arr1[i] > arr2[j])
+            {
+                sum2 += arr2[j];
+                j += 1;
+            }
+            else
+            {
+                result += Math.Max(sum1, sum2);
+                result = result + arr1[i];
+                sum1 = 0;
+                sum2 = 0;
+                i += 1;
+                j += 1;
+            }
+        }
+        while (i < size1)
+        {
+            sum1 += arr1[i];
+            i += 1;
+        }
+
+        while (j < size2)
+        {
+            sum2 += arr2[j];
+            j += 1;
+        }
+
+        result += Math.Max(sum1, sum2);
+        return result;
+    }
+
+    /* Testing code */
+    public static void Main55()
+    {
+        int[] arr1 = new int[] { 12, 13, 18, 20, 22, 26, 70 };
+        int[] arr2 = new int[] { 11, 15, 18, 19, 20, 26, 30, 31 };
+        Console.WriteLine("Max Path Sum :: " + MaxPathSum(arr1, arr1.Length, arr2, arr2.Length));
+    }
+
+    /*
+    Max Path Sum :: 201
+    */
+
+
+    public static int ArrayIndexMaxDiff(int[] arr, int size)
+    {
+        int maxDiff = -1;
+        int j;
+        for (int i = 0; i < size; i++)
+        {
+            j = size - 1;
+            while (i < j)
+            {
+                if (arr[i] <= arr[j])
+                {
+                    maxDiff = Math.Max(maxDiff, j - i);
+                    break;
+                }
+                j -= 1;
+            }
+        }
+        return maxDiff;
+    }
+
+    public static int ArrayIndexMaxDiff2(int[] arr, int size)
+    {
+        int[] rightMax = new int[size];
+        rightMax[size - 1] = arr[size - 1];
+        for (int i = size - 2; i >= 0; i--)
+        {
+            rightMax[i] = Math.Max(rightMax[i + 1], arr[i]);
+        }
+
+        int maxDiff = -1;
+        for (int i = 0, j = 1; i < size && j < size;)
+        {
+            if (arr[i] <= rightMax[j])
+            {
+                if (i < j)
+                {
+                    maxDiff = Math.Max(maxDiff, j - i);
+                }
+                j = j + 1;
+            }
+            else
+            {
+                i = i + 1;
+            }
+        }
+        return maxDiff;
+    }
+
+    /* Testing code */
+    public static void Main56()
+    {
+        int[] arr = new int[] { 33, 9, 10, 3, 2, 60, 30, 33, 1 };// {10, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+        Console.WriteLine("ArrayIndexMaxDiff : " + ArrayIndexMaxDiff(arr, arr.Length));
+        Console.WriteLine("ArrayIndexMaxDiff : " + ArrayIndexMaxDiff2(arr, arr.Length));
+    }
+
+    /*
+    ArrayIndexMaxDiff : 7
+    ArrayIndexMaxDiff : 7
+    */
+
 
     public static void Main(string[] args)
     {
@@ -3513,7 +3779,6 @@ true    */
         Main8();
         Main9();
         Main10();
-        Main10A();
         Main11();
         Main12();
         Main13();
@@ -3554,5 +3819,11 @@ true    */
         Main48();
         Main49();
         Main50();
+        Main51();
+        Main52();
+        Main53();
+        Main54();
+        Main55();
+        Main56();
     }
 }

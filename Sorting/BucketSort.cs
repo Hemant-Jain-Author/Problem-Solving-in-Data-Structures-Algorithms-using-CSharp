@@ -4,7 +4,6 @@ using System.Collections.Generic;
 // Allowed values from 0 to maxValue.
 public class BucketSort
 {
-
     public void Sort(int[] arr, int maxValue)
     {
         int numBucket = 5;
