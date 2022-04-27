@@ -45,7 +45,7 @@ public class LargestBitonicSubseq
     // Testing code.
     public static void Main(string[] args)
     {
-        int[] arr = new int[] {1, 6, 3, 11, 1, 9, 5, 12, 3, 14, 6, 17, 3, 19, 2, 19};
+        int[] arr = new int[] { 1, 6, 3, 11, 1, 9, 5, 12, 3, 14, 6, 17, 3, 19, 2, 19 };
         Console.WriteLine("Length of LBS is " + LBS(arr));
     }
 }

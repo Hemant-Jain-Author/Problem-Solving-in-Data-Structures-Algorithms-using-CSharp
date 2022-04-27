@@ -7,11 +7,13 @@ public class HashTableSC
 
     private class Node
     {
+        internal int key;
         internal int value;
         internal Node next;
 
-        public Node(int v, Node n)
+        public Node(int k, int v, Node n)
         {
+            key = k;
             value = v;
             next = n;
         }
@@ -21,10 +23,7 @@ public class HashTableSC
     {
         tableSize = 512;
         listArray = new Node[tableSize];
-        for (int i = 0; i < tableSize; i++)
-        {
-            listArray[i] = null;
-        }
+        Array.Fill(listArray, null);
     }
 
     private int ComputeHash(int key) // division method
@@ -33,17 +32,22 @@ public class HashTableSC
         return hashValue % tableSize;
     }
 
-    public void Add(int value)
+    public void Add(int key, int value)
     {
-        int index = ComputeHash(value);
-        listArray[index] = new Node(value, listArray[index]);
+        int index = ComputeHash(key);
+        listArray[index] = new Node(key, value, listArray[index]);
     }
 
-    public bool Remove(int value)
+    public void Add(int value)
     {
-        int index = ComputeHash(value);
+        Add(value, value);
+    }
+
+    public bool Remove(int key)
+    {
+        int index = ComputeHash(key);
         Node nextNode, head = listArray[index];
-        if (head != null && head.value == value)
+        if (head != null && head.key == key)
         {
             listArray[index] = head.next;
             return true;
@@ -51,7 +55,7 @@ public class HashTableSC
         while (head != null)
         {
             nextNode = head.next;
-            if (nextNode != null && nextNode.value == value)
+            if (nextNode != null && nextNode.key == key)
             {
                 head.next = nextNode.next;
                 return true;
@@ -72,20 +76,20 @@ public class HashTableSC
             Node head = listArray[i];
             while (head != null)
             {
-                Console.Write(head.value + " ");
+                Console.Write("(" + head.key + "=>" + head.value + ") ");
                 head = head.next;
             }
         }
         Console.WriteLine();
     }
 
-    public bool Find(int value)
+    public bool Find(int key)
     {
-        int index = ComputeHash(value);
+        int index = ComputeHash(key);
         Node head = listArray[index];
         while (head != null)
         {
-            if (head.value == value)
+            if (head.key == key)
             {
                 return true;
             }
@@ -94,22 +98,41 @@ public class HashTableSC
         return false;
     }
 
+    public int Get(int key)
+    {
+        int index = ComputeHash(key);
+        Node head = listArray[index];
+        while (head != null)
+        {
+            if (head.key == key)
+            {
+                return head.value;
+            }
+            head = head.next;
+        }
+        return -1;
+    }
+
     // Testing code.
     public static void Main(string[] args)
     {
         HashTableSC ht = new HashTableSC();
-        ht.Add(1);
-        ht.Add(2);
-        ht.Add(3);
+        ht.Add(1, 10);
+        ht.Add(2, 20);
+        ht.Add(3, 30);
         ht.Print();
         Console.WriteLine("Find key 2 : " + ht.Find(2));
+        Console.WriteLine("Value at  key 2 : " + ht.Get(2));
         ht.Remove(2);
         Console.WriteLine("Find key 2 : " + ht.Find(2));
+        ht.Print();
     }
 }
 
 /*
-Hash Table contains ::1 2 3 
-Find key 2 : true
-Find key 2 : false
+Hash Table contains ::(1=>10) (2=>20) (3=>30) 
+Find key 2 : True
+Value at  key 2 : 20
+Find key 2 : False
+Hash Table contains ::(1=>10) (3=>30) 
 */

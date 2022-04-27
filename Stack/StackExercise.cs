@@ -22,11 +22,11 @@ public class StackExercise
         Console.WriteLine("Main line 2");
     }
     /*
-Main line 1
-Function1 line 1
-Function2 line 1
-Function1 line 2
-Main line 2
+    Main line 1
+    Function1 line 1
+    Function2 line 1
+    Function1 line 2
+    Main line 2
     */
 
     public static bool IsBalancedParenthesis(string expn)
@@ -36,28 +36,28 @@ Main line 2
         {
             switch (ch)
             {
-            case '{':
-            case '[':
-            case '(':
-                stk.Push(ch);
-                break;
-            case '}':
-                if (stk.Pop() != '{')
-                {
-                    return false;
-                }
-                break;
-            case ']':
-                if (stk.Pop() != '[')
-                {
-                    return false;
-                }
-                break;
-            case ')':
-                if (stk.Pop() != '(')
-                {
+                case '{':
+                case '[':
+                case '(':
+                    stk.Push(ch);
+                    break;
+                case '}':
+                    if (stk.Pop() != '{')
+                    {
                         return false;
-                }
+                    }
+                    break;
+                case ']':
+                    if (stk.Pop() != '[')
+                    {
+                        return false;
+                    }
+                    break;
+                case ')':
+                    if (stk.Pop() != '(')
+                    {
+                        return false;
+                    }
                     break;
             }
         }
@@ -69,56 +69,55 @@ Main line 2
     {
         string expn = "{()}[]";
         bool value = IsBalancedParenthesis(expn);
-        Console.WriteLine("Result after isParenthesisMatched: " + value);
+        Console.WriteLine("IsBalancedParenthesis : " + value);
     }
 
     /*
-    Result after isParenthesisMatched: True
+    IsBalancedParenthesis : True
     */
 
-public static int PostfixEvaluate(string expn)
-{
-    Stack<int> stk = new Stack<int>();
-    string[] tokens = expn.Split(' ');
-
-    foreach (string token in tokens)
+    public static int PostfixEvaluate(string expn)
     {
-        if ("+-*/".Contains(token))
-        {
-            int num1 = stk.Pop();
-            int num2 = stk.Pop();
+        Stack<int> stk = new Stack<int>();
+        string[] tokens = expn.Split(' ');
 
-            switch (token)
+        foreach (string token in tokens)
+        {
+            if ("+-*/".Contains(token))
             {
-                case "+":
-                    stk.Push(num1 + num2);
-                    break;
-                case "-":
-                    stk.Push(num1 - num2);
-                    break;
-                case "*":
-                    stk.Push(num1 * num2);
-                    break;
-                case "/":
-                    stk.Push(num1 / num2);
-                    break;
-            }
-        }
-        else
-        {
-            stk.Push(Convert.ToInt32(token));
-        }
+                int num1 = stk.Pop();
+                int num2 = stk.Pop();
 
+                switch (token)
+                {
+                    case "+":
+                        stk.Push(num1 + num2);
+                        break;
+                    case "-":
+                        stk.Push(num1 - num2);
+                        break;
+                    case "*":
+                        stk.Push(num1 * num2);
+                        break;
+                    case "/":
+                        stk.Push(num1 / num2);
+                        break;
+                }
+            }
+            else
+            {
+                stk.Push(Convert.ToInt32(token));
+            }
+
+        }
+        return stk.Pop();
     }
-    return stk.Pop();
-}
 
     // Testing code.
     public static void Main3()
     {
         string expn = "6 5 2 3 + 8 * + 3 + *";
         int value = PostfixEvaluate(expn);
-        Console.WriteLine("Given Postfix Expn: " + expn);
         Console.WriteLine("Result after Evaluation: " + value);
     }
 
@@ -177,29 +176,29 @@ public static int PostfixEvaluate(string expn)
             {
                 switch (ch)
                 {
-                case '+':
-                case '-':
-                case '*':
-                case '/':
-                case '%':
-                case '^':
-                    while (stk.Count > 0 && precedence(ch) <= precedence(stk.Peek()))
-                    {
-                        outVr = stk.Pop();
-                        output = output + " " + outVr;
-                    }
-                    stk.Push(ch);
-                    output = output + " ";
-                    break;
-                case '(':
-                    stk.Push(ch);
-                    break;
-                case ')':
-                    while (stk.Count > 0 && (outVr = stk.Pop()) != '(')
-                    {
-                        output = output + " " + outVr + " ";
-                    }
-                    break;
+                    case '+':
+                    case '-':
+                    case '*':
+                    case '/':
+                    case '%':
+                    case '^':
+                        while (stk.Count > 0 && precedence(ch) <= precedence(stk.Peek()))
+                        {
+                            outVr = stk.Pop();
+                            output = output + " " + outVr;
+                        }
+                        stk.Push(ch);
+                        output = output + " ";
+                        break;
+                    case '(':
+                        stk.Push(ch);
+                        break;
+                    case ')':
+                        while (stk.Count > 0 && (outVr = stk.Pop()) != '(')
+                        {
+                            output = output + " " + outVr + " ";
+                        }
+                        break;
                 }
             }
         }
@@ -321,7 +320,7 @@ public static int PostfixEvaluate(string expn)
     // Testing code.
     public static void Main6()
     {
-        int[] arr = new int[] {6, 5, 4, 3, 2, 4, 5, 7, 9};
+        int[] arr = new int[] { 6, 5, 4, 3, 2, 4, 5, 7, 9 };
         int[] value = StockSpanRange(arr);
         Console.Write("StockSpanRange : ");
         foreach (int val in value)
@@ -401,7 +400,7 @@ public static int PostfixEvaluate(string expn)
     // Testing code.
     public static void Main7()
     {
-        int[] arr = new int[] {7, 6, 5, 4, 4, 1, 6, 3, 1};
+        int[] arr = new int[] { 7, 6, 5, 4, 4, 1, 6, 3, 1 };
         int value = GetMaxArea(arr);
         Console.WriteLine("GetMaxArea :: " + value);
         value = GetMaxArea2(arr);
@@ -414,27 +413,27 @@ public static int PostfixEvaluate(string expn)
     */
 
 
-public static void StockAnalystAdd(Stack<int> stk, int value)
-{
-    while (stk.Count > 0 && stk.Peek() <= value)
+    public static void StockAnalystAdd(Stack<int> stk, int value)
     {
-        stk.Pop();
+        while (stk.Count > 0 && stk.Peek() <= value)
+        {
+            stk.Pop();
+        }
+        stk.Push(value);
     }
-    stk.Push(value);
-}
 
-// Testing code.
-public static void Main7a()
-{
-    int[] arr = new int[] {20, 19, 10, 21, 40, 35, 39, 50, 45, 42};
-    Stack<int> stk = new Stack<int>();
-    for (int i = arr.Length - 1;i >= 0;i--)
+    // Testing code.
+    public static void Main7a()
     {
-        StockAnalystAdd(stk, arr[i]);
-    }
-    foreach(var ele in stk) 
-        Console.Write(ele + " "); 
-    Console.WriteLine();
+        int[] arr = new int[] { 20, 19, 10, 21, 40, 35, 39, 50, 45, 42 };
+        Stack<int> stk = new Stack<int>();
+        for (int i = arr.Length - 1; i >= 0; i--)
+        {
+            StockAnalystAdd(stk, arr[i]);
+        }
+        foreach (var ele in stk)
+            Console.Write(ele + " ");
+        Console.WriteLine();
     }
 
     public static void SortedInsert(Stack<int> stk, int element)
@@ -459,18 +458,18 @@ public static void Main7a()
         stk.Push(1);
         stk.Push(3);
         stk.Push(4);
-        foreach(var ele in stk) 
-            Console.Write(ele + " "); 
+        foreach (var ele in stk)
+            Console.Write(ele + " ");
         Console.WriteLine();
-        
+
         SortedInsert(stk, 2);
-        foreach(var ele in stk) 
-            Console.Write(ele + " "); 
+        foreach (var ele in stk)
+            Console.Write(ele + " ");
         Console.WriteLine();
     }
     /*
-4 3 1 
-4 3 2 1 
+    4 3 1 
+    4 3 2 1 
     */
 
     public static void SortStack(Stack<int> stk)
@@ -511,12 +510,12 @@ public static void Main7a()
         stk.Push(1);
         stk.Push(4);
         stk.Push(2);
-        foreach(var ele in stk) 
-            Console.Write(ele + " "); 
+        foreach (var ele in stk)
+            Console.Write(ele + " ");
         Console.WriteLine();
         SortStack(stk);
-        foreach(var ele in stk) 
-            Console.Write(ele + " "); 
+        foreach (var ele in stk)
+            Console.Write(ele + " ");
         Console.WriteLine();
 
         stk = new Stack<int>();
@@ -524,20 +523,20 @@ public static void Main7a()
         stk.Push(1);
         stk.Push(4);
         stk.Push(2);
-        foreach(var ele in stk) 
-            Console.Write(ele + " "); 
+        foreach (var ele in stk)
+            Console.Write(ele + " ");
         Console.WriteLine();
         SortStack2(stk);
-        foreach(var ele in stk) 
-            Console.Write(ele + " "); 
+        foreach (var ele in stk)
+            Console.Write(ele + " ");
         Console.WriteLine();
     }
 
     /*
-2 4 1 3 
-4 3 2 1 
-2 4 1 3 
-4 3 2 1 
+    2 4 1 3 
+    4 3 2 1 
+    2 4 1 3 
+    4 3 2 1 
     */
 
     public static void BottomInsert(Stack<int> stk, int element)
@@ -562,18 +561,18 @@ public static void Main7a()
         stk.Push(1);
         stk.Push(2);
         stk.Push(3);
-        foreach(var ele in stk) 
-            Console.Write(ele + " "); 
+        foreach (var ele in stk)
+            Console.Write(ele + " ");
         Console.WriteLine();
         BottomInsert(stk, 4);
-        foreach(var ele in stk) 
-            Console.Write(ele + " "); 
+        foreach (var ele in stk)
+            Console.Write(ele + " ");
         Console.WriteLine();
     }
 
     /*
-    [1, 2, 3]
-    [4, 1, 2, 3]
+    3 2 1 
+    3 2 1 4
     */
 
     public static void BottomInsert<T>(Stack<T> stk, T value)
@@ -607,47 +606,47 @@ public static void Main7a()
     }
 
     public static void ReverseStack2(Stack<int> stk)
-{
-    Queue<int> que = new Queue<int>();
-    while (stk.Count > 0)
     {
-        que.Enqueue(stk.Pop());
-    }
+        Queue<int> que = new Queue<int>();
+        while (stk.Count > 0)
+        {
+            que.Enqueue(stk.Pop());
+        }
 
-    while (que.Count != 0)
-    {
-        stk.Push(que.Dequeue());
+        while (que.Count != 0)
+        {
+            stk.Push(que.Dequeue());
+        }
     }
-}
 
     public static void ReverseKElementInStack(Stack<int> stk, int k)
-{
-    Queue<int> que = new Queue<int>();
-    int i = 0;
-    while (stk.Count > 0 && i < k)
     {
-        que.Enqueue(stk.Pop());
-        i++;
-    }
-    while (que.Count != 0)
-    {
-        stk.Push(que.Dequeue());
-    }
-}
-
-public static void reverseQueue(Queue<int> que)
-{
-    Stack<int> stk = new Stack<int>();
-    while (que.Count != 0)
-    {
-        stk.Push(que.Dequeue());
+        Queue<int> que = new Queue<int>();
+        int i = 0;
+        while (stk.Count > 0 && i < k)
+        {
+            que.Enqueue(stk.Pop());
+            i++;
+        }
+        while (que.Count != 0)
+        {
+            stk.Push(que.Dequeue());
+        }
     }
 
-    while (stk.Count > 0)
+    public static void reverseQueue(Queue<int> que)
     {
-        que.Enqueue(stk.Pop());
+        Stack<int> stk = new Stack<int>();
+        while (que.Count != 0)
+        {
+            stk.Push(que.Dequeue());
+        }
+
+        while (stk.Count > 0)
+        {
+            que.Enqueue(stk.Pop());
+        }
     }
-}
 
     public static void ReverseKElementInQueue(Queue<int> que, int k)
     {
@@ -678,8 +677,8 @@ public static void reverseQueue(Queue<int> que)
         stk.Push(1);
         stk.Push(2);
         stk.Push(3);
-        foreach(var ele in stk) 
-            Console.Write(ele + " "); 
+        foreach (var ele in stk)
+            Console.Write(ele + " ");
         Console.WriteLine();
     }
 
@@ -693,27 +692,45 @@ public static void reverseQueue(Queue<int> que)
         stk.Push(2);
         stk.Push(3);
         stk.Push(4);
-        foreach(var ele in stk) 
-            Console.Write(ele + " "); 
+        foreach (var ele in stk)
+            Console.Write(ele + " ");
         Console.WriteLine();
         ReverseStack(stk);
-        foreach(var ele in stk) 
-            Console.Write(ele + " "); 
+        foreach (var ele in stk)
+            Console.Write(ele + " ");
         Console.WriteLine();
         ReverseStack2(stk);
-        foreach(var ele in stk) 
-            Console.Write(ele + " "); 
-        Console.WriteLine();
-        ReverseKElementInStack(stk, 2);
-        foreach(var ele in stk) 
-            Console.Write(ele + " "); 
+        foreach (var ele in stk)
+            Console.Write(ele + " ");
         Console.WriteLine();
     }
     /*
-    [1, 2, 3, 4]
-    [4, 3, 2, 1]
-    [1, 2, 3, 4]
-    [1, 2, 4, 3]
+    4 3 2 1 
+    1 2 3 4 
+    4 3 2 1 
+    */
+
+    // Testing code.
+    public static void Main12A()
+    {
+        Stack<int> stk = new Stack<int>();
+        stk.Push(1);
+        stk.Push(2);
+        stk.Push(3);
+        stk.Push(4);
+        foreach (var ele in stk)
+            Console.Write(ele + " ");
+        Console.WriteLine();
+
+        ReverseKElementInStack(stk, 2);
+        foreach (var ele in stk)
+            Console.Write(ele + " ");
+        Console.WriteLine();
+    }
+
+    /*
+    4 3 2 1 
+    3 4 2 1 
     */
 
     // Testing code.
@@ -723,25 +740,35 @@ public static void reverseQueue(Queue<int> que)
         que.Enqueue(1);
         que.Enqueue(2);
         que.Enqueue(3);
-        foreach(var ele in que) 
-            Console.Write(ele + " "); 
+        foreach (var ele in que)
+            Console.Write(ele + " ");
         Console.WriteLine();
-        
+
         reverseQueue(que);
-        foreach(var ele in que) 
-            Console.Write(ele + " "); 
+        foreach (var ele in que)
+            Console.Write(ele + " ");
+        Console.WriteLine();
+
+        que = new Queue<int>();
+        que.Enqueue(1);
+        que.Enqueue(2);
+        que.Enqueue(3);
+        foreach (var ele in que)
+            Console.Write(ele + " ");
         Console.WriteLine();
         ReverseKElementInQueue(que, 2);
-        
-        foreach(var ele in que) 
-            Console.Write(ele + " "); 
+
+        foreach (var ele in que)
+            Console.Write(ele + " ");
         Console.WriteLine();
     }
 
     /*
-    [1, 2, 3]
-    [3, 2, 1]
-    [2, 3, 1]
+    1 2 3 
+    3 2 1 
+
+    1 2 3 
+    2 1 3 
     */
 
     public static int MaxDepthParenthesis(string expn, int size)
@@ -839,7 +866,7 @@ public static void reverseQueue(Queue<int> que)
         }
         return length;
     }
-    
+
     // Testing code.
     public static void Main15()
     {
@@ -850,7 +877,7 @@ public static void reverseQueue(Queue<int> que)
 
     // LongestContBalParen 12
 
-        public static int ReverseParenthesis(string expn, int size)
+    public static int ReverseParenthesis(string expn, int size)
     {
         Stack<char> stk = new Stack<char>();
         int openCount = 0;
@@ -892,7 +919,7 @@ public static void reverseQueue(Queue<int> que)
                 closeCount += 1;
             }
         }
-        int reversal = (int) Math.Ceiling(openCount / 2.0) + (int) Math.Ceiling(closeCount / 2.0);
+        int reversal = (int)Math.Ceiling(openCount / 2.0) + (int)Math.Ceiling(closeCount / 2.0);
         return reversal;
     }
 
@@ -971,7 +998,7 @@ public static void reverseQueue(Queue<int> que)
             }
 
         }
-        Console.WriteLine("Parenthesis Count " + output);
+        Console.WriteLine("Parenthesis Count :: " + output);
     }
 
     // Testing code.
@@ -1051,7 +1078,7 @@ public static void reverseQueue(Queue<int> que)
         Array.Fill(output, -1);
         for (int i = 0; i < size; i++)
         {
-            for (int j = i + 1;j < size;j++)
+            for (int j = i + 1; j < size; j++)
             {
                 if (arr[j] < arr[i])
                 {
@@ -1100,7 +1127,7 @@ public static void reverseQueue(Queue<int> que)
     // Testing code.
     public static void Main19()
     {
-        int[] arr = new int[] {13, 21, 3, 6, 20, 3};
+        int[] arr = new int[] { 13, 21, 3, 6, 20, 3 };
         int size = arr.Length;
         NextLargerElement(arr, size);
         NextLargerElement2(arr, size);
@@ -1121,7 +1148,7 @@ public static void reverseQueue(Queue<int> que)
         Array.Fill(output, -1);
         for (int i = 0; i < size; i++)
         {
-            for (int j = 1;j < size;j++)
+            for (int j = 1; j < size; j++)
             {
                 if (arr[i] < arr[(i + j) % size])
                 {
@@ -1137,7 +1164,6 @@ public static void reverseQueue(Queue<int> que)
         }
         Console.WriteLine();
     }
-
 
     public static void NextLargerElementCircular2(int[] arr, int size)
     {
@@ -1171,7 +1197,7 @@ public static void reverseQueue(Queue<int> que)
     // Testing code.
     public static void Main20()
     {
-        int[] arr = new int[] {6, 3, 9, 8, 10, 2, 1, 15, 7};
+        int[] arr = new int[] { 6, 3, 9, 8, 10, 2, 1, 15, 7 };
         NextLargerElementCircular(arr, arr.Length);
         NextLargerElementCircular2(arr, arr.Length);
     }
@@ -1179,7 +1205,7 @@ public static void reverseQueue(Queue<int> que)
     // 9 9 10 10 15 15 15 -1 9
     // 9 9 10 10 15 15 15 -1 9
 
-    public static bool IsKnown(int[, ] relation, int a, int b)
+    public static bool IsKnown(int[,] relation, int a, int b)
     {
         if (relation[a, b] == 1)
         {
@@ -1188,7 +1214,7 @@ public static void reverseQueue(Queue<int> que)
         return false;
     }
 
-    public static int FindCelebrity(int[, ] relation, int count)
+    public static int FindCelebrity(int[,] relation, int count)
     {
         int i, j;
         bool cel = true;
@@ -1211,7 +1237,7 @@ public static void reverseQueue(Queue<int> que)
         return -1;
     }
 
-    public static int FindCelebrity2(int[, ] relation, int count)
+    public static int FindCelebrity2(int[,] relation, int count)
     {
         Stack<int> stk = new Stack<int>();
         int first = 0, second = 0;
@@ -1242,7 +1268,7 @@ public static void reverseQueue(Queue<int> que)
         return first;
     }
 
-    public static int FindCelebrity3(int[, ] relation, int count)
+    public static int FindCelebrity3(int[,] relation, int count)
     {
         int first = 0;
         int second = 1;
@@ -1272,7 +1298,7 @@ public static void reverseQueue(Queue<int> que)
     // Testing code.
     public static void Main21()
     {
-        int[, ] arr = new int[, ]
+        int[,] arr = new int[,]
         {
             {1, 0, 1, 1, 0},
             {1, 0, 0, 1, 0},
@@ -1351,6 +1377,7 @@ public static void reverseQueue(Queue<int> que)
         Main9();
         Main10();
         Main11();
+        Main12A();
         Main12();
         Main13();
         Main14();

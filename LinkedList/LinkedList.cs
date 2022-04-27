@@ -15,7 +15,7 @@ public class LinkedList
         }
     }
 
-    private Node head;
+    private Node head = null;
     private int size = 0;
 
     // Other Methods.
@@ -377,7 +377,7 @@ public class LinkedList
             tempHead = tempHead.next;
             tempHead2 = tempHead2.next;
         }
-        return (tempHead != null)? tempHead.value : -1;
+        return (tempHead != null) ? tempHead.value : -1;
     }
 
     public void DeleteList()
@@ -392,7 +392,7 @@ public class LinkedList
         while (temp != null)
         {
             Console.Write(temp.value + " ");
-        temp = temp.next;
+            temp = temp.next;
         }
         Console.WriteLine("");
     }
@@ -677,6 +677,7 @@ public class LinkedList
         Console.WriteLine("Size : " + ll.Size());
         Console.WriteLine("Size : " + ll.FindLength());
         Console.WriteLine("Is empty : " + ll.IsEmpty());
+        Console.WriteLine("Peek : " + ll.Peek());
         ll.AddTail(4);
         ll.Print();
     }
@@ -686,6 +687,7 @@ public class LinkedList
     Size : 3
     Size : 3
     Is empty : False
+    Peek : 3
     3 2 1 4 
     */
 
@@ -706,7 +708,7 @@ public class LinkedList
     3 2 1 
     Search : True
     2 1 
-    */ 
+    */
 
     // Testing code.
     public static void Main3()
@@ -714,23 +716,35 @@ public class LinkedList
         LinkedList ll = new LinkedList();
         ll.AddHead(1);
         ll.AddHead(2);
+        ll.AddHead(3);
+        ll.Print();
+        Console.WriteLine("DeleteNode : " + ll.DeleteNode(2));
+        ll.Print();
+    }
+
+    /*
+    3 2 1 
+    DeleteNode : True
+    3 1
+    */
+
+    public static void Main3A()
+    {
+        LinkedList ll = new LinkedList();
         ll.AddHead(1);
         ll.AddHead(2);
         ll.AddHead(1);
         ll.AddHead(3);
-        ll.Print();
-        Console.WriteLine("DeleteNode : " + ll.DeleteNode(2));
+        ll.AddHead(1);
         ll.Print();
         Console.WriteLine("DeleteNodes : " + ll.DeleteNodes(1));
         ll.Print();
     }
 
     /*
-    3 1 2 1 2 1 
+    1 3 1 2 1 
     DeleteNode : True
-    3 1 1 2 1 
-    DeleteNodes : True
-    3 2 
+    3 2
     */
 
     // Testing code.
@@ -785,10 +799,10 @@ public class LinkedList
     3 2 1 
     3 2 1 
     1 2 3 
-CompareList : True
-CompareList : True
-CompareList : False
-CompareList : False
+    CompareList : True
+    CompareList : True
+    CompareList : False
+    CompareList : False
     */
 
     // Testing code.
@@ -798,14 +812,12 @@ CompareList : False
         ll.AddHead(1);
         ll.AddHead(2);
         ll.AddHead(3);
-        ll.Print();
         Console.WriteLine(ll.NthNodeFromBeginning(2));
         Console.WriteLine(ll.NthNodeFromEnd(2));
         Console.WriteLine(ll.NthNodeFromEnd2(2));
     }
 
     /*
-    3 2 1 
     2
     2
     2
@@ -818,7 +830,6 @@ CompareList : False
         ll.SortedInsert(1);
         ll.SortedInsert(2);
         ll.SortedInsert(3);
-        ll.Print();
         ll.SortedInsert(1);
         ll.SortedInsert(2);
         ll.SortedInsert(3);
@@ -828,13 +839,12 @@ CompareList : False
     }
 
     /*
-    1 2 3 
     1 1 2 2 3 3 
     1 2 3
     */
 
     // Testing code.
-        public static void Main8()
+    public static void Main8()
     {
         LinkedList ll = new LinkedList();
         ll.AddHead(1);
@@ -924,17 +934,18 @@ CompareList : False
         ll.Print();
     }
 
-/*
-1 2 3 4 5 6 7 8 9 10 
-1 2 2 3 3 4 4 5 5 6 6 7 7 8 8 9 9 10 10 
-1 2 2 2 3 3 3 4 4 4 5 5 5 6 6 6 7 7 7 8 8 8 9 9 9 10 10 10 
-*/
+    /*
+    1 2 3 4 5 6 7 8 9 10 
+    1 2 2 3 3 4 4 5 5 6 6 7 7 8 8 9 9 10 10 
+    1 2 2 2 3 3 3 4 4 4 5 5 5 6 6 6 7 7 7 8 8 8 9 9 9 10 10 10 
+    */
 
     public static void Main(string[] args)
     {
         Main1();
         Main2();
         Main3();
+        Main3A();
         Main4();
         Main5();
         Main6();

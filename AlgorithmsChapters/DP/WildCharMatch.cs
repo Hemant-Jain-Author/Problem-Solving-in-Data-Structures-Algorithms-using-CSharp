@@ -2,12 +2,12 @@
 
 public class WildCharMatch
 {
-    public static bool matchExp(string exp, string str)
+    public static bool MatchExp(string exp, string str)
     {
-        return matchExpUtil(exp.ToCharArray(), str.ToCharArray(), 0, 0);
+        return MatchExpUtil(exp.ToCharArray(), str.ToCharArray(), 0, 0);
     }
 
-    private static bool matchExpUtil(char[] exp, char[] str, int m, int n)
+    private static bool MatchExpUtil(char[] exp, char[] str, int m, int n)
     {
         if (m == exp.Length && (n == str.Length || exp[m - 1] == '*'))
         {
@@ -19,23 +19,23 @@ public class WildCharMatch
         }
         if (exp[m] == '?' || exp[m] == str[n])
         {
-            return matchExpUtil(exp, str, m + 1, n + 1);
+            return MatchExpUtil(exp, str, m + 1, n + 1);
         }
         if (exp[m] == '*')
         {
-            return matchExpUtil(exp, str, m + 1, n) || matchExpUtil(exp, str, m, n + 1);
+            return MatchExpUtil(exp, str, m + 1, n) || MatchExpUtil(exp, str, m, n + 1);
         }
         return false;
     }
 
-    public static bool matchExpDP(string exp, string str)
+    public static bool MatchExpDP(string exp, string str)
     {
-        return matchExpUtilDP(exp.ToCharArray(), str.ToCharArray(), exp.Length, str.Length);
+        return MatchExpUtilDP(exp.ToCharArray(), str.ToCharArray(), exp.Length, str.Length);
     }
 
-    private static bool matchExpUtilDP(char[] exp, char[] str, int m, int n)
+    private static bool MatchExpUtilDP(char[] exp, char[] str, int m, int n)
     {
-        bool[, ] lookup = new bool[m + 1, n + 1];
+        bool[,] lookup = new bool[m + 1, n + 1];
         lookup[0, 0] = true; // empty exp and empty str match.
 
         // 0 row will remain all false. empty exp can't match any str.
@@ -86,25 +86,25 @@ public class WildCharMatch
     // Testing code.
     public static void Main(string[] args)
     {
-        Console.WriteLine(matchExp("*llo,?World?", "Hello, World!"));
-        Console.WriteLine(matchExpDP("*llo,?World?", "Hello, World!"));
+        Console.WriteLine("MatchExp :: " + MatchExp("*llo,?World?", "Hello, World!"));
+        Console.WriteLine("MatchExp :: " + MatchExpDP("*llo,?World?", "Hello, World!"));
     }
-/*
-True
-True
-*/
+    /*
+    MatchExp :: True
+    MatchExp :: True
+    */
 
     // Testing code.
     public static void main2(string[] args)
     {
         string str = "baaabab";
-        string[] pattern = new string[] {"*****ba*****ab", "ba*****ab", "ba*ab", "a*ab", "a*****ab", "*a*****ab", "ba*ab****", "****", "*", "aa?ab", "b*b", "a*a", "baaabab", "?baaabab", "*baaaba*"};
+        string[] pattern = new string[] { "*****ba*****ab", "ba*****ab", "ba*ab", "a*ab", "a*****ab", "*a*****ab", "ba*ab****", "****", "*", "aa?ab", "b*b", "a*a", "baaabab", "?baaabab", "*baaaba*" };
 
         foreach (string p in pattern)
         {
-            if (matchExp(p, str) != matchExpDP(p, str))
+            if (MatchExp(p, str) != MatchExpDP(p, str))
             {
-                Console.Write(matchExpDP(p, str) + " for ");
+                Console.Write(MatchExpDP(p, str) + " for ");
                 Console.WriteLine(p + " == " + str);
             }
         }

@@ -12,7 +12,7 @@ public class ChotaBhim
         while (time > 0)
         {
             total += cups[0];
-            cups[0] = (int) Math.Ceiling(cups[0] / 2.0);
+            cups[0] = (int)Math.Ceiling(cups[0] / 2.0);
             index = 0;
             temp = cups[0];
             while (index < size - 1 && temp < cups[index + 1])
@@ -43,7 +43,7 @@ public class ChotaBhim
         {
             value = pq.Dequeue();
             total += value;
-            value = (int) Math.Ceiling(value / 2.0);
+            value = (int)Math.Ceiling(value / 2.0);
             pq.Enqueue(value);
             time -= 1;
         }
@@ -54,9 +54,9 @@ public class ChotaBhim
     // Testing code.
     public static void Main(string[] args)
     {
-        int[] cups = new int[] {2, 1, 7, 4, 2};
+        int[] cups = new int[] { 2, 1, 7, 4, 2 };
         ChotaBhim.TotalQuantity(cups, cups.Length);
-        int[] cups2 = new int[] {2, 1, 7, 4, 2};
+        int[] cups2 = new int[] { 2, 1, 7, 4, 2 };
         ChotaBhim.TotalQuantity2(cups2, cups.Length);
     }
 

@@ -19,8 +19,8 @@ public class HouseRobber
     public static int MaxRobbery2(int[] house)
     {
         int n = house.Length;
-        int[, ] dp = new int[n, 2];
-    
+        int[,] dp = new int[n, 2];
+
         dp[0, 1] = house[0];
         dp[0, 0] = 0;
 
@@ -35,7 +35,7 @@ public class HouseRobber
     // Testing code.
     public static void Main(string[] args)
     {
-        int[] arr = new int[] {10, 12, 9, 23, 25, 55, 49, 70};
+        int[] arr = new int[] { 10, 12, 9, 23, 25, 55, 49, 70 };
         Console.WriteLine("Total cash: " + MaxRobbery(arr));
         Console.WriteLine("Total cash: " + MaxRobbery2(arr));
     }

@@ -39,6 +39,34 @@ public class AVLTree
         return (node == null) ? 0 : Height(node.left) - Height(node.right);
     }
 
+    public void PrintTree()
+    {
+        PrintTree(root, "", false);
+        Console.WriteLine();
+    }
+
+    private void PrintTree(Node node, string indent, bool isLeft)
+    {
+        if (node == null)
+        {
+            return;
+        }
+        if (isLeft)
+        {
+            Console.Write(indent + "L:");
+            indent += "|  ";
+        }
+        else
+        {
+            Console.Write(indent + "R:");
+            indent += "   ";
+        }
+
+        Console.WriteLine(node.data + "(" + node.Height + ")");
+        PrintTree(node.left, indent, true);
+        PrintTree(node.right, indent, false);
+    }
+
     public void Insert(int data)
     {
         root = Insert(root, data);
@@ -64,7 +92,7 @@ public class AVLTree
             return node;
         }
 
-        node.Height = Max(Height(node.left), Height(node.right)) + 1;
+        node.Height = Math.Max(Height(node.left), Height(node.right)) + 1;
         int balance = GetBalance(node);
 
         if (balance > 1)
@@ -104,8 +132,8 @@ public class AVLTree
         x.left = T;
 
         // Update Heights
-        x.Height = Max(Height(x.left), Height(x.right)) + 1;
-        y.Height = Max(Height(y.left), Height(y.right)) + 1;
+        x.Height = Math.Max(Height(x.left), Height(x.right)) + 1;
+        y.Height = Math.Max(Height(y.left), Height(y.right)) + 1;
 
         // Return new root
         return y;
@@ -122,8 +150,8 @@ public class AVLTree
         x.right = T;
 
         // Update Heights
-        x.Height = Max(Height(x.left), Height(x.right)) + 1;
-        y.Height = Max(Height(y.left), Height(y.right)) + 1;
+        x.Height = Math.Max(Height(x.left), Height(x.right)) + 1;
+        y.Height = Math.Max(Height(y.left), Height(y.right)) + 1;
 
         // Return new root
         return y;
@@ -188,7 +216,7 @@ public class AVLTree
             }
         }
 
-        node.Height = Max(Height(node.left), Height(node.right)) + 1;
+        node.Height = Math.Max(Height(node.left), Height(node.right)) + 1;
         int balance = GetBalance(node);
 
         if (balance > 1)
@@ -232,39 +260,6 @@ public class AVLTree
         return node;
     }
 
-    public void PrintTree()
-    {
-        PrintTree(root, "", false);
-        Console.WriteLine();
-    }
-
-    private void PrintTree(Node node, string indent, bool isLeft)
-    {
-        if (node == null)
-        {
-            return;
-        }
-        if (isLeft)
-        {
-            Console.Write(indent + "L:");
-            indent += "|  ";
-        }
-        else
-        {
-            Console.Write(indent + "R:");
-            indent += "   ";
-        }
-
-        Console.WriteLine(node.data + "(" + node.Height + ")");
-        PrintTree(node.left, indent, true);
-        PrintTree(node.right, indent, false);
-    }
-
-    private int Max(int a, int b)
-    {
-        return (a > b) ? a : b;
-    }
-
     // Testing code.
     public static void Main(string[] arg)
     {
@@ -280,14 +275,14 @@ public class AVLTree
         t.PrintTree();
 
         /*
- R:4(3)
-   L:2(1)
-   |  L:1(0)
-   |  R:3(0)
-   R:6(2)
-      L:5(0)
-      R:7(1)
-         R:8(0)
+         R:4(3)
+           L:2(1)
+           |  L:1(0)
+           |  R:3(0)
+           R:6(2)
+              L:5(0)
+              R:7(1)
+                 R:8(0)
 
         */
 
@@ -295,26 +290,26 @@ public class AVLTree
         t.PrintTree();
 
         /*
- R:4(2)
-   L:2(1)
-   |  L:1(0)
-   |  R:3(0)
-   R:7(1)
-      L:6(0)
-      R:8(0)
+         R:4(2)
+           L:2(1)
+           |  L:1(0)
+           |  R:3(0)
+           R:7(1)
+              L:6(0)
+              R:8(0)
 
-       */
+        */
 
         t.Delete(1);
         t.PrintTree();
 
         /*
-R:4(2)
-   L:2(1)
-   |  R:3(0)
-   R:7(1)
-      L:6(0)
-      R:8(0)
+        R:4(2)
+           L:2(1)
+           |  R:3(0)
+           R:7(1)
+              L:6(0)
+              R:8(0)
 
         */
 
@@ -322,11 +317,11 @@ R:4(2)
         t.PrintTree();
 
         /*
-R:4(2)
-   L:3(0)
-   R:7(1)
-      L:6(0)
-      R:8(0) 
-        */
+        R:4(2)
+           L:3(0)
+           R:7(1)
+              L:6(0)
+              R:8(0) 
+                */
     }
 }

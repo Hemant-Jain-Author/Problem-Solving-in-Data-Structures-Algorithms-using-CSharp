@@ -2,8 +2,8 @@
 
 public class DoublyLinkedList
 {
-    private Node head;
-    private Node tail;
+    private Node head = null;
+    private Node tail = null;
     private int size = 0;
 
     private class Node
@@ -20,8 +20,6 @@ public class DoublyLinkedList
         }
     }
 
-    /* Other methods */
-
     public int Size()
     {
         return size;
@@ -31,6 +29,7 @@ public class DoublyLinkedList
     {
         return size == 0;
     }
+    /* Other methods */
 
     public int Peek()
     {
@@ -238,7 +237,6 @@ public class DoublyLinkedList
         return;
     }
 
-    /* Remove Duplicate */
     public void RemoveDuplicate()
     {
         Node curr = head;
@@ -297,12 +295,16 @@ public class DoublyLinkedList
         ll.AddHead(2);
         ll.AddHead(3);
         ll.Print();
+        Console.WriteLine("size : " + ll.Size());
+        Console.WriteLine("isEmpty : " + ll.IsEmpty());
         ll.RemoveHead();
         ll.Print();
         Console.WriteLine(ll.Search(2));
     }
     /*
     3 2 1 
+    size : 3
+    isEmpty : False
     2 1 
     True
     */

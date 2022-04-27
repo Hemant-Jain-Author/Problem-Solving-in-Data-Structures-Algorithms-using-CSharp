@@ -3,7 +3,7 @@
 public class Vacation
 {
     // days are must travel days, costs are cost of tickets.
-    public static int minCost(int[] days, int[] costs)
+    public static int MinCostTravel(int[] days, int[] costs)
     {
         int n = days.Length;
         int max = days[n - 1];
@@ -12,8 +12,8 @@ public class Vacation
         int j = 0;
         for (int i = 1; i <= max; i++)
         {
-            if (days[j] == i)
-            { // That days is definitely travelled.
+            if (days[j] == i) // That days is definitely travelled.
+            {
                 j++;
                 dp[i] = dp[i - 1] + costs[0];
                 dp[i] = Math.Min(dp[i], dp[Math.Max(0, i - 7)] + costs[1]);
@@ -30,10 +30,9 @@ public class Vacation
     // Testing code.
     public static void Main(string[] args)
     {
-        int[] days = new int[] {1, 3, 5, 7, 12, 20, 30};
-        int[] costs = new int[] {2, 7, 20};
-        Console.WriteLine("Min cost is:" + minCost(days, costs));
-
+        int[] days = new int[] { 1, 3, 5, 7, 12, 20, 30 };
+        int[] costs = new int[] { 2, 7, 20 };
+        Console.WriteLine("Min cost is:" + MinCostTravel(days, costs));
     }
 }
 /*

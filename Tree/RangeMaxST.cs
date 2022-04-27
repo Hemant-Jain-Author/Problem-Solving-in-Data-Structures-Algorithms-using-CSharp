@@ -11,7 +11,7 @@ public class RangeMaxST
         // Height of segment tree.
         int x = (int)(Math.Ceiling(Math.Log(n) / Math.Log(2)));
         //Maximum size of segment tree
-        int max_size = 2 * (int) Math.Pow(2, x) - 1;
+        int max_size = 2 * (int)Math.Pow(2, x) - 1;
         // Allocate memory for segment tree
         segArr = new int[max_size];
         ConstructST(input, 0, n - 1, 0);
@@ -31,20 +31,8 @@ public class RangeMaxST
         // then traverse left and right subtrees 
         // and store the minimum of values in current node.
         int mid = (start + end) / 2;
-        segArr[index] = Max(ConstructST(input, start, mid, index * 2 + 1), ConstructST(input, mid + 1, end, index * 2 + 2));
-         return segArr[index];
-    }
-
-    private int Max(int first, int second)
-    {
-        if (first > second)
-        {
-            return first;
-        }
-        else
-        {
-            return second;
-        }
+        segArr[index] = Math.Max(ConstructST(input, start, mid, index * 2 + 1), ConstructST(input, mid + 1, end, index * 2 + 2));
+        return segArr[index];
     }
 
     public int GetMax(int start, int end)
@@ -72,7 +60,7 @@ public class RangeMaxST
 
         // Segment tree is partly overlaps with the query range.
         int mid = (segStart + segEnd) / 2;
-        return Max(GetMaxUtil(segStart, mid, queryStart, queryEnd, 2 * index + 1), 
+        return Math.Max(GetMaxUtil(segStart, mid, queryStart, queryEnd, 2 * index + 1),
         GetMaxUtil(mid + 1, segEnd, queryStart, queryEnd, 2 * index + 2));
     }
 
@@ -118,7 +106,7 @@ public class RangeMaxST
         int mid = (segStart + segEnd) / 2;
 
         // Current node value is updated with min. 
-        segArr[index] = Max(UpdateUtil(segStart, mid, ind, val, 2 * index + 1), UpdateUtil(mid + 1, segEnd, ind, val, 2 * index + 2));
+        segArr[index] = Math.Max(UpdateUtil(segStart, mid, ind, val, 2 * index + 1), UpdateUtil(mid + 1, segEnd, ind, val, 2 * index + 2));
 
         // Value of diff is propagated to the parent node.
         return segArr[index];
@@ -127,7 +115,7 @@ public class RangeMaxST
     // Testing code.
     public static void Main(string[] args)
     {
-        int[] arr = new int[] {1, 8, 2, 7, 3, 6, 4, 5};
+        int[] arr = new int[] { 1, 8, 2, 7, 3, 6, 4, 5 };
         RangeMaxST tree = new RangeMaxST(arr);
         Console.WriteLine("Max value in the range(1, 5): " + tree.GetMax(1, 5));
         Console.WriteLine("Max value in the range(2, 7): " + tree.GetMax(2, 7));

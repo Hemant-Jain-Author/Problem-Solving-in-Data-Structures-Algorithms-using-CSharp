@@ -8,8 +8,8 @@ public class LongestCommonSubseq
         char[] Y = st2.ToCharArray();
         int m = st1.Length;
         int n = st2.Length;
-        int[, ] dp = new int[m + 1, n + 1]; // Dynamic programming array.
-        int[, ] p = new int[m + 1, n + 1]; // For printing the substring.
+        int[,] dp = new int[m + 1, n + 1]; // Dynamic programming array.
+        int[,] p = new int[m + 1, n + 1]; // For printing the substring.
 
         // Fill dp array in bottom up fashion.
         for (int i = 1; i <= m; i++)
@@ -23,8 +23,8 @@ public class LongestCommonSubseq
                 }
                 else
                 {
-                    dp[i, j] = (dp[i - 1, j] > dp[i, j - 1])? dp[i - 1, j]: dp[i, j - 1];
-                    p[i, j] = (dp[i - 1, j] > dp[i, j - 1])? 1 : 2;
+                    dp[i, j] = (dp[i - 1, j] > dp[i, j - 1]) ? dp[i - 1, j] : dp[i, j - 1];
+                    p[i, j] = (dp[i - 1, j] > dp[i, j - 1]) ? 1 : 2;
                 }
             }
         }
@@ -33,7 +33,7 @@ public class LongestCommonSubseq
         return dp[m, n];
     }
 
-    private static void PrintLCS(int[, ] p, char[] X, int i, int j)
+    private static void PrintLCS(int[,] p, char[] X, int i, int j)
     {
         if (i == 0 || j == 0)
         {

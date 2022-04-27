@@ -4,7 +4,7 @@ public class GridUniqueWays
 {
     public static int UniqueWays(int m, int n)
     {
-        int[, ] dp = new int[m, n];
+        int[,] dp = new int[m, n];
         dp[0, 0] = 1;
 
         // Initialize first column.
@@ -31,7 +31,7 @@ public class GridUniqueWays
     // Diagonal movement allowed.
     public static int Unique3Ways(int m, int n)
     {
-        int[, ] dp = new int[m, n];
+        int[,] dp = new int[m, n];
         dp[0, 0] = 1;
 
         // Initialize first column.
@@ -58,13 +58,13 @@ public class GridUniqueWays
     // Testing code.
     public static void Main(string[] args)
     {
-        Console.WriteLine(UniqueWays(3, 3));
-        Console.WriteLine(Unique3Ways(3, 3));
+        Console.WriteLine("UniqueWays : " + UniqueWays(3, 3));
+        Console.WriteLine("UniqueWays : " + Unique3Ways(3, 3));
 
     }
 }
 
 /*
-6
-13
+UniqueWays : 6
+UniqueWays : 13
 */

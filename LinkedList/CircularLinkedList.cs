@@ -17,8 +17,6 @@ public class CircularLinkedList
         }
     }
 
-    /* Other methods */
-
     public int Size()
     {
         return size;
@@ -37,6 +35,8 @@ public class CircularLinkedList
         }
         return tail.next.value;
     }
+
+    /* Other methods */
 
     public void AddTail(int value)
     {
@@ -70,6 +70,23 @@ public class CircularLinkedList
         }
         size++;
     }
+
+    public void Print()
+    {
+        if (IsEmpty())
+        {
+            Console.WriteLine("Empty List.");
+            return;
+        }
+        Node temp = tail.next;
+        while (temp != tail)
+        {
+            Console.Write(temp.value + " ");
+            temp = temp.next;
+        }
+        Console.WriteLine(temp.value);
+    }
+
     public int RemoveHead()
     {
         if (IsEmpty())
@@ -200,22 +217,6 @@ public class CircularLinkedList
         size = 0;
     }
 
-    public void Print()
-    {
-        if (IsEmpty())
-        {
-            Console.WriteLine("Empty List.");
-            return;
-        }
-        Node temp = tail.next;
-        while (temp != tail)
-        {
-            Console.Write(temp.value + " ");
-            temp = temp.next;
-        }
-        Console.WriteLine(temp.value);
-    }
-
     // Testing code.
     public static void Main1()
     {
@@ -231,12 +232,12 @@ public class CircularLinkedList
     }
 
     /*
-3 2 1
-3
-False
-3
-True
-    */
+    3 2 1
+    3
+    False
+    3
+    True
+     */
 
     // Testing code.
     public static void Main2()

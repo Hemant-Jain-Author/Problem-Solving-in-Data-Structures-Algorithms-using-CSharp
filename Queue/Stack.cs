@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 public class Stack
 {
     private Queue<int> que1 = new Queue<int>();
@@ -32,12 +33,6 @@ public class Stack
         return value;
     }
 
-    public void Push2(int value)
-    {
-        que1.Enqueue(value);
-        size += 1;
-    }
-
     public int Pop2()
     {
         int value = 0, s = size;
@@ -56,16 +51,39 @@ public class Stack
     }
 
     // Testing code.
-    public static void Main(string[] args)
+    public static void Main1()
     {
         Stack s = new Stack();
-        for (int i = 0; i < 5; i++)
-        {
-            s.Push(i);
-        }
-        for (int i = 0; i < 5; i++)
-        {
-            Console.Write(s.Pop() + " ");
-        }
+        s.Push(1);
+        s.Push(2);
+        s.Push(3);
+        Console.WriteLine("Stack pop : " + s.Pop() + " ");
+        Console.WriteLine("Stack pop : " + s.Pop() + " ");
+    }
+
+    /*
+    Stack pop : 3 
+    Stack pop : 2     
+    */
+
+    public static void Main2()
+    {
+        Stack s = new Stack();
+        s.Push(1);
+        s.Push(2);
+        s.Push(3);
+        Console.WriteLine("Stack pop : " + s.Pop2() + " ");
+        Console.WriteLine("Stack pop : " + s.Pop2() + " ");
+    }
+
+    /*
+    Stack pop : 3 
+    Stack pop : 2     
+    */
+
+    public static void Main(string[] args)
+    {
+        Main1();
+        Main2();
     }
 }

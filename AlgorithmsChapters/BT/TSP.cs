@@ -3,12 +3,12 @@
 public class TSP
 {
     // Function to find the minimum weight Hamiltonian Cycle 
-    internal static int TSPPath(int[,] graph, int n, int[] path, int pSize, int pCost, bool[] visited, int ans, int[] ansPath)
+    private static int TSPPath(int[,] graph, int n, int[] path, int pSize, int pCost, bool[] visited, int ans, int[] ansPath)
     {
         int curr = path[pSize - 1];
         if (pSize == n)
         {
-            if (graph[curr, 0] > 0 && ans > pCost + graph[curr,0])
+            if (graph[curr, 0] > 0 && ans > pCost + graph[curr, 0])
             {
                 ans = pCost + graph[curr, 0];
                 for (int i = 0; i <= n; i++)
@@ -23,14 +23,14 @@ public class TSP
             {
                 visited[i] = true;
                 path[pSize] = i;
-                ans = TSPPath(graph, n, path, pSize+1, pCost + graph[curr, i],visited, ans, ansPath);
+                ans = TSPPath(graph, n, path, pSize + 1, pCost + graph[curr, i], visited, ans, ansPath);
                 visited[i] = false;
             }
         }
         return ans;
     }
 
-    internal static int TSPPath(int[, ] graph, int n)
+    public static int TSPPath(int[,] graph, int n)
     {
         bool[] visited = new bool[n];
         int[] path = new int[n];
@@ -51,14 +51,14 @@ public class TSP
     public static void Main(string[] args)
     {
         int n = 4;
-        int[, ] graph = new int[, ]
+        int[,] graph = new int[,]
         {
             {0, 10, 15, 20},
             {10, 0, 35, 25},
             {15, 35, 0, 30},
             {20, 25, 30, 0}
         };
-        TSP.TSPPath(graph, n);
+        TSPPath(graph, n);
     }
 }
 

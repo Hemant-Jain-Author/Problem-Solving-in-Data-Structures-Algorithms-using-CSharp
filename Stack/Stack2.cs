@@ -7,11 +7,7 @@ public class Stack2
     private int minCapacity;
     private int capacity;
 
-    public Stack2() : this(1000)
-    {
-    }
-
-    public Stack2(int size)
+    public Stack2(int size = 1000)
     {
         data = new int[size];
         capacity = minCapacity = size;
@@ -33,7 +29,7 @@ public class Stack2
     {
         if (Size() == capacity)
         {
-            Console.WriteLine("size doubled");
+            Console.WriteLine("Size doubled");
             int[] newData = new int[capacity * 2];
             Array.Copy(data, 0, newData, 0, capacity);
             data = newData;
@@ -63,7 +59,7 @@ public class Stack2
         top--;
         if (Size() == capacity / 2 && capacity > minCapacity)
         {
-            Console.WriteLine("size halved");
+            Console.WriteLine("Size halved");
             capacity = capacity / 2;
             int[] newData = new int[capacity];
             Array.Copy(data, 0, newData, 0, capacity);
@@ -89,7 +85,6 @@ public class Stack2
         {
             s.Push(i);
         }
-        s.Print();
         for (int i = 1; i <= 11; i++)
         {
             s.Pop();
@@ -97,9 +92,8 @@ public class Stack2
     }
 }
 /*
-size doubled
-size doubled
-11 10 9 8 7 6 5 4 3 2 1 
-size halved
-size halved
+Size doubled
+Size doubled
+Size halved
+Size halved
 */

@@ -13,24 +13,6 @@ public class ClosestPair
         }
     }
 
-    public double ClosestPairBF(int[, ] arr)
-    {
-        int n = arr.GetLength(0);
-        double dmin = double.MaxValue, d;
-        for (int i = 0; i < n - 1 ; i++)
-        {
-            for (int j = i + 1; j < n ; j++)
-            {
-                d = Math.Sqrt((arr[i, 0] - arr[j, 0]) * (arr[i, 0] - arr[j, 0]) + (arr[i, 1] - arr[j, 1]) * (arr[i, 1] - arr[j, 1]));
-                if (d < dmin)
-                {
-                    dmin = d;
-                }
-            }
-        }
-        return dmin;
-    }
-
     private static double Distance(Point a, Point b)
     {
         return Math.Sqrt((a.x - b.x) * (a.x - b.x) + (a.y - b.y) * (a.y - b.y));
@@ -43,7 +25,7 @@ public class ClosestPair
             return (s1.x - s2.x);
         }
     }
-    
+
     internal class yComp : IComparer<Point>
     {
         public int Compare(Point s1, Point s2)
@@ -63,7 +45,7 @@ public class ClosestPair
         {
             for (int j = i + 1; j < n && (q[j].y - q[i].y) < min; ++j)
             {
-                d = Distance(q[i],q[j]);
+                d = Distance(q[i], q[j]);
                 if (d < min)
                 {
                     min = d;
@@ -110,9 +92,9 @@ public class ClosestPair
     }
 
 
-    public double ClosestPairDC(int[, ] arr)
+    public double ClosestPairDC(int[,] arr)
     {
-        int n =arr.GetLength(0);
+        int n = arr.GetLength(0);
         Point[] p = new Point[n];
         for (int i = 0; i < n; i++)
         {
@@ -130,14 +112,7 @@ public class ClosestPair
     // Testing code.
     public static void Main(string[] args)
     {
-        int[, ] arr = new int[,]
-        {
-            {648, 896},
-            {269, 879},
-            {250, 922},
-            {453, 347},
-            {213, 17}
-        };
+        int[,] arr = new int[,] { { 648, 896 }, { 269, 879 }, { 250, 922 }, { 453, 347 }, { 213, 17 } };
         ClosestPair cp = new ClosestPair();
         Console.WriteLine("Smallest Distance is:" + cp.ClosestPairBF(arr));
         Console.WriteLine("Smallest Distance is:" + cp.ClosestPairDC(arr));

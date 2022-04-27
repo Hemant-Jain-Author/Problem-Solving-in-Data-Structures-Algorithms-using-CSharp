@@ -38,7 +38,7 @@ public class Fibo
             return n;
         }
 
-        int[] dp = new int[n+1];
+        int[] dp = new int[n + 1];
         dp[0] = 0;
         dp[1] = 1;
 
@@ -52,7 +52,7 @@ public class Fibo
 
     public static int FibonacciTD(int n)
     {
-        int[] dp = new int[n+1];
+        int[] dp = new int[n + 1];
         FibonacciTD(n, dp);
         return dp[n];
     }
@@ -65,7 +65,7 @@ public class Fibo
         if (dp[n] != 0)
             return dp[n];
 
-        dp[n] = FibonacciTD(n-1, dp) + FibonacciTD(n-2, dp);
+        dp[n] = FibonacciTD(n - 1, dp) + FibonacciTD(n - 2, dp);
         return dp[n];
     }
 

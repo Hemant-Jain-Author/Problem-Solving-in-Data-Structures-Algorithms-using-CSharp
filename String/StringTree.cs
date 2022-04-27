@@ -78,17 +78,13 @@ public class StringTree
         {
             return true;
         }
-        else
+
+        if (compare == 1)
         {
-            if (compare == 1)
-            {
-                return Find(curr.lChild, value);
-            }
-            else
-            {
-                return Find(curr.rChild, value);
-            }
+            return Find(curr.lChild, value);
         }
+
+        return Find(curr.rChild, value);
     }
 
     public int Frequency(string value)
@@ -108,17 +104,13 @@ public class StringTree
         {
             return curr.count;
         }
-        else
+
+        if (compare > 0)
         {
-            if (compare > 0)
-            {
-                return Frequency(curr.lChild, value);
-            }
-            else
-            {
-                return Frequency(curr.rChild, value);
-            }
+            return Frequency(curr.lChild, value);
         }
+
+        return Frequency(curr.rChild, value);
     }
 
     public void FreeTree()
@@ -139,6 +131,7 @@ public class StringTree
 
     }
 }
+
 /*
 Apple Found : True
 Banana Found : True

@@ -85,7 +85,7 @@ public class QueueLL
         return value;
     }
 
-    internal void Print()
+    public void Print()
     {
         if (size == 0)
         {
@@ -106,18 +106,18 @@ public class QueueLL
     public static void Main(string[] args)
     {
         QueueLL que = new QueueLL();
-        for (int i = 0;i < 5;i++)
-        {
-            que.Add(i);
-        }
-        que.Print();
-        for (int i = 0; i < 5; i++)
-        {
-            Console.Write(que.Remove() + " ");
-        }
+        que.Add(1);
+        que.Add(2);
+        que.Add(3);
+        Console.WriteLine("IsEmpty : " + que.IsEmpty());
+        Console.WriteLine("Size : " + que.Size());
+        Console.WriteLine("Queue remove : " + que.Remove());
+        Console.WriteLine("Queue remove : " + que.Remove());
     }
 }
 /*
-Queue is : 0 1 2 3 4 
-0 1 2 3 4 
+IsEmpty : False
+Size : 3
+Queue remove : 1
+Queue remove : 2
 */

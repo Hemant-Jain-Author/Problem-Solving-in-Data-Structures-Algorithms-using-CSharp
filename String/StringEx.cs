@@ -2,7 +2,7 @@
 
 public class StringEx
 {
-    public static bool Match(string src, string ptn)
+    public static bool MatchPattern(string src, string ptn)
     {
         char[] source = src.ToCharArray();
         char[] pattern = ptn.ToCharArray();
@@ -27,7 +27,7 @@ public class StringEx
     // Testing code.
     public static void Main2()
     {
-        Console.WriteLine(Match("harrypottermustnotgotoschool", "pottergo"));
+        Console.WriteLine(MatchPattern("harrypottermustnotgotoschool", "pottergo"));
     }
     // True
 
@@ -251,7 +251,7 @@ public class StringEx
     String is not a Palindrome
     String is a Palindrome
     */
-    
+
     public static int Pow(int x, int n)
     {
         int value;
@@ -283,7 +283,7 @@ public class StringEx
         int index = 0;
         int len1 = a.Length;
         int len2 = b.Length;
-        int minlen = (len1 < len2)? len1 : len2;
+        int minlen = (len1 < len2) ? len1 : len2;
 
         while (index < minlen && a[index] == b[index])
         {
@@ -311,9 +311,15 @@ public class StringEx
     // Testing code.
     public static void Main10()
     {
-        Console.WriteLine(MyStrcmp("abs", "abs"));
+        Console.WriteLine(MyStrcmp("apple", "appke"));
+        Console.WriteLine(MyStrcmp("apple", "apple"));
+        Console.WriteLine(MyStrcmp("apple", "appme"));
     }
-    // 0
+    /*
+    1
+    0
+    -1
+    */
 
     public static string ReverseString(string str)
     {
@@ -408,7 +414,7 @@ public class StringEx
 
     private static void PrintArray(char[] arr, int n)
     {
-        for (int i = 0;i < n;i++)
+        for (int i = 0; i < n; i++)
         {
             Console.Write(arr[i]);
         }
@@ -429,14 +435,14 @@ public class StringEx
     }
 
     /*
-    123
-    213
-    321
-    231
-    132
-    312
+123
+132
+213
+231
+321
+312
     */
-    
+
     public static void Shuffle(string str)
     {
         char[] ar = str.ToCharArray();
@@ -477,7 +483,7 @@ public class StringEx
         char[] str2 = st2.ToCharArray();
         int size1 = str1.Length;
         int size2 = str2.Length;
-        int max = (size1 > size2)? size1 : size2;
+        int max = (size1 > size2) ? size1 : size2;
         char[] total = new char[max + 1];
         int first = 0, second = 0, sum = 0, carry = 0;
         for (int index = max; index > 0; index--, size1--, size2--)
@@ -499,7 +505,7 @@ public class StringEx
         Console.WriteLine(AddBinary("1000", "11111111"));
     }
     // 100000111
-     
+
     public static void Main(string[] args)
     {
         Main2();

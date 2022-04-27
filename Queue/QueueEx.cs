@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 public class QueueEx
 {
-    public static int CircularTour(int[, ] arr, int n)
+    public static int CircularTour(int[,] arr, int n)
     {
-        for (int i = 0;i < n;i++)
+        for (int i = 0; i < n; i++)
         {
             int total = 0;
             bool found = true;
-            for (int j = 0;j < n;j++)
+            for (int j = 0; j < n; j++)
             {
                 total += (arr[(i + j) % n, 0] - arr[(i + j) % n, 1]);
                 if (total < 0)
@@ -26,7 +26,7 @@ public class QueueEx
         return -1;
     }
 
-    public static int CircularTour2(int[, ] arr, int n)
+    public static int CircularTour2(int[,] arr, int n)
     {
         Queue<int> que = new Queue<int>();
         int nextPump = 0, prevPump;
@@ -65,18 +65,14 @@ public class QueueEx
     // Testing code
     public static void Main1()
     {
-        int[, ] tour = new int[, ]
-        {
-            {8, 6},
-            {1, 4},
-            {7, 6}
-        };
+        int[,] tour = new int[,] { { 8, 6 }, { 1, 4 }, { 7, 6 } };
         Console.WriteLine("Circular Tour : " + CircularTour(tour, 3));
         Console.WriteLine("Circular Tour : " + CircularTour2(tour, 3));
     }
+
     /*
-Circular Tour : 2
-Circular Tour : 2
+    Circular Tour : 2
+    Circular Tour : 2
     */
     public static int ConvertXY(int src, int dst)
     {
@@ -112,18 +108,19 @@ Circular Tour : 2
     // Testing code.
     public static void Main2()
     {
-        Console.WriteLine("Steps counter :: " + ConvertXY(2, 7));
+        Console.WriteLine("Steps count :: " + ConvertXY(2, 7));
     }
+
     /*
-    Steps counter :: 3
+    Steps count :: 3
     */
 
     public static void MaxSlidingWindows(int[] arr, int size, int k)
     {
-        for (int i = 0;i < size - k + 1;i++)
+        for (int i = 0; i < size - k + 1; i++)
         {
             int max = arr[i];
-            for (int j = 1;j < k;j++)
+            for (int j = 1; j < k; j++)
             {
                 max = Math.Max(max, arr[i + j]);
             }
@@ -161,10 +158,9 @@ Circular Tour : 2
     // Testing code.
     public static void Main3()
     {
-        int[] arr = new int[] {11, 2, 75, 92, 59, 90, 55};
+        int[] arr = new int[] { 11, 2, 75, 92, 59, 90, 55 };
         MaxSlidingWindows(arr, 7, 3);
         MaxSlidingWindows2(arr, 7, 3);
-
     }
 
     /*
@@ -201,9 +197,10 @@ Circular Tour : 2
     // Testing code.
     public static void Main4()
     {
-        int[] arr = new int[] {11, 2, 75, 92, 59, 90, 55};
+        int[] arr = new int[] { 11, 2, 75, 92, 59, 90, 55 };
         MinOfMaxSlidingWindows(arr, 7, 3);
     }
+
     /*
     Min of max is :: 75
     */
@@ -236,13 +233,14 @@ Circular Tour : 2
     // Testing code.
     public static void Main5()
     {
-        int[] arr = new int[] {11, 2, 75, 92, 59, 90, 55};
+        int[] arr = new int[] { 11, 2, 75, 92, 59, 90, 55 };
         MaxOfMinSlidingWindows(arr, 7, 3);
-        // Output 59, as minimum values in sliding windows are [2, 2, 59, 59, 55]
     }
+
     /*
     Max of min is :: 59
     */
+
     public static void FirstNegSlidingWindows(int[] arr, int size, int k)
     {
         Queue<int> que = new Queue<int>();
@@ -276,7 +274,7 @@ Circular Tour : 2
     // Testing code.
     public static void Main6()
     {
-        int[] arr = new int[] {3, -2, -6, 10, -14, 50, 14, 21};
+        int[] arr = new int[] { 3, -2, -6, 10, -14, 50, 14, 21 };
         FirstNegSlidingWindows(arr, 8, 3);
     }
 
@@ -284,15 +282,9 @@ Circular Tour : 2
     -2 -2 -6 -14 -14 NAN
     */
 
-    private static void RottenFruitUtil(int[, ] arr, int maxCol, int maxRow, int currCol, int currRow, int[, ] traversed, int day)
+    private static void RottenFruitUtil(int[,] arr, int maxCol, int maxRow, int currCol, int currRow, int[,] traversed, int day)
     {
-        int[, ] dir = new int[, ]
-        {
-            {-1, 0},
-            {1, 0},
-            {0, -1},
-            {0, 1}
-        };
+        int[,] dir = new int[,] { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
         int x, y;
         for (int i = 0; i < 4; i++)
         {
@@ -306,9 +298,9 @@ Circular Tour : 2
         }
     }
 
-    public static int RottenFruit(int[, ] arr, int maxCol, int maxRow)
+    public static int RottenFruit(int[,] arr, int maxCol, int maxRow)
     {
-        int[, ] traversed = new int[maxCol, maxRow];
+        int[,] traversed = new int[maxCol, maxRow];
         for (int i = 0; i < maxCol; i++)
         {
             for (int j = 0; j < maxRow; j++)
@@ -362,16 +354,10 @@ Circular Tour : 2
         }
     }
 
-    public static int RottenFruit2(int[, ] arr, int maxCol, int maxRow)
+    public static int RottenFruit2(int[,] arr, int maxCol, int maxRow)
     {
-        bool[, ] traversed = new bool[maxCol, maxRow];
-        int[, ] dir = new int[, ]
-        {
-            {-1, 0},
-            {1, 0},
-            {0, -1},
-            {0, 1}
-        };
+        bool[,] traversed = new bool[maxCol, maxRow];
+        int[,] dir = new int[,] { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
         Queue<Fruit> que = new Queue<Fruit>();
 
         for (int i = 0; i < maxCol; i++)
@@ -392,7 +378,7 @@ Circular Tour : 2
         {
             temp = que.Peek();
             que.Dequeue();
-            for (int i = 0;i < 4;i++)
+            for (int i = 0; i < 4; i++)
             {
                 x = temp.x + dir[i, 0];
                 y = temp.y + dir[i, 1];
@@ -421,14 +407,12 @@ Circular Tour : 2
     // Testing code.
     public static void Main7()
     {
-        int[, ] arr = new int[, ]
-        {
-            {1, 0, 1, 1, 0},
+        int[,] arr = new int[,]
+            {{1, 0, 1, 1, 0},
             {2, 1, 0, 1, 0},
             {0, 0, 0, 2, 1},
             {0, 2, 0, 0, 1},
-            {1, 1, 0, 0, 1}
-        };
+            {1, 1, 0, 0, 1}};
         Console.WriteLine(RottenFruit(arr, 5, 5));
         Console.WriteLine(RottenFruit2(arr, 5, 5));
     }
@@ -436,21 +420,12 @@ Circular Tour : 2
     // 3
     // 3
 
-    private static void StepsOfKnightUtil(int size, int currCol, int currRow, int[, ] traversed, int dist)
+    private static void StepsOfKnightUtil(int size, int currCol, int currRow, int[,] traversed, int dist)
     {
-        int[, ] dir = new int[, ]
-        {
-            {-2, -1},
-            {-2, 1},
-            {2, -1},
-            {2, 1},
-            {-1, -2},
-            {1, -2},
-            {-1, 2},
-            {1, 2}
-        };
+        int[,] dir = new int[,]
+    {{-2, -1}, {-2, 1}, {2, -1}, {2, 1}, {-1, -2}, {1, -2}, {-1, 2}, {1, 2}};
         int x, y;
-        for (int i = 0;i < 8;i++)
+        for (int i = 0; i < 8; i++)
         {
             x = currCol + dir[i, 0];
             y = currRow + dir[i, 1];
@@ -464,7 +439,7 @@ Circular Tour : 2
 
     public static int StepsOfKnight(int size, int srcX, int srcY, int dstX, int dstY)
     {
-        int[, ] traversed = new int[size, size];
+        int[,] traversed = new int[size, size];
         for (int i = 0; i < size; i++)
         {
             for (int j = 0; j < size; j++)
@@ -491,18 +466,9 @@ Circular Tour : 2
 
     public static int StepsOfKnight2(int size, int srcX, int srcY, int dstX, int dstY)
     {
-        int[, ] traversed = new int[size, size];
-        int[, ] dir = new int[, ]
-        {
-            {-2, -1},
-            {-2, 1},
-            {2, -1},
-            {2, 1},
-            {-1, -2},
-            {1, -2},
-            {-1, 2},
-            {1, 2}
-        };
+        int[,] traversed = new int[size, size];
+        int[,] dir = new int[,]
+    {{-2, -1}, {-2, 1}, {2, -1}, {2, 1}, {-1, -2}, {1, -2}, {-1, 2}, {1, 2}};
         Queue<Knight> que = new Queue<Knight>();
 
         for (int i = 0; i < size; i++)
@@ -512,7 +478,7 @@ Circular Tour : 2
                 traversed[i, j] = int.MaxValue;
             }
         }
-        que.Enqueue(new Knight(srcX - 1,srcY - 1, 0));
+        que.Enqueue(new Knight(srcX - 1, srcY - 1, 0));
         traversed[srcX - 1, srcY - 1] = 0;
 
         int x, y, cost;
@@ -521,7 +487,7 @@ Circular Tour : 2
         {
             temp = que.Peek();
             que.Dequeue();
-            for (int i = 0;i < 8;i++)
+            for (int i = 0; i < 8; i++)
             {
                 x = temp.x + dir[i, 0];
                 y = temp.y + dir[i, 1];
@@ -546,17 +512,11 @@ Circular Tour : 2
     // 8
     // 8
 
-    private static void DistNearestFillUtil(int[, ] arr, int maxCol, int maxRow, int currCol, int currRow, int[, ] traversed, int dist)
-    { // Range check
+    private static void DistNearestFillUtil(int[,] arr, int maxCol, int maxRow, int currCol, int currRow, int[,] traversed, int dist)
+    {
         int x, y;
-        int[, ] dir = new int[, ]
-        {
-            {-1, 0},
-            {1, 0},
-            {0, -1},
-            {0, 1}
-        };
-        for (int i = 0;i < 4;i++)
+        int[,] dir = new int[,] { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
+        for (int i = 0; i < 4; i++)
         {
             x = currCol + dir[i, 0];
             y = currRow + dir[i, 1];
@@ -568,9 +528,9 @@ Circular Tour : 2
         }
     }
 
-    public static void DistNearestFill(int[, ] arr, int maxCol, int maxRow)
+    public static void DistNearestFill(int[,] arr, int maxCol, int maxRow)
     {
-        int[, ] traversed = new int[maxCol, maxRow];
+        int[,] traversed = new int[maxCol, maxRow];
         for (int i = 0; i < maxCol; i++)
         {
             for (int j = 0; j < maxRow; j++)
@@ -613,16 +573,10 @@ Circular Tour : 2
         }
     }
 
-    public static void DistNearestFill2(int[, ] arr, int maxCol, int maxRow)
+    public static void DistNearestFill2(int[,] arr, int maxCol, int maxRow)
     {
-        int[, ] traversed = new int[maxCol, maxRow];
-        int[, ] dir = new int[, ]
-        {
-            {-1, 0},
-            {1, 0},
-            {0, -1},
-            {0, 1}
-        };
+        int[,] traversed = new int[maxCol, maxRow];
+        int[,] dir = new int[,] { { -1, 0 }, { 1, 0 }, { 0, -1 }, { 0, 1 } };
         Queue<Node> que = new Queue<Node>();
 
         for (int i = 0; i < maxCol; i++)
@@ -632,7 +586,7 @@ Circular Tour : 2
                 traversed[i, j] = int.MaxValue;
                 if (arr[i, j] == 1)
                 {
-                    que.Enqueue(new Node(i,j, 0));
+                    que.Enqueue(new Node(i, j, 0));
                     traversed[i, j] = 0;
                 }
             }
@@ -643,7 +597,7 @@ Circular Tour : 2
         {
             temp = que.Peek();
             que.Dequeue();
-            for (int i = 0;i < 4;i++)
+            for (int i = 0; i < 4; i++)
             {
                 x = temp.x + dir[i, 0];
                 y = temp.y + dir[i, 1];
@@ -668,14 +622,12 @@ Circular Tour : 2
     // Testing code.
     public static void Main9()
     {
-        int[, ] arr = new int[, ]
-        {
-            {1, 0, 1, 1, 0},
-            {1, 1, 0, 1, 0},
-            {0, 0, 0, 0, 1},
-            {0, 0, 0, 0, 1},
-            {0, 0, 0, 0, 1}
-        };
+        int[,] arr = new int[,]
+    {{1, 0, 1, 1, 0},
+     {1, 1, 0, 1, 0},
+     {0, 0, 0, 0, 1},
+     {0, 0, 0, 0, 1},
+     {0, 0, 0, 0, 1}};
         DistNearestFill(arr, 5, 5);
         DistNearestFill2(arr, 5, 5);
     }
@@ -694,19 +646,10 @@ Circular Tour : 2
     3 3 2 1 0 
     */
 
-    private static int FindLargestIslandUtil(int[, ] arr, int maxCol, int maxRow, int currCol, int currRow, bool[, ] traversed)
+    private static int FindLargestIslandUtil(int[,] arr, int maxCol, int maxRow, int currCol, int currRow, bool[,] traversed)
     {
-        int[, ] dir = new int[, ]
-        {
-            {-1, -1},
-            {-1, 0},
-            {-1, 1},
-            {0, -1},
-            {0, 1},
-            {1, -1},
-            {1, 0},
-            {1, 1}
-        };
+        int[,] dir = new int[,]
+    {{-1, -1}, {-1, 0}, {-1, 1}, {0, -1}, {0, 1}, {1, -1}, {1, 0}, {1, 1}};
         int x, y, sum = 1;
         for (int i = 0; i < 8; i++)
         {
@@ -721,11 +664,11 @@ Circular Tour : 2
         return sum;
     }
 
-    public static int FindLargestIsland(int[, ] arr, int maxCol, int maxRow)
+    public static int FindLargestIsland(int[,] arr, int maxCol, int maxRow)
     {
         int maxVal = 0;
         int currVal = 0;
-        bool[, ] traversed = new bool[maxCol, maxRow];
+        bool[,] traversed = new bool[maxCol, maxRow];
         for (int i = 0; i < maxCol; i++)
         {
             for (int j = 0; j < maxRow; j++)
@@ -749,21 +692,18 @@ Circular Tour : 2
                 }
             }
         }
-
         return maxVal;
     }
 
     // Testing code.
     public static void Main10()
     {
-        int[, ] arr = new int[, ]
-        {
-            {1, 0, 1, 1, 0},
-            {1, 0, 0, 1, 0},
-            {0, 1, 1, 1, 1},
-            {0, 1, 0, 0, 0},
-            {1, 1, 0, 0, 1}
-        };
+        int[,] arr = new int[,]
+            {{1, 0, 1, 1, 0},
+             {1, 0, 0, 1, 0},
+             {0, 1, 1, 1, 1},
+             {0, 1, 0, 0, 0},
+             {1, 1, 0, 0, 1}};
         Console.WriteLine("Largest Island : " + FindLargestIsland(arr, 5, 5));
     }
 
@@ -798,55 +738,55 @@ Circular Tour : 2
             stk.Pop();
         }
     }
-    
+
     // Testing code.
     public static void Main11()
     {
         Stack<int> stk = new Stack<int>();
-        for (int i = 0;i < 5;i++)
+        for (int i = 0; i < 5; i++)
         {
             stk.Push(i);
         }
-        foreach(var ele in stk)
+        foreach (var ele in stk)
             Console.Write(ele + " ");
         Console.WriteLine();
         ReverseStack(stk);
-        foreach(var ele in stk)
+        foreach (var ele in stk)
             Console.Write(ele + " ");
         Console.WriteLine();
 
         Queue<int> que = new Queue<int>();
-        for (int i = 0;i < 5;i++)
+        for (int i = 0; i < 5; i++)
         {
             que.Enqueue(i);
         }
-        foreach(var ele in que)
+        foreach (var ele in que)
             Console.Write(ele + " ");
         Console.WriteLine();
         ReverseQueue(que);
-        foreach(var ele in que)
+        foreach (var ele in que)
             Console.Write(ele + " ");
-        Console.WriteLine();    
+        Console.WriteLine();
     }
 
     /*
-4 3 2 1 0 
-0 1 2 3 4 
-0 1 2 3 4 
-4 3 2 1 0 
+    4 3 2 1 0 
+    0 1 2 3 4 
+    0 1 2 3 4 
+    4 3 2 1 0 
     */
 
     public static int Josephus(int n, int k)
     {
         Queue<int> que = new Queue<int>();
-        for (int i = 0;i < n;i++)
+        for (int i = 0; i < n; i++)
         {
             que.Enqueue(i + 1);
         }
 
         while (que.Count > 1)
         {
-            for (int i = 0;i < k - 1;i++)
+            for (int i = 0; i < k - 1; i++)
             {
                 que.Enqueue(que.Peek());
                 que.Dequeue();
@@ -861,9 +801,9 @@ Circular Tour : 2
     {
         Console.WriteLine("Position : " + Josephus(11, 5));
     }
-/*
-Position : 8
-*/
+    /*
+    Position : 8
+    */
     public static void Main(string[] args)
     {
         Main1();

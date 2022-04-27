@@ -4,11 +4,6 @@ public class StringMatching
 {
     public static int BruteForceSearch(string text, string pattern)
     {
-        return BruteForceSearch(text.ToCharArray(), pattern.ToCharArray());
-    }
-
-    public static int BruteForceSearch(char[] text, char[] pattern)
-    {
         int i = 0, j = 0;
         int n = text.Length;
         int m = pattern.Length;
@@ -29,11 +24,6 @@ public class StringMatching
     }
 
     public static int RobinKarp(string text, string pattern)
-    {
-        return RobinKarp(text.ToCharArray(), pattern.ToCharArray());
-    }
-
-    public static int RobinKarp(char[] text, char[] pattern)
     {
         int n = text.Length;
         int m = pattern.Length;
@@ -82,7 +72,7 @@ public class StringMatching
         return -1;
     }
 
-    public static void KMPPreprocess(char[] pattern, int[] ShiftArr)
+    public static void KMPPreprocess(string pattern, int[] ShiftArr)
     {
         int m = pattern.Length;
         int i = 0, j = -1;
@@ -100,11 +90,6 @@ public class StringMatching
     }
 
     public static int KMP(string text, string pattern)
-    {
-        return KMP(text.ToCharArray(), pattern.ToCharArray());
-    }
-
-    public static int KMP(char[] text, char[] pattern)
     {
         int i = 0, j = 0;
         int n = text.Length;
@@ -128,11 +113,6 @@ public class StringMatching
     }
 
     public static int KMPFindCount(string text, string pattern)
-    {
-        return KMPFindCount(text.ToCharArray(), pattern.ToCharArray());
-    }
-
-    public static int KMPFindCount(char[] text, char[] pattern)
     {
         int i = 0, j = 0, count = 0;
         int n = text.Length;

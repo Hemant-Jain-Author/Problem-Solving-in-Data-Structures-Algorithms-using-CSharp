@@ -30,7 +30,7 @@ public class LargestIncreasingSubseq
     // Testing code.
     public static void Main(string[] args)
     {
-        int[] arr = new int[] {10, 12, 9, 23, 25, 55, 49, 70};
+        int[] arr = new int[] { 10, 12, 9, 23, 25, 55, 49, 70 };
         Console.WriteLine("Length of LIS is " + LIS(arr));
     }
 }

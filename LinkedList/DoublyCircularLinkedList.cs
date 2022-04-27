@@ -19,7 +19,7 @@ public class DoublyCircularLinkedList
             prev = prv;
         }
     }
-    /* Other methods */
+
     public int Size()
     {
         return size;
@@ -30,6 +30,7 @@ public class DoublyCircularLinkedList
         return size == 0;
     }
 
+    /* Other methods */
     public int PeekHead()
     {
         if (IsEmpty())
@@ -178,19 +179,19 @@ public class DoublyCircularLinkedList
         ll.AddHead(2);
         ll.AddHead(3);
         ll.Print();
-        Console.WriteLine(ll.Size());
-        Console.WriteLine(ll.IsEmpty());
+        Console.WriteLine("Size : " + ll.Size());
+        Console.WriteLine("IsEmpty : " + ll.IsEmpty());
         Console.WriteLine(ll.PeekHead());
         Console.WriteLine(ll.Search(3));
     }
 
-/*
-3 2 1
-3
-False
-3
-True
-*/
+    /*
+    3 2 1
+    3
+    False
+    3
+    True
+    */
 
     // Testing code.
     public static void Main2()
@@ -209,12 +210,12 @@ True
         ll.Print();
     }
 
-/*
-1 2 3
-2 3
-2
-Empty List.
-*/
+    /*
+    1 2 3
+    2 3
+    2
+    Empty List.
+    */
 
     // Testing code.
     public static void Main3()
@@ -229,10 +230,11 @@ Empty List.
         ll.Print();
 
     }
-/*
-3 2 1
-2 1
-*/
+
+    /*
+    3 2 1
+    2 1
+    */
 
     // Testing code.
     public static void Main4()
@@ -246,10 +248,11 @@ Empty List.
         ll.RemoveTail();
         ll.Print();
     }
-/*
-3 2 1
-3 2
-*/
+
+    /*
+    3 2 1
+    3 2
+    */
     public static void Main(string[] args)
     {
         Main1();

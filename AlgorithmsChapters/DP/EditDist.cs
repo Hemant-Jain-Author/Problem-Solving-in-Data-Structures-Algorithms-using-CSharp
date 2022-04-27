@@ -40,7 +40,7 @@ public class EditDist
     {
         int m = str1.Length;
         int n = str2.Length;
-        int[, ] dp = new int[m + 1, n + 1];
+        int[,] dp = new int[m + 1, n + 1];
 
         // Fill dp[, ] in bottom up manner.
         for (int i = 0; i <= m; i++)

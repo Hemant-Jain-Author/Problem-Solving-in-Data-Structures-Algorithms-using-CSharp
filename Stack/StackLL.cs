@@ -54,20 +54,6 @@ public class StackLL
         return value;
     }
 
-    public void InsertAtBottom(int value)
-    {
-        if (IsEmpty())
-        {
-            Push(value);
-        }
-        else
-        {
-            int temp = Pop();
-            InsertAtBottom(value);
-            Push(temp);
-        }
-    }
-
     public void Print()
     {
         Node temp = head;
@@ -89,10 +75,12 @@ public class StackLL
         s.Print();
         Console.WriteLine(s.Pop());
         Console.WriteLine(s.Pop());
+        Console.WriteLine(s.Pop());
     }
 }
 /*
 3 2 1 
 3
 2
+1
 */

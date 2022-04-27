@@ -2,16 +2,11 @@
 
 public class Stack
 {
-    private int capacity = 1000;
+    private int capacity;
     private int[] data;
     private int top = -1;
 
-    public Stack()
-    {
-        data = new int[capacity];
-    }
-
-    public Stack(int size)
+    public Stack(int size = 1000)
     {
         data = new int[size];
         capacity = size;
@@ -30,7 +25,7 @@ public class Stack
 
     public void Push(int value)
     {
-        if (Size() == data.Length)
+        if (Size() == capacity)
         {
             throw new System.InvalidOperationException("StackOverflowException");
         }
@@ -64,7 +59,7 @@ public class Stack
         {
             Console.Write(data[i] + " ");
         }
-        Console.WriteLine("");
+        Console.WriteLine();
     }
 
     // Testing code.
@@ -77,10 +72,12 @@ public class Stack
         s.Print();
         Console.WriteLine(s.Pop());
         Console.WriteLine(s.Pop());
-    }
+        Console.WriteLine(s.Pop());
+}
 }
 /*
 3 2 1 
 3
 2
+1
 */

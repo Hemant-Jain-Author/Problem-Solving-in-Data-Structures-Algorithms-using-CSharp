@@ -13,12 +13,12 @@ public class QueueUsingStack
         stk2 = new Stack<int>();
     }
 
-    internal void Add(int value)
+    public void Add(int value)
     {
         stk1.Push(value);
     }
 
-    internal int Remove()
+    public int Remove()
     {
         int value;
         if (stk2.Count > 0)
@@ -41,14 +41,12 @@ public class QueueUsingStack
         que.Add(1);
         que.Add(2);
         que.Add(3);
-        for (int i = 0; i < 3; i++)
-        {
-            Console.WriteLine(que.Remove());
-        }
+        Console.WriteLine("Queue remove : " + que.Remove());
+        Console.WriteLine("Queue remove : " + que.Remove());
     }
 }
+
 /*
 1
 2
-3
 */

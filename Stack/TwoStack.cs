@@ -73,9 +73,9 @@ public class TwoStack
         st.Push1(1);
         st.Push1(2);
         st.Push1(3);
-        st.Push2(4);
-        st.Push2(5);
-        st.Push2(6);
+        st.Push2(11);
+        st.Push2(22);
+        st.Push2(33);
         Console.WriteLine("stk1 pop: " + st.Pop1());
         Console.WriteLine("stk1 pop: " + st.Pop1());
         Console.WriteLine("stk2 pop: " + st.Pop2());
@@ -86,6 +86,6 @@ public class TwoStack
 /*
 stk1 pop: 3
 stk1 pop: 2
-stk2 pop: 6
-stk2 pop: 5
+stk2 pop: 33
+stk2 pop: 22
 */

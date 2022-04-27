@@ -50,8 +50,8 @@ public class HashTableExercise
         Console.WriteLine("IsAnagram : " + IsAnagram(first, third));
     }
     /*
-    IsAnagram : true
-    IsAnagram : false
+IsAnagram : True
+IsAnagram : False
     */
 
     public static string RemoveDuplicate(char[] str)
@@ -76,6 +76,7 @@ public class HashTableExercise
         char[] first = "hello".ToCharArray();
         Console.WriteLine(RemoveDuplicate(first));
     }
+
     /*
     helo
     */
@@ -101,7 +102,7 @@ public class HashTableExercise
     // Testing code.
     public static void Main3()
     {
-        int[] arr = new int[] {1, 2, 3, 5, 6, 7, 8, 9, 10};
+        int[] arr = new int[] { 1, 2, 3, 5, 6, 7, 8, 9, 10 };
         Console.WriteLine(FindMissing(arr, 1, 10));
     }
     /*
@@ -112,12 +113,12 @@ public class HashTableExercise
     {
         HashSet<int> hs = new HashSet<int>();
 
-        Console.Write("Repeating elements are:");
+        Console.Write("Repeating elements are : ");
         foreach (int val in arr)
         {
             if (hs.Contains(val))
             {
-                Console.Write(" " + val);
+                Console.Write(val + " ");
             }
             else
             {
@@ -125,15 +126,15 @@ public class HashTableExercise
             }
         }
     }
-    
+
     // Testing code.
     public static void Main4()
     {
-        int[] arr1 = new int[] {1, 2, 3, 4, 4, 5, 6, 7, 8, 9, 1};
+        int[] arr1 = new int[] { 1, 2, 3, 4, 4, 5, 6, 7, 8, 9, 1 };
         PrintRepeating(arr1);
     }
     /*
-    Repeating elements are: 4 1
+    Repeating elements are : 4 1
     */
 
     public static void PrintFirstRepeating(int[] arr)
@@ -151,17 +152,17 @@ public class HashTableExercise
             }
             hs.Add(arr[i]);
         }
-        Console.WriteLine("First Repeating number is:" + firstRepeating);
+        Console.WriteLine("First Repeating number is : " + firstRepeating);
     }
 
     // Testing code.
     public static void Main5()
     {
-        int[] arr1 = new int[] {1, 2, 3, 4, 4, 5, 6, 7, 8, 9, 1};
+        int[] arr1 = new int[] { 1, 2, 3, 4, 4, 5, 6, 7, 8, 9, 1 };
         PrintFirstRepeating(arr1);
     }
     /*
-    First Repeating number is:1
+    First Repeating number is : 1
     */
 
     public static int HornerHash(char[] key, int tableSize)
@@ -175,7 +176,7 @@ public class HashTableExercise
         }
         return h;
     }
-    
+
     public static void Main(string[] args)
     {
         Main1();

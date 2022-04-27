@@ -3,7 +3,7 @@
 public class GraphAM
 {
     private int count;
-    private int[, ] adj;
+    private int[,] adj;
 
     public GraphAM(int cnt)
     {
@@ -11,26 +11,17 @@ public class GraphAM
         adj = new int[count, count];
     }
 
-    public void AddDirectedEdge(int src, int dst, int cost)
+    public void AddDirectedEdge(int src, int dst, int cost = 1)
     {
         adj[src, dst] = cost;
     }
 
-    public void AddDirectedEdge(int src, int dst)
+    public void AddUndirectedEdge(int src, int dst, int cost = 1)
     {
-        adj[src, dst] = 1;
+        adj[src, dst] = cost;
+        adj[dst, src] = cost;
     }
 
-    public void AddUndirectedEdge(int src, int dst, int cost)
-    {
-        AddDirectedEdge(src, dst, cost);
-        AddDirectedEdge(dst, src, cost);
-    }
-
-    public void AddUndirectedEdge(int src, int dst)
-    {
-        AddUndirectedEdge(src, dst, 1);
-    }
     public void Print()
     {
         for (int i = 0; i < count; i++)
@@ -43,7 +34,7 @@ public class GraphAM
                     Console.Write(j + "(cost: " + adj[i, j] + ") ");
                 }
             }
-            Console.WriteLine("");
+            Console.WriteLine();
         }
     }
 
@@ -51,18 +42,18 @@ public class GraphAM
     public static void Main1()
     {
         GraphAM graph = new GraphAM(4);
-        graph.AddUndirectedEdge(0, 1, 1);
-        graph.AddUndirectedEdge(0, 2, 1);
-        graph.AddUndirectedEdge(1, 2, 1);
-        graph.AddUndirectedEdge(2, 3, 1);
+        graph.AddUndirectedEdge(0, 1);
+        graph.AddUndirectedEdge(0, 2);
+        graph.AddUndirectedEdge(1, 2);
+        graph.AddUndirectedEdge(2, 3);
         graph.Print();
     }
 
     /*
-    Vertex 0 is connected to : 1(cost: 1) 2(cost: 1) 
-    Vertex 1 is connected to : 0(cost: 1) 2(cost: 1) 
-    Vertex 2 is connected to : 0(cost: 1) 1(cost: 1) 3(cost: 1) 
-    Vertex 3 is connected to : 2(cost: 1) 
+Vertex 0 is connected to : 1(cost: 1) 2(cost: 1) 
+Vertex 1 is connected to : 0(cost: 1) 2(cost: 1) 
+Vertex 2 is connected to : 0(cost: 1) 1(cost: 1) 3(cost: 1) 
+Vertex 3 is connected to : 2(cost: 1) 
     */
     private class Edge : IComparable<Edge>
     {
@@ -199,7 +190,7 @@ public class GraphAM
                 output += ("(" + i + ", Unreachable) ");
                 isMst = false;
             }
-            else
+            else if (previous[i] != i)
             {
                 output += ("(" + previous[i] + "->" + i + " @ " + dist[i] + ") ");
                 sum += dist[i];
@@ -283,7 +274,7 @@ Shortest Paths: (0->1 @ 4) (0->1->2 @ 12) (0->1->2->3 @ 19) (0->7->6->5->4 @ 21)
             {
                 Console.Write(" " + path[i]);
             }
-            Console.WriteLine("");
+            Console.WriteLine();
             return true;
         }
 
@@ -337,7 +328,7 @@ Shortest Paths: (0->1 @ 4) (0->1->2 @ 12) (0->1->2->3 @ 19) (0->7->6->5->4 @ 21)
             {
                 Console.Write(" " + path[i]);
             }
-            Console.WriteLine("");
+            Console.WriteLine();
             return true;
         }
         Console.WriteLine("Hamiltonian Cycle not found");
@@ -349,13 +340,13 @@ Shortest Paths: (0->1 @ 4) (0->1->2 @ 12) (0->1->2->3 @ 19) (0->7->6->5->4 @ 21)
     {
         int count = 5;
         GraphAM graph = new GraphAM(count);
-        int[, ] adj = new int[, ]
+        int[,] adj = new int[,]
         {
-            {0, 1, 0, 1, 0},
-            {1, 0, 1, 1, 0},
-            {0, 1, 0, 0, 1},
-            {1, 1, 0, 0, 1},
-            {0, 1, 1, 1, 0}
+        {0, 1, 0, 1, 0},
+        {1, 0, 1, 1, 0},
+        {0, 1, 0, 0, 1},
+        {1, 1, 0, 0, 1},
+        {0, 1, 1, 1, 0}
         };
 
         for (int i = 0; i < count; i++)
@@ -371,13 +362,13 @@ Shortest Paths: (0->1 @ 4) (0->1->2 @ 12) (0->1->2->3 @ 19) (0->7->6->5->4 @ 21)
         Console.WriteLine("HamiltonianPath : " + graph.HamiltonianPath());
 
         GraphAM graph2 = new GraphAM(count);
-        int[, ] adj2 = new int[, ]
+        int[,] adj2 = new int[,]
         {
-            {0, 1, 0, 1, 0},
-            {1, 0, 1, 1, 0},
-            {0, 1, 0, 0, 1},
-            {1, 1, 0, 0, 0},
-            {0, 1, 1, 0, 0}
+        {0, 1, 0, 1, 0},
+        {1, 0, 1, 1, 0},
+        {0, 1, 0, 0, 1},
+        {1, 1, 0, 0, 0},
+        {0, 1, 1, 0, 0}
         };
         for (int i = 0; i < count; i++)
         {
@@ -389,29 +380,28 @@ Shortest Paths: (0->1 @ 4) (0->1->2 @ 12) (0->1->2->3 @ 19) (0->7->6->5->4 @ 21)
                 }
             }
         }
-
         Console.WriteLine("HamiltonianPath :  " + graph2.HamiltonianPath());
     }
-/*
-Hamiltonian Path found ::  0 1 2 4 3
-HamiltonianPath : true
 
+    /*
+Hamiltonian Path found ::  0 1 2 4 3
+HamiltonianPath : True
 Hamiltonian Path found ::  0 3 1 2 4
-HamiltonianPath :  true
- */
+HamiltonianPath :  True
+     */
 
     // Testing code.
     public static void Main4()
     {
         int count = 5;
         GraphAM graph = new GraphAM(count);
-        int[, ] adj = new int[, ]
+        int[,] adj = new int[,]
         {
-            {0, 1, 0, 1, 0},
-            {1, 0, 1, 1, 0},
-            {0, 1, 0, 0, 1},
-            {1, 1, 0, 0, 1},
-            {0, 1, 1, 1, 0}
+        {0, 1, 0, 1, 0},
+        {1, 0, 1, 1, 0},
+        {0, 1, 0, 0, 1},
+        {1, 1, 0, 0, 1},
+        {0, 1, 1, 1, 0}
         };
 
         for (int i = 0; i < count; i++)
@@ -427,13 +417,13 @@ HamiltonianPath :  true
         Console.WriteLine("HamiltonianCycle : " + graph.HamiltonianCycle());
 
         GraphAM graph2 = new GraphAM(count);
-        int[, ] adj2 = new int[, ]
+        int[,] adj2 = new int[,]
         {
-            {0, 1, 0, 1, 0},
-            {1, 0, 1, 1, 0},
-            {0, 1, 0, 0, 1},
-            {1, 1, 0, 0, 0},
-            {0, 1, 1, 0, 0}
+        {0, 1, 0, 1, 0},
+        {1, 0, 1, 1, 0},
+        {0, 1, 0, 0, 1},
+        {1, 1, 0, 0, 0},
+        {0, 1, 1, 0, 0}
         };
         for (int i = 0; i < count; i++)
         {
@@ -449,19 +439,18 @@ HamiltonianPath :  true
         Console.WriteLine("HamiltonianCycle :  " + graph2.HamiltonianCycle());
     }
 
-/*
+    /*
 Hamiltonian Cycle found ::  0 1 2 4 3 0
-HamiltonianCycle : true
-
+HamiltonianCycle : True
 Hamiltonian Cycle not found
-HamiltonianCycle :  false
-*/
+HamiltonianCycle :  False
+    */
     public static void Main(string[] args)
     {
-            Main1();
-            Main2();
-            Main3(); 
-            Main4(); 
+        Main1();
+        Main2();
+        Main3();
+        Main4();
     }
 }
 

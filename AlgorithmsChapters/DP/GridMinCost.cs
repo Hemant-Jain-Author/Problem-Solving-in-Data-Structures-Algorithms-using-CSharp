@@ -8,23 +8,24 @@ public class GridMinCost
         return Math.Min(x, z);
     }
 
-    public static int MinCost(int[, ] cost, int m, int n)
+    public static int MinCost(int[,] cost, int m, int n)
     {
         if (m == 0 || n == 0)
         {
             return 99999;
         }
 
-        if(m == 1 && n == 1) {
+        if (m == 1 && n == 1)
+        {
             return cost[0, 0];
         }
 
         return cost[m - 1, n - 1] + Min(MinCost(cost, m - 1, n - 1), MinCost(cost, m - 1, n), MinCost(cost, m, n - 1));
     }
 
-    public static int MinCostBU(int[, ] cost, int m, int n)
+    public static int MinCostBU(int[,] cost, int m, int n)
     {
-        int[, ] tc  = new int[m, n];
+        int[,] tc = new int[m, n];
         tc[0, 0] = cost[0, 0];
 
         // Initialize first column.
@@ -51,20 +52,13 @@ public class GridMinCost
     // Testing code.
     public static void Main(string[] args)
     {
-        int[, ] cost = new int[, ]
-        {
-            {1, 3, 4},
-            {4, 7, 5},
-            {1, 5, 3}
-        };
-
-        Console.WriteLine(MinCost(cost, 3, 3));
-        Console.WriteLine(MinCostBU(cost, 3, 3));
-
+        int[,] cost = new int[,] { { 1, 3, 4 }, { 4, 7, 5 }, { 1, 5, 3 } };
+        Console.WriteLine("GridMinCost : " + MinCost(cost, 3, 3));
+        Console.WriteLine("GridMinCost : " + MinCostBU(cost, 3, 3));
     }
 }
 
 /*
-11
-11
+GridMinCost : 11
+GridMinCost : 11
 */

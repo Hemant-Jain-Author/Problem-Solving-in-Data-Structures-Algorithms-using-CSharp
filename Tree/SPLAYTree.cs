@@ -131,7 +131,7 @@ public class SPLAYTree
             { // single rotation case.
                 if (parent.left == node)
                 {
-                   node = RightRotate(parent);
+                    node = RightRotate(parent);
                 }
                 else
                 {

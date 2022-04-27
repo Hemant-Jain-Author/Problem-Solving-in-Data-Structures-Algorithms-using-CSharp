@@ -29,6 +29,7 @@ public class TST
         {
             curr = new Node(word[wordIndex]);
         }
+
         if (word[wordIndex] < curr.data)
         {
             curr.left = Add(curr.left, word, wordIndex);
@@ -37,16 +38,13 @@ public class TST
         {
             curr.right = Add(curr.right, word, wordIndex);
         }
+        else if (wordIndex < word.Length - 1)
+        {
+            curr.equal = Add(curr.equal, word, wordIndex + 1);
+        }
         else
         {
-            if (wordIndex < word.Length - 1)
-            {
-                curr.equal = Add(curr.equal, word, wordIndex + 1);
-            }
-            else
-            {
-                curr.isLastChar = true;
-            }
+            curr.isLastChar = true;
         }
         return curr;
     }
@@ -65,14 +63,12 @@ public class TST
         {
             return Find(curr.right, word, wordIndex);
         }
-        else
+        else if (wordIndex == word.Length - 1)
         {
-            if (wordIndex == word.Length - 1)
-            {
-                return curr.isLastChar;
-            }
-            return Find(curr.equal, word, wordIndex + 1);
+            return curr.isLastChar;
         }
+        
+        return Find(curr.equal, word, wordIndex + 1);
     }
 
     public bool Find(string word)

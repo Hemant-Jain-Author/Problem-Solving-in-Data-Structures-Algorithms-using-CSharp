@@ -4,7 +4,7 @@ public class Permutations
 {
     private static void PrintArray(int[] arr, int n)
     {
-        for (int i = 0;i < n;i++)
+        for (int i = 0; i < n; i++)
         {
             Console.Write(arr[i] + " ");
         }
@@ -35,17 +35,17 @@ public class Permutations
         return;
     }
 
-/*
-1 2 3 4 
-1 2 4 3 
-.....
-4 1 3 2 
-4 1 2 3 
-*/
+    /*
+    1 2 3 4 
+    1 2 4 3 
+    .....
+    4 1 3 2 
+    4 1 2 3 
+    */
 
     private static bool IsValid(int[] arr, int n)
     {
-        for (int j = 1;j < n;j++)
+        for (int j = 1; j < n; j++)
         {
             if (Math.Abs(arr[j] - arr[j - 1]) < 2)
             {
@@ -107,7 +107,7 @@ public class Permutations
     /* Testing code */
     public static void Main(string[] args)
     {
-        int[] arr = {1, 2, 3, 4};
+        int[] arr = { 1, 2, 3, 4 };
         Permutation(arr, 0, 4);
         Console.WriteLine();
         Permutation2(arr, 0, 4);

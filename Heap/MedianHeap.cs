@@ -15,13 +15,9 @@ public class MedianHeap
     public void Enqueue(int value)
     {
         if (maxHeap.Size() == 0 || maxHeap.Peek() >= value)
-        {
             maxHeap.Enqueue(value);
-        }
         else
-        {
             minHeap.Enqueue(value);
-        }
 
         // size balancing
         if (maxHeap.Size() > minHeap.Size() + 1)
@@ -37,39 +33,35 @@ public class MedianHeap
         }
     }
 
-    public int Median
+    public int GetMedian()
     {
-        get
+        if (maxHeap.Size() == 0 && minHeap.Size() == 0)
         {
-            if (maxHeap.Size() == 0 && minHeap.Size() == 0)
-            {
-                return int.MaxValue;
-            }
-    
-            if (maxHeap.Size() == minHeap.Size())
-            {
-                return (maxHeap.Peek() + minHeap.Peek()) / 2;
-            }
-            else if (maxHeap.Size() > minHeap.Size())
-            {
-                return maxHeap.Peek();
-            }
-            else
-            {
-                return minHeap.Peek();
-            }
+            return int.MaxValue;
+        }
+
+        if (maxHeap.Size() == minHeap.Size())
+        {
+            return (maxHeap.Peek() + minHeap.Peek()) / 2;
+        }
+        else if (maxHeap.Size() > minHeap.Size())
+        {
+            return maxHeap.Peek();
+        }
+        else
+        {
+            return minHeap.Peek();
         }
     }
 
     public static void Main(string[] args)
     {
-        int[] arr = new int[] {1, 9, 2, 8, 3, 7};
+        int[] arr = new int[] { 1, 9, 2, 8, 3, 7 };
         MedianHeap hp = new MedianHeap();
-
         for (int i = 0; i < 6; i++)
         {
             hp.Enqueue(arr[i]);
-            Console.WriteLine("Median after Enqueue of " + arr[i] + " is  " + hp.Median);
+            Console.WriteLine("Median after Enqueue of " + arr[i] + " is  " + hp.GetMedian());
         }
     }
 }
@@ -83,7 +75,7 @@ public class MedianHeap
  * Median after Enqueue of 7 is 5
  */
 
- 
+
 public class PriorityQueue<T> where T : IComparable<T>
 {
     private int CAPACITY = 32;

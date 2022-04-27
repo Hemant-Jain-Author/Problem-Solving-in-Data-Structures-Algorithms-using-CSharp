@@ -35,6 +35,33 @@ public class RBTree
         return (node == null) ? false : (node.colour == true);
     }
 
+    public void PrintTree()
+    {
+        PrintTree(root, "", false);
+        Console.WriteLine();
+    }
+
+    private void PrintTree(Node node, string indent, bool isLeft)
+    {
+        if (node == NullNode)
+        {
+            return;
+        }
+        if (isLeft)
+        {
+            Console.Write(indent + "L:");
+            indent += "|  ";
+        }
+        else
+        {
+            Console.Write(indent + "R:");
+            indent += "   ";
+        }
+        Console.WriteLine(node.data + (node.colour ? "(Red)" : "(Black)"));
+        PrintTree(node.left, indent, true);
+        PrintTree(node.right, indent, false);
+    }
+
     private Node GetUncle(Node node)
     {
         // If no parent or grandparent, then no uncle
@@ -121,8 +148,7 @@ public class RBTree
             y.parent.right = y;
         }
 
-        // Return new root
-        return y;
+        return y; // Return new root
     }
 
     private Node RightLeftRotate(Node node)
@@ -176,32 +202,6 @@ public class RBTree
             }
         }
         return false;
-    }
-    public void PrintTree()
-    {
-        PrintTree(root, "", false);
-        Console.WriteLine();
-    }
-
-    private void PrintTree(Node node, string indent, bool isLeft)
-    {
-        if (node == NullNode)
-        {
-            return;
-        }
-        if (isLeft)
-        {
-            Console.Write(indent + "L:");
-            indent += "|  ";
-        }
-        else
-        {
-            Console.Write(indent + "R:");
-            indent += "   ";
-        }
-        Console.WriteLine(node.data + (node.colour? "(Red)":"(Black)"));
-        PrintTree(node.left, indent, true);
-        PrintTree(node.right, indent, false);
     }
 
     public void Insert(int data)

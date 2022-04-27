@@ -6,8 +6,8 @@ public class LargestPalindromicSubstr
     public static int PalindromicSubstring(string str)
     {
         int n = str.Length;
-        int[, ] dp = new int[n, n];
-        for (int i = 0;i < n;i++)
+        int[,] dp = new int[n, n];
+        for (int i = 0; i < n; i++)
         {
             dp[i, i] = 1;
         }
@@ -52,8 +52,7 @@ Max Palindromic Substrings len: 6
 */
 
 /*
-    * If asked to find how many different palindromic substrings are possible.
-    * 
+//If asked to find how many different palindromic substrings are possible.
 int count = 0;
 for(int i=0;i<n;i++)
     for(int j=0;j<n;j++)

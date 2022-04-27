@@ -46,7 +46,7 @@ public class SubsetSum
     // Testing code.
     public static void Main(string[] args)
     {
-        int[] arr = new int[] {15, 22, 14, 26, 32, 9, 16, 8};
+        int[] arr = new int[] { 15, 22, 14, 26, 32, 9, 16, 8 };
         int target = 53;
         int n = arr.Length;
         SubsetSum.FindSubsetSum(arr, n, target);

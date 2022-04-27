@@ -2,7 +2,7 @@
 
 public class OptimalBST
 {
-    private static int OptCost(int[] freq, int i, int j)
+    private static int OptCostBst(int[] freq, int i, int j)
     {
         if (i > j)
         {
@@ -14,26 +14,26 @@ public class OptimalBST
             return freq[i];
         }
 
-    int min = int.MaxValue;
-    for (int r = i; r <= j; r++)
-    {
-            min = Math.Min(min, OptCost(freq, i, r - 1) + OptCost(freq, r + 1, j));
-    }
-    return min + sum(freq, i, j);
-    }
-
-    public static int OptCost(int[] keys, int[] freq)
-    {
-        int n = freq.Length;
-        return OptCost(freq, 0, n - 1);
+        int min = int.MaxValue;
+        for (int r = i; r <= j; r++)
+        {
+            min = Math.Min(min, OptCostBst(freq, i, r - 1) + OptCostBst(freq, r + 1, j));
+        }
+        return min + sum(freq, i, j);
     }
 
-    public static int OptCostTD(int[] keys, int[] freq)
+    public static int OptCostBst(int[] keys, int[] freq)
     {
         int n = freq.Length;
-        int[, ] cost = new int[n, n];
-        for(int i=0; i<n; i++)
-            for(int j=0;j<n;j++)
+        return OptCostBst(freq, 0, n - 1);
+    }
+
+    public static int OptCostBstTD(int[] keys, int[] freq)
+    {
+        int n = freq.Length;
+        int[,] cost = new int[n, n];
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++)
                 cost[i, j] = int.MaxValue;
 
         for (int i = 0; i < n; i++)
@@ -41,10 +41,10 @@ public class OptimalBST
             cost[i, i] = freq[i];
         }
 
-        return OptCostTD(freq, cost, 0, n - 1);
+        return OptCostBstTD(freq, cost, 0, n - 1);
     }
 
-    private static int OptCostTD(int[] freq, int[, ] cost, int i, int j)
+    private static int OptCostBstTD(int[] freq, int[,] cost, int i, int j)
     {
         if (i > j)
         {
@@ -59,7 +59,7 @@ public class OptimalBST
         int s = sum(freq, i, j);
         for (int r = i; r <= j; r++)
         {
-            cost[i, j] = Math.Min(cost[i, j], OptCostTD(freq,cost, i, r - 1) + OptCostTD(freq,cost, r + 1, j) + s);
+            cost[i, j] = Math.Min(cost[i, j], OptCostBstTD(freq, cost, i, r - 1) + OptCostBstTD(freq, cost, r + 1, j) + s);
         }
         return cost[i, j];
     }
@@ -72,6 +72,35 @@ public class OptimalBST
             s += freq[k];
         }
         return s;
+    }
+
+    public static int OptCostBstBU(int[] keys, int[] freq)
+    {
+        int n = freq.Length;
+        int[,] cost = new int[n, n];
+
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++)
+                cost[i, j] = int.MaxValue;
+
+        for (int i = 0; i < n; i++)
+        {
+            cost[i, i] = freq[i];
+        }
+
+        int sm = 0;
+        for (int l = 1; l < n; l++)
+        { // l is length of range.
+            for (int i = 0, j = i + l; j < n; i++, j++)
+            {
+                sm = sum(freq, i, j);
+                for (int r = i; r <= j; r++)
+                {
+                    cost[i, j] = Math.Min(cost[i, j], sm + ((r - 1 >= i) ? cost[i, r - 1] : 0) + ((r + 1 <= j) ? cost[r + 1, j] : 0));
+                }
+            }
+        }
+        return cost[0, n - 1];
     }
 
     private static int[] SumInit(int[] freq, int n)
@@ -94,43 +123,12 @@ public class OptimalBST
         return sum[j] - sum[i - 1];
     }
 
-    public static int OptCostBU(int[] keys, int[] freq)
+    public static int OptCostBstBU2(int[] keys, int[] freq)
     {
         int n = freq.Length;
-        int[, ] cost = new int[n, n];
-
-        for(int i=0; i<n; i++)
-            for(int j=0;j<n;j++)
-                cost[i, j] = int.MaxValue;
-
+        int[,] cost = new int[n, n];
         for (int i = 0; i < n; i++)
-        {
-            cost[i, i] = freq[i];
-        }
-
-        int sm = 0;
-        for (int l = 1; l < n; l++)
-        { // l is length of range.
-            for (int i = 0, j = i + l; j < n; i++, j++)
-            {
-                sm = sum(freq, i, j);
-                for (int r = i; r <= j; r++)
-                {
-                    cost[i, j] = Math.Min(cost[i, j], sm + ((r - 1 >= i)? cost[i, r - 1] : 0) + ((r + 1 <= j)? cost[r + 1, j] : 0));
-                }
-            }
-        }
-        return cost[0, n - 1];
-    }
-
-
-
-    public static int OptCostBU2(int[] keys, int[] freq)
-    {
-        int n = freq.Length;
-        int[, ] cost = new int[n, n];
-        for(int i=0; i<n; i++)
-            for(int j=0;j<n;j++)
+            for (int j = 0; j < n; j++)
                 cost[i, j] = int.MaxValue;
 
         int[] sumArr = SumInit(freq, n);
@@ -147,7 +145,7 @@ public class OptimalBST
                 sm = SumRange(sumArr, i, j);
                 for (int r = i; r <= j; r++)
                 {
-                    cost[i, j] = Math.Min(cost[i, j], sm + ((r - 1 >= i)? cost[i, r - 1] : 0) + ((r + 1 <= j)? cost[r + 1, j] : 0));
+                    cost[i, j] = Math.Min(cost[i, j], sm + ((r - 1 >= i) ? cost[i, r - 1] : 0) + ((r + 1 <= j) ? cost[r + 1, j] : 0));
                 }
             }
         }
@@ -157,12 +155,12 @@ public class OptimalBST
     // Testing code.
     public static void Main(string[] args)
     {
-        int[] keys = new int[] {9, 15, 25};
-        int[] freq = new int[] {30, 10, 40};
-        Console.WriteLine("OBST cost:" + OptCost(keys, freq));
-        Console.WriteLine("OBST cost:" + OptCostTD(keys, freq));
-        Console.WriteLine("OBST cost:" + OptCostBU(keys, freq));
-        Console.WriteLine("OBST cost:" + OptCostBU2(keys, freq));
+        int[] keys = new int[] { 9, 15, 25 };
+        int[] freq = new int[] { 30, 10, 40 };
+        Console.WriteLine("OBST cost:" + OptCostBst(keys, freq));
+        Console.WriteLine("OBST cost:" + OptCostBstTD(keys, freq));
+        Console.WriteLine("OBST cost:" + OptCostBstBU(keys, freq));
+        Console.WriteLine("OBST cost:" + OptCostBstBU2(keys, freq));
     }
 }
 

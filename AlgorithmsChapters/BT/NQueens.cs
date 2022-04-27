@@ -23,7 +23,7 @@ public class NQueens
         return true;
     }
 
-    public static void Arrange(int[] Q, int k, int n)
+    public static void NQueensPattern(int[] Q, int k, int n)
     {
         if (k == n)
         {
@@ -35,7 +35,7 @@ public class NQueens
             Q[k] = i;
             if (Feasible(Q, k))
             {
-                Arrange(Q, k + 1, n);
+                NQueensPattern(Q, k + 1, n);
             }
         }
     }
@@ -44,7 +44,7 @@ public class NQueens
     public static void Main(string[] args)
     {
         int[] Q = new int[8];
-        NQueens.Arrange(Q, 0, 8);
+        NQueensPattern(Q, 0, 8);
     }
 }
 

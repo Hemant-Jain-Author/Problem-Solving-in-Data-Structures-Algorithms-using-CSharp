@@ -1,14 +1,6 @@
 ﻿using System;
 
-
-// Activities selection problem.
-
-// Prints a maximum set of activities that can be done by a 
-// single person performing one task at a time.
-// s[] is an array that contains start time of all activities
-// f[] is an array that contains finish time of all activities
-
-internal class ActivitySelection
+public class ActivitySelection
 {
     internal class Activity : IComparable<Activity>
     {
@@ -30,7 +22,7 @@ internal class ActivitySelection
     {
         Activity[] act = new Activity[n];
         int i;
-        for (i = 0;i < n;i++)
+        for (i = 0; i < n; i++)
         {
             act[i] = new Activity(s[i], f[i]);
         }
@@ -54,8 +46,8 @@ internal class ActivitySelection
     // Testing code.
     public static void Main(string[] args)
     {
-        int[] s = new int[] {1, 5, 0, 3, 5, 6, 8};
-        int[] f = new int[] {2, 6, 5, 4, 9, 7, 9};
+        int[] s = new int[] { 1, 5, 0, 3, 5, 6, 8 };
+        int[] f = new int[] { 2, 6, 5, 4, 9, 7, 9 };
         int n = s.Length;
         ActivitySelection act = new ActivitySelection();
         act.MaxActivities(s, f, n);

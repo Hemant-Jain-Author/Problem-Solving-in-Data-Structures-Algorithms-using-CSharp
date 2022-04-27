@@ -2,7 +2,7 @@
 
 public class StairUniqueWays
 {
-    public static int diffWaysBU(int n)
+    public static int UniqueWaysBU(int n)
     {
         if (n <= 2)
         {
@@ -21,7 +21,7 @@ public class StairUniqueWays
         return temp;
     }
 
-    public static int diffWaysBU2(int n)
+    public static int UniqueWaysBU2(int n)
     {
         if (n < 2)
         {
@@ -43,8 +43,8 @@ public class StairUniqueWays
     // Testing code.
     public static void Main(string[] args)
     {
-        Console.WriteLine("Unique way to reach top:: " + diffWaysBU(4));
-        Console.WriteLine("Unique way to reach top:: " + diffWaysBU2(4));
+        Console.WriteLine("Unique way to reach top:: " + UniqueWaysBU(4));
+        Console.WriteLine("Unique way to reach top:: " + UniqueWaysBU2(4));
     }
 }
 /*

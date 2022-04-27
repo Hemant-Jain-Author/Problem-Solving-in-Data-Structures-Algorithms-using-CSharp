@@ -33,26 +33,16 @@ public class Graph
         }
     }
 
-    public void AddDirectedEdge(int source, int dest, int cost)
+    public void AddDirectedEdge(int source, int dest, int cost = 1)
     {
         Edge edge = new Edge(source, dest, cost);
         Adj[source].Add(edge);
     }
 
-    public void AddDirectedEdge(int source, int dest)
-    {
-        AddDirectedEdge(source, dest, 1);
-    }
-
-    public void AddUndirectedEdge(int source, int dest, int cost)
+    public void AddUndirectedEdge(int source, int dest, int cost = 1)
     {
         AddDirectedEdge(source, dest, cost);
         AddDirectedEdge(dest, source, cost);
-    }
-
-    public void AddUndirectedEdge(int source, int dest)
-    {
-        AddUndirectedEdge(source, dest, 1);
     }
 
     public void Print()
@@ -153,12 +143,19 @@ public class Graph
     public static void Main1()
     {
         Graph gph = new Graph(4);
-        gph.AddDirectedEdge(0, 1);
-        gph.AddDirectedEdge(0, 2);
-        gph.AddDirectedEdge(1, 2);
-        gph.AddDirectedEdge(2, 3);
+        gph.AddUndirectedEdge(0, 1);
+        gph.AddUndirectedEdge(0, 2);
+        gph.AddUndirectedEdge(1, 2);
+        gph.AddUndirectedEdge(2, 3);
         gph.Print();
     }
+    /*
+    Vertex 0 is connected to : 1(cost: 1) 2(cost: 1) 
+    Vertex 1 is connected to : 0(cost: 1) 2(cost: 1) 
+    Vertex 2 is connected to : 0(cost: 1) 1(cost: 1) 3(cost: 1) 
+    Vertex 3 is connected to : 2(cost: 1)
+    */
+
 
     // Testing Code
     public static void Main2()
@@ -264,7 +261,7 @@ Path between 0 & 6 : True
         path.Push(source);
         if (source == dest)
         {
-            foreach(int item in path)
+            foreach (int item in path)
                 Console.Write(item + " ");
             Console.WriteLine();
             path.Pop();
@@ -368,7 +365,7 @@ Path Count :: 3
 
     public int[,] TransitiveClosure()
     {
-        int[, ] tc = new int[count, count];
+        int[,] tc = new int[count, count];
         for (int i = 0; i < count; i++)
         {
             TransitiveClosureUtil(i, i, tc);
@@ -521,7 +518,7 @@ BfsDistance(1, 6) : 3
         {
             if (visited[i] == false && IsCyclePresentUndirectedDFS(i, -1, visited))
             {
-                    return true;
+                return true;
             }
         }
         return false;
@@ -548,7 +545,7 @@ BfsDistance(1, 6) : 3
         int[] parent = new int[count];
         Array.Fill(parent, -1);
         List<Edge> edge = new List<Edge>();
-        bool[, ] flags = new bool[count, count];
+        bool[,] flags = new bool[count, count];
         for (int i = 0; i < count; i++)
         {
             List<Edge> ad = Adj[i];
@@ -587,7 +584,7 @@ BfsDistance(1, 6) : 3
         }
 
         List<Edge> edge = new List<Edge>();
-        bool[, ] flags = new bool[count, count];
+        bool[,] flags = new bool[count, count];
         for (int i = 0; i < count; i++)
         {
             List<Edge> ad = Adj[i];
@@ -821,7 +818,7 @@ Vertex 4 is connected to : 3(cost: 1)
     /*
     IsConnectedUndirected:: True
     */
-    
+
     public bool IsStronglyConnected()
     {
         bool[] visited = new bool[count];
@@ -891,7 +888,7 @@ Vertex 4 is connected to : 3(cost: 1)
             {
                 stk2.Clear();
                 gReversed.DFSUtil2(index, visited, stk2);
-                foreach(var ele in stk2)
+                foreach (var ele in stk2)
                     Console.Write(ele + " ");
                 Console.WriteLine();
             }
@@ -956,7 +953,7 @@ Vertex 4 is connected to : 3(cost: 1)
                 }
             }
         }
-        
+
         // Printing result.
         int sum = 0;
         bool isMst = true;
@@ -968,7 +965,7 @@ Vertex 4 is connected to : 3(cost: 1)
                 output += ("(" + i + ", Unreachable) ");
                 isMst = false;
             }
-            else
+            else if (previous[i] != i)
             {
                 output += ("(" + previous[i] + "->" + i + " @ " + dist[i] + ") ");
                 sum += dist[i];
@@ -1046,7 +1043,7 @@ Vertex 4 is connected to : 3(cost: 1)
                 edge[E++] = adn;
             }
         }
-        Array.Sort(edge, 0, E-1);
+        Array.Sort(edge, 0, E - 1);
 
         int sum = 0;
         string output = "Edges are ";
@@ -1326,7 +1323,7 @@ Shortest Paths: (0->4->1 @ 0) (0->4->1->2 @ 1) (0->4->1->2->3 @ 2) (0->4 @ 2)
     // Testing Code
     public static void Main17()
     {
-        int[] parentArray = new int[] {-1, 0, 1, 2, 3};
+        int[] parentArray = new int[] { -1, 0, 1, 2, 3 };
         Console.WriteLine(HeightTreeParentArr(parentArray));
         Console.WriteLine(HeightTreeParentArr2(parentArray));
     }
@@ -1451,17 +1448,17 @@ Shortest Paths: (0->4->1 @ 0) (0->4->1->2 @ 1) (0->4->1->2->3 @ 2) (0->4 @ 2)
 
         if (odd == 0)
         {
-            Console.WriteLine("graph is Eulerian");
+            Console.WriteLine("Graph is Eulerian");
             return 2;
         }
         else if (odd == 2)
         {
-            Console.WriteLine("graph is Semi-Eulerian");
+            Console.WriteLine("Graph is Semi-Eulerian");
             return 1;
         }
         else
         {
-            Console.WriteLine("graph is not Eulerian");
+            Console.WriteLine("Graph is not Eulerian");
             return 0;
         }
     }
@@ -1481,8 +1478,8 @@ Shortest Paths: (0->4->1 @ 0) (0->4->1->2 @ 1) (0->4->1->2->3 @ 2) (0->4 @ 2)
     }
 
     /*
-graph is Semi-Eulerian
-graph is Eulerian
+Graph is Semi-Eulerian
+Graph is Eulerian
     */
 
     public bool IsStronglyConnected2()
@@ -1600,12 +1597,12 @@ graph is Eulerian
     /*
 Shortest Paths: (0->1 @ 1) (0->1->2 @ 2) (0->1->2->3 @ 3) (0->1->2->3->4 @ 4) (0->1->2->5 @ 3) (0->7->6 @ 2) (0->7 @ 1) (0->7->8 @ 2) 
     */
-    
-    internal void FloydWarshall()
+
+    public void FloydWarshall()
     {
         int V = count;
-        int[, ] dist = new int[V, V];
-        int[, ] path = new int[V, V];
+        int[,] dist = new int[V, V];
+        int[,] path = new int[V, V];
 
         for (int i = 0; i < V; i++)
         {
@@ -1655,7 +1652,7 @@ Shortest Paths: (0->1 @ 1) (0->1->2 @ 2) (0->1->2->3 @ 3) (0->1->2->3->4 @ 4) (0
                 if (dist[i, i] < 0)
                 {
                     Console.WriteLine("Negative-weight cycle found.");
-                        return;
+                    return;
                 }
             }
         }
@@ -1671,9 +1668,9 @@ Shortest Paths: (0->1 @ 1) (0->1->2 @ 2) (0->1->2->3 @ 3) (0->1->2->3->4 @ 4) (0
             {
                 if (u != v && path[u, v] != -1)
                 {
-                Console.Write("(");
-                PrintPath(path, u, v);
-                Console.Write(" @ " + cost[u, v] + ") ");
+                    Console.Write("(");
+                    PrintPath(path, u, v);
+                    Console.Write(" @ " + cost[u, v] + ") ");
                 }
             }
         }
@@ -1712,7 +1709,7 @@ Shortest Paths : (0->1 @ 5) (0->1->2 @ 8) (0->1->2->3 @ 9) (1->2 @ 3) (1->2->3 @
     */
 
     internal void PrintSolution(int[,] dist, int V)
-    {    
+    {
         for (int i = 0; i < V; i++)
         {
             for (int j = 0; j < V; j++)
@@ -1733,10 +1730,11 @@ Shortest Paths : (0->1 @ 5) (0->1->2 @ 8) (0->1->2->3 @ 9) (1->2 @ 3) (1->2->3 @
 
     public static void Main(string[] args)
     {
+        /*
         Main1();
-        Main2(); 
-        Main3(); 
-        Main4(); 
+        Main2();
+        Main3();
+        Main4();
         Main5();
         Main6();
         Main7();
@@ -1745,6 +1743,7 @@ Shortest Paths : (0->1 @ 5) (0->1->2 @ 8) (0->1->2->3 @ 9) (1->2 @ 3) (1->2->3 @
         Main10();
         Main11();
         Main12();
+        */
         Main13();
         Main14();
         Main16();

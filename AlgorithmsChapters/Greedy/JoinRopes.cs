@@ -2,7 +2,7 @@
 
 public class JoinRopes
 {
-    public static int Join(int[] ropes, int size)
+    public static int JoinCost(int[] ropes, int size)
     {
         Array.Sort(ropes);
         for (int i = 0, j = size - 1; i < j; i++, j--)
@@ -33,7 +33,7 @@ public class JoinRopes
         return total;
     }
 
-    public static int Join2(int[] ropes, int size)
+    public static int JoinCost2(int[] ropes, int size)
     {
         PriorityQueue<int> pq = new PriorityQueue<int>();
         int i = 0;
@@ -58,10 +58,10 @@ public class JoinRopes
     // Testing code.
     public static void Main(string[] args)
     {
-        int[] ropes = new int[] {4, 3, 2, 6};
-        JoinRopes.Join(ropes, ropes.Length);
-        int[] rope2 = new int[] {4, 3, 2, 6};
-        JoinRopes.Join2(rope2, rope2.Length);
+        int[] ropes = new int[] { 4, 3, 2, 6 };
+        JoinRopes.JoinCost(ropes, ropes.Length);
+        int[] rope2 = new int[] { 4, 3, 2, 6 };
+        JoinRopes.JoinCost2(rope2, rope2.Length);
     }
 
     /*

@@ -6,9 +6,9 @@ public class LargestPalindromicSubsequence
     public static int PalindromicSubsequence(string str)
     {
         int n = str.Length;
-        int[, ] dp = new int[n, n];
+        int[,] dp = new int[n, n];
 
-        for (int i = 0;i < n;i++) // each char is itself palindromic with length 1
+        for (int i = 0; i < n; i++) // each char is itself palindromic with length 1
         {
             dp[i, i] = 1;
         }

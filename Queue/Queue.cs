@@ -2,63 +2,29 @@
 
 public class Queue
 {
-    private int size;
-    private int capacity = 100;
+    private int capacity;
     private int[] data;
-    internal int front = 0;
-    internal int back = 0;
+    private int size = 0;    
+    private int front = 0;
+    private int back = 0;
 
-    public Queue(int n)
+    public Queue(int n = 1000)
     {
-        size = 0;
         capacity = n;
         data = new int[n];
     }
 
-    public bool add(int value)
-    {
-        if (size >= capacity)
-        {
-            Console.WriteLine("Queue is full.");
-            return false;
-        }
-        else
-        {
-            size++;
-            data[back] = value;
-            back = (++back) % capacity;
-        }
-        return true;
-    }
-
-    public int remove()
-    {
-        int value;
-        if (size <= 0)
-        {
-            Console.WriteLine("Queue is empty.");
-            return -999;
-        }
-        else
-        {
-            size--;
-            value = data[front];
-            front = (++front) % capacity;
-        }
-        return value;
-    }
-
-    internal bool isEmpty()
+    public bool IsEmpty()
     {
         return size == 0;
     }
 
-    internal int Size()
+    public int Size()
     {
         return size;
     }
 
-    internal void print()
+    public void Print()
     {
         if (size == 0)
         {
@@ -76,25 +42,56 @@ public class Queue
         }
         Console.WriteLine();
     }
+    public bool Add(int value)
+    {
+        if (size >= capacity)
+        {
+            Console.WriteLine("Queue is full.");
+            return false;
+        }
+        else
+        {
+            size++;
+            data[back] = value;
+            back = (++back) % capacity;
+        }
+        return true;
+    }
+
+    public int Remove()
+    {
+        int value;
+        if (size <= 0)
+        {
+            Console.WriteLine("Queue is empty.");
+            return -999;
+        }
+        else
+        {
+            size--;
+            value = data[front];
+            front = (++front) % capacity;
+        }
+        return value;
+    }
 
     // Testing code.
     public static void Main(string[] args)
     {
-        Queue que = new Queue(5);
-        for (int i = 0;i < 5;i++)
-        {
-            que.add(i);
-        }
-        que.print();
-
-        for (int i = 0; i < 5; i++)
-        {
-            Console.Write(que.remove() + " ");
-        }
+        Queue que = new Queue();
+        que.Add(1);
+        que.Add(2);
+        que.Add(3);
+        Console.WriteLine("IsEmpty : " + que.IsEmpty());
+        Console.WriteLine("Size : " + que.Size());
+        Console.WriteLine("Queue remove : " + que.Remove());
+        Console.WriteLine("Queue remove : " + que.Remove());
     }
 }
 
 /*
-Queue is : 0 1 2 3 4 
-0 1 2 3 4 
+IsEmpty : False
+Size : 3
+Queue remove : 1
+Queue remove : 2
 */
