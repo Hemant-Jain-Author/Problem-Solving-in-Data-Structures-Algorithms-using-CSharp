@@ -51,7 +51,7 @@ public class QuickSelect
 
     public static int Select(int[] arr, int k)
     {
-        Select(arr, 0, arr.Length - 1, k);
+        Select(arr, 0, arr.Length - 1, k - 1);
         return arr[k - 1];
     }
 

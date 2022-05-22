@@ -2039,7 +2039,7 @@ public class Searching
             {
                 start = mid + 1;
             }
-            else if (arr[mid - 1] > arr[mid] && arr[mid] > arr[mid + 1]) // increasing
+            else if (arr[mid - 1] > arr[mid] && arr[mid] > arr[mid + 1]) // decreasing
             {
                 end = mid - 1;
             }
