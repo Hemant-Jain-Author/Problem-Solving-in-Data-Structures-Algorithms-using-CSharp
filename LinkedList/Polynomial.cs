@@ -20,7 +20,7 @@ public class Polynomial
         Node head = null, tail = null, temp = null;
         while (p1 != null || p2 != null)
         {
-            if (p1 == null || p1.pow < p2.pow)
+            if (p1 == null || (p2 != null && p1.pow < p2.pow))
             {
                 temp = new Node(p2.coeff, p2.pow);
                 p2 = p2.next;
