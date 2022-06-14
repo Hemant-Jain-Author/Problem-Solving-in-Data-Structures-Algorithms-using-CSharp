@@ -458,23 +458,16 @@ public class HeapEx
             hp.Enqueue(arr[i]);
         }
 
-        int[] output = new int[size];
         int index = 0;
-
         for (i = k; i < size; i++)
         {
-            output[index++] = hp.Dequeue();
+            arr[index++] = hp.Dequeue();
             hp.Enqueue(arr[i]);
         }
 
         while (hp.Size() > 0)
         {
-            output[index++] = hp.Dequeue();
-        }
-
-        for (i = 0; i < size; i++)
-        {
-            arr[i] = output[i];
+            arr[index++] = hp.Dequeue();
         }
     }
 
