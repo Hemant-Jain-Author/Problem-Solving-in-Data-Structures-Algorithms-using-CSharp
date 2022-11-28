@@ -2,7 +2,7 @@
 
 public class LongestCommonSubseq
 {
-    public static int LCSubStr(string st1, string st2)
+    public static int LCSubSeq(string st1, string st2)
     {
         char[] X = st1.ToCharArray();
         char[] Y = st2.ToCharArray();
@@ -60,7 +60,7 @@ public class LongestCommonSubseq
     {
         string X = "carpenter";
         string Y = "sharpener";
-        Console.WriteLine(LCSubStr(X, Y));
+        Console.WriteLine(LCSubSeq(X, Y));
     }
 }
 
